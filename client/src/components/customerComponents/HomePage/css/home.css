@@ -1,0 +1,372 @@
+#search_div {
+    position: absolute;
+    top: 130px;
+    width: 100%;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+#welcome_image_div{
+    width: 100%;
+    height: 350px;
+}
+#welcome_image_div img{
+    width: 100%;
+    height: 350px;
+   
+}
+div {
+    display: block;
+}
+#search {
+    width: 70%;
+   
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+.search-wrap {
+    position: relative!important;
+    display: inline-block;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.18);
+    z-index: 5;
+}
+
+.search-box {
+    position: relative;
+}
+.search-box {
+    width: 225px;
+    border: 1px solid #d2d2d2;
+    height: 46px;
+    background-color: #fff;
+}
+.fl {
+    float: left;
+}
+.fa-calendar-week {
+    font-size: 23px;
+    padding-top: 4.3%;
+    padding-right: 2.4%;
+    padding-left: 2%;
+    color: gray;
+}
+
+
+
+input.db {
+    color: #404040;
+    width: 100%;
+    height: 44px;
+   
+    font-weight: 400;
+    font-size: 14px;
+}
+#dest, #src {
+    outline: none;
+}
+.db {
+    display: block;
+    border: none;
+}
+.db {
+    display: block!important;
+}
+input {
+    line-height: normal;
+}
+.clearfix input[type=text]
+{
+    margin:0px
+}
+label.db {
+    color: #4a4a4a;
+    position: absolute;
+    bottom: 0;
+    left: 14%;
+    font-size: 12px;
+    top: 35%;
+    height: 25px;
+    -webkit-transition: all .3s ease;
+    letter-spacing: 1px;
+    font-weight: 400;
+    letter-spacing: 0!important;
+    line-height: 15px;
+}
+
+.error-message-fixed, .errorMessageFixed {
+    display: block;
+    font-size: 11px;
+    color: red;
+    margin-top: 2px;
+    text-align: right;
+    word-break: keep-all;
+}
+.error-message-fixed {
+    height: 17px;
+}
+#togglebtn {
+    margin: 21px 10px 0 0;
+    float: left;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transform: rotate(0deg);
+    transition: transform .5s ease-in;
+    top: -5.5px;
+    left: 210px;
+    position: absolute;
+    z-index: 1;
+}
+
+.search-box {
+    position: relative;
+}
+.date-box {
+    width: 168px!important;
+}
+.search-box {
+    width: 225px;
+    border: 1px solid #d2d2d2;
+    height: 46px;
+    background-color: #fff;
+}
+.fl {
+    float: left;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+#search_btn {
+    height: 46px;
+    width: 144px;
+    border-width: 0;
+    background-color: #d74f57;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500!important;
+    font-style: normal;
+    font-stretch: normal;
+    text-transform: none;
+}
+
+
+.promiseMain {
+    width: 1122px;
+    height: 320px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.subHeader {
+    float: left;
+    width: 83%;
+    margin-top: 34px;
+}
+.info_hero, .info_hero2 {
+    float: left;
+    width: 200px;
+    padding-top: 33px;
+}
+.info_hero {
+    margin-left: 128px;
+}
+.info_hero2 {
+    margin-left: 99px;
+    display: inline-block;
+}
+.info_hero, .info_hero2 {
+    float: left;
+    width: 200px;
+    padding-top: 33px;
+}
+.img2_Hero {
+    float: left;
+    margin: 20px;
+    background-repeat: no-repeat;
+    background-image: url(//s3.rdbuz.com/images/webplatform/india/HeroFeature/ic-shield-red-big.png);
+    width: 88px;
+    height: 88px;
+    background-size: contain;
+}
+.Title_hero {
+    font-weight: bolder;
+    text-align: left;
+    color: #3e3e52;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 27px;
+}
+.subtext_hero {
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: .3px;
+    text-align: left;
+    color: #7e7e8c;
+    margin-top: 10px;
+}
+.img3_hero, .img4_Hero {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+.img3_hero {
+    background-image: url(//s3.rdbuz.com/images/webplatform/india/HeroFeature/tip-icon.png);
+    width: 24px;
+    height: 24px;
+}
+.img4_Hero {
+    background-image: url(//s3.rdbuz.com/images/webplatform/india/HeroFeature/otgText.png);
+    width: 156px;
+    height: 26px;
+}
+.img3_hero, .img4_Hero {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+.titl_hero {
+    height: 24px;
+    font-size: 19px;
+    font-weight: bolder;
+    color: #1446a0;
+}
+
+.titl_hero, .value_hero {
+    width: 278px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: .3px;
+    text-align: left;
+}
+.titl_hero, .value_hero {
+    width: 278px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: .3px;
+    text-align: left;
+}
+.value_hero {
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    color: #34495e;
+    font-weight: 700;
+}
+.text_hero {
+    width: 278px;
+    height: 60px;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: .3px;
+    color: #34495e;
+    text-align: left;
+}
+
+.mybustracker {
+    width: 1122px;
+    height: 524px;
+    background-color: #e8ecef;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+
+element.style {
+}
+.path_Tmb {
+    width: 940px;
+    height: 2px;
+    border-bottom: 2px solid #ddd;
+    padding-top: 35px;
+    margin-left: 92px;
+    margin-right: 92px;
+}
+.info_Tmb, .path_Tmb {
+    display: inline-block;
+}
+
+
+.info_Tmb {
+    margin-left: 135px;
+    float: left;
+    width: 200px;
+    text-align: center;
+    padding-top: 30px;
+}
+.img1_Tmb {
+    display: inline-block;
+    float: left;
+    width: 43%;
+    margin-left: 71px;
+    margin-top: 26px;
+    background-repeat: no-repeat;
+    background-image: url(https://s3.rdbuz.com/Images/carousel/tmb_img.png);
+    width: 440px;
+    height: 282px;
+    object-fit: contain;
+}
+.sub_container_Tmb {
+    margin-left: 80px;
+    float: left;
+    width: 531px;
+}
+.Title_Tmb {
+    height: 29px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+    padding-top: 60px;
+    color: #4a4a4a;
+}
+.subtext_Tmb {
+    padding-top: 50px;
+    font-size: 14px;
+    line-height: 1.36;
+    text-align: left;
+    padding-right: 76px;
+    height: 38px;
+    color: #4a4a4a;
+}
+.links_Tmb {
+    display: inline-block;
+    float: left;
+    text-decoration: none;
+    padding-top: 90px;
+    width: 130px;
+    height: 32px;
+    box-sizing: border-box;
+}
+.know_more, .titl_Tmb {
+    font-size: 14px;
+    text-align: center;
+}
+.titl_Tmb {
+    letter-spacing: 1px;
+    color: #4a4a4a;
+}
+.value_Tmb {
+    font-size: 36px;
+    text-align: center;
+    color: #da4d52;
+}
+.text_Tmb {
+    font-size: 14px;
+    text-align: center;
+    color: #4a4a4a;
+}

@@ -1,0 +1,46 @@
+#Vemail{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+#VType{
+    margin-right: 50px;
+    font-style: bold;
+
+}
+.NVDataEntry1{
+    width:100%;
+   
+    text-align: center;
+}
+.NVDataEntry2{
+    
+    margin-top: 20px;
+   
+}
+text{
+    
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: Poppins  ;
+
+ 
+}
+input{
+    
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: Poppins  ;
+    margin-bottom: 20px;
+    
+    
+}
+h5{
+    font-weight: bold;
+}
+textarea
+{
+    font-family: Poppins  ;
+    width: 50%;
+    height: 200px;
+}

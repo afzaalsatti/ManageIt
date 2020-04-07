@@ -1,0 +1,68 @@
+
+  .bookseat-container {
+    width: 600px;
+    margin: auto;
+    text-align: center;
+    
+  }
+  .break{
+    white-space: pre-line;
+    background-color: red;
+    content: "A";
+  }
+  .grid{
+    width: 100px;
+    border: 2px solid orange;
+    display: inline-block ;
+    margin-right: 50px;
+  
+  
+
+  }
+  .grid .seat
+  {
+    width: 30px;
+    display: inline-block ;
+    margin-bottom: 20px;
+    
+  }
+  .grid.Left{
+    float: left;
+    width: 30px ;
+  }
+
+  .grid.Right{
+    float: right;
+    width: 30px;
+  }
+ .grid img{
+   width: 30px;
+   height: 30px;
+ }
+  
+  .grid img:hover {
+    opacity: .7;
+    cursor: pointer;
+  }
+  
+  .reserved {
+    background-color: red;
+    color: #fff;
+    display: inline-block;
+  }
+  
+  /* .reserved::after {
+    content: 'RESERVED'
+  }
+  
+  .available::after {
+    content: 'AVAILABLE'
+  }  */
+  
+   .available {
+    background-color: white;
+  }
+ 
+  .left ul li{
+    display: inline;
+  }

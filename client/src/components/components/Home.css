@@ -1,0 +1,249 @@
+font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../AuthComponents/poppins/poppins-v5-latin-300.eot");
+    /* IE9 Compat Modes */
+    src: local("Poppins Light"), local("Poppins-Light"), url("../AuthComponents/poppins/poppins-v5-latin-300.eot?#iefix") format("embedded-opentype"), url("../AuthComponents/poppins/poppins-v5-latin-300.woff2") format("woff2"), url("../AuthComponents/poppins/poppins-v5-latin-300.woff") format("woff"), url("../AuthComponents/poppins/poppins-v5-latin-300.ttf") format("truetype"), url("../AuthComponents/poppins/poppins-v5-latin-300.svg#Poppins") format("svg");
+    /* Legacy iOS */ }
+    
+#intoDiv{
+    margin: 0px;
+    
+}
+#videoBanner{
+    width: 100%;
+    margin: 0px;
+    position: absolute;
+
+   
+}
+.PlaceHolder{
+
+
+    position: relative;
+    line-break: strict;
+    color: #000;
+   font-family: Poppins;
+    margin: 0 auto;
+    overflow: hidden;
+    
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    float: left;
+
+}
+.introText{
+   
+    width: 60%;
+    color: #000;
+   font-family: Poppins;
+    margin: 0 auto;
+    overflow: hidden;
+    
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    float: none;
+}
+.erp-button{
+    width: 200px;
+margin-top: 50px;
+
+    text-transform: none;
+    background-color: #1a73e8;
+    color: #fff !important;
+    align-items: center;
+    border: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font: 500 14px Google Sans,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+    height: 44px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    letter-spacing: .25px;
+    min-width: auto;
+    outline: none;
+    padding: 0 27px;
+    position: relative;
+    text-decoration: none;
+
+    text-transform: none;
+    -webkit-transition: none;
+    transition: none;
+
+    vertical-align: inherit;
+    font-family: Poppins;
+    
+}
+
+.pricingbtn{
+    width: auto;
+    margin-top: 0px;
+    background-color: #1976d2;
+    font-family: Poppins;
+   
+    
+    color: white;
+    margin-bottom: 5px;
+    height: 30px;
+   font-size: small;
+   justify-content: center;
+   
+}
+.plan-footer{
+    justify-content: space-around;
+    display: flex;
+    float: none;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    font-family: Poppins;
+}
+.divs{
+    width: 100%;
+    
+    margin: 0px;
+    margin-top: 30px;
+    padding: 0px;
+    color: black;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.pricing-table {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: stretch;
+    flex-direction: row;
+    font-family: Poppins;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.is-comparative .pricing-plan {
+    border-radius: initial;
+    margin: 0;
+}
+.is-comparative .pricing-plan:not(:last-child) {
+    border-right: none;
+}
+.is-comparative .pricing-plan:first-child {
+    
+}
+.is-comparative .pricing-plan:last-child {
+  
+}
+.is-comparative .pricing-plan.is-active {
+    border: solid;
+
+}
+.pricing-plan {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 230px;
+    font-family: Poppins;
+    background-color: white;
+ border: groove;
+ border-width: 1px;
+ 
+ border-color: black;
+  
+    
+}
+.margin-class{
+    margin-right: 50px;
+}
+.plan-header {
+    align-items: center;
+    background-color: #fff;
+    height: 50px;
+    color: black;
+    justify-content: space-around;
+    display: flex;
+    font-family: Poppins;
+    float: none;
+    font-size: large;
+
+   
+    
+   
+}
+.heading{
+    align-items: center;
+    font-family: Poppins;
+    margin-top: 30px;
+    color: black;
+    justify-content: space-around;
+    display: flex;
+   
+    float: none;
+    font-size: xxx-large;
+}
+.enterprise{
+
+background-color: rgb(62, 218, 24);
+}
+.professional{
+ background-color: #1976D2;
+    }
+.basic{
+ background-color: rgb(226, 58, 28);
+        }
+.plan-item {
+    background: white-ter;
+    border-bottom: 0.1rem solid white;
+    padding: 0.5em;
+    align-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 0.8em;
+    color: black;
+}
+.plan-price-amount{
+    justify-content: space-around;
+    display: flex;
+    float: none;
+    font-weight: bold;
+}
+#myFooter{
+    margin-top: 40px;
+    height: auto;
+    font-family: Poppins;
+    border-top: thin;
+    border-color: black;
+    border: groove;
+    border-left: transparent;
+    border-right: transparent;
+ border-width: .1px;
+ padding-top: 50px;
+ border-color: black;
+    margin-bottom: 0px;
+    background-color: white;
+}
+.footer-copyright{
+    align-items: center;
+    
+    font-family: Poppins;
+    color: black;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    
+    float: none;
+    
+}
+.container a{
+    color:black;
+    font-family: Poppins;
+}

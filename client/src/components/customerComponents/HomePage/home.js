@@ -3,7 +3,7 @@ import './css/home.css'
 export default class home extends Component {
     render() {
         return (
-            <div >
+            <div  id="homeComponent">
  <div id="welcome_image_div" >
 
      <img src="/assets/imageSlider/test3.jpg"></img>
@@ -127,7 +127,176 @@ export default class home extends Component {
         </div> 
  </div>
 
+
+
+
+
 </div>
+<div class="border-separator">
+
+</div>
+     
+<div id="advantage_div">
+  <section>
+    <div className="aw main-body">
+      <div className="ah heading-1 main-header-family rest1 animate">
+        <div className="dib"><img src="//s1.rdbuz.com/web/images/home/promise.png" height={100} /></div>
+        <div className="promise-head-main"> We promise to deliver</div>
+      </div>
+      <div className="ad rest1 animate">
+      </div>
+      <div className="clearfix aa our-promise-blocks" id="advantage">
+        <div className="fl cardAdv rest1 appear-first aa-25 animate">
+          <div className="imgCont rest1 animate">
+            <img src="//s3.rdbuz.com/web/images/home/maximum_choices.png" height={90} />
+          </div>
+          <div className="tilleBlock rest1 animate">
+            MAXIMUM CHOICE
+          </div>
+          <div className="second-level-heading ">
+            We give you the widest number of travel options across thousands of routes.
+          </div>
+        </div>
+        <div className="fl cardAdv rest1 appear-second aa-25 animate">
+          <div className="imgCont rest1 animate">
+            <img src="//s1.rdbuz.com/web/images/home/customer_care.png" height={100} />
+          </div>
+          <div className="tilleBlock rest1 animate">
+            SUPERIOR CUSTOMER SERVICE
+          </div>
+          <div className="second-level-heading ">
+            We put our experience and relationships to good use and are available to solve your travel issues.
+          </div>
+        </div>
+        <div className="fl cardAdv rest1 appear-third aa-25 animate">
+          <div className="imgCont rest1 animate">
+            <img src="//s1.rdbuz.com/web/images/home/lowest_Fare.png" height={90} />
+          </div>
+          <div className="tilleBlock rest1 animate">
+            LOWEST PRICES
+          </div>
+          <div className="second-level-heading ">
+            We always give you the lowest price with the best partner offers. 
+          </div>
+        </div>
+        <div className="fl cardAdv rest1 appear-fourth aa-25 animate">
+          <div className="imgCont rest1 animate">
+            <img src="//s2.rdbuz.com/web/images/home/benefits.png" height={90} />
+          </div>
+          <div className="tilleBlock rest1 animate">
+            UNMATCHED BENEFITS
+          </div>
+          <div className="second-level-heading ">
+            We take care of your travel beyond ticketing by providing you with innovative and unique benefits.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="border-separator">
+
+</div>
+     
+<div id="awards_div" className="main-body">
+  <section>
+    <div className="aw">
+      <div className="ah heading-1 main-header-family rest1 main-head animate">
+        Awards &amp; Recognition
+      </div>            
+      <div className="clearfix ac awards-main">
+        <div className="fl rest1 appear-first animate">
+          <a href="http://www.business-standard.com/article/companies/bs-annual-awards-saluting-the-spirit-of-entrepreneurship-114033100015_1.html" target="_blank">
+            <div>
+              <div className="imgCont">
+                <img src="//s2.rdbuz.com/web/images/home/awards/Business_Standard1.png" />
+              </div>
+              <div className="second-level-heading label-1">
+                Most Innovative Company
+              </div>
+              <div className="second-level-heading label-2">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div className="fl rest1 appear-second animate">
+          <a href="https://thebrandtrustreport.wordpress.com/tag/redbus-in/" target="_blank">
+            <div style={{marginTop: 35}}>
+              <div className="imgCont">
+                <img src="//s1.rdbuz.com/web/images/home/awards/Brand_Trust_Report.png" />
+              </div>
+              <div className="second-level-heading label-1">
+                Most Trusted Brand
+              </div>
+              <div className="second-level-heading label-2">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div className="fl rest1 appear-third animate">
+          <a href="https://eyefortravelblog.blogspot.in/2014/04/winners-of-mobile-innovation-in-travel.html" target="_blank">
+            <div>
+              <div className="imgCont">
+                <img src="//s3.rdbuz.com/web/images/home/awards/Eye_for_Travel1.png" />
+              </div>
+              <div className="second-level-heading label-1">
+                Mobile Innovation Award
+              </div>
+              <div className="second-level-heading label-2">
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="border-separator">
+
+</div>
+     
+
+<div className="main-body" style={{textAlign:"center",backgroundColor:"#F1F1F1"}}>
+  <section id="stats_div">
+    <div>
+      <div className="stats-header heading-1 main-header-family rest1 animate">
+        The numbers are growing!
+      </div>
+      <div className="clearfix stats-v-holder">
+        <div className="fll">
+          <div>
+            <div className="sp rest1 animate">CUSTOMERS</div>
+            <div className="sv rest1 animate">17 M</div>
+            <div className="common-desc second-level-heading rest1 animate">redBus is trusted by over 17 million happy customers globally</div>
+          </div>
+        </div>
+        <div className="fll">
+          <div>
+            <div className="sp rest1 animate">OPERATORS</div>
+            <div className="sv rest1 animate">2300</div>
+            <div className="common-desc second-level-heading rest1 animate">network of over 2300 bus operators worldwide</div>
+          </div>
+        </div>
+        <div className="fll">
+          <div>
+            <div className="sp rest1 animate">BUS TICKETS</div>
+            <div className="sv rest1 animate">180+ M</div>
+            <div className="common-desc second-level-heading rest1 animate">Over 180 million trips booked using redBus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
+
 
 
             </div>

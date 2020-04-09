@@ -6,6 +6,9 @@
 *, :after, :before {
     box-sizing: border-box;
 }
+#homeComponent{
+    font-family: poppins;
+}
 #welcome_image_div{
     width: 100%;
     height: 350px;
@@ -134,9 +137,6 @@ label.db {
     border: 1px solid #d2d2d2;
     height: 46px;
     background-color: #fff;
-}
-.fl {
-    float: left;
 }
 *, :after, :before {
     box-sizing: border-box;
@@ -363,10 +363,243 @@ element.style {
 .value_Tmb {
     font-size: 36px;
     text-align: center;
-    color: #da4d52;
+    color: #196EDE;
 }
 .text_Tmb {
     font-size: 14px;
     text-align: center;
     color: #4a4a4a;
+}
+#advantage_div{
+    color: #4a4a4a;
+word-break: break-word;
+font-family: Montserrat;
+font-size: 14px;
+font-weight: 400;
+box-sizing: border-box;
+padding-bottom: 0;
+padding-top: 15px;
+background-color: #ededed;
+text-align: center;
+font-family: poppins;
+}
+
+
+
+
+a, img {
+    border: none;
+}
+img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.aa {
+    margin: 30px auto;
+    color: #8d8d8d;
+    margin-top: 13px;
+    margin-left: 6%;
+}
+.our-promise-blocks>div {
+    box-shadow: 0 0 1.2px #686868;
+    height: 390px;
+    color: #3c3d41;
+    background-color: #fff;
+}
+.our-promise-blocks .imgCont {
+    margin-top: 35px;
+    margin-bottom: 15px;
+    min-height: 125px;
+}
+.our-promise-blocks .tilleBlock {
+    color: #4a4a4a;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1px;
+    word-spacing: 8px;
+    margin-bottom: 27px;
+    margin: 0 auto;
+    width: 215px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.our-promise-blocks .descCont {
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #737373;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: absolute;
+    top: 60%;
+} 
+.aa div {
+    text-align: center;
+   
+}
+
+.second-level-heading {
+    line-height: 1.5em!important;
+    word-spacing: 2px!important;
+    font-weight: 300!important;
+    margin-right: 20px;
+     margin-left: 20px;
+     font-family: poppins;
+     margin-top: 30px;
+}
+.border-separator {
+    border-bottom: 20px solid #fff;
+}
+.cardAdv{
+width: 300px;
+
+}
+
+
+.promise-head-main {
+    margin-top: 13px;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.ad, .ah {
+    text-align: center;
+}
+.ah {
+    font-weight: 600;
+}
+.ah {
+    font-weight: 400;
+}
+.heading-1 {
+    font-size: 30px;
+    line-height: 1.1em;
+    color: #4a4a4a;
+    font-weight: 600;
+}
+
+#awards_div{
+    color: #4a4a4a;
+word-break: break-word;
+font-family: Montserrat;
+font-size: 14px;
+font-weight: 400;
+box-sizing: border-box;
+min-width: 1000px;
+max-width: 1300px;
+margin: 0 auto;
+overflow: hidden;
+padding: 0 20px;
+margin-bottom: 10px;
+margin-top: 30px;
+font-family: poppins;
+}
+#our_distribution_div {
+    padding-bottom: 10px;
+    padding-top: 40px;
+    background-color: #f1f1f1;
+
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+#stats_div {
+    margin: 50px 0;
+    margin-bottom: 85px;
+}
+.stats-header {
+    text-align: center;
+    margin-top: 40px;
+}
+.stats-v-holder {
+    margin: 50px 0;
+    
+}
+.awards-main {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.ac {
+    margin: 30px auto;
+}
+.ac, .ad {
+    color: #8d8d8d;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+.ac>div {
+    width: 33.33%;
+}
+.ac div {
+    text-align: center;
+    margin: 10px 0;
+}
+
+
+
+#stats_div {
+    margin: 50px 0;
+    margin-bottom: 85px;
+    text-align: center;
+    display: inline-block;
+}
+
+.stats-header {
+    text-align: center;
+    margin-top: 40px;
+}
+.heading-1 {
+    font-size: 30px;
+    line-height: 1.1em;
+    color: #4a4a4a;
+    font-weight: 600;
+}
+.main-header-family {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+.stats-v-holder {
+    margin: 50px 0;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+.sv {
+    color: #1446a0;
+    font-size: 46px;
+    font-weight: 400;
+}
+.common-desc {
+    width: 208px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.second-level-heading {
+    /* line-height: 1.5em!important; */
+    word-spacing: 2px!important;
+    font-weight: 300!important;
+}
+
+.fll{
+    float: left;
+    width: 400px;
 }

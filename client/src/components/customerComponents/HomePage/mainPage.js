@@ -1,6 +1,7 @@
 import React from 'react'
 import  './SlideDrawer/SlideDrawer.css'
 import Home from './home'
+import HireVahicle from '../Hire/HireVahicle'
 
 export default class mainPage extends React.Component {
   
@@ -142,9 +143,9 @@ this.getMenuSelection=this.getMenuSelection.bind(this);
         <div className="left">
         
         
-<Home></Home>
+{/* <Home></Home> */}
 
-
+<HireVahicle></HireVahicle>
         
         </div>
     </div>

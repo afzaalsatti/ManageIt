@@ -3,304 +3,505 @@ import './css/home.css'
 export default class home extends Component {
     render() {
         return (
-            <div  id="homeComponent">
- <div id="welcome_image_div" >
+          <div id="homeComponent">
+            <div id="welcome_image_div">
+              <img src="/assets/imageSlider/test3.jpg"></img>
+            </div>
 
-     <img src="/assets/imageSlider/test3.jpg"></img>
-</div>
+            <div id="search_div" className="clearfix md5">
+              <section id="search">
+                <div className="clearfix search-wrap">
+                  <div
+                    className="fl search-box clearfix"
+                    style={{ borderColor: "rgb(210, 210, 210)" }}
+                  >
+                    <span className="fl icon-city icon"></span>
+                    <div className="contentBar">
+                      <input
+                        type="text"
+                        id="src"
+                        className="db"
+                        data-message="Please enter a source city"
+                        tabIndex={1}
+                        autoComplete="off"
+                      />
+                      <label
+                        htmlFor="src"
+                        className="db"
+                        style={{ left: "15%" }}
+                      >
+                        FROM
+                      </label>
+                      <div className="error-message-fixed "> </div>
+                    </div>
+                  </div>
+                  <span className="icon-doublearrow icon" id="togglebtn" />
+                  <div className="fl search-box">
+                    <span
+                      className="fl icon-city icon"
+                      style={{ marginLeft: 13 }}
+                    ></span>
+                    <div>
+                      <input
+                        type="text"
+                        id="dest"
+                        className="db"
+                        data-message="Please enter a destination city"
+                        tabIndex={2}
+                        autoComplete="off"
+                      />
+                      <label
+                        htmlFor="dest"
+                        style={{ left: "21%" }}
+                        className="db"
+                      >
+                        TO
+                      </label>
+                      <div className="error-message-fixed "> </div>
+                    </div>
+                  </div>
+                  <div className="fl search-box date-box gtm-onwardCalendar">
+                    <span className="fl icon-calendar_icon-new icon-onward-calendar icon"></span>
+                    <div>
+                      <input
+                        type="text"
+                        type="date"
+                        id="onward_cal"
+                        className="db"
+                        style={{ backgroundColor: "#f1f1f1" }}
+                      />
+                      <label htmlFor="onward_cal" className="db text-trans-uc">
+                        Onward Date
+                      </label>
+                    </div>
+                  </div>
+                  <div className="fl search-box date-box gtm-returnCalendar">
+                    <span className="fl icon-calendar_icon-new icon-return-calendar icon"></span>
+                    <div>
+                      <input
+                        type="date"
+                        id="return_cal"
+                        className="db text-trans-uc "
+                        style={{ backgroundColor: "#f1f1f1" }}
+                        tabIndex={4}
+                        data-caleng
+                      />
+                      <label
+                        htmlFor="return_cal"
+                        className="db text-trans-uc tal"
+                      >
+                        Return Date
+                      </label>
+                    </div>
+                  </div>
+                  <button id="search_btn" className="fl button">
+                    Search Buses
+                  </button>
+                </div>
+              </section>
+            </div>
 
-                <div id="search_div" className="clearfix md5">
-            
-  <section id="search">
-    <div className="clearfix search-wrap">
-      <div className="fl search-box clearfix" style={{borderColor: 'rgb(210, 210, 210)'}}>
-        <span className="fl icon-city icon">
-        </span>
-        <div className="contentBar">
+            <div className="main-body">
+              <div className="promiseMain">
+                <div className="header">
+                  <div className="img2_Hero" />
+                  <span className="fl">
+                    <div className="Title_hero">
+                      Introducing On-Time Guarantee
+                    </div>
+                    <div className="subtext_hero">Leave on time, everytime</div>
+                  </span>
+                  <span className="fr"></span>
+                </div>
+                <div className="subHeader">
+                  <span className="img3_hero" />
+                  <span className="Herotext1">Look for buses with </span>
+                  <span className="img4_Hero" />
+                  <span className="text">tag while booking your journey, </span>
+                </div>
+                <div className="info_hero">
+                  <div className="titl_hero"> Bus on time </div>
+                  <div className="value_hero">Get 25% refund</div>
+                  <div className="text_hero">
+                    If bus departure is delayed by 30 mins from boarding point.{" "}
+                  </div>
+                </div>
+                <div className="info_hero2">
+                  <div className="titl_hero"> No bus cancellation </div>
+                  <div className="value_hero">Get 150% refund</div>
+                  <div className="text_hero">
+                    Bus is cancelled without an alternate arrangement.
+                  </div>
+                </div>
+                <div className="info_hero2">
+                  <div className="titl_hero"> Alternate assurance </div>
+                  <div className="value_hero">Get 300% refund</div>
+                  <div className="text_hero">
+                    Bus breaks down with no alternate arrangement within 6
+                    hours.{" "}
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <input type="text" id="src" className="db" data-message="Please enter a source city" tabIndex={1} autoComplete="off" />
-          <label htmlFor="src" className="db" style={{left: '15%'}}>FROM</label>
-          <div className="error-message-fixed "> </div>
-        </div>
-      </div>
-      <span className="icon-doublearrow icon" id="togglebtn" />
-      <div className="fl search-box">
-        <span className="fl icon-city icon" style={{marginLeft: 13}}>
-        </span>
-        <div>
-          <input type="text" id="dest" className="db" data-message="Please enter a destination city" tabIndex={2} autoComplete="off" />
-          <label htmlFor="dest" style={{left: '21%'}} className="db">TO</label>
-          <div className="error-message-fixed "> </div>
-        </div>
-      </div>
-      <div className="fl search-box date-box gtm-onwardCalendar">
-        <span className="fl icon-calendar_icon-new icon-onward-calendar icon">
-    
-        </span>
-        <div>
-          <input type="text" type="date" id="onward_cal" className="db"  style={{backgroundColor:"#f1f1f1"}} />
-          <label htmlFor="onward_cal" className="db text-trans-uc">Onward Date</label>
-          
-        </div>
-      </div>
-      <div className="fl search-box date-box gtm-returnCalendar">
-        <span className="fl icon-calendar_icon-new icon-return-calendar icon">
-        </span>
-        <div>
-          <input type="date" id="return_cal" className="db text-trans-uc " style={{backgroundColor:"#f1f1f1"}} tabIndex={4} data-caleng />
-          <label htmlFor="return_cal" className="db text-trans-uc tal">Return Date</label>
-        </div>
-         </div>
-      <button id="search_btn" className="fl button">Search Buses</button>
-    </div>
-  </section>
-</div>
+            <div class="main-body">
+              <div class="mybustracker">
+                <div class="header">
+                  <div class="img1_Tmb"></div>
+                  <div class="sub_container_Tmb">
+                    <div class="Title_Tmb">
+                      TRACK MY BUS - Smarter Way To Travel
+                    </div>
+                    <div class="subtext_Tmb">
+                      Track your bus with our ‘Track My Bus’ feature and know
+                      the exact location in real-time.Stay informed and keep
+                      your family informed!
+                    </div>
+                    <div class="links_Tmb">
+                      {" "}
+                      <a
+                        href="https://www.redbus.in/info/track-my-bus"
+                        class="know_more"
+                      >
+                        Know more
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="path_Tmb"></div>
+                <div class="info_Tmb">
+                  <div class="titl_Tmb"> BUSES</div>
+                  <div class="value_Tmb">10,000</div>
+                  <div class="text_Tmb">
+                    Total buses currently being tracked
+                  </div>
+                </div>
+                <div class="info_Tmb">
+                  <div class="titl_Tmb"> ROUTES</div>
+                  <div class="value_Tmb">60,000</div>
+                  <div class="text_Tmb">
+                    Total routes covered by live tracking
+                  </div>
+                </div>
+                <div class="info_Tmb">
+                  <div class="titl_Tmb"> USERS</div>
+                  <div class="value_Tmb">40,000</div>
+                  <div class="text_Tmb">
+                    Total users using Track My Bus feature
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-separator"></div>
 
+            <div id="advantage_div">
+              <section>
+                <div className="aw main-body">
+                  <div className="ah heading-1 main-header-family rest1 animate">
+                    <div className="dib">
+                      <img
+                        src="//s1.rdbuz.com/web/images/home/promise.png"
+                        height={100}
+                      />
+                    </div>
+                    <div className="promise-head-main">
+                      {" "}
+                      We promise to deliver
+                    </div>
+                  </div>
+                  <div className="ad rest1 animate"></div>
+                  <div
+                    className="clearfix aa our-promise-blocks"
+                    id="advantage"
+                  >
+                    <div className="fl cardAdv rest1 appear-first aa-25 animate">
+                      <div className="imgCont rest1 animate">
+                        <img
+                          src="//s3.rdbuz.com/web/images/home/maximum_choices.png"
+                          height={90}
+                        />
+                      </div>
+                      <div className="tilleBlock rest1 animate">
+                        MAXIMUM CHOICE
+                      </div>
+                      <div className="second-level-heading ">
+                        We give you the widest number of travel options across
+                        thousands of routes.
+                      </div>
+                    </div>
+                    <div className="fl cardAdv rest1 appear-second aa-25 animate">
+                      <div className="imgCont rest1 animate">
+                        <img
+                          src="//s1.rdbuz.com/web/images/home/customer_care.png"
+                          height={100}
+                        />
+                      </div>
+                      <div className="tilleBlock rest1 animate">
+                        SUPERIOR CUSTOMER SERVICE
+                      </div>
+                      <div className="second-level-heading ">
+                        We put our experience and relationships to good use and
+                        are available to solve your travel issues.
+                      </div>
+                    </div>
+                    <div className="fl cardAdv rest1 appear-third aa-25 animate">
+                      <div className="imgCont rest1 animate">
+                        <img
+                          src="//s1.rdbuz.com/web/images/home/lowest_Fare.png"
+                          height={90}
+                        />
+                      </div>
+                      <div className="tilleBlock rest1 animate">
+                        LOWEST PRICES
+                      </div>
+                      <div className="second-level-heading ">
+                        We always give you the lowest price with the best
+                        partner offers.
+                      </div>
+                    </div>
+                    <div className="fl cardAdv rest1 appear-fourth aa-25 animate">
+                      <div className="imgCont rest1 animate">
+                        <img
+                          src="//s2.rdbuz.com/web/images/home/benefits.png"
+                          height={90}
+                        />
+                      </div>
+                      <div className="tilleBlock rest1 animate">
+                        UNMATCHED BENEFITS
+                      </div>
+                      <div className="second-level-heading ">
+                        We take care of your travel beyond ticketing by
+                        providing you with innovative and unique benefits.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
 
+            <div class="border-separator"></div>
 
+            <div id="awards_div" className="main-body">
+              <section>
+                <div className="aw">
+                  <div className="ah heading-1 main-header-family rest1 main-head animate">
+                    Awards &amp; Recognition
+                  </div>
+                  <div className="clearfix ac awards-main">
+                    <div className="fl rest1 appear-first animate">
+                      <a
+                        href="http://www.business-standard.com/article/companies/bs-annual-awards-saluting-the-spirit-of-entrepreneurship-114033100015_1.html"
+                        target="_blank"
+                      >
+                        <div>
+                          <div className="imgCont">
+                            <img src="//s2.rdbuz.com/web/images/home/awards/Business_Standard1.png" />
+                          </div>
+                          <div className="second-level-heading label-1">
+                            Most Innovative Company
+                          </div>
+                          <div className="second-level-heading label-2"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="fl rest1 appear-second animate">
+                      <a
+                        href="https://thebrandtrustreport.wordpress.com/tag/redbus-in/"
+                        target="_blank"
+                      >
+                        <div style={{ marginTop: 35 }}>
+                          <div className="imgCont">
+                            <img src="//s1.rdbuz.com/web/images/home/awards/Brand_Trust_Report.png" />
+                          </div>
+                          <div className="second-level-heading label-1">
+                            Most Trusted Brand
+                          </div>
+                          <div className="second-level-heading label-2"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="fl rest1 appear-third animate">
+                      <a
+                        href="https://eyefortravelblog.blogspot.in/2014/04/winners-of-mobile-innovation-in-travel.html"
+                        target="_blank"
+                      >
+                        <div>
+                          <div className="imgCont">
+                            <img src="//s3.rdbuz.com/web/images/home/awards/Eye_for_Travel1.png" />
+                          </div>
+                          <div className="second-level-heading label-1">
+                            Mobile Innovation Award
+                          </div>
+                          <div className="second-level-heading label-2"></div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="border-separator"></div>
 
-
-<div className="main-body">
-  <div className="promiseMain">
-    <div className="header">
-      <div className="img2_Hero" />
-      <span className="fl">
-        <div className="Title_hero">Introducing On-Time Guarantee</div>
-        <div className="subtext_hero">Leave on time, everytime</div>
-      </span>
-      <span className="fr">
+            <div
+              className="main-body"
+              style={{ textAlign: "center", backgroundColor: "#F1F1F1" }}
+            >
+              <section id="stats_div">
+                <div>
+                  <div className="stats-header heading-1 main-header-family rest1 animate">
+                    The numbers are growing!
+                  </div>
+                  <div className="clearfix stats-v-holder">
+                    <div className="fll">
+                      <div>
+                        <div className="sp rest1 animate">CUSTOMERS</div>
+                        <div className="sv rest1 animate">17 M</div>
+                        <div className="common-desc second-level-heading rest1 animate">
+                          redBus is trusted by over 17 million happy customers
+                          globally
+                        </div>
+                      </div>
+                    </div>
+                    <div className="fll">
+                      <div>
+                        <div className="sp rest1 animate">OPERATORS</div>
+                        <div className="sv rest1 animate">2300</div>
+                        <div className="common-desc second-level-heading rest1 animate">
+                          network of over 2300 bus operators worldwide
+                        </div>
+                      </div>
+                    </div>
+                    <div className="fll">
+                      <div>
+                        <div className="sp rest1 animate">BUS TICKETS</div>
+                        <div className="sv rest1 animate">180+ M</div>
+                        <div className="common-desc second-level-heading rest1 animate">
+                          Over 180 million trips booked using redBus
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="border-separator"></div>
+            <div className="seo-section clearfix ">
+              <div className="main-body ">
+                <div className="operator-footer-list clearfix">
+                  {" "}
+                  <ul className="container clearfix">
+                    {" "}
+                    <h6 className="seo-header">Top Operators</h6>{" "}
+                    <li>
+                      <a href="https://www.redbus.in/travels/srs-travels-srs.aspx">
+                        SRS Travels
+                      </a>
+                    </li>{" "}
+                    <li>
+                      <a href="https://www.redbus.in/travels/evacay-bus.aspx ">
+                        Evacay Bus
+                      </a>
+                    </li>{" "}
+                    
+                    <li>
+                      <a href="https://www.redbus.in/travels/yamani-travels.aspx">
+                        Yamani Travels
+                      </a>
+                    </li>{" "}
+                    <li>
+                      <a href="https://www.redbus.in/travels/arthi-travels.aspx">
+                        Arthi Travels
+                      </a>
+                    </li>{" "}
+                  </ul>
+                  <div className="more-link">
+                    <a
+                      href="/travels/operators-directory.aspx"
+                      className="more-link site-links"
+                      target="_blank"
+                    >
+                      All Operators &gt;
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-separator"></div>
         
-      </span>             
-    </div>
-    <div className="subHeader">
-      <span className="img3_hero" />
-      <span className="Herotext1">Look for buses with </span>
-      <span className="img4_Hero" />
-      <span className="text">tag while booking your journey, </span>
-    </div>
-    <div className="info_hero">
-      <div className="titl_hero"> Bus on time </div>
-      <div className="value_hero">Get 25% refund</div>
-      <div className="text_hero">If bus departure is delayed by 30 mins from boarding point. </div>
-    </div> 
-    <div className="info_hero2">
-      <div className="titl_hero"> No bus cancellation </div>
-      <div className="value_hero">Get 150% refund</div>
-      <div className="text_hero">Bus is cancelled without an alternate arrangement.</div>
-    </div> 
-    <div className="info_hero2">
-      <div className="titl_hero"> Alternate assurance </div>
-      <div className="value_hero">Get 300% refund</div>
-      <div className="text_hero">Bus breaks down with no alternate arrangement within 6 hours. </div>
-    </div>
-  </div></div>
- 
 
- 
-
-  <div class="main-body">
-  <div class="mybustracker">
-    <div class="header">
-        <div class="img1_Tmb"></div>
-            <div class="sub_container_Tmb">
-              <div class="Title_Tmb">TRACK MY BUS - Smarter  Way To Travel</div>
-              <div class="subtext_Tmb">Track your bus with our ‘Track My Bus’ feature and know the exact location in real-time.Stay informed and keep your family informed!</div>
-              <div class="links_Tmb"> <a href="https://www.redbus.in/info/track-my-bus" class="know_more">Know more</a></div>
-             </div>
-
-    </div>
-    <div class="path_Tmb"></div>
-  <div class="info_Tmb">
-         <div class="titl_Tmb"> BUSES</div>
-         <div class="value_Tmb">10,000</div>
-         <div class="text_Tmb">Total buses currently being tracked</div>
-        </div> 
-  <div class="info_Tmb">
-         <div class="titl_Tmb"> ROUTES</div>
-         <div class="value_Tmb">60,000</div>
-         <div class="text_Tmb">Total routes covered by live tracking</div>
-        </div> 
-  <div class="info_Tmb">
-         <div class="titl_Tmb"> USERS</div>
-         <div class="value_Tmb">40,000</div>
-         <div class="text_Tmb">Total users using Track My Bus feature</div>
-        </div> 
- </div>
-
-
-
-
-
-</div>
-<div class="border-separator">
-
-</div>
-     
-<div id="advantage_div">
-  <section>
-    <div className="aw main-body">
-      <div className="ah heading-1 main-header-family rest1 animate">
-        <div className="dib"><img src="//s1.rdbuz.com/web/images/home/promise.png" height={100} /></div>
-        <div className="promise-head-main"> We promise to deliver</div>
-      </div>
-      <div className="ad rest1 animate">
-      </div>
-      <div className="clearfix aa our-promise-blocks" id="advantage">
-        <div className="fl cardAdv rest1 appear-first aa-25 animate">
-          <div className="imgCont rest1 animate">
-            <img src="//s3.rdbuz.com/web/images/home/maximum_choices.png" height={90} />
+           <div className="footer-row">
+  <div className="clearfix promotion  main-body rest1 animate">
+    <div className="w-100 pR fl footer-links">
+      <div className="dib foot-wrapper">
+        <div className="row fl">
+          <div className="dib">
+            About redBus
           </div>
-          <div className="tilleBlock rest1 animate">
-            MAXIMUM CHOICE
-          </div>
-          <div className="second-level-heading ">
-            We give you the widest number of travel options across thousands of routes.
-          </div>
+          <a href="/info/aboutus" target="_blank">About Us</a>
+          <a href="/info/contactus" target="_blank">Contact Us</a>
+          <a href="//m.redbus.in" target="_blank">Mobile Version</a>
+          <a href="/info/mobile" target="_blank">redBus on Mobile</a>
+          <a href="/sitemap.html" target="_blank">Sitemap</a>
+          <a href="/info/OfferTerms" target="_blank">Offers</a>
+          <a href="/careers" target="_blank">Careers</a>
+          <a href="/values" target="_blank">Values</a>
         </div>
-        <div className="fl cardAdv rest1 appear-second aa-25 animate">
-          <div className="imgCont rest1 animate">
-            <img src="//s1.rdbuz.com/web/images/home/customer_care.png" height={100} />
+        <div className="row fl">
+          <div className="dib">
+            Info
           </div>
-          <div className="tilleBlock rest1 animate">
-            SUPERIOR CUSTOMER SERVICE
-          </div>
-          <div className="second-level-heading ">
-            We put our experience and relationships to good use and are available to solve your travel issues.
-          </div>
+          <a href="/info/termscondition" target="_blank">T &amp; C</a>
+          <a href="/info/privacypolicy" target="_blank">Privacy Policy</a>
+          <a href="/info/faq" target="_blank">FAQ</a>
+          <a href="http://blog.redbus.in/" target="_blank">Blog</a>
+          <a href="https://in3.seatseller.travel/" target="_blank">Agent Registration</a>
+          <a href="https://www.icicilombard.com/" target="_blank">Insurance Partner</a>
+          <a href="/info/useragreement" target="_blank">User Agreement</a>
         </div>
-        <div className="fl cardAdv rest1 appear-third aa-25 animate">
-          <div className="imgCont rest1 animate">
-            <img src="//s1.rdbuz.com/web/images/home/lowest_Fare.png" height={90} />
+        <div className="row fl">
+          <div className="dib">
+            Global Sites
           </div>
-          <div className="tilleBlock rest1 animate">
-            LOWEST PRICES
-          </div>
-          <div className="second-level-heading ">
-            We always give you the lowest price with the best partner offers. 
-          </div>
+          <a href="https://www.redbus.in" target="_blank">India</a>
+          <a href="https://www.redbus.sg" target="_blank">Singapore</a>
+          <a href="https://www.redbus.my" target="_blank">Malaysia</a>
+          <a href="https://www.redbus.id" target="_blank">Indonesia</a>
+          <a href="https://www.redbus.pe" target="_blank">Peru</a>
+          <a href="https://www.redbus.co" target="_blank">Colombia</a>
         </div>
-        <div className="fl cardAdv rest1 appear-fourth aa-25 animate">
-          <div className="imgCont rest1 animate">
-            <img src="//s2.rdbuz.com/web/images/home/benefits.png" height={90} />
+        <div className="row fl">
+          <div className="dib">
+            Our Partners
           </div>
-          <div className="tilleBlock rest1 animate">
-            UNMATCHED BENEFITS
-          </div>
-          <div className="second-level-heading ">
-            We take care of your travel beyond ticketing by providing you with innovative and unique benefits.
-          </div>
+          <a href="https://www.goibibo.com/" target="_blank">Goibibo</a>
+          <a href="https://www.makemytrip.com/" target="_blank">Makemytrip</a>
         </div>
       </div>
+      <div className="fr rights-cont">
+        <div className="img-cont">
+          <img src="https://s3.rdbuz.com/web/images/home/sgp/r_logo.png" />
+        </div>
+        <div>
+          redBus is the world's largest online bus ticket booking service trusted by over 17 million happy customers globally. redBus offers bus ticket booking through its website,iOS and Android mobile apps for all major routes.
+        </div>
+        <div id="social-media">
+          <a target="_blank" href="https://www.facebook.com/redbus.in/"><span className="fbicon icon-Facebook" /></a>
+          <a target="_blank" href="https://twitter.com/redBus_in"><span className="twittericon icon-Twitter" /></a>
+        </div>
+        <div style={{float: 'left'}}>
+          <span>Ⓒ</span>
+          <span> 2020 ibibogroup All rights reserved</span>
+        </div>
+      </div>      
     </div>
-  </section>
+  </div>
 </div>
 
-<div class="border-separator">
 
-</div>
-     
-<div id="awards_div" className="main-body">
-  <section>
-    <div className="aw">
-      <div className="ah heading-1 main-header-family rest1 main-head animate">
-        Awards &amp; Recognition
-      </div>            
-      <div className="clearfix ac awards-main">
-        <div className="fl rest1 appear-first animate">
-          <a href="http://www.business-standard.com/article/companies/bs-annual-awards-saluting-the-spirit-of-entrepreneurship-114033100015_1.html" target="_blank">
-            <div>
-              <div className="imgCont">
-                <img src="//s2.rdbuz.com/web/images/home/awards/Business_Standard1.png" />
-              </div>
-              <div className="second-level-heading label-1">
-                Most Innovative Company
-              </div>
-              <div className="second-level-heading label-2">
-              </div>
-            </div>
-          </a>
-        </div>
-        <div className="fl rest1 appear-second animate">
-          <a href="https://thebrandtrustreport.wordpress.com/tag/redbus-in/" target="_blank">
-            <div style={{marginTop: 35}}>
-              <div className="imgCont">
-                <img src="//s1.rdbuz.com/web/images/home/awards/Brand_Trust_Report.png" />
-              </div>
-              <div className="second-level-heading label-1">
-                Most Trusted Brand
-              </div>
-              <div className="second-level-heading label-2">
-              </div>
-            </div>
-          </a>
-        </div>
-        <div className="fl rest1 appear-third animate">
-          <a href="https://eyefortravelblog.blogspot.in/2014/04/winners-of-mobile-innovation-in-travel.html" target="_blank">
-            <div>
-              <div className="imgCont">
-                <img src="//s3.rdbuz.com/web/images/home/awards/Eye_for_Travel1.png" />
-              </div>
-              <div className="second-level-heading label-1">
-                Mobile Innovation Award
-              </div>
-              <div className="second-level-heading label-2">
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-<div class="border-separator">
-
-</div>
-     
-
-<div className="main-body" style={{textAlign:"center",backgroundColor:"#F1F1F1"}}>
-  <section id="stats_div">
-    <div>
-      <div className="stats-header heading-1 main-header-family rest1 animate">
-        The numbers are growing!
-      </div>
-      <div className="clearfix stats-v-holder">
-        <div className="fll">
-          <div>
-            <div className="sp rest1 animate">CUSTOMERS</div>
-            <div className="sv rest1 animate">17 M</div>
-            <div className="common-desc second-level-heading rest1 animate">redBus is trusted by over 17 million happy customers globally</div>
+        
+        
           </div>
-        </div>
-        <div className="fll">
-          <div>
-            <div className="sp rest1 animate">OPERATORS</div>
-            <div className="sv rest1 animate">2300</div>
-            <div className="common-desc second-level-heading rest1 animate">network of over 2300 bus operators worldwide</div>
-          </div>
-        </div>
-        <div className="fll">
-          <div>
-            <div className="sp rest1 animate">BUS TICKETS</div>
-            <div className="sv rest1 animate">180+ M</div>
-            <div className="common-desc second-level-heading rest1 animate">Over 180 million trips booked using redBus</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-
-
-
-
-
-
-
-
-
-            </div>
-        )
+        );
     }
 }
 

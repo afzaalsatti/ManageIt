@@ -75,6 +75,7 @@ position: absolute;
    position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 .topbarCorerPart{
    -webkit-tap-highlight-color: rgba(0,0,0,0);

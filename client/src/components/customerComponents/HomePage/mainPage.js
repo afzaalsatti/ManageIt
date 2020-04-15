@@ -11,6 +11,7 @@ super();
 this.toggleSlideMenu=this.toggleSlideMenu.bind(this);
 this.showHireMenu=this.showHireMenu.bind(this);
 this.getMenuSelection=this.getMenuSelection.bind(this);
+this.state={component:<Home></Home>};
 
     }
 
@@ -25,6 +26,13 @@ this.getMenuSelection=this.getMenuSelection.bind(this);
             
             document.getElementById("subMenu").style.display="none"
         }
+
+        if(this.state.component != <HireVahicle></HireVahicle>)
+             {
+                 this.setState({
+                     component:<HireVahicle></HireVahicle>
+                 });
+             }
         
     }
     toggleSlideMenu()
@@ -44,6 +52,26 @@ this.getMenuSelection=this.getMenuSelection.bind(this);
     getMenuSelection(pageToBeLoaded)
     {
          console.log(pageToBeLoaded);
+         if(pageToBeLoaded==="home")
+         {
+            if(this.state.component != <Home></Home>)
+            {
+                this.setState({
+                    component:<Home></Home>
+                });
+            }
+             
+         }
+         else 
+         if(pageToBeLoaded==="hire")
+         {
+            if(this.state.component != <HireVahicle></HireVahicle>)
+             {
+                 this.setState({
+                     component:<HireVahicle></HireVahicle>
+                 });
+             }
+         }
          if(!pageToBeLoaded.includes("hire"))
          {
             document.getElementById("subMenu").style.display="none"
@@ -143,9 +171,9 @@ this.getMenuSelection=this.getMenuSelection.bind(this);
         <div className="left">
         
         
-{/* <Home></Home> */}
+{this.state.component}
 
-<HireVahicle></HireVahicle>
+{/* <HireVahicle></HireVahicle> */}
         
         </div>
     </div>

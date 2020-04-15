@@ -15,6 +15,7 @@ font-face {
     width: 100%;
     margin: 0px;
     position: absolute;
+    top: 1px;
 
    
 }
@@ -49,7 +50,7 @@ font-face {
 }
 .erp-button{
     width: 200px;
-margin-top: 50px;
+margin-top: 7px;
 
     text-transform: none;
     background-color: #1a73e8;

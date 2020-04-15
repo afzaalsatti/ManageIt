@@ -1,11 +1,43 @@
 import React, { Component } from 'react'
 import './css/home.css'
 export default class home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [
+        "/assets/imageSlider/test.jpg",
+        "/assets/imageSlider/test1.jpg",
+        "/assets/imageSlider/test3.jpg"
+      ],
+      selectedImage: "/assets/imageSlider/test.jpg"
+    };
+  }
+  componentDidMount() {
+    setInterval(() => {
+      this.setState(prevState => {
+        if (prevState.selectedImage === this.state.images[0]) {
+          return {
+            selectedImage: this.state.images[1]
+          };
+        }else
+        if (prevState.selectedImage === this.state.images[1]) {
+          return {
+            selectedImage: this.state.images[2]
+          };
+        } else {
+          return {
+            selectedImage: this.state.images[0]
+          };
+        }
+      });
+    }, 2000);
+  }
     render() {
         return (
           <div id="homeComponent">
+            <h1 className="book_ticket_heading">Booking  Tickets Became so easy!</h1>
             <div id="welcome_image_div">
-              <img src="/assets/imageSlider/test3.jpg"></img>
+              <img src={this.state.selectedImage}></img>
             </div>
 
             <div id="search_div" className="clearfix md5">
@@ -17,6 +49,11 @@ export default class home extends Component {
                   >
                     <span className="fl icon-city icon"></span>
                     <div className="contentBar">
+                    <img
+                            className="autocomplete_img"
+                            src="/assets/svg/tickets.svg"
+                            alt
+                          />
                       <input
                         type="text"
                         id="src"
@@ -24,24 +61,22 @@ export default class home extends Component {
                         data-message="Please enter a source city"
                         tabIndex={1}
                         autoComplete="off"
+                        placeholder="FROM*"
                       />
-                      <label
-                        htmlFor="src"
-                        className="db"
-                        style={{ left: "15%" }}
-                      >
-                        FROM
-                      </label>
+                      
                       <div className="error-message-fixed "> </div>
                     </div>
                   </div>
                   <span className="icon-doublearrow icon" id="togglebtn" />
-                  <div className="fl search-box">
-                    <span
-                      className="fl icon-city icon"
-                      style={{ marginLeft: 13 }}
-                    ></span>
-                    <div>
+                  <div className="fl contentBar search-box">
+                    
+                    <div className="contentBar">
+                    <img
+                            className="autocomplete_img"
+                            src="/assets/svg/distance.svg"
+                            alt
+                            style={{    marginTop :"10px"}}
+                          />
                       <input
                         type="text"
                         id="dest"
@@ -49,49 +84,46 @@ export default class home extends Component {
                         data-message="Please enter a destination city"
                         tabIndex={2}
                         autoComplete="off"
+                        placeholder="To*"
                       />
-                      <label
-                        htmlFor="dest"
-                        style={{ left: "21%" }}
-                        className="db"
-                      >
-                        TO
-                      </label>
+                      
                       <div className="error-message-fixed "> </div>
                     </div>
                   </div>
                   <div className="fl search-box date-box gtm-onwardCalendar">
                     <span className="fl icon-calendar_icon-new icon-onward-calendar icon"></span>
-                    <div>
+                    <div style={{backgroundColor:"#f1f1f1"}}>
+                    <text htmlFor="onward_cal" className="date_text">
+                        Onward Date *
+                      </text>
                       <input
                         type="text"
                         type="date"
                         id="onward_cal"
-                        className="db"
+                        className=" date_input"
                         style={{ backgroundColor: "#f1f1f1" }}
                       />
-                      <label htmlFor="onward_cal" className="db text-trans-uc">
-                        Onward Date
-                      </label>
+                      
                     </div>
                   </div>
                   <div className="fl search-box date-box gtm-returnCalendar">
                     <span className="fl icon-calendar_icon-new icon-return-calendar icon"></span>
-                    <div>
+                    <div style={{backgroundColor:"#f1f1f1"}}>
+                    <text
+                        htmlFor="return_cal"
+                        className="date_text"
+                      >
+                        Return Date
+                      </text>
                       <input
                         type="date"
                         id="return_cal"
-                        className="db text-trans-uc "
+                        className=" date_input"
                         style={{ backgroundColor: "#f1f1f1" }}
                         tabIndex={4}
                         data-caleng
                       />
-                      <label
-                        htmlFor="return_cal"
-                        className="db text-trans-uc tal"
-                      >
-                        Return Date
-                      </label>
+                      
                     </div>
                   </div>
                   <button id="search_btn" className="fl button">

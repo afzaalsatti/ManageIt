@@ -93,6 +93,14 @@
     color: #fff;
     font-family: poppins;
 }
+.contentBar{
+    display: flex;
+    background-color: #F1F1F1;
+}
+
+.contentBar img{
+    margin-top: 5px;
+}
 .autocomplete_block {
     width: 297px;
     height: 48px;

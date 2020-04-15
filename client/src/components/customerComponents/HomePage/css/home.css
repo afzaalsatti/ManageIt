@@ -1,7 +1,8 @@
 #search_div {
     position: absolute;
-    top: 130px;
+    top: 250px;
     width: 100%;
+    z-index: 0;
 }
 *, :after, :before {
     box-sizing: border-box;
@@ -11,11 +12,11 @@
 }
 #welcome_image_div{
     width: 100%;
-    height: 350px;
+    height: 450px;
 }
 #welcome_image_div img{
     width: 100%;
-    height: 350px;
+    height: 450px;
    
 }
 div {
@@ -45,7 +46,7 @@ div {
 .search-box {
     width: 225px;
     border: 1px solid #d2d2d2;
-    height: 46px;
+    height: 50px;
     background-color: #fff;
 }
 .fl {
@@ -59,6 +60,15 @@ div {
     color: gray;
 }
 
+.date_text{
+    margin:0px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #f1f1f1;
+   
+    
+
+}
 
 
 input.db {
@@ -68,6 +78,18 @@ input.db {
    
     font-weight: 400;
     font-size: 14px;
+}
+.date_input{
+    height: 22px;
+
+    color: #404040;
+    width: 100%;
+    text-align: center;
+  
+   
+    font-weight: 350;
+    font-size: 13px;
+    border: none;
 }
 #dest, #src {
     outline: none;
@@ -132,18 +154,13 @@ label.db {
 .date-box {
     width: 168px!important;
 }
-.search-box {
-    width: 225px;
-    border: 1px solid #d2d2d2;
-    height: 46px;
-    background-color: #fff;
-}
+
 *, :after, :before {
     box-sizing: border-box;
 }
 
 #search_btn {
-    height: 46px;
+    height: 50px;
     width: 144px;
     border-width: 0;
     background-color: #d74f57;
@@ -153,6 +170,7 @@ label.db {
     font-style: normal;
     font-stretch: normal;
     text-transform: none;
+    margin-left: 5px;
 }
 
 
@@ -235,6 +253,17 @@ label.db {
     background-repeat: no-repeat;
     background-size: contain;
     vertical-align: middle;
+}
+
+
+.book_ticket_heading{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: poppins;
+    margin-top: 50px;
+    
 }
 .titl_hero {
     height: 24px;

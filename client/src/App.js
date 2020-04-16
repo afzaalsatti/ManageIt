@@ -22,7 +22,7 @@ import AddBusRoute from './components/Inventry/RouteManagement/AddBusRoute'
 import UserProfile from './components/user/UserProfile'
 
 import mainPage from './components/customerComponents/HomePage/mainPage'
-
+import StripePayment from './components/customerComponents/payment/stripe_payment'
 
 
 
@@ -52,6 +52,7 @@ function App() {
       <Route path="/bookticket" exact component={PersonalDetails}></Route>
       <Route path="/bookseat" exact component={BookBusTicket}></Route>
       <Route path="/contactus" exact component={ContactPage}></Route>
+      <Route path="/payment" exact component={StripePayment}></Route>
     
       </Switch>
     </Router>

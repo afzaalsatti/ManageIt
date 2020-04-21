@@ -13,7 +13,7 @@ export default class HireVahicle extends Component {
                     </div>
                     <div id="widget_header2">
                       <span>
-                        Hire Buses, Trucks and Cars at your convenience
+                        Hire {this.props.type} at your convenience
                       </span>
                     </div>
                   </div>

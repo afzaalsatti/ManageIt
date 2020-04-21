@@ -26,6 +26,8 @@ import StripePayment from './components/customerComponents/payment/stripe_paymen
 
 
 
+
+
 function App() {
   
     document.title = "ManageIt"
@@ -53,7 +55,8 @@ function App() {
       <Route path="/bookseat" exact component={BookBusTicket}></Route>
       <Route path="/contactus" exact component={ContactPage}></Route>
       <Route path="/payment" exact component={StripePayment}></Route>
-    
+     
+      
       </Switch>
     </Router>
    

@@ -1,0 +1,35 @@
+#trans_hist_nav_div{
+height: 50px;
+width: 80%;
+margin: auto;
+background: #B12C3B;
+text-align: center;
+position: sticky;
+top: 0;
+z-index: 1;
+font-size: larger;
+}
+
+#ride{
+margin-right: 50px;
+display: inline-block;
+text-decoration-line: none;
+  text-decoration-style: solid;
+  text-decoration-color: white;
+  color: white;
+}
+#booking{
+    margin-right: 100px;
+    display: inline-block;
+
+    text-decoration-line: none;
+    text-decoration-color: white;
+    color: white;
+  
+    }
+
+
+   
+
+    
+    

@@ -1,0 +1,80 @@
+#rideHistoryList{
+    list-style: none;
+    margin: auto;
+    width: 80%;
+    padding-top: 10px;
+    background: #1A73E8;
+}
+
+
+.historytopdiv{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#rideHistoryCard{
+    width: 90%;
+    margin-top: 10px;
+}
+.charges{
+    float: right;
+    font-weight: 600;
+    margin: 0px;
+    margin-right: 5px;
+}
+.date{
+    
+        
+        font-weight: 600;;
+        margin-left: 5px;
+    
+}
+.time{
+    margin-left: 40%;
+    font-weight: 600;;
+}
+
+.rideHistoryAddress{
+   margin-left: 10px;
+
+   width : 500px;
+  overflow:hidden;
+  display:inline-flex;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  
+}
+.rideHistoryAddIcon{
+    height: 20px;
+    width: 20px;
+}
+
+#rideHistoryLineSperator {
+   
+    width: 2px;
+    margin-left: 10px;
+    height: 30px;
+    background: #1A73E8;
+    display: block;
+}
+
+#rideHistoryHeading{
+    width: 80%;
+    background: #1A73E8;
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+   
+}
+#rideHistoryHeading h5{
+    font-family: poppins;
+    font-size: xx-large;
+    
+    color: white;
+    margin-bottom: 0px;
+}
+#rideHistoryHeading svg{
+   float: left;
+   margin-left: 5px;
+}

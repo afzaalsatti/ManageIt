@@ -2,6 +2,7 @@ import React from 'react'
 import  './SlideDrawer/SlideDrawer.css'
 import Home from './home'
 import HireVahicle from '../Hire/HireVahicle'
+import TransHistory from '../TransportationHistory/TransHistory'
 
 export default class mainPage extends React.Component {
   
@@ -30,7 +31,7 @@ this.state={component:<Home></Home>};
         if(this.state.component != <HireVahicle></HireVahicle>)
              {
                  this.setState({
-                     component:<HireVahicle></HireVahicle>
+                     component:<HireVahicle type="Buses"></HireVahicle>
                  });
              }
         
@@ -51,7 +52,7 @@ this.state={component:<Home></Home>};
     }
     getMenuSelection(pageToBeLoaded)
     {
-         console.log(pageToBeLoaded);
+       
          if(pageToBeLoaded==="home")
          {
             if(this.state.component != <Home></Home>)
@@ -65,15 +66,60 @@ this.state={component:<Home></Home>};
          else 
          if(pageToBeLoaded==="hire")
          {
-            if(this.state.component != <HireVahicle></HireVahicle>)
+             
+            if(this.state.component != <HireVahicle type="Buses"></HireVahicle>)
              {
+
                  this.setState({
-                     component:<HireVahicle></HireVahicle>
+                     component:<HireVahicle type="Buses"></HireVahicle>
                  });
              }
+
+
+         }
+         if(pageToBeLoaded==="history")
+         {
+             
+            if(this.state.component != <TransHistory ></TransHistory>)
+             {
+
+                 this.setState({
+                     component:<TransHistory ></TransHistory>
+                 });
+             }
+
+
+         }
+         else 
+         if(pageToBeLoaded==="hireCar")
+         {
+             
+            if(this.state.component != <HireVahicle type="Cars"></HireVahicle>)
+             {
+
+                 this.setState({
+                     component:<HireVahicle type="Cars"></HireVahicle>
+                 });
+             }
+
+
+         }else
+         if(pageToBeLoaded==="hireTruck")
+         {
+             
+            if(this.state.component != <HireVahicle type="Trucks"></HireVahicle>)
+             {
+
+                 this.setState({
+                     component:<HireVahicle type="Trucks"></HireVahicle>
+                 });
+             }
+
+
          }
          if(!pageToBeLoaded.includes("hire"))
          {
+            
             document.getElementById("subMenu").style.display="none"
          }
          

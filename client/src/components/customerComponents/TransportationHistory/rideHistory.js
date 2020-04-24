@@ -10,7 +10,69 @@ export default class rideHistory extends Component {
 this.getListItemCards=this.getListItemCards.bind(this);
     }
     getListItemCards=function(){
-        var menu = [ { "_id": "order ID", "date": "11/2/2020", "time": "11;20pm", "charges": "PKR 250", "pickup": "G8 Islamabad", "dropoff": "I9 Islamabad" }, { "_id": "order ID", "date": "11/2/2020", "time": "11;20pm", "charges": "PKR 250", "pickup": "G8 Islamabad", "dropoff": "I9 Islamabad" }, { "_id": "order ID", "date": "11/2/2020", "time": "11;20pm", "charges": "PKR 250", "pickup": "G8 Islamabad", "dropoff": "I9 Islamabad" }, { "_id": "order ID", "date": "11/2/2020", "time": "11;20pm", "charges": "PKR 250", "pickup": "G8 Islamabad", "dropoff": "I9 Islamabad" }, { "_id": "order ID", "date": "11/2/2020", "time": "11;20pm", "charges": "PKR 250", "pickup": "G8 Islamabad", "dropoff": "I9 Islamabad" } ];
+        var menu = [
+            {
+              "_id": "order ID",
+              "date": "11/2/2020",
+              "time": "11;20pm",
+              "charges": "PKR 250",
+              "vahicleMake": "Toyota",
+              "model": "Corolla 2018",
+              "pickup": "G8 Islamabad",
+              "dropoff": "I9 Islamabad",
+              "pickupCords": "73.084488,33.738045",
+              "dropoffCords": "73.071442,33.626057"
+            },
+            {
+              "_id": "order ID",
+              "date": "11/2/2020",
+              "time": "11;20pm",
+              "charges": "PKR 250",
+              "vahicleMake": "Toyota",
+              "model": "Corolla 2018",
+              "pickup": "G8 Islamabad",
+              "dropoff": "I9 Islamabad",
+              "pickupCords": "73.084488,33.738045",
+              "dropoffCords": "73.071442,33.626057"
+            },
+            {
+              "_id": "order ID",
+              "date": "11/2/2020",
+              "time": "11;20pm",
+              "charges": "PKR 250",
+              "vahicleMake": "Toyota",
+              "model": "Corolla 2018",
+              "pickup": "G8 Islamabad",
+              "dropoff": "I9 Islamabad",
+              "pickupCords": "73.084488,33.738045",
+              "dropoffCords": "73.071442,33.626057"
+            },
+            {
+              "_id": "order ID",
+              "date": "11/2/2020",
+              "time": "11;20pm",
+              "charges": "PKR 250",
+              "vahicleMake": "Toyota",
+              "model": "Corolla 2018",
+              "pickup": "G8 Islamabad",
+              "dropoff": "I9 Islamabad",
+              "pickupCords": "73.084488,33.738045",
+              "dropoffCords": "73.071442,33.626057"
+            },
+            {
+              "_id": "order ID",
+              "date": "11/2/2020",
+              "time": "11;20pm",
+              "charges": "PKR 250",
+              "vahicleMake": "Toyota",
+              "model": "Corolla 2018",
+              "pickup": "G8 Islamabad",
+              "dropoff": "I9 Islamabad",
+              "pickupCords": "73.084488,33.738045",
+              "dropoffCords": "73.071442,33.626057"
+            }
+          ];
+        
         return menu.map((key, index)=>{
             
          

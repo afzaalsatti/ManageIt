@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import rideHistory from './rideHistory'
 import './TransHistory.css'
+import BookinHistory from './BookingHistory'
 const RideHistory=rideHistory;
 
 export default class TransHistory extends Component {
@@ -10,7 +11,7 @@ export default class TransHistory extends Component {
         this.changeHeadingToggleHover=this.changeHeadingToggleHover.bind(this);
         this.toggleComponent=this.toggleComponent.bind(this);
       
-        this.state={component:<RideHistory></RideHistory>}
+        this.state={component:<BookinHistory></BookinHistory>}
     }
 
 
@@ -29,7 +30,7 @@ this.setState({
             element.style.textDecoration="underline";
 this.setState({
 
-    component:<text></text>
+    component:<BookinHistory></BookinHistory>
 });
         }
        

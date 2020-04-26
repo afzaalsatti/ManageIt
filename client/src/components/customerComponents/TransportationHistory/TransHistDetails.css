@@ -6,7 +6,30 @@
   border-radius: 50%;
   cursor: pointer;
   }
-
+  #userprofile {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer;
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    outline: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+    height: 32px;
+    vertical-align: middle;
+    width: 32px;
+    margin: auto;
+    display: block;
+    object-fit: cover;
+    position: absolute;
+}
+  .rideDetailCard{
+    font-weight: 400;
+  }
   #TransHistmapDiv{
       width: 90% !important;
     height: 350px !important;

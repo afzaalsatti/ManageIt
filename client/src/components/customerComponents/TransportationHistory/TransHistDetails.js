@@ -3,10 +3,12 @@ import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl';
 import './TransHistDetails.css'
 import * as turf from '@turf/turf'
+import { Card } from 'react-bootstrap'
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obmFsZXgyIiwiYSI6ImNqemNudGs4cDAyaGYzY3FiamVtd2h4ZmQifQ.YYt71bcR3ZdD6UgIs6EQog';
 
 var  map;
+var rating = "";
 export default class TransHistDetails extends Component {
 
   constructor(props) {
@@ -328,7 +330,9 @@ map.on('load', function() {
     });
 
 
+ 
 
+    
 
 
     
@@ -336,13 +340,88 @@ map.on('load', function() {
 
   render() {
     const { lng, lat, zoom } = this.state;
-
+    if(rating==="")
+    { for(var i=0;i<this.props.details.rating;i++)
+      {
+       rating=rating+"★";
+       
+     }}
+   
     return (
       <div>
         <div  className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
           <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
         </div>
         <div id="TransHistmapDiv" style={{    width: "90%",height: "300px", marginLeft: "2%"}} ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+      
+      
+
+        <Card style={{ marginLeft: "15px"}} id="rideHistoryCard" >
+                  <div>
+          <div className="historytopdiv">
+          
+              <text className="date" >Ride Fare</text>
+         
+              <text className="charges ">{this.props.details.charges}</text>
+              <hr></hr>
+          
+              <img
+                                      className="rideHistoryAddIcon"
+                                      style={{marginLeft: '5px'}}
+                                      src="/assets/images/credit.png"
+                                      alt
+                                    />
+              <text className="date rideDetailCard" >Credit Pay </text>
+         
+              <text className="charges rideDetailCard">{this.props.details.credit}</text>
+              <br></br>
+              <img
+                                      className="rideHistoryAddIcon"
+                                      style={{marginLeft: '5px'}}
+                                      src="/assets/images/cash.png"
+                                      alt
+                                    />
+              <text className="date rideDetailCard" >Cash Pay</text>
+         
+              <text className="charges rideDetailCard">{this.props.details.cash}</text>
+          
+           </div>
+           <hr></hr>
+           <div className="historymiddlediv">
+           <img
+                                      className="rideHistoryAddIcon"
+                                      id="userprofile"
+                                      style={{marginLeft: '5px'}}
+                                      src="/assets/images/userprofile.png"
+                                      alt
+                                    />
+               <text style={{marginLeft:"37px"}} className="date rideDetailCard">{this.props.details.driver_name}</text>
+    <text style={{color:"blue"}} className="charges rideDetailCard">{rating}</text>
+               <br></br>
+               <text style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">{this.props.details.vahicleMake}{this.props.details.model}</text>
+ <br></br>
+          
+               <text style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">{this.props.details.vahicle_number}</text>
+          
+            
+              
+          
+           </div>
+                 </div>
+                 <hr></hr>
+                 </Card>
+     
+
+
+     
+
+      
+
+
+      
+  
+      
+      
       </div>
     );
   }

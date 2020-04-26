@@ -4,6 +4,8 @@
     width: 80%;
     padding-top: 10px;
     background: #1A73E8;
+    height: 500px;
+    overflow: auto;
 }
 
 
@@ -11,6 +13,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 #rideHistoryCard{
     width: 90%;
     margin-top: 10px;

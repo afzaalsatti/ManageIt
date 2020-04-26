@@ -157,14 +157,17 @@ this.state={component:<Home></Home>};
 
                 
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("home")}>
-                <i className="fa fa-home"></i>    
+                <img src="/assets/images/home_icon.png">
+                </img>   
                   <span >
                         Home
                     </span>
                 </li>
 
                 <li className="home-nav-item" onClick={this.showHireMenu}>
-                <i className="fa fa-home"></i>      <span>
+                <img src="/assets/images/booking_icon.png">
+                </img>   
+                <span>
                         Hire a Vahicle
                     </span>
 
@@ -192,22 +195,27 @@ this.state={component:<Home></Home>};
 
 
 
-                <i className="fa fa-home"></i>      <span>
+               <img src="/assets/images/history_icon.png">
+                </img>         <span>
                        History
                     </span>
                 </li>
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("career")}>
-                <i className="fa fa-home"></i>      <span>
+                <img src="/assets/images/career_icon.png">
+                </img>         <span>
                         Career
                     </span>
                 </li>
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("partner")}>
-                <i className="fa fa-home"></i>      <span>
+                <img src="/assets/images/partners_icon.png"/>  
+
+                    <span>
                         Our Partners
                     </span>
                 </li>
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("setting")}>
-                <i className="fa fa-home"></i>      <span>
+                <img src="/assets/images/settings_icon.png">
+                </img>         <span>
                         Settings
                     </span>
                 </li>

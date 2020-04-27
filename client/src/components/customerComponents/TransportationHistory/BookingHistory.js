@@ -160,7 +160,7 @@ this.state={component:this.getListItemCards()};
           
               <text className="date" >{key.date}</text>
               <text className="time">{key.time}</text>
-              <text className="charges">{key.charges}</text>
+              <text className="moveToRight">{key.charges}</text>
               <br></br>
           
            </div>

@@ -1,0 +1,51 @@
+.company_logo{
+    float: left;
+   height: 70px;
+  
+    width: 60px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+}
+#jobTitle{
+
+    margin-top: 30px !important;
+    font-weight: 600 !important;
+    font-size: larger !important;
+}
+#endDate{
+
+    margin-top: 30px !important;
+   
+}
+#JobsAddListButton{
+
+    height: 50px;
+    width: 130px;
+    background: #196EDE;
+    color: white;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    border-radius: 10px;
+    /* background: #006699; */
+}
+.JobAdsCard{
+    width: 85%;
+    margin: auto;
+    margin-top: 10px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+#JobAdListHeading{
+    width: 85%;
+    margin: auto;
+    text-align: center;
+    font-size: x-large;
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+    /* background: #196ede; */
+    /* color: white; */
+    height: 50px;
+}
+

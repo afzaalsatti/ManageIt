@@ -31,7 +31,7 @@ export default class TransHistDetails extends Component {
       center: this.state.pickupCords,
       zoom:8
     });
-//   
+  
 
 var markerjson = {
     type: 'FeatureCollection',
@@ -139,186 +139,93 @@ var counter = 0;
 
 
 map.on('load', function() {
+  try{
     // Add a source and layer displaying a point which will be animated in a circle.
     map.addSource('route', {
-    'type': 'geojson',
-    'data': route
-    });
+      'type': 'geojson',
+      'data': route
+      });
+       
+      map.addSource('point', {
+      'type': 'geojson',
+      'data': point
+      });
+       
+      map.addLayer({
+      'id': 'route',
+      'source': 'route',
+      'type': 'line',
+      'paint': {
+      'line-width': 2,
+      'line-color': '#007cbf'
+      }
+      });
+       
+      map.addLayer({
+      'id': 'point',
+      'source': 'point',
+      'type': 'symbol',
+      'layout': {
+      'icon-image': 'airport-15',
+      'icon-rotate': ['get', 'bearing'],
+      'icon-rotation-alignment': 'map',
+      'icon-allow-overlap': true,
+      'icon-ignore-placement': true
+      }
+      });
+       
+      function animate() {
+      // Update point geometry to a new position based on counter denoting
+      // the index to access the arc.
+      point.features[0].geometry.coordinates =
+      route.features[0].geometry.coordinates[counter];
+       
+      // Calculate the bearing to ensure the icon is rotated to match the route arc
+      // The bearing is calculate between the current point and the next point, except
+      // at the end of the arc use the previous point and the current point
+      try{
+          point.features[0].properties.bearing = turf.bearing(
+              turf.point(
+              route.features[0].geometry.coordinates[
+              counter >= steps ? counter - 1 : counter
+              ]
+              ),
+              turf.point(
+              route.features[0].geometry.coordinates[
+              counter >= steps ? counter : counter + 1
+              ]
+              ) );
+      }
+      catch(e)
+      {
+  
+      }
      
-    map.addSource('point', {
-    'type': 'geojson',
-    'data': point
-    });
+       
+      // Update the source with this new data.
+      map.getSource('point').setData(point);
+       
+      // Request the next frame of animation so long the end has not been reached.
+      if (counter < steps) {
+      requestAnimationFrame(animate);
+      }
+       
+      counter = counter + 1;
+      }
+       
      
-    map.addLayer({
-    'id': 'route',
-    'source': 'route',
-    'type': 'line',
-    'paint': {
-    'line-width': 2,
-    'line-color': '#007cbf'
-    }
-    });
-     
-    map.addLayer({
-    'id': 'point',
-    'source': 'point',
-    'type': 'symbol',
-    'layout': {
-    'icon-image': 'airport-15',
-    'icon-rotate': ['get', 'bearing'],
-    'icon-rotation-alignment': 'map',
-    'icon-allow-overlap': true,
-    'icon-ignore-placement': true
-    }
-    });
-     
-    function animate() {
-    // Update point geometry to a new position based on counter denoting
-    // the index to access the arc.
-    point.features[0].geometry.coordinates =
-    route.features[0].geometry.coordinates[counter];
-     
-    // Calculate the bearing to ensure the icon is rotated to match the route arc
-    // The bearing is calculate between the current point and the next point, except
-    // at the end of the arc use the previous point and the current point
-    try{
-        point.features[0].properties.bearing = turf.bearing(
-            turf.point(
-            route.features[0].geometry.coordinates[
-            counter >= steps ? counter - 1 : counter
-            ]
-            ),
-            turf.point(
-            route.features[0].geometry.coordinates[
-            counter >= steps ? counter : counter + 1
-            ]
-            ) );
-    }
-    catch(e)
-    {
-
-    }
-   
-     
-    // Update the source with this new data.
-    map.getSource('point').setData(point);
-     
-    // Request the next frame of animation so long the end has not been reached.
-    if (counter < steps) {
-    requestAnimationFrame(animate);
-    }
-     
-    counter = counter + 1;
-    }
-     
-    // document.getElementById('replay').addEventListener('click', function() {
+      // Start the animation.
+      animate(counter);
+  }
+  catch(e)
+  {
     
-    // // Set the coordinates of the original point back to origin
-    // point.features[0].geometry.coordinates = origin;
-     
-    // // Update the source layer
-    // map.getSource('point').setData(point);
-     
-    // // Reset the counter
-    // counter = 0;
-     
-    // // Restart the animation.
-    // animate(counter);
-    // });
-     
-    // Start the animation.
-    animate(counter);
+  }
+    
     });
 
     
-//     var geojson = {
-//         'type': 'FeatureCollection',
-//         'features': [
-//         {
-//         'type': 'Feature',
-//         'geometry': {
-//         'type': 'LineString',
-//         'coordinates': [[0, 0]]
-//         }
-//         }
-//         ]
-//         };
-//         var speedFactor = 30; // number of frames per longitude degree
-// var animation; // to store and cancel the animation
-// var startTime = 0;
-// var progress = 0; // progress = timestamp - startTime
-// var resetTime = false; // indicator of whether time reset is needed for the animation
-
-//     map.on('load', function() {
-//         map.addSource('line', {
-//         'type': 'geojson',
-//         'data': geojson
-//         });
-
-//         map.addLayer({
-//             'id': 'line-animation',
-//             'type': 'line',
-//             'source': 'line',
-//             'layout': {
-//             'line-cap': 'round',
-//             'line-join': 'round'
-//             },
-//             'paint': {
-//             'line-color': '#ed6498',
-//             'line-width': 5,
-//             'line-opacity': 0.8
-//             }
-//             });
-
-//             startTime = performance.now();
- 
-//             animateLine();
-             
-//             // click the button to pause or play
-//             // pauseButton.addEventListener('click', function() {
-//             // pauseButton.classList.toggle('pause');
-//             // if (pauseButton.classList.contains('pause')) {
-//             // cancelAnimationFrame(animation);
-//             // } else {
-//             // resetTime = true;
-//             // animateLine();
-//             // }
-//             // });
-             
-//             // reset startTime and progress once the tab loses or gains focus
-//             // requestAnimationFrame also pauses on hidden tabs by default
-//             document.addEventListener('visibilitychange', function() {
-//             resetTime = true;
-//             });
-             
-//             // animated in a circle as a sine wave along the map.
-//             function animateLine(timestamp) {
-//             if (resetTime) {
-//             // resume previous progress
-//             startTime = performance.now() - progress;
-//             resetTime = false;
-//             } else {
-//             progress = timestamp - startTime;
-//             }
-             
-//             // restart if it finishes a loop
-//             if (progress > speedFactor * 360) {
-//             startTime = timestamp;
-//             geojson.features[0].geometry.coordinates = [];
-//             } else {
-//             var x = progress / speedFactor;
-//             // draw a sine wave with some math.
-//             var y = Math.sin((x * Math.PI) / 90) * 40;
-//             // append new coordinates to the lineString
-//             geojson.features[0].geometry.coordinates.push([x, y]);
-//             // then update the map
-//             map.getSource('line').setData(geojson);
-//             }
-//             // Request the next frame of the animation.
-//             animation = requestAnimationFrame(animateLine);
-//             }
-//             });
+//    
      map.on('move', () => {
       const { lng, lat } = map.getCenter();
 
@@ -362,7 +269,7 @@ map.on('load', function() {
           
               <text className="date" >Ride Fare</text>
          
-              <text className="charges ">{this.props.details.charges}</text>
+              <text className="moveToRight ">{this.props.details.charges}</text>
               <hr></hr>
           
               <img
@@ -373,7 +280,7 @@ map.on('load', function() {
                                     />
               <text className="date rideDetailCard" >Credit Pay </text>
          
-              <text className="charges rideDetailCard">{this.props.details.credit}</text>
+              <text className="moveToRight rideDetailCard">{this.props.details.credit}</text>
               <br></br>
               <img
                                       className="rideHistoryAddIcon"
@@ -383,7 +290,7 @@ map.on('load', function() {
                                     />
               <text className="date rideDetailCard" >Cash Pay</text>
          
-              <text className="charges rideDetailCard">{this.props.details.cash}</text>
+              <text className="moveToRight rideDetailCard">{this.props.details.cash}</text>
           
            </div>
            <hr></hr>
@@ -396,7 +303,7 @@ map.on('load', function() {
                                       alt
                                     />
                <text style={{marginLeft:"37px"}} className="date rideDetailCard">{this.props.details.driver_name}</text>
-    <text style={{color:"blue"}} className="charges rideDetailCard">{rating}</text>
+    <text style={{color:"blue"}} className="moveToRight rideDetailCard">{rating}</text>
                <br></br>
                <text style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">{this.props.details.vahicleMake}{this.props.details.model}</text>
  <br></br>

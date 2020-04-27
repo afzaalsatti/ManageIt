@@ -3,6 +3,7 @@ import  './SlideDrawer/SlideDrawer.css'
 import Home from './home'
 import HireVahicle from '../Hire/HireVahicle'
 import TransHistory from '../TransportationHistory/TransHistory'
+import CareerPage from '../career/CareerPage'
 
 export default class mainPage extends React.Component {
   
@@ -76,7 +77,7 @@ this.state={component:<Home></Home>};
              }
 
 
-         }
+         }else
          if(pageToBeLoaded==="history")
          {
              
@@ -112,6 +113,18 @@ this.state={component:<Home></Home>};
 
                  this.setState({
                      component:<HireVahicle type="Trucks"></HireVahicle>
+                 });
+             }
+
+
+         }else if(pageToBeLoaded==="career")
+         {
+             
+            if(this.state.component != <CareerPage ></CareerPage>)
+             {
+
+                 this.setState({
+                     component:<CareerPage ></CareerPage>
                  });
              }
 

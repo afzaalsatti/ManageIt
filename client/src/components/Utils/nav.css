@@ -15,3 +15,14 @@ font-face {
     {
         color:black;
     }
+.HomeNavLink{
+        height: 50px;
+       
+        color: black ;
+      
+        width: 130px;
+        text-align: center;
+       
+       
+        padding-top: 13px;
+    }

@@ -114,11 +114,20 @@ margin-top: 7px;
     width: 100%;
     
     margin: 0px;
-    margin-top: 30px;
+   
     padding: 0px;
     color: black;
     padding-left: 100px;
     padding-right: 100px;
+    background: #E6E1DD;
+}
+.homeCards{
+    
+
+     margin-top: 20px; 
+    border-radius: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 .pricing-table {
     display: flex;
@@ -229,7 +238,8 @@ background-color: rgb(62, 218, 24);
  padding-top: 50px;
  border-color: black;
     margin-bottom: 0px;
-    background-color: white;
+    background: #343a40;
+
 }
 .footer-copyright{
     align-items: center;
@@ -244,7 +254,19 @@ background-color: rgb(62, 218, 24);
     float: none;
     
 }
-.container a{
-    color:black;
-    font-family: Poppins;
+.Footercontainer{
+   
+    background: #343a40;
+    color: white;
 }
+.Footercontainer a{
+    color:white;
+    font-family: Poppins;
+    background: #343a40;
+}
+.Footercontainer ul{
+    background: #343a40;
+    list-style: none;
+    margin-right: 35px;
+}
+

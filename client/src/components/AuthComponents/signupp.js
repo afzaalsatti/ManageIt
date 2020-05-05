@@ -71,7 +71,7 @@ export default class signup2 extends Component {
     <div className="container">
       <div className="signup-content">
         <div className="signup-form">
-          <h2 className="form-title">Sign up</h2>
+          <h2 className="form-title">Let`s Begin!</h2>
           <div className="register-form" id="register-form">
           <div className="form-group">
               <label htmlFor="name"><i className="zmdi zmdi-account" /></label>

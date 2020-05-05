@@ -73,7 +73,7 @@ class Signn extends Component {
           </ ReactLink>
         </div>
         <div className="signin-form">
-          <h2 className="form-title">Sign up</h2>
+          <h2 className="form-title">Welcome Back!</h2>
           <div  className="register-form" id="login-form">
             <div className="form-group">
               <label htmlFor="your_name"><i className="zmdi zmdi-account material-icons-name" /></label>

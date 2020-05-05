@@ -1,0 +1,52 @@
+.sideImage{
+    width: 200px;
+}
+
+.formgroupDivs{
+    width: 250px !important;
+    float: left;
+    margin-right: 30px;
+}
+.form-title{
+    font-family: poppins;
+    margin-bottom: 20px;
+    position: sticky !important;
+    top: 0 !important;
+    background: white !important;
+    z-index: 1;
+}
+.formHeadings
+{
+    font-size: larger;
+    font-family: poppins;
+    margin-bottom: 20px;
+   
+   
+}
+.company-signup-form
+{
+    height: 550px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+    width: 8px;
+    
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #1976D2;
+}

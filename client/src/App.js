@@ -24,6 +24,8 @@ import UserProfile from './components/user/UserProfile'
 import mainPage from './components/customerComponents/HomePage/mainPage'
 import StripePayment from './components/customerComponents/payment/stripe_payment'
 
+import RegisterCompany from './components/AuthComponents/RegisterCompany/Signup'
+
 
 
 
@@ -38,7 +40,8 @@ function App() {
     <Router history={history}>
       <Switch>
       <Route path="/" exact component={HomeComponent}></Route>
-      <Route path="/home" exact component={mainPage}></Route>
+      <Route path="/register-company" exact component={RegisterCompany}></Route>
+       <Route path="/home" exact component={mainPage}></Route> 
       <Route path="/app" exact component={ManageItApp}></Route>
       <Route  path="/signn" exact component={SignInSide}></Route>
       <Route  path="/signupp" exact component={SignUp}></Route>

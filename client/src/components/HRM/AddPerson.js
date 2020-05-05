@@ -1,8 +1,35 @@
 import React, { Component } from 'react'
 import ImageUploader from 'react-images-upload';
 import {Link as ReactLink} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 var count=0;
 var data={};
+function notifySuccess()  {
+      
+      
+
+  toast.success("Updated Successfully",  {containerId: 'A'});
+
+  
+};
+
+function notifyWarning()  {
+      
+      
+
+  toast.warning("All Fields Are Mendatory ",  {containerId: 'A'});
+
+  
+};
+function notifyPasswordMismatch()  {
+      
+     
+
+  toast.error("Password Must match ",  {containerId: 'A'});
+
+  
+};
 export default class AddPerson extends Component {
   
   constructor(){
@@ -10,11 +37,13 @@ export default class AddPerson extends Component {
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
+    // this.notifySuccess=this.notifySuccess.bind(this);
   
   }
     onDrop(picture) {
         alert(picture)
     }
+    
     getDataFromFields (count){
 
 
@@ -23,22 +52,34 @@ export default class AddPerson extends Component {
         let name=document.getElementById("inputName").value;
         let email=document.getElementById("email").value;
         let id=document.getElementById("idNumber").value;
-        let role=document.getElementById("role").value;
+        let job_id=document.getElementById("job_id").value;
         let status=document.getElementById("status").value;
         let pass1=document.getElementById("pass1").value;
         let pass2=document.getElementById("pass2").value;
-        if(name && email && id && role && status!="Gender" && (pass1===pass2) && pass1 & pass2)
+        if(name && email && id && job_id && status!="Gender"  && pass1 && pass2)
         {
+          
+          if(pass1===pass2)
+          {
           data["name"]=name;
         data["email"]=email;
         data["id"]=id; 
-        data["role"]=role;
+        data["job_id"]=job_id;
         data["status"]=status;
+      
         return true;
+      }
+        else{
+      
+         notifyPasswordMismatch();
+         
+          return false;
+        }
 
         }
         else{
-          alert("All Fields are Mandatory!");
+         
+    notifyWarning();
           return false;
         }
         
@@ -108,7 +149,7 @@ export default class AddPerson extends Component {
       }
      
     }
-
+   
      goForward () {
       
       let valid=this.getDataFromFields(count);
@@ -161,6 +202,8 @@ export default class AddPerson extends Component {
     render() {
         return (
             <div >
+
+<ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
   {/* Content Header (Page header) */}
   
   {/* Main content */}
@@ -177,32 +220,49 @@ export default class AddPerson extends Component {
           </div>
          
           <div className="card-body">
-            <div  style={{width:'70%'}} className="form-group">
+
+<div style={{height:"100px"}}>
+
+<div  style={{width:'48%',float:"left"}} className="form-group">
               <text htmlFor="inputName"> Full Name</text>
               <input type="text" id="inputName" className="form-control" />
             </div>
-            <div style={{width:'70%'}} className="form-group">
+            <div  style={{width:'48%',float:"right"}} className="form-group">
               <text htmlFor="inputName">Email</text>
               <input type="email" id="email" className="form-control" />
             </div>
-            <div style={{width:'48%',float:'left'}} className="form-group">
+</div>
+
+<br>
+</br>
+<div style={{height:"100px"}}>
+
+<div style={{width:'48%',float:'left'}} className="form-group">
               <text htmlFor="inputName">ID Number</text>
               <input type="text" id="idNumber" className="form-control" />
             </div>
+
             <div style={{width:'48%',float:'right'}} className="form-group">
-              <text htmlFor="inputName">Role</text>
-              <input type="text" id="role" className="form-control" />
+              <text htmlFor="inputName">Job ID</text>
+              <input type="text" id="job_id" className="form-control" />
             </div>
-            
-            <div style={{width:'48%',float:'left'}} className="form-group">
+</div>
+<br>
+</br>
+      <div style={{height:"100px"}}>
+
+      <div style={{width:'48%',float:'left'}} className="form-group">
               <text htmlFor="inputName">Password</text>
               <input type="password" id="pass1" className="form-control" /> </div>
               <div style={{width:'48%',float:'right'}} className="form-group">
               <text htmlFor="inputName">Confirm Password</text>
               <input type="password" id="pass2" className="form-control" />
             </div>
-            <br></br>
-            <div style={{width:'48%',float:'left'}} className="form-group">
+</div>     
+<br></br>     
+<div style={{height:"100px"}}>
+
+<div style={{width:'48%',float:'left'}} className="form-group">
               <text htmlFor="inputStatus">Gender</text>
               <select id="status" className="form-control custom-select">
                 <option selected disabled>Gender</option>
@@ -211,10 +271,9 @@ export default class AddPerson extends Component {
                 
               </select>
             </div>
-            
-           
 
-            <div style={{width:'48%',float:'right'}}className="form-group">
+
+     <div style={{width:'48%',float:'right',height: "180px"}}className="form-group">
               <text htmlFor="inputName">Upload Image</text>
             
               <ImageUploader
@@ -224,7 +283,17 @@ export default class AddPerson extends Component {
                 imgExtension={['.jpg', '.jpeg', '.png']}
                 maxFileSize={5242880}
             />
-            </div>
+            </div>         
+</div>     
+    
+     
+            
+         
+            
+      
+           
+
+         
           </div>
           {/* /.card-body */}
         </div>
@@ -242,15 +311,15 @@ export default class AddPerson extends Component {
           </div>
           
           <div className="card-body">
-            <div className="form-group">
+            <div style={{float:"left",width:"48%"}} className="form-group">
               <text htmlFor="inputName">Highest Degree</text>
               <input type="text" id="degree" className="form-control" />
             </div>
-            <div className="form-group">
+            <div style={{float:"right",width:"48%"}} className="form-group">
               <text htmlFor="inputName">Insitute</text>
               <input type="text" id="insitute" className="form-control" />
             </div>
-            <div className="form-group">
+            <div style={{margin:"auto",width:"48%"}} className="form-group">
               <text htmlFor="inputName">GPA/Marks</text>
               <input type="text" id="marks" className="form-control" />
             </div>
@@ -276,15 +345,15 @@ export default class AddPerson extends Component {
           </div>
          
           <div className="card-body">
-            <div className="form-group">
+            <div style={{float:"left",width:"48%"}}  className="form-group">
               <text htmlFor="inputName"> Position</text>
               <input type="text" id="postition" className="form-control" />
             </div>
-            <div className="form-group">
+            <div style={{float:"right",width:"48%"}} className="form-group">
               <text htmlFor="inputName">Company</text>
               <input type="text" id="company" className="form-control" />
             </div>
-            <div className="form-group">
+            <div style={{margin:"auto",width:"48%"}} className="form-group">
               <text htmlFor="inputName">Duration</text>
               <input type="text" id="duration" className="form-control" />
             </div>

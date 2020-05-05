@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './css/home.css'
+import Footer from '../../Utils/Footer'
 export default class home extends Component {
   constructor(props) {
     super(props);
@@ -461,76 +462,10 @@ export default class home extends Component {
             <div class="border-separator"></div>
         
 
-           <div className="footer-row">
-  <div className="clearfix promotion  main-body rest1 animate">
-    <div className="w-100 pR fl footer-links">
-      <div className="dib foot-wrapper">
-        <div className="row fl">
-          <div className="dib">
-            About redBus
-          </div>
-          <a href="/info/aboutus" target="_blank">About Us</a>
-          <a href="/info/contactus" target="_blank">Contact Us</a>
-          <a href="//m.redbus.in" target="_blank">Mobile Version</a>
-          <a href="/info/mobile" target="_blank">redBus on Mobile</a>
-          <a href="/sitemap.html" target="_blank">Sitemap</a>
-          <a href="/info/OfferTerms" target="_blank">Offers</a>
-          <a href="/careers" target="_blank">Careers</a>
-          <a href="/values" target="_blank">Values</a>
-        </div>
-        <div className="row fl">
-          <div className="dib">
-            Info
-          </div>
-          <a href="/info/termscondition" target="_blank">T &amp; C</a>
-          <a href="/info/privacypolicy" target="_blank">Privacy Policy</a>
-          <a href="/info/faq" target="_blank">FAQ</a>
-          <a href="http://blog.redbus.in/" target="_blank">Blog</a>
-          <a href="https://in3.seatseller.travel/" target="_blank">Agent Registration</a>
-          <a href="https://www.icicilombard.com/" target="_blank">Insurance Partner</a>
-          <a href="/info/useragreement" target="_blank">User Agreement</a>
-        </div>
-        <div className="row fl">
-          <div className="dib">
-            Global Sites
-          </div>
-          <a href="https://www.redbus.in" target="_blank">India</a>
-          <a href="https://www.redbus.sg" target="_blank">Singapore</a>
-          <a href="https://www.redbus.my" target="_blank">Malaysia</a>
-          <a href="https://www.redbus.id" target="_blank">Indonesia</a>
-          <a href="https://www.redbus.pe" target="_blank">Peru</a>
-          <a href="https://www.redbus.co" target="_blank">Colombia</a>
-        </div>
-        <div className="row fl">
-          <div className="dib">
-            Our Partners
-          </div>
-          <a href="https://www.goibibo.com/" target="_blank">Goibibo</a>
-          <a href="https://www.makemytrip.com/" target="_blank">Makemytrip</a>
-        </div>
-      </div>
-      <div className="fr rights-cont">
-        <div className="img-cont">
-          <img src="https://s3.rdbuz.com/web/images/home/sgp/r_logo.png" />
-        </div>
-        <div>
-          redBus is the world's largest online bus ticket booking service trusted by over 17 million happy customers globally. redBus offers bus ticket booking through its website,iOS and Android mobile apps for all major routes.
-        </div>
-        <div id="social-media">
-          <a target="_blank" href="https://www.facebook.com/redbus.in/"><span className="fbicon icon-Facebook" /></a>
-          <a target="_blank" href="https://twitter.com/redBus_in"><span className="twittericon icon-Twitter" /></a>
-        </div>
-        <div style={{float: 'left'}}>
-          <span>Ⓒ</span>
-          <span> 2020 ibibogroup All rights reserved</span>
-        </div>
-      </div>      
-    </div>
-  </div>
-</div>
-
-
-        
+      
+        <Footer>
+          
+        </Footer>
         
           </div>
         );

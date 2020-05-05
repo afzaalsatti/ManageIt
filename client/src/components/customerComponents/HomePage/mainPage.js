@@ -4,7 +4,7 @@ import Home from './home'
 import HireVahicle from '../Hire/HireVahicle'
 import TransHistory from '../TransportationHistory/TransHistory'
 import CareerPage from '../career/CareerPage'
-
+import Settings from '../Settings/UserSettings'
 export default class mainPage extends React.Component {
   
     constructor()
@@ -125,6 +125,19 @@ this.state={component:<Home></Home>};
 
                  this.setState({
                      component:<CareerPage ></CareerPage>
+                 });
+             }
+
+
+         }
+         else if(pageToBeLoaded==="setting")
+         {
+             
+            if(this.state.component != <Settings ></Settings>)
+             {
+
+                 this.setState({
+                     component:<Settings ></Settings>
                  });
              }
 

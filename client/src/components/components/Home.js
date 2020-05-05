@@ -10,11 +10,18 @@ import Zoom from "react-reveal/Zoom";
 import Bounce from "react-reveal/Bounce";
 import Reveal from "react-reveal/Reveal";
 import Typical from "react-typical";
+import { Card } from 'react-bootstrap'
+import Footer from '../Utils/Footer'
 // import UserSession from '../../UserSession'
 
 function goToLogin() {
+  // window.alert(UserSesgoToLogin() {
   // window.alert(UserSession.getName());
   history.push("/signin");
+}
+
+function goToRegisterCompany(){
+  history.push("/register-company");
 }
 
 class HomeComponent extends React.Component {
@@ -75,7 +82,7 @@ class HomeComponent extends React.Component {
              */}
           </div>
         </Zoom>
-        <div id="intoDiv" style={{marginTop:"100px",float:"left",width:'100%'}}>
+        <div id="intoDiv" style={{marginTop:"100px",float:"left",width:'100%',  background:"#fff"}}>
             <Bounce>
               <h1 className="introText"  style={{float:"left",width:'100%'}} is-upgraded="">
                 <span>ManageIt replaces your tradational ERPs</span>
@@ -90,7 +97,7 @@ class HomeComponent extends React.Component {
             <br></br>
             <Bounce>
               <h7 className="introText" is-upgraded="">
-              <p >Already using ManageIt? <a href="http://localhost:3000/signin" data-clog-click="1" data-clog-ui-element="link_sign_in_cta" data-clog-ui-step="" data-clog-ui-component="inc_cta_signup" data-gtm-click="optout_signin" data-qa="cta_sign_in">Sign in</a>.</p>
+              <p >Already using ManageIt? <a  data-clog-click="1" data-clog-ui-element="link_sign_in_cta" data-clog-ui-step="" data-clog-ui-component="inc_cta_signup" data-gtm-click="optout_signin" data-qa="cta_sign_in">Sign in</a>.</p>
 
               </h7>
             </Bounce>
@@ -108,7 +115,7 @@ class HomeComponent extends React.Component {
             track-metadata-anchor_text="Go to console"
             className="erp-button"
             track-type="navigateTo"
-            href="http://localhost:3000/signin"
+            
             track-name="console"
             track-metadata-eventdetail="hero"
             track-metadata-position="banner"
@@ -117,8 +124,8 @@ class HomeComponent extends React.Component {
             Go to console
           </a>
           <a
-                 href="http://localhost:3000/contactus"
-            track-metadata-anchor_text="Go to console"
+          onClick={goToRegisterCompany}
+            
             
             className="erp-button "
             track-type="navigateTo"
@@ -135,13 +142,30 @@ class HomeComponent extends React.Component {
           <div
             id="aboutus"
             className="introText divs"
-            style={{ height: "auto" }}
+            style={{ height: "auto",width:"auto",marginTop:"30px",backgroundColor: "rgba(246,245,245,0)" }}
           >
-            <p>
+           
               <Reveal effect="fadeInUp">
-                <p className="heading">Why Us</p>
+               
               </Reveal>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
+
+<Card className="homeCards" style={{paddinTop:"20px",marginTop:"0px"}}>
+ 
+ <div>
+  <img
+                        src="//s1.rdbuz.com/web/images/home/promise.png"
+                        height={100}
+                        width={100}
+                        
+                      />
+  
+
+<p
+//  style={{width: "fit-content"}}
+   className="heading">Why Us</p>
+</div>
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
               viverra justo, nec tristique nisi. Curabitur id orci in sapien
               vehicula pretium id non mauris. Nam ac dolor gravida, rhoncus arcu
               sed, ultrices nibh. Class aptent taciti sociosqu ad litora
@@ -185,15 +209,20 @@ class HomeComponent extends React.Component {
               eget. Suspendisse et nisi in velit sodales finibus. Curabitur ut
               tristique magna, quis maximus neque. Duis congue metus sit amet
               elit tincidunt laoreet. Vestibulum sagittis at nibh quis sodales.
-            </p>
+              </p>
+</Card>
+              
+            
           </div>
         </Zoom>
         <Zoom>
           <div
             id="solutions"
             className="introText divs"
-            style={{ height: "auto" }}
+            style={{ height: "auto",width:"100%" }}
           >
+
+<Card className="homeCards" >
             <p>
               <Reveal effect="fadeInUp">
                 <p className="heading">Our Provided Solutions</p>
@@ -243,13 +272,14 @@ class HomeComponent extends React.Component {
               tristique magna, quis maximus neque. Duis congue metus sit amet
               elit tincidunt laoreet. Vestibulum sagittis at nibh quis sodales.
             </p>
-          </div>
+            </Card>
+         </div>
         </Zoom>
         <Zoom>
           <div
             id="products"
             className="introText divs"
-            style={{ height: "auto" }}
+            style={{ height: "auto" ,background:"#fff"}}
           >
             <p>
               <Reveal effect="fadeInUp">
@@ -362,92 +392,17 @@ class HomeComponent extends React.Component {
         <Reveal effect="fadeInUp">
           <p className="heading">Pricing and Business Palns</p>
         </Reveal>
-        <div id="pricing" className="introText divs">
+        <div id="pricing" className="introText divs" style={{background:"#fff"}}>
           <PricingTable></PricingTable>
         </div>
 
-        <div id="myFooter">
-          <footer>
-            <div className="container">
-              <div className="row">
-                <div className="col-sm-3 myCols">
-                  <h5>Get started</h5>
-                  <ul>
-                    <li>
-                      <a href="#">Home</a>
-                    </li>
-                    <li>
-                      <a href="#">Sign up</a>
-                    </li>
-                    <li>
-                      <a href="#">Downloads</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-sm-3 myCols">
-                  <h5>About us</h5>
-                  <ul>
-                    <li>
-                      <a href="#">Company Information</a>
-                    </li>
-                    <li>
-                      <a href="#">Contact us</a>
-                    </li>
-                    <li>
-                      <a href="#">Reviews</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-sm-3 myCols">
-                  <h5>Support</h5>
-                  <ul>
-                    <li>
-                      <a href="#">FAQ</a>
-                    </li>
-                    <li>
-                      <a href="#">Help desk</a>
-                    </li>
-                    <li>
-                      <a href="#">Forums</a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-sm-3 myCols">
-                  <h5>Legal</h5>
-                  <ul>
-                    <li>
-                      <a href="#">Terms of Service</a>
-                    </li>
-                    <li>
-                      <a href="#">Terms of Use</a>
-                    </li>
-                    <li>
-                      <a href="#">Privacy Policy</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="social-networks">
-              <a href="#" className="twitter">
-                <i className="fa fa-twitter"></i>
-              </a>
-              <a href="#" className="facebook">
-                <i className="fa fa-facebook-official"></i>
-              </a>
-              <a href="#" className="google">
-                <i className="fa fa-google-plus"></i>
-              </a>
-            </div>
-            <div className="footer-copyright">
-              <p>© 2020 All rights reserved </p>
-            </div>
-            <div style={{ height: "30px" }}>
+<Footer>
+  
+</Footer>
+        <div  style={{ height: "30px"}}>
               <GoogleApiWrapper stores={[]}></GoogleApiWrapper>
             </div>
-          </footer>
-        </div>
-      </div>
+         </div>
     );
   }
 }

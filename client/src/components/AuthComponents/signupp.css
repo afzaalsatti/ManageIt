@@ -484,7 +484,7 @@ label.valid {
   }
   .form-submit {
     display: inline-block !important;
-      background: #6dabe4 !important;
+      background: #1976D2 !important;
       color: #fff;
       border-bottom: none !important;
       width: auto !important;
@@ -497,7 +497,7 @@ label.valid {
       margin-top: 25px !important;
       cursor: pointer; }
     .form-submit:hover {
-      background: #4292dc !important; }
+      background: #135da1 !important; }
   
       .input[type="password" i] {
         -webkit-text-security: disc !important;

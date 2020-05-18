@@ -10,9 +10,12 @@
   "author": "Afzaal Shoukat",
   "license": "ISC",
   "dependencies": {
+    "deck.gl": "^8.1.6",
     "express": "^4.17.1",
+    "mapbox-gl-geocoder": "^2.0.1",
     "mongoose": "^5.8.12",
-    "react-datepicker": "^2.13.0"
+    "react-datepicker": "^2.13.0",
+    "react-map-gl-geocoder": "^2.0.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

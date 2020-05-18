@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import './css/home.css'
 import Footer from '../../Utils/Footer'
+import MapLocationPicker from '../../Utils/MapLocationPicker'
+import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
+var pageLoaded=1;
 export default class home extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +15,8 @@ export default class home extends Component {
         "/assets/imageSlider/test1.jpg",
         "/assets/imageSlider/test3.jpg"
       ],
-      selectedImage: "/assets/imageSlider/test.jpg"
+      selectedImage: "/assets/imageSlider/test.jpg",
+      showModal:false
     };
   }
   componentDidMount() {
@@ -36,6 +42,22 @@ export default class home extends Component {
     render() {
         return (
           <div id="homeComponent">
+            <Modal show={this.state.showModal}>
+        <Modal.Header></Modal.Header>
+        <Modal.Body>
+        <MapLocationPicker >
+
+</MapLocationPicker>
+    </Modal.Body>
+       <Modal.Footer>
+       <button onClick={()=>{this.setState({
+          showModal:false
+      })}}>Confirm Location</button>
+       </Modal.Footer>
+      </Modal>
+            
+
+            
             <h1 className="book_ticket_heading">Booking  Tickets Became so easy!</h1>
             <div id="welcome_image_div">
               <img src={this.state.selectedImage}></img>
@@ -62,6 +84,20 @@ export default class home extends Component {
                         data-message="Please enter a source city"
                         tabIndex={1}
                         autoComplete="off"
+                        onClick={
+                          
+                         (this.state.showModal==false && pageLoaded >1)?
+                          
+                            this.setState({
+                              showModal:true
+                            })
+                            
+                            :
+                           pageLoaded=2
+                          
+                          }
+                          
+                          
                         placeholder="FROM*"
                       />
                       

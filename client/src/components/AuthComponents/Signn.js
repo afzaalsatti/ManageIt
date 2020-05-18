@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './signupp.css'
 import './css/material-design-iconic-font.min.css'
 import {Link as ReactLink} from 'react-router-dom'
+import history from "../../history";
 import UserSession from '../../UserSession'
 function login() {
   
@@ -36,8 +37,8 @@ function login() {
      if(status==='Success')
      {
      
-       window.alert("M")
-      // history.push('/mainPage');
+      // window.alert("M")
+       history.push('/home');
      
       // history.push("");
      }else{

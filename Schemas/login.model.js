@@ -37,7 +37,11 @@ const User=mongoose.Schema({
     password:{
         type:String,
         require:'required'
-    }
+    },
+    subscription:{
+        type:Array
+
+    },
 });
 
 mongoose.model("Users",User);

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignInSide from './components/AuthComponents/SignIn';
-import SignUp from './components/AuthComponents/SignUp';
+
 import signupp from './components/AuthComponents/signupp';
 import {Signn} from './components/AuthComponents/Signn';
 import HomeComponent  from './components/components/Home'
@@ -27,7 +26,7 @@ import StripePayment from './components/customerComponents/payment/stripe_paymen
 import RegisterCompany from './components/AuthComponents/RegisterCompany/Signup'
 
 
-
+import MapLocationPicker from './components/Utils/MapLocationPicker'
 
 
 function App() {
@@ -39,12 +38,13 @@ function App() {
    
     <Router history={history}>
       <Switch>
+      
+      <Route path="/MapLocationPicker" exact component={MapLocationPicker}></Route>
       <Route path="/" exact component={HomeComponent}></Route>
       <Route path="/register-company" exact component={RegisterCompany}></Route>
        <Route path="/home" exact component={mainPage}></Route> 
       <Route path="/app" exact component={ManageItApp}></Route>
-      <Route  path="/signn" exact component={SignInSide}></Route>
-      <Route  path="/signupp" exact component={SignUp}></Route>
+  
       <Route  path="/signup" exact component={signupp}></Route>
       <Route  path="/signin" exact component={Signn}></Route>
       <Route  path="/inventry" exact component={MainInventryPage}></Route>

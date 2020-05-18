@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import mapboxgl from 'mapbox-gl';
+import mapboxgl  from 'mapbox-gl';
 import './TransHistDetails.css'
 import * as turf from '@turf/turf'
 import { Card } from 'react-bootstrap'
@@ -137,7 +137,10 @@ route.features[0].geometry.coordinates = arc;
 // Used to increment the value of the point measurement against the route.
 var counter = 0;
 
-
+map.on('click', function(e) {
+  
+ console.log(e.lngLat.wrap())
+  });
 map.on('load', function() {
   try{
     // Add a source and layer displaying a point which will be animated in a circle.

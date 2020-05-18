@@ -3,6 +3,7 @@ import Details from './personalDetails'
 import BookSeat from './BookSeat'
 
 
+
 var count=0;
 var data={};
 var booked,total_booked,total_free;
@@ -16,6 +17,11 @@ export default class BooBusTicket extends Component {
     this.BookSeatListener= this.BookSeatListener.bind(this);
   
   }
+
+ 
+  
+       
+    
   BookSeatListener(book,tfree,tbooked)
   {
       booked=book;
@@ -174,6 +180,7 @@ console.log(data)
     render() {
         return (
             <div >
+        
   {/* Content Header (Page header) */}
   
   {/* Main content */}

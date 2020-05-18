@@ -1,0 +1,25 @@
+.mapboxgl-ctrl-geocoder--input
+{
+        padding: 6px 45px !important;
+        margin: 0 !important;
+        background-color: transparent !important;
+        border: 0 !important;
+}
+.confirm-button-div{
+    width: 100%;
+    
+    text-align: end;
+    /* margin: 30px; */
+    /* margin-right: 50px; */
+    padding-right: 8%;
+    margin-top: 10px;
+  
+    border-radius: 20px;
+}
+.confirm-button-div button{
+    background: #1a73e8;
+    height: 50px;
+    width: 200px;
+    color: white;
+    border-radius: 12px;
+}

@@ -19,6 +19,12 @@
     height: 450px;
    
 }
+.showModal{
+    visibility: visible;
+}
+.hideModal{
+    visibility: hidden;
+}
 div {
     display: block;
 }

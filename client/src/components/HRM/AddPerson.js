@@ -292,8 +292,7 @@ return true;
       }
     }else{
       window.alert("Contecting")
-        let e="abc";
-        let p="123";
+        
         const req_data={
         
          

@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const Company=mongoose.Schema({
+const Route=mongoose.Schema({
     company: {
         type: String,
         
@@ -9,9 +9,13 @@ const Company=mongoose.Schema({
         
      
     },
-    id:{
+    title:{
         type:String,
         require:'required'
+    },
+    email:{
+        type:String,
+        
     },
     to: {
         type: String,
@@ -29,13 +33,35 @@ const Company=mongoose.Schema({
         
      
     },
+
+    dep_time: {
+        type: String,
+        require:'required'
+        
+       
+     
+    },
+    arv_time:{
+        type: String
+    },
+    arv_date:{
+        type: String
+     
+    },
+    dep_date: {
+        type: String,
+        require:'required'
+        
+       
+     
+    },
     distance: {
         type: String,
         
        
      
     },
-    ticketPrice: {
+    fare: {
         type: String,
       
        
@@ -43,7 +69,14 @@ const Company=mongoose.Schema({
         
      
     },
-    bookingPrice:{
+    vh_id:{
+        type: String,
+      
+        
+        require:'required'
+
+    },
+    driver_id:{
         type: String,
       
         
@@ -54,4 +87,4 @@ const Company=mongoose.Schema({
    
 });
 
-mongoose.model("Company",Company);
+mongoose.model("Route",Route);

@@ -60,6 +60,13 @@ const Booking=mongoose.Schema({
         require:'required'
 
     },
+    vahicleId:{
+        type: String,
+      
+        
+        
+
+    },
     cords:{
         type: Array,
       

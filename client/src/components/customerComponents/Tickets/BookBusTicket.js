@@ -36,26 +36,26 @@ export default class BooBusTicket extends Component {
       if(count==0)
       {
         let cnic=document.getElementById("cnic").value;
-        let acity=document.getElementById("acity").value;
-        let dcity=document.getElementById("dcity").value;
-        let date=document.getElementById("date").value;
+        // let acity=document.getElementById("acity").value;
+        // let dcity=document.getElementById("dcity").value;
+        // let date=document.getElementById("date").value;
        
 
-        let time=document.getElementById("time").value;
+        // let time=document.getElementById("time").value;
         
 
         
         
         
-        if(acity && cnic && time  && date && dcity  )
+        if(cnic   )
         {
         let  data={};
         data["cnic"]=cnic;
-        data["acity"]=acity;
-        data["time"]=time; 
-        data["date"]=date;
+        // data["acity"]=acity;
+        // data["time"]=time; 
+        // data["date"]=date;
        
-        data["dcity"]=dcity;
+        // data["dcity"]=dcity;
        
        
        
@@ -197,33 +197,16 @@ console.log(data)
           </div>
          
           <div className="card-body">
-            <div  style={{width:'60%',float:"left"}} className="form-group">
+            <div   style={{width:'50%',margin:"auto"}} className="form-group">
               <text htmlFor="inputName"> Traveler`s Digital CNIC Number</text>
               <input type="text" id="cnic" className="form-control" />
             </div>
             
           
             
-            <div style={{width:'60%',float:"left"}}  className="form-group">
-            <text>Departure City</text>
-               <input type="text" id="dcity" className="form-control"></input>
-            </div>
-            <div style={{width:'60%',paddingLeft:'10px'}}  className="form-group">
-            <text>Arrival City</text>
-               <input type="text" id="acity" className="form-control"></input>
-            </div>
+      
 
-
-
-            <div style={{width:'40%',float:"left"}}  className="form-group">
-            <text>Travel Time</text>
-               <input type="time" id="time" className="form-control"></input>
-            </div>
-            <div style={{width:'55%',paddingLeft:'10px'}}  className="form-group">
-            <text>Travel Date</text>
-               <input type="date" id="date" className="form-control"></input>
-            </div>
-
+     
             
             
            

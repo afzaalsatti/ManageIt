@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import './css/home.css'
+import "../career/jobs.css"
+import { Card } from 'react-bootstrap'
 import Footer from '../../Utils/Footer'
 import MapLocationPicker from '../../Utils/MapLocationPicker'
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 var pageLoaded=1;
+var from_cord="Select from map",to_cord="Select from map";
+var click;
+var fetchTickets;
+
 export default class home extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +24,191 @@ export default class home extends Component {
         "/assets/imageSlider/test3.jpg"
       ],
       selectedImage: "/assets/imageSlider/test.jpg",
-      showModal:false
+      showModal:false,
+      tickets:[]
     };
+
+    this.setCords = this.setCords.bind(this);
+    this.searchTickets=this.searchTickets.bind(this);
+     this.bookTicket=this.bookTicket.bind(this);
+
+    
+  }
+  bookTicket = index => e =>
+    {
+      let data=[]
+      data["company"]=fetchTickets[index].company;
+      data["to"]=fetchTickets[index].to;
+      data["from"]=fetchTickets[index].from;
+      data["date"]=fetchTickets[index].dep_date;
+      data["driver_Id"]=fetchTickets[index].driver_id;
+      data["vahicle_Id"]=fetchTickets[index].vh_id;
+      data["fare"]=fetchTickets[index].fare;
+      data["cust_id"]="CustomerID";
+      data["cust_email"]="Customer email";
+     
+console.log(data)
+        window.alert(index)
+    }
+  searchTickets()
+  {
+    let to=document.getElementById("dest").value;
+    let from=document.getElementById("src").value;
+    let dept_date=document.getElementById("onward_cal").value;
+    window.alert("Contecting")
+        
+    const req_data={
+    
+     
+      
+     
+      "to":"73.30079257202033,33.23656743872422",
+      "from":"73.0645865173326,33.19290819746557",
+      "dept_date":"2020-06-17"
+
+
+
+
+    }
+     
+      const options={
+          method:"POST",
+          headers:{
+              'Content-type':"application/json"
+              
+          },
+          body:JSON.stringify(req_data)
+      }
+      fetch("/getTickets",options).then(response=>{
+          return response.json();
+    }).then(data=>{
+        let status=data.status;
+        console.log(data.result)
+   
+        if(status==='Success')
+        {
+        
+          window.alert("Operation Sucessful")
+          fetchTickets=data.result;
+let temp=  data.result.map((key,index)=>{
+  return  <li style={{listStyle:"none"}}>
+
+<Card className="JobAdsCard">
+      <div className="historymiddlediv">
+      <img
+          className="company_logo"
+           src="/assets/svg/tickets.svg">
+          </img>
+          <text id ="jobTitle" className="rideHistoryAddress">{data.result[index].title}</text>
+   
+          <text id ="endDate" className="moveToRight">
+              <span style={{marginRight:"15px",color:"red"}}>
+Departure Date
+                  </span>
+                  <span>
+                  {data.result[index].dep_date}
+                  </span>
+          </text>
+   
+   <br></br>
+   
+   <text  style={{    marginLeft: "12px"}}>
+              <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+Issue Date
+                  </span>
+                  <span style={{    fontSize: "12px"}}>
+                  {data.result[index].arv_date}
+                  </span>
+          </text>
+         
+          </div>
+          
+         
+          <div>
+          <text  style={{    marginLeft: "70px"}}>
+              <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+Fare
+                  </span>
+                  <span style={{    fontSize: "12px"}}>
+{data.result[index].fare}
+                  </span>
+          </text>
+          <br>
+          </br>
+
+          <text style={{    fontSize: "12px", marginLeft: "70px"}} >
+          <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+              Company Name
+              </span>
+              {data.result[index].company}
+              
+          </text>
+          <br></br>
+          <text style={{    fontSize: "12px", marginLeft: "70px"}} >
+          <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+              Contact Email
+              </span>
+              {data.result[index].email}
+              
+          </text>
+          <br></br>
+          <br></br>
+          <text style={{    fontSize: "12px", marginLeft: "70px"}} >
+          <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+              Vahicle Number
+              </span>
+              {data.result[index].vh_id}
+              
+          </text>
+          <br></br>
+          
+          
+          <button id="JobsAddListButton" className="moveToRight"  onClick={this.bookTicket(index)} >
+          {/* onClick={this.props.showJobDetails(data.result[index])} */}
+              Buy Now
+          </button>
+          </div>
+      </Card>
+    
+
+      </li>
+});
+
+          this.setState({
+            tickets:temp  
+        
+          })
+       
+        }else{
+         
+          window.alert("Operation Failed!")
+        }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    }).catch((error) => {
+     
+     window.alert("Unexpected error Try again...  "+error);
+   });
+
+
+  }
+
+  setCords(a){
+if(click==="from")
+{
+  from_cord=a.lng+","+a.lat;
+  window.alert("from   "+from_cord)
+}
+else{
+  to_cord=a.lng+","+a.lat;
+  window.alert("to   "+to_cord)
+}
+   
+
+
   }
   componentDidMount() {
+   
     setInterval(() => {
       this.setState(prevState => {
         if (prevState.selectedImage === this.state.images[0]) {
@@ -41,18 +230,37 @@ export default class home extends Component {
   }
     render() {
         return (
-          <div id="homeComponent">
-            <Modal show={this.state.showModal}>
-        <Modal.Header></Modal.Header>
-        <Modal.Body>
-        <MapLocationPicker >
+<div>
+ {/* <div id="buyTicketComponent">
 
-</MapLocationPicker>
-    </Modal.Body>
-       <Modal.Footer>
-       <button onClick={()=>{this.setState({
+ </div> */}
+
+          <div id="homeComponent">
+            <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
+        
+        <Modal.Body style={{background:"#3d3d3e"}}>
+        <MapLocationPicker setCords={this.setCords}>
+
+</MapLocationPicker >
+    </Modal.Body  >
+       <Modal.Footer style={{background:"#3d3d3e"}}>
+       <button
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "40%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+         document.getElementById("src").value=from_cord;
+         document.getElementById("dest").value=to_cord;
+         this.setState({
           showModal:false
-      })}}>Confirm Location</button>
+      });
+      }}>Confirm Location</button>
        </Modal.Footer>
       </Modal>
             
@@ -84,17 +292,17 @@ export default class home extends Component {
                         data-message="Please enter a source city"
                         tabIndex={1}
                         autoComplete="off"
-                        onClick={
-                          
+                        onClick={ ()=>{
+                          click="from";
                          (this.state.showModal==false && pageLoaded >1)?
                           
                             this.setState({
                               showModal:true
-                            })
+                            }) 
                             
                             :
                            pageLoaded=2
-                          
+                        }
                           }
                           
                           
@@ -121,6 +329,18 @@ export default class home extends Component {
                         data-message="Please enter a destination city"
                         tabIndex={2}
                         autoComplete="off"
+                        onClick={ ()=>{
+                          click="to";
+                         (this.state.showModal==false && pageLoaded >1)?
+                          
+                            this.setState({
+                              showModal:true
+                            }) 
+                            
+                            :
+                           pageLoaded=2
+                        }
+                      }
                         placeholder="To*"
                       />
                       
@@ -163,13 +383,31 @@ export default class home extends Component {
                       
                     </div>
                   </div>
-                  <button id="search_btn" className="fl button">
+                  <button id="search_btn" className="fl button" onClick={this.searchTickets}>
                     Search Buses
                   </button>
                 </div>
               </section>
             </div>
+<div className={this.state.tickets.length == 0 ? "hideBottomDiv" : "showBottomDiv"}>
+  <button  style={{float: "right",
+    color: "red",
+    marginRight: "5px",
+    background: "white",
+    border: "none",
+}}
+onClick={()=>{
+  this.setState({tickets:[]})
+}}
 
+>
+    close
+  </button>
+  <br></br>
+<h5 style={{    textAlign: "center"}}>Available Tickets(Based on your Search)</h5>
+ {this.state.tickets}
+</div>
+<div className={this.state.tickets.length == 0 ? "showBottomDiv" : "hideBottomDiv"}>
             <div className="main-body">
               <div className="promiseMain">
                 <div className="header">
@@ -497,11 +735,13 @@ export default class home extends Component {
             </div>
             <div class="border-separator"></div>
         
-
+            </div>
       
         <Footer>
           
         </Footer>
+        
+          </div>
         
           </div>
         );

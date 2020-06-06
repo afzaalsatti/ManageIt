@@ -9,7 +9,11 @@ const Ticket=mongoose.Schema({
         
      
     },
-    id:{
+    cust_id:{
+        type:String,
+        require:'required'
+    },
+    cust_email:{
         type:String,
         require:'required'
     },
@@ -35,8 +39,7 @@ const Ticket=mongoose.Schema({
 
     },
     time:{
-        type:String,
-        require:'required'
+        type:String
 
     },
     

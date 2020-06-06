@@ -28,6 +28,12 @@
 div {
     display: block;
 }
+.showBottomDiv{
+    display: block;
+}
+.hideBottomDiv{
+    display: none;
+}
 #search {
     width: 70%;
    

@@ -12,7 +12,13 @@ const Attendance=mongoose.Schema({
     date:{
         type:String,
         require:'required'
-    },
+    }
+    ,
+    time:{
+        type:String,
+        require:'required'
+    }
+    ,
     attendance:{
         type:Array,
      

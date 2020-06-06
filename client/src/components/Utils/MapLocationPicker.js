@@ -13,6 +13,7 @@ var  map;
 var marker;
 
 var rating = "";
+var test;
 export default class MapLocationPicker extends Component {
 
   constructor(props) {
@@ -24,6 +25,7 @@ export default class MapLocationPicker extends Component {
       zoom: 8,
       showModal:this.props.showModal
     };
+    test=this.props.setCords;
   }
 
  
@@ -60,7 +62,8 @@ map.on('click', function(e) {
    
      marker.setLngLat(e.lngLat.wrap())
       .addTo(map);
- console.log(e.lngLat.wrap())
+test(e.lngLat.wrap());
+
   });
 
     
@@ -81,14 +84,13 @@ map.on('click', function(e) {
    
     return (
         
-        <div  className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
+        
           
        
-        <div id="TransHistmapDiv" style={{    width: "90%",height: "300px", marginLeft: "2%"}} ref={el => this.mapContainer = el} className="absolute top right left bottom" />
-      <div className="confirm-button-div">
+        <div id="TransHistmapDiv" style={{    width: "100%",height: "100%", marginLeft: "2%"}} ref={el => this.mapContainer = el}  />
       
-      </div>
-      </div>
+       
+      
     
       
 

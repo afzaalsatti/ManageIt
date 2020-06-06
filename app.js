@@ -30,12 +30,255 @@ app.use(express.json());
 
 const users=mongoose.model("Users");
 const Employee=mongoose.model("Employee");
+const Career=mongoose.model("Career");
+const Vahicle=mongoose.model("Vahicle");
+ const Attendance=mongoose.model("Attendance");
+ const Route=mongoose.model("Route");
 
-
-app.get('/add',(req,res)=>
+app.post('/getTickets',(req,res)=>
 {
-res.json("hello");
+    
+    Route.find({ to : req.body.to,  from:req.body.from,  dep_date : req.body.dept_date }, function (err, record) {
+   
+
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                
+                    res.json({
+                        status:'Success',
+                        result:record
+                    });
+                 
+                
+               
+             }
+             else{
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+
 });
+ 
+
+
+
+app.post('/addRoute',(req,res)=>
+{
+
+    const route=new Route();
+route.company=req.body.data["company"];
+route.fare=req.body.data["fare"];
+route.title=req.body.data["title"];
+route.email=req.body.data["email"];
+
+route.from=req.body.data["from"];
+route.to=req.body.data["to"];
+route.dep_time=req.body.data["dtime"];
+route.dep_date=req.body.data["ddate"];
+
+route.arv_time=req.body.data["company"];
+
+route.arv_date=req.body.data["company"];
+
+
+route.vh_id=req.body.data["vh_id"];
+route.driver_id=req.body.data["driver_id"];
+
+route.save().then(resultCode => {
+    res.json({
+        status:'Success'
+       
+
+    });
+}).catch(function(error) {
+    console.log(error);
+    res.setHeader('Content-Type', 'text/json');
+    res.json({
+        status:'Failure'
+       
+
+    });
+    });
+
+
+});
+app.post('/addAttendence',(req,res)=>
+{
+    const attendanceObj=new Attendance();
+
+    let attendence=[];
+
+    Attendance.findOne({company:req.body.company, date:req.body.date}   , 
+    function(err,record) {  
+     if (record==null) {  
+        attendanceObj.company=req.body.company;
+        attendanceObj.date=req.body.date;
+        
+        attendanceObj.attendence=req.body.attendence;
+        
+        attendanceObj.save().then(resultCode => {
+            res.json({
+                status:'Success'
+               
+        
+            });
+        }).catch(function(error) {
+            console.log(error);
+            res.setHeader('Content-Type', 'text/json');
+            res.json({
+                status:'Failure'
+               
+        
+            });
+            });
+     return;  
+     }  
+
+     attendence=record.attendance;
+    
+     attendence.push(req.body.attendance)
+     console.log(attendence)
+     Attendance.findOneAndUpdate({company:req.body.company, date:req.body.date} , { attendance:  attendence },   
+         function(err,record) {  
+          if (record==null) {  
+             res.json({
+                 status:'Failure'
+                
+         
+             });
+          return;  
+          }  
+          res.json({
+            status:'Success'
+           
+    
+        });
+          });  
+
+
+
+
+    
+     });  
+
+    // users.findOneAndUpdate({name:"Afzaal Satti", password:"123"} , { name:  "Afzaal Shoukat" },   
+    //     function(err,record) {  
+    //      if (record==null) {  
+    //         res.json({
+    //             status:'Failure'
+               
+        
+    //         });
+    //      return;  
+    //      }  
+    //      res.send({data:"Record has been Updated..!!"+record});  
+    //      });  
+        
+
+    // const Attendence=new Attendence();
+    // Attendence.findByIdAndUpdate(req.body.company, {
+
+
+        
+    //     name:  req.body.name, address: req.body.address, contact: req.body.contact,email:req.body.email
+    
+    
+    
+    // },   
+    //     function(err) {  
+    //      if (err) {  
+    //      res.send(err);  
+    //      return;  
+    //      }  
+    //      res.send({data:"Record has been Updated..!!"});  
+    //      });  
+
+
+});
+
+app.post('/addNewVahicle',(req,res)=>
+{    
+const vahicle=new Vahicle();
+
+    vahicle.company=req.body.company;
+    vahicle.owner=req.body.owner;
+    vahicle.price=req.body.price;
+    vahicle.payment_status=req.body.payment_status;
+    vahicle.number=req.body.number;
+    vahicle.vah_model=req.body.vah_model;
+    vahicle.entry_date=req.body.entry_date;
+    vahicle.entry_time=req.body.entry_time;
+    vahicle.brand=req.body.brand;
+    vahicle.color=req.body.color;
+    vahicle.buyer_emp_id=req.body.buyer_emp_id;
+    vahicle.reg_year=req.body.reg_year;
+    vahicle.type=req.body.type;
+    vahicle.save().then(resultCode => {
+        res.json({
+            status:'Success'
+           
+    
+        });
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+
+});
+
+app.post('/postJob',(req,res)=>
+{
+    const career=new Career();
+    career.contactEmail=req.body.data.contactEmail;
+    career.company_name=req.body.data.company_name;
+    career.type=req.body.data.type;
+    career.location=req.body.data.branch;
+    career.branch=req.body.data.branch;
+    career.salary=req.body.data.salary;
+    career.expireDate=req.body.data.expireDate;
+    career.postDate=req.body.data.postDate;
+    career.requirements=req.body.data.requirements;
+    career.responsibiities=req.body.data.responsibiities;
+
+    
+  career.save().then(resultCode => {
+    
+    res.json({
+        status:'Success'
+       
+
+    });
+}).catch(function(error) {
+    console.log(error);
+    res.setHeader('Content-Type', 'text/json');
+    res.json({
+        status:'Failure'
+       
+
+    });
+    });
+});
+
 app.post('/addEmployee',(req,res)=>
 {
 

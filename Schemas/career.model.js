@@ -7,7 +7,7 @@ const Career=mongoose.Schema({
     },
     company_name: {
         type: String,
-        lowercase: true,
+       
         required: true,
         
      
@@ -15,7 +15,7 @@ const Career=mongoose.Schema({
     location: {
         type: String,
         
-        required: true,
+        
         
      
     },

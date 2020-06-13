@@ -13,7 +13,7 @@ const Ticket=mongoose.Schema({
         type:String,
         require:'required'
     },
-    cust_email:{
+    cust_contact:{
         type:String,
         require:'required'
     },
@@ -42,8 +42,7 @@ const Ticket=mongoose.Schema({
         type:String
 
     },
-    
-    fare: {
+    quantity: {
         type: String,
       
        
@@ -51,20 +50,14 @@ const Ticket=mongoose.Schema({
         
      
     },
-    driverId:{
+    routeId: {
         type: String,
       
-        
+       
         require:'required'
-
-    },
-    vahicleId:{
-        type: String,
-      
         
-        
-
-    },
+     
+    }
    
     
    

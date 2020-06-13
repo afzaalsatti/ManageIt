@@ -10,6 +10,11 @@
     background-color: red;
     content: "A";
   }
+  .mybooking{
+    background-color: rgb(105, 240, 105) ;
+    color: #fff;
+    display: inline-block;
+  }
   .grid{
     width: 100px;
     border: 2px solid orange;

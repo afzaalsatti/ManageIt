@@ -83,6 +83,20 @@ const Route=mongoose.Schema({
         require:'required'
 
     }
+    ,
+    booked_seats:{
+        type: String,
+      
+        
+       
+    }
+    ,
+    active:{
+        type: Boolean,
+      
+        
+       
+    }
     
    
 });

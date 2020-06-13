@@ -4,9 +4,10 @@ import "../career/jobs.css"
 import { Card } from 'react-bootstrap'
 import Footer from '../../Utils/Footer'
 import MapLocationPicker from '../../Utils/MapLocationPicker'
-import Button from 'react-bootstrap/Button';
+
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 
 var pageLoaded=1;
 var from_cord="Select from map",to_cord="Select from map";
@@ -37,18 +38,23 @@ export default class home extends Component {
   bookTicket = index => e =>
     {
       let data=[]
+      data["id"]=fetchTickets[index]._id;
       data["company"]=fetchTickets[index].company;
       data["to"]=fetchTickets[index].to;
+      data["tittle"]=fetchTickets[index].tittle;
       data["from"]=fetchTickets[index].from;
       data["date"]=fetchTickets[index].dep_date;
       data["driver_Id"]=fetchTickets[index].driver_id;
       data["vahicle_Id"]=fetchTickets[index].vh_id;
       data["fare"]=fetchTickets[index].fare;
+      data["booked_seats"]=fetchTickets[index].booked_seats;
       data["cust_id"]="CustomerID";
       data["cust_email"]="Customer email";
      
-console.log(data)
-        window.alert(index)
+
+
+this.props.replaceMainComponent(data,"BookBusTicket")
+      
     }
   searchTickets()
   {
@@ -90,6 +96,7 @@ console.log(data)
         
           window.alert("Operation Sucessful")
           fetchTickets=data.result;
+          
 let temp=  data.result.map((key,index)=>{
   return  <li style={{listStyle:"none"}}>
 
@@ -130,7 +137,7 @@ Issue Date
 Fare
                   </span>
                   <span style={{    fontSize: "12px"}}>
-{data.result[index].fare}
+{data.result[index].fare} PKR
                   </span>
           </text>
           <br>
@@ -161,6 +168,13 @@ Fare
               
           </text>
           <br></br>
+          <text style={{    fontSize: "12px", marginLeft: "70px"}} >
+          <span style={{marginRight:"10px",color:"green",    fontSize: "12px"}}>
+             Available Seats
+              </span>
+              {data.result[index].booked_seats}
+              
+          </text>
           
           
           <button id="JobsAddListButton" className="moveToRight"  onClick={this.bookTicket(index)} >

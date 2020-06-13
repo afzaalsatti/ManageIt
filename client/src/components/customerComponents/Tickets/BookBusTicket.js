@@ -2,19 +2,21 @@ import React, { Component } from 'react'
 import Details from './personalDetails'
 import BookSeat from './BookSeat'
 
-
+import StripePayment from '../payment/stripe_payment'
 
 var count=0;
 var data={};
 var booked,total_booked,total_free;
 export default class BooBusTicket extends Component {
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
     this.BookSeatListener= this.BookSeatListener.bind(this);
+   
+  
   
   }
 
@@ -47,7 +49,7 @@ export default class BooBusTicket extends Component {
         
         
         
-        if(cnic   )
+        if(cnic)
         {
         let  data={};
         data["cnic"]=cnic;
@@ -61,14 +63,14 @@ export default class BooBusTicket extends Component {
        
         
        
-console.log(data)
+
 
         return true;
 
         }
         else{
-         // alert("All Fields are Mandatory!");
-          return true;
+          alert("All Fields are Mandatory!");
+          return false;
         }
         
              
@@ -81,10 +83,80 @@ console.log(data)
         
           
           
-        console.log(booked);
-        console.log(total_booked);
-        console.log(total_free);
+     
+        window.alert("Contecting")
+        var d = new Date();
+        
+        const req_data={
+        
+         
+          
+         
+          "booked_seats":total_booked.toString(),
+          "id":this.props.details["id"],
 
+          "cust_id":document.getElementById("cnic").value,
+          "cust_contact":"contact number/email",
+          "to":this.props.details["to"],
+          "from":this.props.details["from"],
+          "date":this.props.details["date"],
+          "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
+          "tickets":booked.length
+    //       "company":this.props.details["company"],
+    // "title":this.props.details["tittle"],
+    // "vh_id":this.props.details["vahicle_Id"],
+    // "driver_id": this.props.details["driver_Id"]
+    
+
+
+
+
+        }
+         
+        console.log("Request Data", req_data)
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+          fetch("/updateRouteSeats",options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+            
+       
+            if(status==='Success')
+            {
+            
+              window.alert("Operation Sucessful")
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }else{
+             
+              window.alert("Operation Failed!")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+         // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+         window.alert("Unexpected error Try again...  "+error);
+       });
 
         return true;
         
@@ -232,7 +304,7 @@ console.log(data)
           </div>
           
           <div className="card-body">
-           <BookSeat BookSeatListener={this.BookSeatListener}></BookSeat>
+           <BookSeat booked_seats={this.props.details["booked_seats"]}  BookSeatListener={this.BookSeatListener}></BookSeat>
             
             
             
@@ -244,37 +316,7 @@ console.log(data)
       </div>
      
       <div id="step3" className="col-md-8" style={{display:'none'}}>
-        <div className="card card-primary">
-          <div className="card-header">
-            <h3 className="card-title">Professional Details</h3>
-            <div className="card-tools">
-              <button type="button" className="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i className="fas fa-minus" /></button>
-            </div>
-          </div>
-         
-          <div className="card-body">
-            <div className="form-group">
-              <text htmlFor="inputName"> Position</text>
-              <input type="text" id="postition" className="form-control" />
-            </div>
-            <div className="form-group">
-              <text htmlFor="inputName">Company</text>
-              <input type="text" id="company" className="form-control" />
-            </div>
-            <div className="form-group">
-              <text htmlFor="inputName">Duration</text>
-              <input type="text" id="duration" className="form-control" />
-            </div>
-            
-            
-            
-            
-            
-          </div>
-          {/* /.card-body */}
-        </div>
-        {/* /.card */}
+   <StripePayment></StripePayment>
       </div>
      
        </div>

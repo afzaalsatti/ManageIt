@@ -5,6 +5,7 @@ import HireVahicle from '../Hire/HireVahicle'
 import TransHistory from '../TransportationHistory/TransHistory'
 import CareerPage from '../career/CareerPage'
 import Settings from '../Settings/UserSettings'
+import BookBusTicket from '../Tickets/BookBusTicket'
 export default class mainPage extends React.Component {
   
     constructor()
@@ -13,10 +14,21 @@ super();
 this.toggleSlideMenu=this.toggleSlideMenu.bind(this);
 this.showHireMenu=this.showHireMenu.bind(this);
 this.getMenuSelection=this.getMenuSelection.bind(this);
-this.state={component:<Home></Home>};
+this.replaceMainComponent=this.replaceMainComponent.bind(this);
+this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></Home>};
 
     }
+    
+    replaceMainComponent(data,comp)
+    {
+        if(comp==="BookBusTicket")
+        {
+            this.setState({
+                component:<BookBusTicket details={data}></BookBusTicket>
+            });
+        }
 
+    }
     
     showHireMenu()
     {
@@ -39,6 +51,8 @@ this.state={component:<Home></Home>};
     }
     toggleSlideMenu()
     {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; 
         
         if(document.getElementById("right").style.display=="none")
         {
@@ -53,13 +67,13 @@ this.state={component:<Home></Home>};
     }
     getMenuSelection(pageToBeLoaded)
     {
-       
+        this.toggleSlideMenu();
          if(pageToBeLoaded==="home")
          {
-            if(this.state.component != <Home></Home>)
+            if(this.state.component != <Home ></Home>)
             {
                 this.setState({
-                    component:<Home></Home>
+                    component:<Home replaceMainComponent={this.replaceMainComponent}></Home>
                 });
             }
              

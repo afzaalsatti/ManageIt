@@ -34,6 +34,8 @@ const Career=mongoose.model("Career");
 const Vahicle=mongoose.model("Vahicle");
  const Attendance=mongoose.model("Attendance");
  const Route=mongoose.model("Route");
+ const Ticket=mongoose.model("Ticket");
+
 
 app.post('/getTickets',(req,res)=>
 {
@@ -76,6 +78,121 @@ app.post('/getTickets',(req,res)=>
  
 
 
+app.post('/updateRouteSeats',(req,res)=>
+{
+
+    
+    const ticket=new Ticket();
+    let seats;
+
+    Route.findOne({ _id: req.body.id }, function (err, record) {
+   
+
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                 seats=record.booked_seats;
+                 Route.findOneAndUpdate({_id:req.body.id} , { booked_seats:  req.body.booked_seats },   
+                    function(err,record) {  
+                     if (record==null) {  
+                        res.json({
+                            status:'Failure'
+                           
+                    
+                        });
+                     return;  
+                     }  
+                     ticket.cust_id=req.body.cust_id;
+                     ticket.cust_contact=req.body.cust_contact;
+                     ticket.to=req.body.to;
+                     ticket.from=req.body.from;
+                     ticket.date=req.body.date;
+                     ticket.time=req.body.time;
+                    ticket.routeId=req.body.id
+                    ticket.routeId=req.body.id
+                    ticket.quantity=req.body.tickets;
+                    ticket.save().then(resultCode => {
+                        //  res.status(200).json({ status:'Success' });
+                       res.json({
+                           status:'Success'
+                          
+                   
+                       });
+                   }).catch(function(error) {
+
+
+                    // Route.findOneAndUpdate({_id:req.body.id} , { booked_seats:  seats },   
+                    //     function(err,record) {  
+                    //      if (record==null) {  
+                    //         res.json({
+                    //             status:'Failure'
+                               
+                        
+                    //         });
+                    //      return;  
+                    //      }  
+                    //      res.json({
+                    //        status:'Success'
+                          
+                   
+                    //    });
+                    //      });  
+
+
+
+
+                       
+                       
+                       res.json({
+                           status:'Failure'
+                          
+                   
+                       });
+                       });
+                     res.json({
+                       status:'Success'
+                      
+               
+                   });
+                     });  
+           
+               
+             }
+             else{
+                res.json({
+                    status:'Failure'
+
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+
+
+
+         
+       
+    
+    
+    
+        
+         }); 
+
+
+    
+
+
+
 
 app.post('/addRoute',(req,res)=>
 {
@@ -98,7 +215,8 @@ route.arv_date=req.body.data["company"];
 
 route.vh_id=req.body.data["vh_id"];
 route.driver_id=req.body.data["driver_id"];
-
+route.booked_seats="";
+route.active=true;
 route.save().then(resultCode => {
     res.json({
         status:'Success'

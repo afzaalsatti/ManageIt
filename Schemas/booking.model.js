@@ -81,7 +81,13 @@ const Booking=mongoose.Schema({
         require:'required'
 
     },
-    
+    status:{
+        type: String,
+      
+        
+        require:'required'
+
+    },
    
 });
 

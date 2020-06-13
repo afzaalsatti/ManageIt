@@ -3,8 +3,8 @@ import './BookSeat.css';
 var bookings=[]
 export default class BookSeat extends Component {
   
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
         this.state = {
         seat: [
           'L1','L2','L3',
@@ -25,20 +25,25 @@ export default class BookSeat extends Component {
         ],
         seatReserved: []
       }
+
+    
     }
     componentDidMount()
     {
 
-let list1='L1,L2,L3,L4,R1,R2,R3,R4,R5,R6';
-var ar = list1.split(','); // split string on comma space
+      
 
-let list2='L10,L12,L13,L14,R11,R12,R13,R14,R15,R16';
-var ar1 = list2.split(','); // split string on comma space
+let list1=this.props.booked_seats;
+var reserved = list1.split(','); // split string on comma space
+
+
+var available = this.state.seat.filter(n => !reserved.includes(n)); // split string on comma space
 this.setState({
-  seatAvailable:ar,
-  seatReserved:ar1
+  seatAvailable:available,
+  seatReserved:reserved
  
 })
+
 
 
 
@@ -115,7 +120,7 @@ this.setState({
         className="seat"
            key={row} onClick = {e => this.onClickSeat(row)}>
             
-             <img  className={this.props.reserved.indexOf(row) > -1? 'reserved': 'available' }src='/assets/images/seatbelt.png'></img>
+             <img  className= {bookings.indexOf(row) > -1?'mybooking': this.props.reserved.indexOf(row) > -1? 'reserved': 'available' }src='/assets/images/seatbelt.png'></img>
              
            
 
@@ -173,7 +178,7 @@ this.setState({
       const seatCount = this.props.available.length;
       return(
         <div className="left">
-          <h4>Available Seats: ({seatCount == 0? 'No seats available' : seatCount})</h4>
+          <h4 style={{background:"green"}}>Available Seats: ({seatCount == 0? 'No seats available' : seatCount})</h4>
           <ul>
             {this.props.available.map( res => <li key={res} >{res} , </li> )}
             
@@ -187,7 +192,7 @@ this.setState({
     render() {
       return(
         <div className="left">
-          <h4>Reserved Seats: ({this.props.reserved.length})</h4>
+          <h4 tyle={{background:"red"}}>Reserved Seats: ({this.props.reserved.length-1})</h4>
           <ul>
             { this.props.reserved.map(res => <li key={res} >{res} , </li>) }
           </ul>

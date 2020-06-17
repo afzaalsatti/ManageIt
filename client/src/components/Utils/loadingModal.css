@@ -1,0 +1,9 @@
+.showElement{
+    display: block;
+}
+.showElementBtn{
+    display: flex;
+}
+.hideElement{
+    display: none;
+}

@@ -16,6 +16,7 @@
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.4",
     "date-fns": "^2.10.0",
+    "global": "^4.4.0",
     "google-maps-react": "^2.0.2",
     "mapbox-gl": "^1.9.1",
     "node-sass": "^4.13.1",

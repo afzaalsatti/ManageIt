@@ -25,7 +25,8 @@ export default class AddNewVahicle extends Component {
    let emp_id=document.getElementById("vh_resp_emp_id").value;
    let type=document.getElementById("vh_type").value;
    let year=document.getElementById("vh_make_year").value;
-
+   var d = new Date();
+   
    if(price && status && vh_num && vh_model && time && date && color && brand && emp_id && type && year)
    {
      
@@ -39,8 +40,8 @@ export default class AddNewVahicle extends Component {
       "payment_status":status,
       "number":vh_num,
       "vah_model":vh_model,
-      "entry_date":date,
-      "entry_time":time,
+      "entry_date":d.getMonth()+1+"/"+ d.getDate()+":"+d.getFullYear(),
+      "entry_time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
       "brand":brand,
       "color":color,
       "buyer_emp_id":emp_id,
@@ -120,9 +121,11 @@ else{
 <div style={{width:'48%',float:"left"}} className="form-group">
               <text htmlFor="inputName">Vahicle Type</text>
               <select  style={{height:"37px",width:'100%',background:"#F1F1F1"}} id="vh_type">
-<option value="Car">Car</option>
+              <option value="Car">Car</option>
 <option value="Bus">Bus</option>
-<option value="Truck">Truck</option>
+<option value="Bike">Bike</option>
+<option value="Van">Van</option>
+<option value="Truck">Heavy Vahicle</option>
 
 
 </select>       </div>
@@ -195,101 +198,7 @@ else{
      
      </div>
   
-                {/* <div className="main">
-  <section className="sign-in">
-    <div className="container">
-      <div className="signin-content">
-       
-        <div className="signin-form" style={{width:'100%',textAlign:"center"}}>
-            <h1>Congrats on Buying New Vahicle</h1>
-          <h2  className="form-title">Add New Vahicle`s Details</h2>
-      
-
-
-          <Card style={{  display:'inline-block',marginLeft:'10px',width:'100%'}}>
-  
- 
-  <Card.Body >
-    <Card.Title>New Vehicle Data</Card.Title>
-    <br></br>
-    <div className="NVDataEntry1">
-    <text id="VType" >Type</text>
-    <Dropdown as={ButtonGroup} >
-  <Button  id="ddButton" >Select Type</Button>
-  <Dropdown.Toggle  id="dropdown-split-basic">
-    
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu >
-  <Dropdown.Item  onClick={ () => this.clickListener('Bus')}>Bus</Dropdown.Item>
-  <Dropdown.Item  onClick={ () => this.clickListener('Car')}>Car</Dropdown.Item>
-  <Dropdown.Item  onClick={ () => this.clickListener('Truck')}>Truck</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
-   </div>
-  
-           <div className="NVDataEntry2">
-           <h5>Expense Details</h5>
-            <text >Amount</text>
-            <input></input>
-            
-            <text for="paid">Status</text>
-
-<select id="status">
-<option value="paid">Paid</option>
-<option value="pending">Pending</option>
-
-</select>
-<br></br>
-               <h5>Info About Vahicle</h5>
-               <text >Vahicle Number</text>
-               <input></input>
-               <text >Vahicle Model</text>
-               <input></input>
-               <tr></tr>
-               <text >Vahicle Color</text>
-               <input></input>
-               <text >Vahicle Brand</text>
-               <input></input>
-               <h5>Employee Information</h5>
-               <text >Employee Name</text>
-               <input></input>
-               <text >Employee ID</text>
-               <input></input>
-               <tr></tr>
-               <text >Branch</text>
-               <input></input>
-               <h5>Other Info</h5>
-               <text>Date</text>
-               <input type="date" id="datePicker"></input>
-               
-               <text>Time</text>
-               <input type="time" id="timePicker"></input>
-               <h5>Additional  Info</h5>
-               <textarea>
-
-               </textarea>
-           </div>
-
-    <Card.Text>
-    New Vahicle refers to buying new vahicle.
-    
-    </Card.Text>
-    <CardButton variant="primary">Add Expense</CardButton>
-  </Card.Body>
-</Card>
-         
-
-
-
-
-
-         
-        </div>
-      </div>
-    </div>
-  </section>
-</div> */}
+              
 
 
             </div>

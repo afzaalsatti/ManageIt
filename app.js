@@ -35,6 +35,7 @@ const Vahicle=mongoose.model("Vahicle");
  const Attendance=mongoose.model("Attendance");
  const Route=mongoose.model("Route");
  const Ticket=mongoose.model("Ticket");
+ const HirePool=mongoose.model("HirePool")
 
 
 app.post('/getTickets',(req,res)=>
@@ -397,6 +398,45 @@ app.post('/postJob',(req,res)=>
     });
 });
 
+app.post('/addDriverToHirePool',(req,res)=>
+{
+
+    const hire_pool=new HirePool();
+    hire_pool.company=req.body.company;
+    hire_pool.driverId=req.body.driverId;
+    hire_pool.vahicleId=req.body.vahicleId;
+    hire_pool.vahicleType=req.body.vahicleType;
+
+    hire_pool.position=req.body.position;
+    hire_pool.status=req.body.status;
+    
+
+    
+   
+    hire_pool.save().then(resultCode => {
+        res.json('Success');
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+
+
+
+
+
+    console.log(req.body);
+    res.json({
+        status:'Success'
+       
+
+    });
+
+});
 app.post('/addEmployee',(req,res)=>
 {
 
@@ -412,6 +452,7 @@ app.post('/addEmployee',(req,res)=>
     employee.address=req.body.address;
     employee.education=req.body.education;
     employee.experience=req.body.experience;
+    employee.joining_date=req.body.joining_date;
 
     
    

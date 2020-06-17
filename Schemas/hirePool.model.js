@@ -10,6 +10,10 @@ const HirePool=mongoose.Schema({
         type:String,
         require:'required'
     },
+    vahicleType:{
+        type:String,
+        require:'required'
+    },
     company:{
         type:String,
         require:'required'

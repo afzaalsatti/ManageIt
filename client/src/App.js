@@ -12,7 +12,7 @@ import { Router,Switch,Route} from 'react-router-dom';
 import history from './history';
 
 import Attendance from './components/HRM/AddAttendance'
-import AddPerson from './components/HRM/AddPerson'
+import AddCaptain from './components/HRM/RegisterDriver'
 import AddJobs from './components/HRM/JobAds'
 import PersonalDetails from './components/customerComponents/Tickets/personalDetails'
 import BookSeat from './components/customerComponents/Tickets/BookSeat'
@@ -27,6 +27,7 @@ import RegisterCompany from './components/AuthComponents/RegisterCompany/Signup'
 
 
 import MapLocationPicker from './components/Utils/MapLocationPicker'
+import VahicleTracking from './components/Utils/VahicleTrackingPage'
 
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
       <Route  path="/signin" exact component={Signn}></Route>
       <Route  path="/inventry" exact component={MainInventryPage}></Route>
       <Route path="/AdminDashboard" exact component={AdminDashboard}></Route>
-      <Route path="/addperson" exact component={AddPerson}></Route>
+      <Route path="/registerCaptain" exact component={AddCaptain}></Route>
       <Route path="/attendance" exact component={Attendance}></Route>
       <Route path="/addjob" exact component={AddJobs}></Route>
       <Route path="/route" exact component={AddBusRoute}></Route>
@@ -58,6 +59,9 @@ function App() {
       <Route path="/bookseat" exact component={BookBusTicket}></Route>
       <Route path="/contactus" exact component={ContactPage}></Route>
       <Route path="/payment" exact component={StripePayment}></Route>
+
+
+      <Route  path="/trackRide" exact component={VahicleTracking}></Route>
      
       
       </Switch>

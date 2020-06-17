@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './hire.css'
+import history from "../../../history";
 export default class HireVahicle extends Component {
     render() {
         return (
@@ -100,7 +101,17 @@ export default class HireVahicle extends Component {
                       </div>
                     </div>
                     <div id="hire_btn_container">
-                      <button id="hire_btn">HIRE</button>
+                      <button id="hire_btn"
+                      onClick={()=>{
+                        history.push({
+                          pathname: '/trackRide',
+                          customNameData: "Test",
+                        }
+                          )
+                      }}
+                      
+                      
+                      >HIRE</button>
                     </div>
                   </div>
                 </div>
@@ -290,9 +301,12 @@ export default class HireVahicle extends Component {
                     Interested in becoming an operator
                   </h5>
                   <div className="trustmaintext">
-                    Interested in becoming an operator ?{" "}
+                    Interested in becoming Captain ?{" "}
                     <span
-                      onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfbESvcmnFn93wYqNksj-jOLigorEDgfA9KCm7iFCtB9u8jNQ/viewform');"
+                      onClick={()=>{
+                      
+                        history.push('/registercaptain');
+                      }}
                       className="operatorBtnClick"
                     >
                       Click here

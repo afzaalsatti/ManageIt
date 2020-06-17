@@ -46,6 +46,10 @@ const Employee=mongoose.Schema({
     password:{
         type:String,
         require:'required'
+    },
+    joining_date:{
+        type:String,
+       
     }
 });
 

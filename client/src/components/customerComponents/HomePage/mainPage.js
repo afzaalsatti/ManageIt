@@ -17,6 +17,8 @@ this.getMenuSelection=this.getMenuSelection.bind(this);
 this.replaceMainComponent=this.replaceMainComponent.bind(this);
 this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></Home>};
 
+
+
     }
     
     replaceMainComponent(data,comp)
@@ -51,6 +53,7 @@ this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></H
     }
     toggleSlideMenu()
     {
+       
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; 
         

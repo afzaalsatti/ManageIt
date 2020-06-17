@@ -1,0 +1,28 @@
+.dangerBtn{
+    background: red;
+    color: white;
+    width: 100px;
+    /* height: 0px; */
+    
+    border-radius: 7px;
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+}
+
+.marker {
+    background-image: url('/assets/svg/car.svg');
+   
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+  
+ 
+ 
+  }
+
+.marker image{
+    transform: rotate(90deg);
+}

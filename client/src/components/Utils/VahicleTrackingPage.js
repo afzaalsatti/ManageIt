@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import mapboxgl  from 'mapbox-gl';
 import { Card } from 'react-bootstrap'
 import './css/tracking.css'
-import worker_script from './worker';
+import LoadiningModal  from '../Utils/LodingModal'
+import { id } from 'date-fns/locale';
 
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obmFsZXgyIiwiYSI6ImNqemNudGs4cDAyaGYzY3FiamVtd2h4ZmQifQ.YYt71bcR3ZdD6UgIs6EQog';
 var  map;
 var testVar=0;
+var marker;
+var reqInProcess=1;
+var requestLoadingMessage="";
+var reqFailed=false;
 var testCords=[
      
 
@@ -48,14 +53,16 @@ export default class VahicleTrackingPage extends Component {
             dropoffCords:["73.444","31.22"] ,
         //   lng: this.props.pickupCords[0],
         //   lat: this.props.pickupCords[1],
-          zoom: 5
+          zoom: 5, showModal:false
         };
 
 
-        // window.alert(this.props.location.customNameData)
+        
       }
 
       testMethod=()=>{
+
+       
         const data={
    
             "email":"afzaalsatti74@gmail.com",
@@ -83,13 +90,15 @@ export default class VahicleTrackingPage extends Component {
                       
           setTimeout(() => { 
            
-            var el = document.createElement('div');
-        el.className = 'marker';
+        // var el = document.createElement('div');
+        // el.className = 'tracking_marker';
      
       
-        // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-          .setLngLat(testCords[testVar])
+        // // make a marker for each feature and add to the map
+        // new mapboxgl.Marker(el)
+       
+       
+       marker.setLngLat(testCords[testVar])
          
           .addTo(map);
 
@@ -133,7 +142,7 @@ export default class VahicleTrackingPage extends Component {
       center: this.state.pickupCords,
 //       pitch: 60, // pitch in degrees
 // bearing: -60, // bearing in degrees
-      zoom:15
+      zoom:20
     });
 
     var markerjson = {
@@ -165,6 +174,8 @@ export default class VahicleTrackingPage extends Component {
         'type': 'LineString',
         'coordinates': [
             [ "73.01920605585065","33.658527514640355"],
+
+
     ["73.0184764949986", "33.65849179380938"],
     ["73.01757527276959", "33.658313189431944"],
     ["73.01628781244244", "33.658027421656975"],
@@ -206,19 +217,46 @@ export default class VahicleTrackingPage extends Component {
         }
         });
         });
-    markerjson.features.forEach(function(marker) {
+
+
+        if(this.props.location.data !== undefined)
+        {
+          let src=this.props.location.data["src"];
+          let dest=this.props.location.data["dest"];
+          var el = document.createElement('div');
+          el.className = 'tracking_marker tracking_src_marker ' ;
+       
+           new mapboxgl.Marker(el)
+            .setLngLat(src)
+            .addTo(map);
+  
+            var el = document.createElement('div');
+          el.className = 'tracking_marker tracking_dest_marker ';
+       
+           new mapboxgl.Marker(el)
+            .setLngLat(dest)
+            .addTo(map);
+        }
+
+       
+     
+
+
+    markerjson.features.forEach(function(mark) {
     
         // create a HTML element for each feature
         var el = document.createElement('div');
-        el.className = 'marker';
+        el.className = 'tracking_marker';
      
-      
+        marker= new mapboxgl.Marker(el);
         // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-          .setLngLat(marker.geometry.coordinates)
+        marker
+          .setLngLat(testCords[0])
          
           .addTo(map);
       });
+
+      
 
     //   while(count<)
     //   setTimeout(() => { 
@@ -246,14 +284,144 @@ this.testMethod()
     
     
 }
+RequestToServer=()=>{
+        
+         
+  let req_data;
+  let address;
+  let d = new Date();
+  if(reqInProcess<= 3)
+  {
+     
+ 
+  if(reqInProcess==1)
+  {
+    address="sendRideInvitation";
+    req_data={
+
+       
+      "company":"decideLater",
+      "ride_id":id,
+      "cust_id":"Customer101",
+      "to":this.props.location.data["dest"],
+      "from":this.props.location.data["src"],
+      "distance":this.props.location.data[2],
+      "fare":this.props.location.data[2]*25,
+      "driverId":"nil",
+      "vahicleId":"nil",
+      "cords":"nil",
+      "rating":"nil",
+      "status":"searching"
+        
+  
+ 
+  
+ 
 
 
+
+
+
+
+      }
+  } else
+    if(reqInProcess==3)
+  {
+      requestLoadingMessage= <text> Finding Your Captain... </text>
+    
+      address="sendRideInvitation";
+      req_data={
+  
+         
+         
+          
+    
+   
+    
+          "company":"decideLater",
+"rideId":"Ride ID",
+
+"to":this.props.location.data["dest"],
+      "from":this.props.location.data["src"],
+      
+      "fare":this.props.location.data[2]*25,
+"type":"Ride Invitation"
+
+
+
+        }
+         
+  
+      }
+   
+      const options={
+          method:"POST",
+          headers:{
+              'Content-type':"application/json"
+              
+          },
+          body:JSON.stringify(req_data)
+      }
+      this.setState({showModal:true})
+      fetch("/"+address,options).then(response=>{
+          return response.json();
+    }).then(data=>{
+        let status=data.status;
+        console.log(status)
+   
+        if(status==='Success')
+        {
+        
+          console.log("Operation Sucessful" +reqInProcess)
+          //history.push('/home');
+          reqInProcess++;
+          this.RequestToServer();
+         // history.push("");
+        }else{
+
+         
+          window.alert("Operation Failed!")
+        }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    }).catch((error) => {
+      reqFailed=true;
+      this.setState({showModal:true})
+      //   reqInProcess=reqInProcess+1;
+      // this.RequestToServer(reqInProcess);
+     window.alert("Unexpected error Try again...  "+reqInProcess);
+   });
+  
+  }
+  else
+  {
+      
+      
+      this.setState({showModal:false});
+      
+
+
+  }
+}
+getModalBtnClick=type=>{
+  this.setState({showModal:false})
+  if(type===1)
+  {
+
+     reqFailed=false;
+      this.RequestToServer();
+  }
+ 
+
+}
 
 
     render() {
         return (
             <div>
-            <div id="TransHistmapDiv" style={{    width: "90%",height: "300px", marginLeft: "2%"}} ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+              <LoadiningModal getModalBtnClick={this.getModalBtnClick} reqFailed={reqFailed} displayText={requestLoadingMessage} showModal={this.state.showModal}></LoadiningModal>
+    
+            <div id="TransHistmapDiv" style={{    width: "90%",height: "300px", marginLeft: "2%",marginTop:"50px"}} ref={el => this.mapContainer = el} className="absolute top right left bottom" />
           
           
     

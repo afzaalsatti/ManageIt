@@ -10,7 +10,7 @@
     outline: none;
 }
 
-.marker {
+.tracking_marker {
     background-image: url('/assets/svg/car.svg');
    
     background-size: cover;
@@ -18,6 +18,24 @@
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+  
+ 
+ 
+  }
+  
+.tracking_src_marker {
+    background-image: url('/assets/images/src_flag.png') !important;
+   
+    
+  
+ 
+ 
+  }
+  
+.tracking_dest_marker {
+    background-image: url('/assets/images/dest_flag.png') !important;
+   
+   
   
  
  

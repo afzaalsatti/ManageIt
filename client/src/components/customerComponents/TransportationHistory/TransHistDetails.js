@@ -116,6 +116,7 @@ var point = {
 };
  
 // Calculate the distance in kilometers between route start/end point.
+
 var lineDistance = turf.length(route.features[0], {units: 'kilometers'});
  
 var arc = [];

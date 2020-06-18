@@ -9,7 +9,11 @@ const Booking=mongoose.Schema({
         
      
     },
-    id:{
+    ride_id:{
+        type:String,
+        require:'required'
+    },
+    cust_id:{
         type:String,
         require:'required'
     },

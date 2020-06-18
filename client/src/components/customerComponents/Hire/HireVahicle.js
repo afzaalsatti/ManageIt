@@ -1,10 +1,69 @@
 import React, { Component } from 'react'
 import './hire.css'
 import history from "../../../history";
+import * as turf from '@turf/turf'
+
+import MapLocationPicker from '../../Utils/MapLocationPicker'
+
+import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
+var from_cord="Select from map",to_cord="Select from map";
+var click;
 export default class HireVahicle extends Component {
+  
+  constructor(props)
+  {
+    super(props);
+    this.state={  showModal:false}
+    this.setCords = this.setCords.bind(this);
+  }
+
+  setCords(a){
+    if(click==="from")
+    {
+      from_cord=a.lng+","+a.lat;
+     
+    }
+    else{
+      to_cord=a.lng+","+a.lat;
+     
+    }
+       
+    
+    
+      }
     render() {
         return (
           <div>
+                     <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
+        
+        <Modal.Body style={{background:"#3d3d3e"}}>
+        <MapLocationPicker setCords={this.setCords}>
+
+</MapLocationPicker >
+    </Modal.Body  >
+       <Modal.Footer style={{background:"#3d3d3e"}}>
+       <button
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "40%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+         document.getElementById("src").value=from_cord;
+         document.getElementById("dest").value=to_cord;
+         this.setState({
+          showModal:false
+      });
+      }}>Confirm Location</button>
+       </Modal.Footer>
+      </Modal>
+            
+
             <div className="WidgetContainer">
               <div id="widget_block">
                 <div id="widget_inner_block">
@@ -22,7 +81,7 @@ export default class HireVahicle extends Component {
                     <div id="src_city_block">
                       <div className="autocomplete_container_block">
                         <span className="autocomplete_container_label">
-                          CITY OF HIRE
+                          Select Your Ride
                         </span>
                         <div className="autocomplete_block">
                           <img
@@ -30,11 +89,17 @@ export default class HireVahicle extends Component {
                             src="/assets/svg/tickets.svg"
                             alt
                           />
-                          <input
-                            className="SourceCity autocomplete_input"
-                            placeholder="eg: Islamabad"
-                            type="text"
-                          />
+                          
+                          <select  style={{height:"45px",border:"none"}} id="vh_type">
+                          <option value="head">   Select Your Ride</option>
+<option value="Car">Car</option>
+<option value="Bus">Bus</option>
+<option value="Bike">Bike</option>
+<option value="Van">Van</option>
+<option value="Truck">Heavy Vahicle</option>
+
+
+</select> 
                           <ul
                             className="autocomplete_ul"
                             style={{ width: "108%", display: "none" }}
@@ -61,6 +126,19 @@ export default class HireVahicle extends Component {
                             className="StartingPoint autocomplete_input"
                             placeholder="eg: Railway Station"
                             type="text"
+                            id="src"
+                            onClick={ ()=>{
+                              click="from";
+                             (this.state.showModal==false )?
+                              
+                                this.setState({
+                                  showModal:true
+                                }) 
+                                
+                                :
+                               console.log("")
+                            }
+                              }
                           />
                           <ul
                             className="autocomplete_ul"
@@ -88,6 +166,19 @@ export default class HireVahicle extends Component {
                             className="DestinationCity autocomplete_input"
                             placeholder="eg: Airport/Islamabad"
                             type="text"
+                            id="dest"
+                            onClick={ ()=>{
+                              click="to";
+                             (this.state.showModal==false )?
+                              
+                                this.setState({
+                                  showModal:true
+                                }) 
+                                
+                                :
+                               console.log("")
+                            }
+                              }
                           />
                           <ul
                             className="autocomplete_ul"
@@ -103,11 +194,49 @@ export default class HireVahicle extends Component {
                     <div id="hire_btn_container">
                       <button id="hire_btn"
                       onClick={()=>{
-                        history.push({
-                          pathname: '/trackRide',
-                          customNameData: "Test",
-                        }
-                          )
+                        // let src="73.01920605585065,33.658527514640355";
+                        // let dest="72.94201871281325, 33.63254911983691";
+let src=document.getElementById("src").value;
+let dest=document.getElementById("dest").value;
+let vahicle=document.getElementById("vh_type").value;
+
+if(src && dest && vahicle!=="head")
+{
+  
+  src= src.split(',').map(Number);
+  dest= dest.split(',').map(Number);
+ 
+  var route = {
+    'type': 'FeatureCollection',
+    'features': [
+    {
+    'type': 'Feature',
+    'geometry': {
+    'type': 'LineString',
+    'coordinates': [src,  dest]
+    }
+    }
+    ]
+    };
+  let lineDistance = turf.length( route.features[0], {units: 'kilometers'});
+
+  let temp={
+    "src":src,
+     "dest":dest,
+     "data":lineDistance};
+     console.log(temp)
+  
+ 
+  history.push({
+    pathname: '/trackRide',
+    data: temp,
+  }
+    )
+
+}else{
+  window.alert("Fields cant be empty")
+}
+                        
                       }}
                       
                       

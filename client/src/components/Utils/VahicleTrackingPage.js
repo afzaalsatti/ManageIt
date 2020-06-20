@@ -11,8 +11,10 @@ var  map;
 var testVar=0;
 var marker;
 var reqInProcess=1;
-var requestLoadingMessage="";
+var requestLoadingMessage="Searching For Captain";
 var reqFailed=false;
+var src,dest,fare,dis;
+var rideID="";
 var testCords=[
      
 
@@ -56,7 +58,9 @@ export default class VahicleTrackingPage extends Component {
           zoom: 5, showModal:false
         };
 
-
+src="12345";
+dest="12345";
+dis="15";
         
       }
 
@@ -164,59 +168,59 @@ export default class VahicleTrackingPage extends Component {
         }
         ]
       };
-      map.on('load', function() {
-        map.addSource('route', {
-        'type': 'geojson',
-        'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-        'type': 'LineString',
-        'coordinates': [
-            [ "73.01920605585065","33.658527514640355"],
+    //   map.on('load', function() {
+    //     map.addSource('route', {
+    //     'type': 'geojson',
+    //     'data': {
+    //     'type': 'Feature',
+    //     'properties': {},
+    //     'geometry': {
+    //     'type': 'LineString',
+    //     'coordinates': [
+    //         [ "73.01920605585065","33.658527514640355"],
 
 
-    ["73.0184764949986", "33.65849179380938"],
-    ["73.01757527276959", "33.658313189431944"],
-    ["73.01628781244244", "33.658027421656975"],
-    ["73.0127687542149", "33.65734871938782"],
-    ["73.01173878595318", "33.655686266763944"],
-    ["73.01126671716656", "33.65515043505014"],
-    ["73.0109663097569", "33.654686044866125"],
-    ["73.01066590234723", "33.65515043505014"],
-    ["73.00903511926617", "33.65565054475346"],
-    ["73.00791932031598", "33.65761523330819"],
-    ["73.00611099275133", "33.65943699534039"],
-    ["73.00546726258776", "33.66144221373574"],
-    ["73.00392231019518", "33.662299480189816"],
-    ["72.99868663819811", "33.661263615482646"],
-    ["72.99175581010363", "33.65862031799072"],
-    ["72.98697074922106", "33.65508388760189"],
+    // ["73.0184764949986", "33.65849179380938"],
+    // ["73.01757527276959", "33.658313189431944"],
+    // ["73.01628781244244", "33.658027421656975"],
+    // ["73.0127687542149", "33.65734871938782"],
+    // ["73.01173878595318", "33.655686266763944"],
+    // ["73.01126671716656", "33.65515043505014"],
+    // ["73.0109663097569", "33.654686044866125"],
+    // ["73.01066590234723", "33.65515043505014"],
+    // ["73.00903511926617", "33.65565054475346"],
+    // ["73.00791932031598", "33.65761523330819"],
+    // ["73.00611099275133", "33.65943699534039"],
+    // ["73.00546726258776", "33.66144221373574"],
+    // ["73.00392231019518", "33.662299480189816"],
+    // ["72.99868663819811", "33.661263615482646"],
+    // ["72.99175581010363", "33.65862031799072"],
+    // ["72.98697074922106", "33.65508388760189"],
 
-    ["72.97811051731765", "33.65258329355696"],
-    ["72.97158738499343", "33.64791233923181"],
-    [" 72.9568674219197", "33.644875641146605"],
-    [" 72.9508674219197", "33.63794442311159"],
-    ["72.94201871281325", "33.63254911983691"],
+    // ["72.97811051731765", "33.65258329355696"],
+    // ["72.97158738499343", "33.64791233923181"],
+    // [" 72.9568674219197", "33.644875641146605"],
+    // [" 72.9508674219197", "33.63794442311159"],
+    // ["72.94201871281325", "33.63254911983691"],
     
-        ]
-        }
-        }
-        });
-        map.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-        'layout': {
-        'line-join': 'round',
-        'line-cap': 'round'
-        },
-        'paint': {
-        'line-color': '#888',
-        'line-width': 8
-        }
-        });
-        });
+    //     ]
+    //     }
+    //     }
+    //     });
+    //     map.addLayer({
+    //     'id': 'route',
+    //     'type': 'line',
+    //     'source': 'route',
+    //     'layout': {
+    //     'line-join': 'round',
+    //     'line-cap': 'round'
+    //     },
+    //     'paint': {
+    //     'line-color': '#888',
+    //     'line-width': 8
+    //     }
+    //     });
+    //     });
 
 
         if(this.props.location.data !== undefined)
@@ -277,7 +281,8 @@ export default class VahicleTrackingPage extends Component {
 
 
 
-this.testMethod()
+// this.testMethod()
+this.RequestToServer();
     
   
 
@@ -290,47 +295,14 @@ RequestToServer=()=>{
   let req_data;
   let address;
   let d = new Date();
-  if(reqInProcess<= 3)
+  if(reqInProcess<= 2)
   {
      
  
-  if(reqInProcess==1)
+  if(reqInProcess==2)
   {
     address="sendRideInvitation";
     req_data={
-
-       
-      "company":"decideLater",
-      "ride_id":id,
-      "cust_id":"Customer101",
-      "to":this.props.location.data["dest"],
-      "from":this.props.location.data["src"],
-      "distance":this.props.location.data[2],
-      "fare":this.props.location.data[2]*25,
-      "driverId":"nil",
-      "vahicleId":"nil",
-      "cords":"nil",
-      "rating":"nil",
-      "status":"searching"
-        
-  
- 
-  
- 
-
-
-
-
-
-
-      }
-  } else
-    if(reqInProcess==3)
-  {
-      requestLoadingMessage= <text> Finding Your Captain... </text>
-    
-      address="sendRideInvitation";
-      req_data={
   
          
          
@@ -338,17 +310,53 @@ RequestToServer=()=>{
     
    
     
-          "company":"decideLater",
-"rideId":"Ride ID",
+      "company":"decideLater",
+"rideId":rideID,
 
-"to":this.props.location.data["dest"],
-      "from":this.props.location.data["src"],
-      
-      "fare":this.props.location.data[2]*25,
-"type":"Ride Invitation"
+"body":src+","+dest+","+
+"Date"+","+"Time"+","+
+
+dis*25,
+
+  
+"type":"Ride Invitation",
+"isActive":"Yes"
 
 
+    }
+    
+  } else
+    if(reqInProcess==1)
+  {
+      requestLoadingMessage= <text> Finding Your Captain... </text>
+    
+      address="addBooking";
+      req_data={
 
+       "sender":"cutomer",
+        "company":"decideLater",
+        "ride_id":"1",
+        "cust_id":"Customer101",
+        "to":dest,
+        "from":src,
+        "distance":dis,
+        "fare":dis*25,
+        "driverId":"nil",
+        "vahicleId":"nil",
+        "cords":"nil",
+        "rating":"nil",
+        "status":"searching"
+          
+    
+   
+    
+   
+  
+  
+  
+  
+  
+  
         }
          
   
@@ -372,6 +380,10 @@ RequestToServer=()=>{
         if(status==='Success')
         {
         
+          if(reqInProcess===1)
+          {
+            rideID=data.id;
+          }
           console.log("Operation Sucessful" +reqInProcess)
           //history.push('/home');
           reqInProcess++;
@@ -395,7 +407,7 @@ RequestToServer=()=>{
   }
   else
   {
-      
+    this.testMethod();
       
       this.setState({showModal:false});
       

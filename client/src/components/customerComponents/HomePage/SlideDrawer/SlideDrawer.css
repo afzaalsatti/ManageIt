@@ -71,6 +71,13 @@ position: absolute;
 
 
 }
+
+.showOption{
+   display: block;
+}
+.hideOption{
+   display: none;
+}
 .topbar{
    position: -webkit-sticky; /* Safari */
   position: sticky;

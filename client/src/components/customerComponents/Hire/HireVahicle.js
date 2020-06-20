@@ -7,6 +7,11 @@ import MapLocationPicker from '../../Utils/MapLocationPicker'
 
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import LoadiningModal  from '../../Utils/LodingModal'
+var reqInProcess=1;
+var requestLoadingMessage="";
+var reqFailed=false;
 var from_cord="Select from map",to_cord="Select from map";
 var click;
 export default class HireVahicle extends Component {

@@ -79,10 +79,10 @@ const Booking=mongoose.Schema({
 
     },
     rating:{
-        type: Number,
+        type: String,
       
         
-        require:'required'
+        
 
     },
     status:{

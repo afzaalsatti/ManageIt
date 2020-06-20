@@ -36,7 +36,141 @@ const Vahicle=mongoose.model("Vahicle");
  const Route=mongoose.model("Route");
  const Ticket=mongoose.model("Ticket");
  const HirePool=mongoose.model("HirePool")
+ const Booking=mongoose.model("Booking")
+ const EmployeeNotification=mongoose.model("EmployeeNotification")
 
+ app.post('/getAllNotification',(req,res)=>
+{ 
+    
+  
+  
+    EmployeeNotification.find({}, function(err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+            res.json({
+                status:'Success',
+                result:result
+            });
+         
+        }
+      }); });
+    
+    
+    
+
+ app.post('/addBooking',(req,res)=>
+ { const booking=new Booking();
+
+if(req.body.sender==="cutomer")
+{
+   
+    booking.company=req.body.company
+    booking.ride_id=booking._id.toString(),
+    booking.cust_id=req.body.cust_id,
+    booking.to=req.body.to,
+    booking.from=req.body.from,
+    booking.distance=req.body.distance,
+    booking.fare=req.body.fare,
+    booking.driverId=req.body.driverId,
+    booking.vahicleId=req.body.vahicleId,
+    booking.cords=req.body.cords,
+    booking.rating=req.body.rating,
+    booking.status=req.body.status
+    
+    
+     
+
+   
+   
+    booking.save().then(resultCode => {
+         res.json({
+
+             status:'Success',
+             id:booking._id.toString()
+            
+     
+         });
+     }).catch(function(error) {
+         console.log(error);
+         res.setHeader('Content-Type', 'text/json');
+         res.json({
+             status:'Failure'
+            
+     
+         });
+         });
+        }
+        else{
+
+            
+                         Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,vahicleId:  req.body.driverId,cords:  req.body.cords, status:"Booked"  },   
+                            function(err,record) {  
+                             if (record==null) {  
+                                res.json({
+                                    status:'Failure'
+                                   
+                            
+                                });
+                             return;  
+                             }  
+                            
+                        
+                              
+                             res.json({
+                               status:'Success'
+                              
+                       
+                           });
+                             });  
+                   
+                       
+                    
+           
+               
+                  
+
+
+
+
+        }
+     
+     
+     });
+
+ app.post('/sendRideInvitation',(req,res)=>
+{ const notification=new EmployeeNotification();
+    notification.company=req.body.company;
+    notification.body=req.body.body;
+   
+    
+   
+    
+   
+    
+    notification.type=req.body.type;
+    notification.isActive=req.body.isActive;
+    notification.rideId=req.body.rideId;
+  
+  
+    notification.save().then(resultCode => {
+        res.json({
+            status:'Success'
+           
+    
+        });
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+    
+    
+    });
 
 app.post('/getTickets',(req,res)=>
 {

@@ -1,37 +1,28 @@
 const mongoose=require('mongoose');
 
-const Notification=mongoose.Schema({
+const EmployeeNotification=mongoose.Schema({
     body:{
         type:String,
-        require:'required'
+    
     },
-    company_name: {
+    company: {
+        
+        
+     
+    },
+    rideId:{
         type: String,
        
         required: true,
-        
-     
     },
-    to: {
-        type: String,
-        
-        
-        
-     
-    },
+    
     type: {
         type: String,
       
         
      
     },
-    date: {
-        type: String,
-        
-        required: true,
-        
-     
-    },
+  
     isActive: {
         type: String,
         
@@ -44,4 +35,4 @@ const Notification=mongoose.Schema({
     
 });
 
-mongoose.model("Notification",Notification);
+mongoose.model("EmployeeNotification",EmployeeNotification);

@@ -18,6 +18,10 @@ export default class home extends Component {
 
   constructor(props) {
     super(props);
+
+
+
+
     this.state = {
       images: [
         "/assets/imageSlider/test.jpg",
@@ -242,6 +246,8 @@ else{
       });
     }, 2000);
   }
+
+ 
     render() {
         return (
 <div>
@@ -250,7 +256,7 @@ else{
  </div> */}
 
           <div id="homeComponent">
-            <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
+            <Modal  style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
         
         <Modal.Body style={{background:"#3d3d3e"}}>
         <MapLocationPicker setCords={this.setCords}>
@@ -481,7 +487,7 @@ onClick={()=>{
                     <div class="links_Tmb">
                       {" "}
                       <a
-                        href="https://www.redbus.in/info/track-my-bus"
+                       
                         class="know_more"
                       >
                         Know more

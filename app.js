@@ -38,13 +38,64 @@ const Vahicle=mongoose.model("Vahicle");
  const HirePool=mongoose.model("HirePool")
  const Booking=mongoose.model("Booking")
  const EmployeeNotification=mongoose.model("EmployeeNotification")
+ 
+ app.post('/getActiveBookings',(req,res)=>
+ { 
+    Booking.findOne({ cust_id : req.body.cust_id,company: req.body.company }, function (err, record) {
+   
 
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                
+                    res.json({
+                        status:'Success'
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
  app.post('/getAllNotification',(req,res)=>
 { 
     
   
-  
-    EmployeeNotification.find({}, function(err, result) {
+  if(req.body.sender!=="customer")
+  {
+    EmployeeNotification.find({
+        $or: [
+            {
+            $and: [
+
+            { 'type': "Ride Invitation" },
+            { 'isActive': "Yes" }]
+            },
+            { 'to': req.body.id }
+          ]
+    }, function(err, result) {
         if (err) {
           res.send(err);
         } else {
@@ -54,15 +105,106 @@ const Vahicle=mongoose.model("Vahicle");
             });
          
         }
-      }); });
+      }); 
+  }
+
     
-    
-    
+    });
+     
+      app.post('/setDriverlocation',(req,res)=>
+      { 
+          
+        
+        
+        Booking.findOneAndUpdate({ride_id:req.body.rideId } , {
+             cords:  req.body.cords},   
+         function(err, result) {
+              if (err) {
+                  
+                res.json({
+                  
+                    status:'Failure'
+                   
+                });
+              } else {
+                  console.log(req.body.rideId)
+                  res.json({
+                      status:'Success'
+                     
+                  });
+               
+              }
+            }); });
+      app.post('/updateHirePoolStatus',(req,res)=>
+      { 
+          
+        
+        
+        HirePool.findOneAndUpdate({driverId:req.body.driverId , company : req.body.company} , { status:  req.body.status},   
+         function(err, result) {
+              if (err) {
+                  console.log(req.body)
+                res.json({
+                    status:'Failure'
+                   
+                });
+              } else {
+                  res.json({
+                      status:'Success'
+                     
+                  });
+               
+              }
+            }); });
+
+            app.post('/cancelBooking',(req,res)=>
+            { 
+                
+              let sender=req.body.sender;
+              
+              Booking.findOneAndUpdate({ride_id:req.body.ride_id , company : req.body.company} , { status:  "cancel("+sender+")"},   
+               function(err, result) {
+                    if (err) {
+                        console.log(req.body)
+                      res.json({
+                          status:'Failure'
+                         
+                      });
+                    } else {
+                        res.json({
+                            status:'Success'
+                           
+                        });
+                     
+                    }
+                  }); });
+      app.post('/updateNotificationStatus',(req,res)=>
+      { 
+          
+        
+        
+        EmployeeNotification.findOneAndUpdate({rideId:req.body.rideId , company : req.body.company} , { isActive:  req.body.status},   
+         function(err, result) {
+              if (err) {
+                  console.log(req.body)
+                res.json({
+                    status:'Failure'
+                   
+                });
+              } else {
+                  res.json({
+                      status:'Success'
+                     
+                  });
+               
+              }
+            }); });
+          
 
  app.post('/addBooking',(req,res)=>
  { const booking=new Booking();
 
-if(req.body.sender==="cutomer")
+if(req.body.sender==="customer")
 {
    
     booking.company=req.body.company
@@ -92,7 +234,7 @@ if(req.body.sender==="cutomer")
      
          });
      }).catch(function(error) {
-         console.log(error);
+       console.log(error)
          res.setHeader('Content-Type', 'text/json');
          res.json({
              status:'Failure'
@@ -103,7 +245,7 @@ if(req.body.sender==="cutomer")
         }
         else{
 
-            
+            console.log(req.body)
                          Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,vahicleId:  req.body.driverId,cords:  req.body.cords, status:"Booked"  },   
                             function(err,record) {  
                              if (record==null) {  
@@ -171,7 +313,49 @@ if(req.body.sender==="cutomer")
     
     
     });
+    
+    app.post('/getDriverlocation',(req,res)=>
+{
+    
+    Booking.findOne({ ride_id : req.body.rideId }, function (err, record) {
+   
 
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                
+                    res.json({
+                        status:'Success',
+                        driverId:record.driverId,
+
+                        cords:record.cords
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+
+});
 app.post('/getTickets',(req,res)=>
 {
     
@@ -242,6 +426,8 @@ app.post('/updateRouteSeats',(req,res)=>
                      }  
                      ticket.cust_id=req.body.cust_id;
                      ticket.cust_contact=req.body.cust_contact;
+                     ticket.cust_cnic=req.body.cust_cnic;
+                     
                      ticket.to=req.body.to;
                      ticket.from=req.body.from;
                      ticket.date=req.body.date;
@@ -563,7 +749,7 @@ app.post('/addDriverToHirePool',(req,res)=>
 
 
 
-    console.log(req.body);
+   
     res.json({
         status:'Success'
        
@@ -573,14 +759,14 @@ app.post('/addDriverToHirePool',(req,res)=>
 });
 app.post('/addEmployee',(req,res)=>
 {
-
+console.log(req.body)
     const employee=new Employee();
     employee.company=req.body.company;
     employee.name=req.body.name;
     employee.email=req.body.email;
     employee.password=req.body.password;
-
-    employee.id=req.body.id;
+    employee.status=req.body.status;
+    employee.id=employee._id.toString();
     employee.job_id=req.body.job_id;
     employee.gender=req.body.gender;
     employee.address=req.body.address;
@@ -591,7 +777,12 @@ app.post('/addEmployee',(req,res)=>
     
    
     employee.save().then(resultCode => {
-        res.json('Success');
+        res.json({
+            status:'Success',
+            id:employee._id.toString()
+           
+    
+        });
     }).catch(function(error) {
         console.log(error);
         res.setHeader('Content-Type', 'text/json');
@@ -608,7 +799,8 @@ app.post('/addEmployee',(req,res)=>
 
     console.log(req.body);
     res.json({
-        status:'Success'
+        status:'Success',
+        id:employee._id.toString()
        
 
     });
@@ -673,8 +865,15 @@ app.post('/signin',(req,res)=>
 
   let email=req.body. email;
    let password=req.body.password;
-   
-   users.findOne({ email: email }, function (err, record) {
+   let collection=users;
+   if(req.body.sender==="customer")
+   {
+    collection=users
+   }else{
+    collection=Employee
+
+   }
+  collection.findOne({ email: email }, function (err, record) {
    
 
        
@@ -686,7 +885,8 @@ app.post('/signin',(req,res)=>
                      if(req.body.password=== record.password)
                      {
                         res.json({
-                            status:'Success'
+                            status:'Success',
+                            record:record
                         });
                      }  else{
                         res.json({

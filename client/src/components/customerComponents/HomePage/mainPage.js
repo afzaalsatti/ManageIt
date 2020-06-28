@@ -7,19 +7,32 @@ import CareerPage from '../career/CareerPage'
 import Settings from '../Settings/UserSettings'
 import BookBusTicket from '../Tickets/BookBusTicket'
 import NotificationModal from '../../Utils/NotificationModal'
+
+
+import history from "../../../history";
 var notifications=[];
+
+var requestLoadingMessage="";
+var reqFailed=false;
+var reqInProcess=1;
+
+var mounted=true;
+
 export default class mainPage extends React.Component {
   
-    constructor()
+    constructor(props)
     {
-super();
+super(props);
+
 this.toggleSlideMenu=this.toggleSlideMenu.bind(this);
 this.showHireMenu=this.showHireMenu.bind(this);
 this.getMenuSelection=this.getMenuSelection.bind(this);
 this.replaceMainComponent=this.replaceMainComponent.bind(this);
+mounted=true;
 this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></Home>,
 showNotif:false,
-noti_icon:"/assets/svg/notify.svg"
+noti_icon:"/assets/svg/notify.svg",
+isAdmin:false
 };
 
 
@@ -28,6 +41,14 @@ noti_icon:"/assets/svg/notify.svg"
 
 
     getNotifications=()=>{
+
+
+        // "sender":"customer",
+
+        // "userData":data.record
+
+
+
 
         let req_data;
         let address;
@@ -40,7 +61,8 @@ noti_icon:"/assets/svg/notify.svg"
           req_data={
         
                
-               "type":"emp",
+               "type":this.props.location.data["sender"],
+               "id":this.props.location.data["userData"]["_id"],
                "location":"b",
 
                 
@@ -81,6 +103,7 @@ noti_icon:"/assets/svg/notify.svg"
 
                     if(JSON.stringify(notifications) != JSON.stringify(data.result)) 
                 {
+                    
                     notifications=data.result;
                     this.setState({
                         noti_icon:"/assets/svg/new_notify.svg"
@@ -89,7 +112,12 @@ noti_icon:"/assets/svg/notify.svg"
               
                     
                 }
-this.getNotifications()
+                if(mounted)
+                {
+                    this.getNotifications()
+                }
+                
+               
 
                 }, 5000);
                 
@@ -106,19 +134,47 @@ this.getNotifications()
             //   reqInProcess=reqInProcess+1;
             // this.RequestToServer(reqInProcess);
            window.alert("Unexpected error Try again Retrying...  ");
-        this.getNotifications()
+           if(mounted)
+           {
+               this.getNotifications()
+           }
+           
          });
        
 
 
 
     }
-
-
+    RequestToServer=()=>{
+        
+     
+    }
+    componentWillUnmount(){
+      mounted=false;
+      }
     componentDidMount(){
 
-      this.getNotifications();
 
+        if(this.props.location.data === undefined)
+        {
+            
+           
+            mounted = false;
+          history.push("/signin")
+        }
+        else
+        {
+            if(this.props.location.data["sender"]==="Admin")
+            {
+                this.setState({
+                    isAdmin:true
+                })
+            }
+            this.getNotifications();
+
+
+        }
+      
 
 
 
@@ -129,7 +185,7 @@ this.getNotifications()
         if(comp==="BookBusTicket")
         {
             this.setState({
-                component:<BookBusTicket details={data}></BookBusTicket>
+                component:<BookBusTicket  userData={this.props.location.data} details={data}></BookBusTicket>
             });
         }
 
@@ -149,7 +205,7 @@ this.getNotifications()
         if(this.state.component != <HireVahicle></HireVahicle>)
              {
                  this.setState({
-                     component:<HireVahicle type="Buses"></HireVahicle>
+                     component:<HireVahicle userData={this.props.location.data} type="Buses"></HireVahicle>
                  });
              }
         
@@ -174,6 +230,17 @@ this.getNotifications()
     getMenuSelection(pageToBeLoaded)
     {
         this.toggleSlideMenu();
+        if(pageToBeLoaded==="Admin")
+         {
+            
+            history.push({
+                pathname: '/AdminDashboard',
+                data: this.props.location.data["userData"],
+              })
+            
+             
+         }
+         else
          if(pageToBeLoaded==="home")
          {
             if(this.state.component != <Home ></Home>)
@@ -192,7 +259,7 @@ this.getNotifications()
              {
 
                  this.setState({
-                     component:<HireVahicle type="Buses"></HireVahicle>
+                     component:<HireVahicle userData={this.props.location.data} type="Buses"></HireVahicle>
                  });
              }
 
@@ -219,7 +286,7 @@ this.getNotifications()
              {
 
                  this.setState({
-                     component:<HireVahicle type="Cars"></HireVahicle>
+                     component:<HireVahicle userData={this.props.location.data} type="Cars"></HireVahicle>
                  });
              }
 
@@ -232,7 +299,7 @@ this.getNotifications()
              {
 
                  this.setState({
-                     component:<HireVahicle type="Trucks"></HireVahicle>
+                     component:<HireVahicle userData={this.props.location.data} type="Trucks"></HireVahicle>
                  });
              }
 
@@ -279,12 +346,187 @@ this.getNotifications()
        
       
       }
+      acceptRideInvitation=rData=>{
+        
+
+
+
+//we will get this when driver logs in
+let empId="lkj"
+let vahicleId="ICT-1234"
+let company="decideLater"
+
+let ride_id=rData.rideId
+
+let req_data;
+let address;
+
+if(reqInProcess<= 3)
+{
+    if(reqInProcess==1)
+    {
+        address="addBooking";
+        req_data={
+     
+           
+           
+            
+      
+     
+      
+            "company":company,
+            "ride_id":ride_id,
+     "driverId":empId,
+     
+     "vahicleId":vahicleId,
+     "cords":["123,213"],
+     
+     
+     
+     
+          }
+           
+    }
+    else if(reqInProcess==2)
+    {
+        address="updateHirePoolStatus";
+        req_data={
+     
+           
+           
+            
+      
+     
+      
+            "company":company,
+            "driverId":empId,
+     "status":"riding",
+     
+     
+     
+     
+     
+     
+          }
+           
+    }
+    else 
+    {
+        address="updateNotificationStatus";
+        req_data={
+     
+           
+           
+            
+      
+     
+      
+            "company":company,
+            "rideId":ride_id,
+     "status":"No",
+     
+     
+     
+     
+     
+     
+          }
+           
+    }
+    const options={
+        method:"POST",
+        headers:{
+            'Content-type':"application/json"
+            
+        },
+        body:JSON.stringify(req_data)
+    }
+   
+    fetch("/"+address,options).then(response=>{
+        return response.json();
+  }).then(data=>{
+      let status=data.status;
+      console.log(status)
+ 
+      if(status==='Success')
+      {
+        window.alert("Success"+reqInProcess)
+        reqInProcess++;
+       this.acceptRideInvitation(rData);
+        //history.push('/home');
+      
+   
+       // history.push("");
+      }else{
+ 
+       
+        window.alert("Operation Failed!"+reqInProcess)
+      }
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+  }).catch((error) => {
+   
+    //   reqInProcess=reqInProcess+1;
+    // this.RequestToServer(reqInProcess);
+   window.alert("Unexpected error Try again...  ");
+ });
+ 
+ 
+
+
+}
+else
+{
+    
+
+    let body=rData.body.split("-");
+    
+
+
+    let temp={
+        "sender":"driver",
+        "src":body[0].split(',').map(Number),
+         "dest":body[1].split(',').map(Number),
+         "date":body[2],
+         "time":body[3],
+         "driverId":empId,
+         "rideId":rData.rideId,
+         "vahicleId":vahicleId,
+         "fare":body[4],
+         "data":body[4]/25,
+        };
+
+    
+     //  console.log( temp["src"])
+    history.push({
+        pathname: '/trackRide',
+        data: temp,
+      }
+        )
+   
+}
+
+
+  
+
+   
+
+  
+
+
+
+
+
+
+
+
+      }
    render(){
      
       return(
 
         <div style={{height:"100%",width:"100%"}}>
-<NotificationModal getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
+<NotificationModal acceptRideInvitation={this.acceptRideInvitation} getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
 <div className="topbar" >
     <svg className="translate" style={{marginLeft:"15px"}} onClick={this.toggleSlideMenu} xmlns="http://www.w3.org/2000/svg"  height="24" viewBox="0 0 24 24" width="24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
 
@@ -365,13 +607,13 @@ onClick={()=>{
                     </span>
                 </li>
 
-                <li  onClick={() => this.getMenuSelection("wallet")}>
+               
 
 
-
-               <img src="/assets/images/history_icon.png">
+                <li className="home-nav-item" onClick={() => this.getMenuSelection("wallet")}>
+                <img src="/assets/images/career_icon.png">
                 </img>         <span>
-                       My Wallet
+                        My Wallet
                     </span>
                 </li>
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("career")}>
@@ -385,6 +627,13 @@ onClick={()=>{
 
                     <span>
                         Our Partners
+                    </span>
+                </li>
+                <li  className={this.state.isAdmin? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("Admin")}>
+                <img src="/assets/images/partners_icon.png"/>  
+
+                    <span>
+                        Admin Dashboard
                     </span>
                 </li>
                 <li className="home-nav-item" onClick={() => this.getMenuSelection("setting")}>

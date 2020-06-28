@@ -4,8 +4,10 @@ import {Link as ReactLink} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadiningModal  from '../Utils/LodingModal'
+import './css/register_driver.css'
 import history from "../../history";
 var count=0;
+var driverId;
 var data={};
 var education=[];
 var experience=[];
@@ -150,12 +152,12 @@ export default class RegisterDriver extends Component {
         let name=document.getElementById("inputName").value;
         let email=document.getElementById("email").value;
         let id=document.getElementById("idNumber").value;
-        let job_id=document.getElementById("job_id").value;
+        let location=document.getElementById("location").value;
         let gender=document.getElementById("status").value;
         let pass1=document.getElementById("pass1").value;
         let pass2=document.getElementById("pass2").value;
         let address=document.getElementById("address").value;
-        if(name && email && id && job_id && gender!="Gender" && address && pass1 && pass2)
+        if(name && email && id && location && gender!="Gender" && address && pass1 && pass2)
         {
           
           if(pass1===pass2)
@@ -163,7 +165,7 @@ export default class RegisterDriver extends Component {
           data["name"]=name;
         data["email"]=email;
         data["id"]=id; 
-        data["job_id"]=job_id;
+        data["location"]=location;
         data["gender"]=gender;
         data["address"]=address;
         data["pass"]=pass1;
@@ -350,12 +352,14 @@ return true;
                 "email":data["email"],
                 "password":data["pass"],
                 "id":data["id"],
-                "job_id":"Driver101",
+                
+                "job_id":"Captain",
                 "address":data["address"],
                 "gender":data["gender"],
                 "education":education,
                 "experience":experience,
                 "joining_date":d.getMonth()+1+"/"+ d.getDate()+"/"+d.getFullYear(),
+                "status":"pending"
       
       
       
@@ -375,7 +379,7 @@ return true;
          
           
                 "company":"decideLater",
-      "owner":data["id"],
+      "owner":driverId,
       "price": data["price"],
       "payment_status":data["status"],
       "number":data["vh_num"],
@@ -407,11 +411,11 @@ return true;
          
           
                 "company":"decideLater",
-      "driverId":data["id"],
+      "driverId":driverId,
      
       "vahicleId":data["vh_num"],
    "status":"active",
-   "position":"longi latti",
+   "position":data["location"],
    "vahicleType":data["type"]
       
       
@@ -441,6 +445,12 @@ return true;
               
                 console.log("Operation Sucessful" +reqInProcess)
                 //history.push('/home');
+                console.log(data.id)
+                console.log(data.id !== undefined)
+                if(data.id !== undefined)
+                {
+                  driverId=data.id;
+                }
                 reqInProcess++;
                 this.RequestToServer();
                // history.push("");
@@ -604,7 +614,8 @@ return true;
     }
     render() {
         return (
-            <div  style={{marginTop:"35px"}}>
+            <div  style={{
+              background: "url('/signupbg.jpg')" }}  >
 
 <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
   {/* Content Header (Page header) */}
@@ -615,7 +626,7 @@ return true;
     <div className="row" style={{justifyContent:'center'}}>
     <LoadiningModal getModalBtnClick={this.getModalBtnClick} reqFailed={reqFailed} displayText={requestLoadingMessage} showModal={this.state.showModal}></LoadiningModal>
       <div id="step1"className="col-md-8" >
-        <div className="card card-primary">
+        <div className="card registerDriverCard card-primary">
           <div  style={{padding:"0px"}}className="card-header">
             <h3 className="card-title" style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}}> Welcome! 
              <br></br> Enter Personal Details</h3>
@@ -651,11 +662,11 @@ return true;
               <text htmlFor="inputName">Location</text>
               <input onClick={()=>{ navigator.geolocation.getCurrentPosition(function(position) {
 
-                document.getElementById("job_id").value=position["coords"].longitude+"  ,   "+position["coords"].latitude ;
+                document.getElementById("location").value=position["coords"].longitude+","+position["coords"].latitude ;
             // console.log(position["coords"].longitude )
             // console.log(position["coords"].latitude )
             //
-          });}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="job_id" className="form-control" />
+          });}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location" className="form-control" />
             </div>
 </div>
 
@@ -720,7 +731,7 @@ return true;
 
 
       <div id="step2"className="col-md-8" style={{display:'none'}} >
-        <div className="card card-primary">
+        <div className="card registerDriverCard card-primary">
           <div  style={{padding:"0px"}} className="card-header">
             <h3 style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title"> Vahicle Details</h3>
             <div className="card-tools">
@@ -803,7 +814,7 @@ return true;
       
        
       <div id="step3" className="col-md-8" style={{display:'none'}}>
-        <div className="card card-primary">
+        <div className="card registerDriverCard card-primary">
           <div style={{padding:"0px"}} className="card-header">
             <h3  style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title">Educational Details</h3>
             <div className="card-tools">
@@ -831,7 +842,7 @@ return true;
       </div>
      
       <div id="step4" className="col-md-8" style={{display:'none'}}>
-        <div className="card card-primary">
+        <div className="card registerDriverCard card-primary">
           <div className="card-header" style={{padding:"0px"}}>
             <h3 style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title">Experience</h3>
             <div className="card-tools">

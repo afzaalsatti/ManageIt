@@ -29,6 +29,12 @@ const EmployeeNotification=mongoose.Schema({
         required: true,
         
      
+    }, to: {
+        type: String,
+        
+       
+        
+     
     }
 
 

@@ -26,7 +26,7 @@ const Employee=mongoose.Schema({
         type:String,
         require:'required'
     },
-    jobid:{
+    job_id:{
         type:String,
         require:'required'
     },
@@ -47,9 +47,15 @@ const Employee=mongoose.Schema({
         type:String,
         require:'required'
     },
+    
     joining_date:{
         type:String,
        
+    },
+    status:{
+        type:String,
+        require:'required'
+
     }
 });
 

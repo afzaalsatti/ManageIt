@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './hire.css'
 import history from "../../../history";
 import * as turf from '@turf/turf'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MapLocationPicker from '../../Utils/MapLocationPicker'
 
 import Modal from "react-bootstrap/Modal";
@@ -14,13 +15,24 @@ var requestLoadingMessage="";
 var reqFailed=false;
 var from_cord="Select from map",to_cord="Select from map";
 var click;
+
 export default class HireVahicle extends Component {
   
   constructor(props)
   {
     super(props);
-    this.state={  showModal:false}
+  
+    this.state={  showModal:false,
+      showRideWarning:false}
     this.setCords = this.setCords.bind(this);
+   
+
+//     email: "1"
+// name: "Afzaal Shoukat"
+// password: "1"
+// subscription
+// _id
+    // console.log("----------------->"+this.props.userData["userData"]["_id"])
   }
 
   setCords(a){
@@ -37,10 +49,186 @@ export default class HireVahicle extends Component {
     
     
       }
+       notifyWarning=() => {
+      
+      
+
+        toast.warning("All Fields Are Mendatory ",  {containerId: 'A'});
+      
+        
+      };
+
+      continueRideBooking=(exist)=>{
+        if(!exist){
+          window.alert("Cancel");
+        }
+        else{
+
+          let src=document.getElementById("src").value;
+          let dest=document.getElementById("dest").value;
+          let vahicle=document.getElementById("vh_type").value;
+          
+          if(src && dest && vahicle!=="head")
+          {
+            
+            src= src.split(',').map(Number);
+            dest= dest.split(',').map(Number);
+           
+            var route = {
+              'type': 'FeatureCollection',
+              'features': [
+              {
+              'type': 'Feature',
+              'geometry': {
+              'type': 'LineString',
+              'coordinates': [src,  dest]
+              }
+              }
+              ]
+              };
+            let lineDistance = turf.length( route.features[0], {units: 'kilometers'});
+          
+            let temp={
+              "sender":"customer",
+              "cust_id":this.props.userData["userData"]["_id"],
+              "src":src,
+               "dest":dest,
+               "data":lineDistance};
+                    history.push({
+              pathname: '/trackRide',
+              data: temp,
+            }
+              )
+        }
+        else
+        {
+          this.notifyWarning();
+        }
+
+//         
+      }}
+
+checkForActiveRide=()=>{
+
+ 
+  let address="getActiveBookings";
+  let req_data={
+
+     
+     
+      
+
+
+
+      "company":"decideLater",
+ "cust_id":this.props.userData["userData"]["_id"],
+
+// "vahicleId":data["vh_num"],
+// "status":"active",
+// "position":"longi latti",
+// "vahicleType":data["type"]
+
+
+
+    }
+  const options={
+    method:"POST",
+    headers:{
+        'Content-type':"application/json"
+        
+    },
+    body:JSON.stringify(req_data)
+}
+this.setState({showModal:true})
+fetch("/"+address,options).then(response=>{
+    return response.json();
+}).then(data=>{
+  let status=data.status;
+
+
+  if(status==='Success')
+  {
+    
+    
+    this.setState({showRideWarning:true})
+ 
+ 
+   
+  }else{
+
+    this.continueRideBooking(true)
+   
+    window.alert("Operation Failed!")
+  }
+// `data` is the parsed version of the JSON returned from the above endpoint.
+console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+}).catch((error) => {
+
+
+//   reqInProcess=reqInProcess+1;
+// this.RequestToServer(reqInProcess);
+window.alert("Unexpected error Try again...  "+reqInProcess);
+});
+
+}
+
     render() {
         return (
           <div>
-                     <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
+<ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
+<Modal id="modal1" style={{backdropFilter: "blur(5px)"}} show={this.state.showRideWarning} >
+        
+        <Modal.Body style={{background:"#3d3d3e",color:"white",textAlign:"center"}}>
+        <text>Notice !!! </text>
+        <br>
+</br>
+<text>Looks Like you already have a active Ride </text>
+<br>
+</br>
+<text>Do you want to Book another one ? </text>
+
+    </Modal.Body  >
+       <Modal.Footer style={{background:"#3d3d3e"}}>
+       <button
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "40%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+         
+         this.setState({
+          showRideWarning:false
+      });
+      }}>Cancel</button>
+      <button
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "40%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+        this.setState({
+          showRideWarning:false
+      });
+      this.continueRideBooking(true)
+      }}>Continue</button>
+       </Modal.Footer>
+      </Modal>
+            
+
+
+
+
+                     <Modal id="modal2" style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
         
         <Modal.Body style={{background:"#3d3d3e"}}>
         <MapLocationPicker setCords={this.setCords}>
@@ -198,49 +386,52 @@ export default class HireVahicle extends Component {
                     </div>
                     <div id="hire_btn_container">
                       <button id="hire_btn"
-                      onClick={()=>{
+                      onClick={ ()=>{
                         // let src="73.01920605585065,33.658527514640355";
                         // let dest="72.94201871281325, 33.63254911983691";
-let src=document.getElementById("src").value;
-let dest=document.getElementById("dest").value;
-let vahicle=document.getElementById("vh_type").value;
+// // let src=document.getElementById("src").value;
+// // let dest=document.getElementById("dest").value;
+// // let vahicle=document.getElementById("vh_type").value;
 
-if(src && dest && vahicle!=="head")
-{
+// // if(src && dest && vahicle!=="head")
+// // {
   
-  src= src.split(',').map(Number);
-  dest= dest.split(',').map(Number);
+// //   src= src.split(',').map(Number);
+// //   dest= dest.split(',').map(Number);
  
-  var route = {
-    'type': 'FeatureCollection',
-    'features': [
-    {
-    'type': 'Feature',
-    'geometry': {
-    'type': 'LineString',
-    'coordinates': [src,  dest]
-    }
-    }
-    ]
-    };
-  let lineDistance = turf.length( route.features[0], {units: 'kilometers'});
+// //   var route = {
+// //     'type': 'FeatureCollection',
+// //     'features': [
+// //     {
+// //     'type': 'Feature',
+// //     'geometry': {
+// //     'type': 'LineString',
+// //     'coordinates': [src,  dest]
+// //     }
+// //     }
+// //     ]
+// //     };
+// //   let lineDistance = turf.length( route.features[0], {units: 'kilometers'});
 
-  let temp={
-    "src":src,
-     "dest":dest,
-     "data":lineDistance};
-     console.log(temp)
-  
+// //   let temp={
+// //     "sender":"customer",
+// //     "cust_id":this.props.userData["userData"]["_id"],
+// //     "src":src,
+// //      "dest":dest,
+// //      "data":lineDistance};
+    
+//      this.checkForActiveRide;
+
+
+
  
-  history.push({
-    pathname: '/trackRide',
-    data: temp,
-  }
-    )
 
-}else{
-  window.alert("Fields cant be empty")
-}
+
+// }else{
+//   window.alert("Fields cant be empty")
+// }
+
+this.checkForActiveRide()
                         
                       }}
                       

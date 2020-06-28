@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import signupp from './components/AuthComponents/signupp';
+import signup from './components/AuthComponents/SignUp';
 import {Signn} from './components/AuthComponents/Signn';
 import HomeComponent  from './components/components/Home'
 import ContactPage from './components/components/ContactPage'
@@ -46,7 +46,7 @@ function App() {
        <Route path="/home" exact component={mainPage}></Route> 
       <Route path="/app" exact component={ManageItApp}></Route>
   
-      <Route  path="/signup" exact component={signupp}></Route>
+      <Route  path="/signup" exact component={signup}></Route>
       <Route  path="/signin" exact component={Signn}></Route>
       <Route  path="/inventry" exact component={MainInventryPage}></Route>
       <Route path="/AdminDashboard" exact component={AdminDashboard}></Route>

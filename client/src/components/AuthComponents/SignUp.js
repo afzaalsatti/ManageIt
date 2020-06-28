@@ -1,73 +1,22 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { Component } from 'react'
+import './signupp.css'
+import './css/material-design-iconic-font.min.css'
 import history from '../../history'
 import {Link as ReactLink} from 'react-router-dom'
-import Particles from 'react-particles-js';
-import UserSession from '../../UserSession'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-       {'Copyright © '}
-      <Link color="inherit" href="http://localhost:3000/">
-        Manage-It
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  mainDiv:
-  {
-background:'linear-gradient(to right, rgb(203,52,181),rgb(68,166,187))',
-
-  },
-}));
 function register()
 {
     
   
    
-   let fName=  document.getElementById("firstName").value ;
-   let lName=document.getElementById("lastName").value;
+   let name=  document.getElementById("name").value ;
+  
    let email=document.getElementById("email").value ;
    let pass=document.getElementById("password").value ;
 
 
      const data={
-    "name":fName+" "+lName,
+    "name":name,
     "email":email,
     "password":pass
   }
@@ -104,105 +53,77 @@ function register()
     
    
 }
-export default function SignUp() {
-  const classes = useStyles();
- 
-  return (
+export default class signup2 extends Component {
+//   componentDidMount () {
+//     const script = document.createElement("script");
+
+//     script.src='/js/signuppScript.js';
+//     script.async = true;
+
+//     document.body.appendChild(script);
+// }
+
    
-    <div  >
-    
-    <Container  component="main" maxWidth="xs">
-    
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
-          <Button
-           
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={register}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              < ReactLink to="/signin">
-                Already have an account? Sign in
-              </ReactLink>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-     
-    </Container>
-  
+    render() {
+        return (
+          <div className="main">
+  <section className="signup">
+    <div className="container">
+      <div className="signup-content">
         
+        <div className="signup-form">
+
+          <h2 className="form-title">Let`s Begin!</h2>
+          <div className="register-form" id="register-form">
+          <div className="form-group">
+              <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
+              <input className="input" type="name" name="name" id="name" placeholder="Your Name" />
+            </div>
+           
+            <div className="form-group">
+              <label htmlFor="email"><i className="zmdi zmdi-email" /></label>
+              <input className="input"  type="email" name="email" id="email" placeholder="Your Email" />
+            </div>
+
+            
+           
+            <div className="form-group">
+              <label htmlFor="pass"><i className="zmdi zmdi-lock" /></label>
+              <input className="input"  type="password" name="pass" id="password" placeholder="Password" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline" /></label>
+              <input className="input"  type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+            </div>
+           <div className="form-group">
+  <input className="input"  type="checkbox" name="agree-term" id="agree-term" className="agree-term" />
+  <label htmlFor="agree-term" className="label-agree-term"><span><span /></span>I agree all statements in  <a href="#" className="term-service">Terms of service</a></label>
+</div>
+
+
+            <div className="form-group form-button">
+  <button onClick={register} name="signup" id="signup" className="form-submit"  >Register</button>
+</div>
+
+          </div>
+        </div>
+        <div className="signup-image">
+          <figure><img src="/signupimage.jpg" alt="sing up image" /></figure>
+          < ReactLink to="/signin">
+          <a href="#" className="signup-image-link">I am already member</a>
+         
+          </ ReactLink>
+          < ReactLink to="/registerCaptain">
+          <a href="#" className="signup-image-link">Register as Driver</a>
+         
+          </ ReactLink>
+        </div>
       </div>
-   
-  );
+    </div>
+  </section>
+</div>
+
+     
+        )
+    }
 }

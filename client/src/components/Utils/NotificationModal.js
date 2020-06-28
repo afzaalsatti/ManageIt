@@ -4,15 +4,17 @@ import { Card } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/notification_modal.css'
 
+
 export default class NotificationModal extends Component {
     constructor(props)
     {
         super(props);
         this.getListItemCards=this.getListItemCards.bind(this);
+      
     }
 
     getListItemCards=function(){
-        console.log(this.props.notifications)
+        
           
         return this.props.notifications.map((key, index)=>{
           
@@ -29,7 +31,12 @@ export default class NotificationModal extends Component {
             
             <br></br>
 
-            {key.type=="Ride Invitation"? <button className="NotiBtn">Accept</button>:""}
+            {key.type=="Ride Invitation"? <button
+           onClick={()=>{
+           this.props.acceptRideInvitation(key)
+            
+          }}
+             className="NotiBtn">Accept</button>:""}
             
         
          </div>

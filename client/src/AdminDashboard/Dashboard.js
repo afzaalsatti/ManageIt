@@ -10,10 +10,10 @@ var state=<Charts></Charts>
 var height="100px";
 export default class Dashboard extends Component {
     
-    constructor()
+    constructor(props)
     {
-      super();
-     
+      super(props);
+    //  window.alert(this.props.location.data["name"])
       this.handleToUpdate = this.handleToUpdate.bind(this);
       this.state={
           Component:<Charts></Charts>

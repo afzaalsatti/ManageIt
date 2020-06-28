@@ -13,6 +13,10 @@ const Ticket=mongoose.Schema({
         type:String,
         require:'required'
     },
+    cust_cnic:{
+        type:String,
+        require:'required'
+    },
     cust_contact:{
         type:String,
         require:'required'

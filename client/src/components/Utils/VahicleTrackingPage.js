@@ -5,6 +5,7 @@ import './css/tracking.css'
 import LoadiningModal  from '../Utils/LodingModal'
 import { id } from 'date-fns/locale';
 
+var myLocation;
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obmFsZXgyIiwiYSI6ImNqemNudGs4cDAyaGYzY3FiamVtd2h4ZmQifQ.YYt71bcR3ZdD6UgIs6EQog';
 var  map;
@@ -15,129 +16,214 @@ var requestLoadingMessage="Searching For Captain";
 var reqFailed=false;
 var src,dest,fare,dis;
 var rideID="";
-var testCords=[
-     
-
-    [ "73.01920605585065","33.658527514640355"],
-    ["73.0184764949986", "33.65849179380938"],
-    ["73.01757527276959", "33.658313189431944"],
-    ["73.01628781244244", "33.658027421656975"],
-    ["73.0127687542149", "33.65734871938782"],
-    ["73.01173878595318", "33.655686266763944"],
-    ["73.01126671716656", "33.65515043505014"],
-    ["73.0109663097569", "33.654686044866125"],
-    ["73.01066590234723", "33.65515043505014"],
-    ["73.00903511926617", "33.65565054475346"],
-    ["73.00791932031598", "33.65761523330819"],
-    ["73.00611099275133", "33.65943699534039"],
-    ["73.00546726258776", "33.66144221373574"],
-    ["73.00392231019518", "33.662299480189816"],
-    ["72.99868663819811", "33.661263615482646"],
-    ["72.99175581010363", "33.65862031799072"],
-    ["72.98697074922106", "33.65508388760189"],
-
-    ["72.97811051731765", "33.65258329355696"],
-    ["72.97158738499343", "33.64791233923181"],
-    [" 72.9568674219197", "33.644875641146605"],
-    [" 72.9508674219197", "33.63794442311159"],
-    ["72.94201871281325", "33.63254911983691"],
-
-
-    
-
-]
+var driverID="";
+var testCords=[];
 export default class VahicleTrackingPage extends Component {
 
     constructor(props) {
         super(props);
+        if(this.props.location.data !== undefined)
+        {
+          
+          
+           src=this.props.location.data["src"];
+             dest=this.props.location.data["dest"];
+
+        }
+        else
+        {
+          src=[ "73.01920605585065","33.658527514640355"];
+          dest=["72.94201871281325", "33.63254911983691"];
+        }
         this.state = {
-            pickupCords:testCords[0],
-            dropoffCords:["73.444","31.22"] ,
+            pickupCords:src,
+            dropoffCords:dest ,
         //   lng: this.props.pickupCords[0],
         //   lat: this.props.pickupCords[1],
           zoom: 5, showModal:false
         };
 
-src="12345";
-dest="12345";
-dis="15";
-        
+
+
+navigator.geolocation.getCurrentPosition(function(position) {
+
+  myLocation=[position["coords"].longitude,position["coords"].latitude] ;
+  testCords.push(myLocation)
+  
+// console.log(position["coords"].longitude )
+// console.log(position["coords"].latitude )
+//
+});
+
       }
 
-      testMethod=()=>{
+      getCordsFromServer=()=>{
 
-       
-        const data={
+        let data;
+        let address;
+        if(this.props.location.data !== undefined)
+        {
+          navigator.geolocation.getCurrentPosition(function(position) {
+
+           
+            myLocation=[position["coords"].longitude,position["coords"].latitude] ;
+            console.log("Adding Location 2 : "+myLocation)
+          // console.log(position["coords"].longitude )
+          // console.log(position["coords"].latitude )
+          
+          });
+        
+        if( this.props.location.data["sender"]==="driver" )
+        {
+          driverID=this.props.location.data["driverId"]
+          testCords.push(myLocation)
+         
+          
+          address="setDriverlocation"
+        
+           data={
    
-            "email":"afzaalsatti74@gmail.com",
-            "password":"123"
+            "rideId":this.props.location.data["rideId"],
+            "cords":testCords,
+           
           }
            
-            const options={
-                method:"POST",
-                headers:{
-                    'Content-type':"application/json"
-                    
-                },
-                body:JSON.stringify(data)
-            }
-            fetch("/signin",options).then(response=>{
-                return response.json();
-          }).then(data=>{
-              let status=data.status;
+           
+
+
+          
+        
+        }else
+        {
+          address="getDriverlocation"
+           data={
+   
+            "rideId":rideID,
+           
+          }
+           
+            
+        }
+        const options={
+          method:"POST",
+          headers:{
+              'Content-type':"application/json"
               
-         
-              if(status==='Success')
-              {
-              
+          },
+          body:JSON.stringify(data)
+      }
+
+        fetch("/"+address,options).then(response=>{
+          return response.json();
+    }).then(data=>{
+        let status=data.status;
+        
+   
+        if(status==='Success')
+        {
+        
+          
                 
-                      
-          setTimeout(() => { 
-           
-        // var el = document.createElement('div');
-        // el.className = 'tracking_marker';
+    setTimeout(() => { 
      
-      
-        // // make a marker for each feature and add to the map
-        // new mapboxgl.Marker(el)
-       
-       
-       marker.setLngLat(testCords[testVar])
-         
-          .addTo(map);
+  // var el = document.createElement('div');
+  // el.className = 'tracking_marker';
 
-          map.flyTo({
-            center:testCords[testVar] ,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
-          testVar++;
-         
-          if(testVar<testCords.length)
-          {
-            this.testMethod();
-          }
 
+  // // make a marker for each feature and add to the map
+  // new mapboxgl.Marker(el)
+ if(this.props.location.data["sender"]==="driver")
+ {
+  marker.setLngLat(myLocation)
+    
+  .addTo(map);
+
+  map.flyTo({
+    center:myLocation ,
+    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+    });
+
+ }
+ else
+ {
+  testCords=data.cords;
+  driverID=data.driverId;
+ 
+ if(testCords.length>1)
+ {
+  marker.setLngLat(testCords[testCords.length-1])
+    
+     .addTo(map);
+ 
+     map.flyTo({
+       center:testCords[testCords.length-1] ,
+       essential: true // this animation is considered essential with respect to prefers-reduced-motion
+       });
+
+        //  map.on('load', function() {
+        // map.addSource('route', {
+        // 'type': 'geojson',
+        // 'data': {
+        // 'type': 'Feature',
+        // 'properties': {},
+        // 'geometry': {
+        // 'type': 'LineString',
+        // 'coordinates': testCords
            
-        
-        
-        }, 2000);
+        // }
+        // }
+        // });
+        // map.addLayer({
+        // 'id': 'route',
+        // 'type': 'line',
+        // 'source': 'route',
+        // 'layout': {
+        // 'line-join': 'round',
+        // 'line-cap': 'round'
+        // },
+        // 'paint': {
+        // 'line-color': '#888',
+        // 'line-width': 8
+        // }
+        // });
+        // });
+
+     
+ }
+ else{
+   console.log("Ride is not Booked Yet")
+ }
+}
+   
+   
+      this.getCordsFromServer();
     
+
+     
+  
+  
+  }, 2000);
+
+  
+
+
+         
+        }else{
+         
+          window.alert("Erroe in fetch driver Location!")
+        }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    }).catch((error) => {
+     
+     window.alert("Unexpected error Try again...");
+   });
+
+        }
         
-    
-    
-               
-              }else{
-               
-                window.alert("Invalid Credentials!")
-              }
-            // `data` is the parsed version of the JSON returned from the above endpoint.
-            console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-          }).catch((error) => {
-           
-           window.alert("Unexpected error Try again...");
-         });
       }
       componentDidMount() {
+        
     // const { lng, lat, zoom } = this.state;
 
      map = new mapboxgl.Map({
@@ -225,8 +311,12 @@ dis="15";
 
         if(this.props.location.data !== undefined)
         {
-          let src=this.props.location.data["src"];
-          let dest=this.props.location.data["dest"];
+          let src,dest;
+          
+           src=this.props.location.data["src"];
+             dest=this.props.location.data["dest"];
+          
+         
           var el = document.createElement('div');
           el.className = 'tracking_marker tracking_src_marker ' ;
        
@@ -255,7 +345,7 @@ dis="15";
         marker= new mapboxgl.Marker(el);
         // make a marker for each feature and add to the map
         marker
-          .setLngLat(testCords[0])
+          .setLngLat(src)
          
           .addTo(map);
       });
@@ -281,13 +371,144 @@ dis="15";
 
 
 
-// this.testMethod()
-this.RequestToServer();
+// this.getCordsFromServer()
+if(this.props.location.data !== undefined)
+{
+if( this.props.location.data["sender"]==="driver" )
+{
+
+  this.updateBookingCords();
+
+}else
+{
+  this.RequestToServer();
+}
+}
     
   
 
     
     
+}
+
+updateBookingCords=()=>{
+  this.getCordsFromServer();
+
+}
+updateNotification=()=>{
+let address,req_data;
+  address="sendRideInvitation";
+    req_data={
+  
+         
+         
+          
+    
+   
+    
+      "company":"decideLater",
+"rideId":rideID,
+
+"body":"Ride has been Cancelled by "+this.props.location.data["sender"],
+
+  
+"type":"Ride cancel Notification",
+"to":driverID,
+"isActive":"Yes"
+    }
+    const options={
+      method:"POST",
+      headers:{
+          'Content-type':"application/json"
+          
+      },
+      body:JSON.stringify(req_data)
+  }
+    fetch("/"+address,options).then(response=>{
+      return response.json();
+    }).then(data=>{
+    let status=data.status;
+    console.log(status)
+    
+    if(status==='Success')
+    {
+    
+      console.log("Operation Sucessful" +reqInProcess)
+      
+     
+    
+    }else{
+    
+     
+      window.alert("Operation Failed!")
+    
+    }
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    }).catch((error) => {
+    
+    //   reqInProcess=reqInProcess+1;
+    // this.RequestToServer(reqInProcess);
+    window.alert("Unexpected error Try again...  ");
+    });
+}
+cancelBooking=()=>{
+  let req_data;
+  let address;
+  address="cancelBooking";
+  req_data={
+
+       
+       
+        
+  
+ "sender":this.props.location.data["sender"],
+  
+    "company":"decideLater",
+    
+    "ride_id":rideID,
+    
+
+
+
+  }
+  const options={
+    method:"POST",
+    headers:{
+        'Content-type':"application/json"
+        
+    },
+    body:JSON.stringify(req_data)
+}
+
+fetch("/"+address,options).then(response=>{
+  return response.json();
+}).then(data=>{
+let status=data.status;
+console.log(status)
+
+if(status==='Success')
+{
+this.updateNotification();
+  console.log("Operation Sucessful" +reqInProcess)
+  
+ 
+
+}else{
+
+ 
+  window.alert("Operation Failed!")
+
+}
+// `data` is the parsed version of the JSON returned from the above endpoint.
+console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+}).catch((error) => {
+
+//   reqInProcess=reqInProcess+1;
+// this.RequestToServer(reqInProcess);
+window.alert("Unexpected error Try again...  ");
+});
+
 }
 RequestToServer=()=>{
         
@@ -313,8 +534,8 @@ RequestToServer=()=>{
       "company":"decideLater",
 "rideId":rideID,
 
-"body":src+","+dest+","+
-"Date"+","+"Time"+","+
+"body":src+"-"+dest+"-"+
+"Date"+"-"+"Time"+"-"+
 
 dis*25,
 
@@ -333,12 +554,12 @@ dis*25,
       address="addBooking";
       req_data={
 
-       "sender":"cutomer",
+       "sender":"customer",
         "company":"decideLater",
         "ride_id":"1",
-        "cust_id":"Customer101",
-        "to":dest,
-        "from":src,
+        "cust_id":this.props.location.data["cust_id"],
+        "to":dest.toString(),
+        "from":src.toString(),
         "distance":dis,
         "fare":dis*25,
         "driverId":"nil",
@@ -362,6 +583,7 @@ dis*25,
   
       }
    
+      console.log("REQ BODY : "+req_data)
       const options={
           method:"POST",
           headers:{
@@ -407,7 +629,7 @@ dis*25,
   }
   else
   {
-    this.testMethod();
+    this.getCordsFromServer();
       
       this.setState({showModal:false});
       
@@ -445,7 +667,11 @@ getModalBtnClick=type=>{
                   <button  className ="dangerBtn" 
                   
                   
-                 
+                 onClick={()=>{
+
+this.cancelBooking();
+
+                 }}
                   
                     // make a marker for each feature and add to the map
                     

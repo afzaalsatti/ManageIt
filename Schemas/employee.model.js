@@ -30,7 +30,16 @@ const Employee=mongoose.Schema({
         type:String,
         require:'required'
     },
+    cnic:{
+        type:String,
+        require:'required'
+    },
     gender:{
+        type:String,
+        require:'required'
+    },
+    
+    phone:{
         type:String,
         require:'required'
     },

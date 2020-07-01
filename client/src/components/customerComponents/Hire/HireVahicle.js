@@ -68,6 +68,10 @@ export default class HireVahicle extends Component {
           let dest=document.getElementById("dest").value;
           let vahicle=document.getElementById("vh_type").value;
           
+          src="72.7707022399893,33.459119468548835";
+          dest="72.7707022399893,33.459119468548835";
+          vahicle="car";
+
           if(src && dest && vahicle!=="head")
           {
             
@@ -90,10 +94,15 @@ export default class HireVahicle extends Component {
           
             let temp={
               "sender":"customer",
-              "cust_id":this.props.userData["userData"]["_id"],
+              "id":this.props.userData["userData"]["_id"],
+              "name":this.props.userData["userData"]["name"],
+              "email":this.props.userData["userData"]["email"],
+              "status":this.props.userData["userData"]["status"],
+              "phone":this.props.userData["userData"]["phone"],
+             
               "src":src,
                "dest":dest,
-               "data":lineDistance};
+               "dis":lineDistance};
                     history.push({
               pathname: '/trackRide',
               data: temp,
@@ -158,7 +167,7 @@ fetch("/"+address,options).then(response=>{
 
     this.continueRideBooking(true)
    
-    window.alert("Operation Failed!")
+   
   }
 // `data` is the parsed version of the JSON returned from the above endpoint.
 console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }

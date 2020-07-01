@@ -1,14 +1,11 @@
 const mongoose=require('mongoose');
 
-const User=mongoose.Schema({
+const Customer=mongoose.Schema({
     name:{
         type:String,
         require:'required'
     },
-    phone:{
-        type:String,
-        require:'required'
-    },
+    
     email: {
         type: String,
         lowercase: true,
@@ -42,10 +39,14 @@ const User=mongoose.Schema({
         type:String,
         require:'required'
     },
+    phone:{
+        type:String,
+        require:'required'
+    },
     subscription:{
         type:Array
 
     },
 });
 
-mongoose.model("Users",User);
+mongoose.model("Customer",Customer);

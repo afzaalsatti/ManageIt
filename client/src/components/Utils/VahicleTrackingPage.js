@@ -4,9 +4,12 @@ import { Card } from 'react-bootstrap'
 import './css/tracking.css'
 import LoadiningModal  from '../Utils/LodingModal'
 import { id } from 'date-fns/locale';
-
+import history from '../../history'
+var mounted=true;
 var myLocation;
-
+var gotVahicleDetails=false;
+var gotDriverDetails=false;
+var  gotCustomerDetails=false;
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9obmFsZXgyIiwiYSI6ImNqemNudGs4cDAyaGYzY3FiamVtd2h4ZmQifQ.YYt71bcR3ZdD6UgIs6EQog';
 var  map;
 var testVar=0;
@@ -22,12 +25,17 @@ export default class VahicleTrackingPage extends Component {
 
     constructor(props) {
         super(props);
+       
         if(this.props.location.data !== undefined)
         {
           
           
            src=this.props.location.data["src"];
              dest=this.props.location.data["dest"];
+             dis=this.props.location.data["dis"]
+
+             fare=dis*25;
+            
 
         }
         else
@@ -43,12 +51,13 @@ export default class VahicleTrackingPage extends Component {
           zoom: 5, showModal:false
         };
 
-
-
+ 
 navigator.geolocation.getCurrentPosition(function(position) {
 
   myLocation=[position["coords"].longitude,position["coords"].latitude] ;
   testCords.push(myLocation)
+  
+
   
 // console.log(position["coords"].longitude )
 // console.log(position["coords"].latitude )
@@ -56,9 +65,245 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 
       }
+      
+      getCustomerDetails=(id)=>
+      {
+      
+      
+      
+          let req_data;
+          let address;
+          address="getCustomerDetails";
+          req_data={
+       
+             
+             
+              
+         
+       
+        
+              "id":id
+       
+       
+       
+       
+       
+       
+       
+            }
+       
+      
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+         
+          fetch("/"+address,options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+          
+       
+            if(status==='Success')
+            {
+              
+      
+      
+        
+              document.getElementById("dname").innerHTML=data.customerName;
+            
+              document.getElementById("phone").innerHTML=data.phone;
+            
+            gotCustomerDetails=true;
+            
+              //history.push('/home');
+            
+         
+             // history.push("");
+            }else{
+       
+             
+              console.log("Operation Failed! Customer Details")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+          //   reqInProcess=reqInProcess+1;
+          // this.RequestToServer(reqInProcess);
+         console.log("Unexpected error Try again...  ");
+       });
+      }
+      getDriverDetails=(id,company)=>
+      {
+      
+      
+      
+          let req_data;
+          let address;
+          address="getDriverDetails";
+          req_data={
+       
+             
+             
+              
+         
+       
+        
+              "company":company,
+              "id":id,
+       
+       
+       
+       
+       
+       
+       
+            }
+       
+      
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+         
+          fetch("/"+address,options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+          
+       
+            if(status==='Success')
+            {
+              
+      
+      
+        
+              document.getElementById("dname").innerHTML=data.driverName;
+            
+              document.getElementById("phone").innerHTML=data.phone;
+            
+            gotDriverDetails=true;
+            
+              //history.push('/home');
+            
+         
+             // history.push("");
+            }else{
+       
+             
+              console.log("Operation Failed! Driver Details")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+          //   reqInProcess=reqInProcess+1;
+          // this.RequestToServer(reqInProcess);
+         console.log("Unexpected error Try again...  ");
+       });
+      }
+
+      getVahicleDetails=(vh_id,company)=>
+{
+
+
+//   brand: "HONDA"
+// buyer_emp_id: "12364-8734344-1"
+// color: "WHITE"
+// company: "decideLater"
+// entry_date: "6/29/2020"
+// entry_time: "17:33:26"
+// number: "ICT-2107"
+// owner: "5ef9df96ca8ab93f3070f4eb"
+// payment_status: "no estimate"
+// price: "no estimate"
+// reg_year: "2020"
+// type: "Car"
+// vah_model: "CIVIC"
+    let req_data;
+    let address;
+    address="getVahicleDetails";
+    req_data={
+ 
+       
+       
+        
+   
+ 
+  
+        "company":company,
+        "number":vh_id,
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      }
+
+    
+ 
+
+    const options={
+        method:"POST",
+        headers:{
+            'Content-type':"application/json"
+            
+        },
+        body:JSON.stringify(req_data)
+    }
+   
+    fetch("/"+address,options).then(response=>{
+        return response.json();
+  }).then(data=>{
+      let status=data.status;
+     
+ 
+      if(status==='Success')
+      {
+        
+
+  
+         document.getElementById("VmakeModel").innerHTML=data.v_details["color"]+" "+data.v_details["brand"]+" "+data.v_details["vah_model"]+" "+data.v_details["reg_year"];
+      
+         document.getElementById("Vnumber").innerHTML=data.v_details["number"];
+      
+      gotVahicleDetails=true;
+      
+      
+        //history.push('/home');
+      
+   
+       // history.push("");
+      }else{
+ 
+       
+        console.log("Operation Failed! Vahicle Details")
+      }
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+  }).catch((error) => {
+   
+    //   reqInProcess=reqInProcess+1;
+    // this.RequestToServer(reqInProcess);
+   console.log("Unexpected error Try again...  in GET VAHICLE DETAILS ");
+ });
+}
 
       getCordsFromServer=()=>{
 
+        
+       
         let data;
         let address;
         if(this.props.location.data !== undefined)
@@ -75,6 +320,16 @@ navigator.geolocation.getCurrentPosition(function(position) {
         
         if( this.props.location.data["sender"]==="driver" )
         {
+       
+         
+         document.getElementById("dname").innerHTML= this.props.location.data["name"];
+          document.getElementById("phone").innerHTML= this.props.location.data["phone"]
+          if(!gotVahicleDetails)
+          {
+            document.getElementById("fare").innerHTML="RS "+ this.props.location.data["fare"]
+            this.getVahicleDetails( this.props.location.data["details"]["vahicleId"],  this.props.location.data["company"] )
+          }
+         
           driverID=this.props.location.data["driverId"]
           testCords.push(myLocation)
          
@@ -95,6 +350,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
         
         }else
         {
+
+
+
           address="getDriverlocation"
            data={
    
@@ -125,6 +383,14 @@ navigator.geolocation.getCurrentPosition(function(position) {
           
                 
     setTimeout(() => { 
+
+      
+      if(data.bookingStatus!=="booked" && data.bookingStatus!=="searching"){
+      if(mounted)
+      {
+        this.checkBookingStatus();
+      }
+    }
      
   // var el = document.createElement('div');
   // el.className = 'tracking_marker';
@@ -143,14 +409,31 @@ navigator.geolocation.getCurrentPosition(function(position) {
     essential: true // this animation is considered essential with respect to prefers-reduced-motion
     });
 
+    if(!gotCustomerDetails)
+    {
+
+      this.getCustomerDetails(this.props.location.data["customerID"])
+    }
+
  }
  else
  {
   testCords=data.cords;
   driverID=data.driverId;
  
+ if(!gotVahicleDetails)
+          {
+
+            this.getVahicleDetails(data.vahicleId,data.company)
+          }
+          if(!gotDriverDetails)
+          {
+
+            this.getDriverDetails(driverID,data.company)
+          }
  if(testCords.length>1)
  {
+  this.setState({showModal:false});
   marker.setLngLat(testCords[testCords.length-1])
     
      .addTo(map);
@@ -195,9 +478,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
  }
 }
    
-   
+
+if(mounted)
+{
       this.getCordsFromServer();
-    
+}
 
      
   
@@ -210,13 +495,18 @@ navigator.geolocation.getCurrentPosition(function(position) {
          
         }else{
          
-          window.alert("Erroe in fetch driver Location!")
+          if(mounted)
+          {
+          this.getCordsFromServer();}
+          console.log("Error in fetch driver Location!")
         }
       // `data` is the parsed version of the JSON returned from the above endpoint.
       console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
     }).catch((error) => {
-     
-     window.alert("Unexpected error Try again...");
+      if(mounted)
+      {
+      this.getCordsFromServer();}
+     console.log("Unexpected error Try again...");
    });
 
         }
@@ -381,6 +671,7 @@ if( this.props.location.data["sender"]==="driver" )
 
 }else
 {
+
   this.RequestToServer();
 }
 }
@@ -392,12 +683,31 @@ if( this.props.location.data["sender"]==="driver" )
 }
 
 updateBookingCords=()=>{
-  this.getCordsFromServer();
+  if(mounted)
+  {
+    this.getCordsFromServer();
+  }
+  
 
 }
+
 updateNotification=()=>{
+
 let address,req_data;
   address="sendRideInvitation";
+  let to,from;
+  
+  if(this.props.location.data["sender"]==="driver")
+  {
+    to=this.props.location.data["customerID"];
+    from=driverID;
+
+  }
+  else
+  {
+    to=driverID;
+    from=this.props.location.data["email"];
+  }
     req_data={
   
          
@@ -413,9 +723,15 @@ let address,req_data;
 
   
 "type":"Ride cancel Notification",
-"to":driverID,
+"to":to,
+"from":from,
 "isActive":"Yes"
+
     }
+
+    console.log("RED DATA UPDATE");
+    console.log(req_data);
+
     const options={
       method:"POST",
       headers:{
@@ -432,30 +748,172 @@ let address,req_data;
     
     if(status==='Success')
     {
-    
-      console.log("Operation Sucessful" +reqInProcess)
+      this.updateHirePool();
+      console.log("Finishing Booking Notification Updated")
       
      
     
     }else{
     
-     
-      window.alert("Operation Failed!")
+     this.updateNotification()
+     console.log("Finishing Booking Notification Update Failed")
     
     }
     // `data` is the parsed version of the JSON returned from the above endpoint.
     console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
     }).catch((error) => {
-    
+      this.updateNotification()
     //   reqInProcess=reqInProcess+1;
     // this.RequestToServer(reqInProcess);
-    window.alert("Unexpected error Try again...  ");
+    console.log("Unexpected error Try again... RIDE CANCEL ");
     });
 }
-cancelBooking=()=>{
+
+updateHirePool=()=>{
+  let address,req_data;
+    address="updateHirePoolStatus";
+      req_data={
+    
+           
+           
+            
+      
+     
+      
+        "company":"decideLater",
+        "driverId":driverID,
+        "status":"active",
+  
+      }
+      const options={
+        method:"POST",
+        headers:{
+            'Content-type':"application/json"
+            
+        },
+        body:JSON.stringify(req_data)
+    }
+      fetch("/"+address,options).then(response=>{
+        return response.json();
+      }).then(data=>{
+      let status=data.status;
+      console.log(status)
+      
+      if(status==='Success')
+      {
+      
+        mounted=false;
+        window.alert("Booking finished ")
+        console.log("Finishing Booking HirePool Updated")
+        let sender="customer"
+        let userData={};
+        userData["name"]=this.props.location.data["name"]
+       
+        userData["email"]=this.props.location.data["email"]
+        if(this.props.location.data["sender"]!=="customer")
+        {
+          sender="employee"
+          userData["status"]=this.props.location.data["status"]
+          userData["phone"]=this.props.location.data["phone"]
+          userData["job_id"]=this.props.location.data["job_id"]
+          userData["company"]=this.props.location.data["company"]
+          userData["id"]=this.props.location.data["driverId"]
+          
+    
+        }
+        else
+        {
+          userData["id"]=this.props.location.data["email"]
+        }
+        let temp={
+          "sender":sender,
+          "userData":userData
+           
+          };
+    
+        history.push({
+          pathname: '/home',
+          data: temp,
+        });
+        
+       
+      
+      }else{
+      
+        this.updateHirePool()
+       
+        console.log("Finishing Booking Hirepool Update Failed")
+      
+      }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+      }).catch((error) => {
+      
+        this.updateHirePool()
+      //   reqInProcess=reqInProcess+1;
+      // this.RequestToServer(reqInProcess);
+      console.log("Unexpected error Try again... Update Hire Pool ");
+      });
+  }
+  
+ 
+
+
+checkBookingStatus=()=>{
+
+  
+     mounted=false;
+    window.alert("Booking finished <checkBookingStatus>")
+    let sender="customer"
+    let userData={};
+    userData["name"]=this.props.location.data["name"]
+  
+    userData["email"]=this.props.location.data["email"]
+    if(this.props.location.data["sender"]!=="customer")
+    {
+      sender="employee"
+      userData["status"]=this.props.location.data["status"]
+      userData["phone"]=this.props.location.data["phone"]
+      userData["job_id"]=this.props.location.data["job_id"]
+      userData["company"]=this.props.location.data["company"]
+      userData["id"]=this.props.location.data["driverId"]
+      
+
+    }
+    else
+    {
+      userData["id"]=this.props.location.data["email"]
+    }
+    let temp={
+      "sender":sender,
+      "userData":userData
+       
+      };
+
+    history.push({
+      pathname: '/home',
+      data: temp,
+    });
+    
+  
+ 
+
+  
+  
+ 
+
+
+}
+finishBooking=(status)=>{
+  mounted=false;
+
   let req_data;
   let address;
-  address="cancelBooking";
+  address="finishBooking";
+  if(this.props.location.data["sender"]==="driver")
+  {
+    rideID=this.props.location.data["rideId"]
+  }
   req_data={
 
        
@@ -467,6 +925,7 @@ cancelBooking=()=>{
     "company":"decideLater",
     
     "ride_id":rideID,
+    "status":status
     
 
 
@@ -490,29 +949,41 @@ console.log(status)
 if(status==='Success')
 {
 this.updateNotification();
-  console.log("Operation Sucessful" +reqInProcess)
+
+  console.log("Finishing Booking Booking Updated")
   
  
 
 }else{
-
+this.finishBooking(status);
  
-  window.alert("Operation Failed!")
+  console.log(" Finishing Booking Booking Update Failed!")
 
 }
 // `data` is the parsed version of the JSON returned from the above endpoint.
 console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
 }).catch((error) => {
 
+  this.finishBooking(status);
 //   reqInProcess=reqInProcess+1;
 // this.RequestToServer(reqInProcess);
-window.alert("Unexpected error Try again...  ");
+console.log("Unexpected error Try again... RIDE CANCEL ");
 });
 
 }
 RequestToServer=()=>{
-        
-         
+  if(testCords.length>1)
+  {
+       if(this.props.location.data["dest"]===testCords[testCords.length-1])  
+       {
+         window.alert("Ride Completed");
+       }
+       else{
+        console.log("current location"+testCords[testCords.length-1]);
+        console.log("Destination"+this.props.location.data["dest"]);
+       }
+
+  }
   let req_data;
   let address;
   let d = new Date();
@@ -533,22 +1004,27 @@ RequestToServer=()=>{
     
       "company":"decideLater",
 "rideId":rideID,
+"from":this.props.location.data["email"],
 
 "body":src+"-"+dest+"-"+
 "Date"+"-"+"Time"+"-"+
 
 dis*25,
 
-  
+  "to":"All Drivers",
 "type":"Ride Invitation",
 "isActive":"Yes"
 
 
     }
     
+    
   } else
     if(reqInProcess==1)
   {
+    
+
+      document.getElementById("fare").innerHTML="RS "+dis*25;
       requestLoadingMessage= <text> Finding Your Captain... </text>
     
       address="addBooking";
@@ -557,7 +1033,7 @@ dis*25,
        "sender":"customer",
         "company":"decideLater",
         "ride_id":"1",
-        "cust_id":this.props.location.data["cust_id"],
+        "cust_id":this.props.location.data["email"],
         "to":dest.toString(),
         "from":src.toString(),
         "distance":dis,
@@ -609,12 +1085,15 @@ dis*25,
           console.log("Operation Sucessful" +reqInProcess)
           //history.push('/home');
           reqInProcess++;
+          if(mounted)
+          {
           this.RequestToServer();
+          }
          // history.push("");
         }else{
 
          
-          window.alert("Operation Failed!")
+          console.log("Operation Failed!")
         }
       // `data` is the parsed version of the JSON returned from the above endpoint.
       console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
@@ -623,15 +1102,17 @@ dis*25,
       this.setState({showModal:true})
       //   reqInProcess=reqInProcess+1;
       // this.RequestToServer(reqInProcess);
-     window.alert("Unexpected error Try again...  "+reqInProcess);
+     console.log("Unexpected error Try again...  "+reqInProcess);
    });
   
   }
   else
   {
+    if(mounted)
+    {
     this.getCordsFromServer();
+    }
       
-      this.setState({showModal:false});
       
 
 
@@ -669,7 +1150,7 @@ getModalBtnClick=type=>{
                   
                  onClick={()=>{
 
-this.cancelBooking();
+this.finishBooking("cancel");
 
                  }}
                   
@@ -681,7 +1162,7 @@ this.cancelBooking();
               </div>
                   <text className="date" >Ride Fare</text>
              
-                  <text className="moveToRight ">this.props.details.charges</text>
+                  <text id="fare" className="moveToRight ">this.props.details.charges</text>
                   <hr></hr>
               
                   <img
@@ -692,7 +1173,7 @@ this.cancelBooking();
                                         />
                   <text className="date rideDetailCard" >Credit Pay </text>
              
-                  <text className="moveToRight rideDetailCard">this.props.details.credit</text>
+                  <text className="moveToRight rideDetailCard">RS 0.0</text>
                   <br></br>
                   <img
                                           className="rideHistoryAddIcon"
@@ -702,7 +1183,7 @@ this.cancelBooking();
                                         />
                   <text className="date rideDetailCard" >Cash Pay</text>
              
-                  <text className="moveToRight rideDetailCard">this.props.details.cash</text>
+                  <text className="moveToRight rideDetailCard">RS 0.0</text>
               
                </div>
                <hr></hr>
@@ -714,13 +1195,16 @@ this.cancelBooking();
                                           src="/assets/images/userprofile.png"
                                           alt
                                         />
-                   <text style={{marginLeft:"37px"}} className="date rideDetailCard">this.props.details.driver_name</text>
-        <text style={{color:"blue"}} className="moveToRight rideDetailCard">rating</text>
+
+                   <text id="dname" style={{marginLeft:"37px"}} className="date rideDetailCard">this.props.details.driver_name</text>
+        <text id="rating" style={{color:"blue"}} className="moveToRight rideDetailCard">rating</text>
                    <br></br>
-                   <text style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">this.props.details.vahicleMake this.props.details.model</text>
+                   <text id="phone" style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">Driver Phone</text>
+                   <br></br>
+                   <text id="VmakeModel" style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">this.props.details.vahicleMake this.props.details.model</text>
      <br></br>
               
-                   <text style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">this.props.details.vahicle_number</text>
+                   <text id="Vnumber" style={{marginLeft:"30px", fontSize:"13px"}} className="date rideDetailCard">this.props.details.vahicle_number</text>
               
                 
                   

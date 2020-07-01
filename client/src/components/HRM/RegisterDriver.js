@@ -157,7 +157,8 @@ export default class RegisterDriver extends Component {
         let pass1=document.getElementById("pass1").value;
         let pass2=document.getElementById("pass2").value;
         let address=document.getElementById("address").value;
-        if(name && email && id && location && gender!="Gender" && address && pass1 && pass2)
+        let phone=document.getElementById("phNumber").value;
+        if(name && email && id && location && gender!="Gender" && phone && address && pass1 && pass2)
         {
           
           if(pass1===pass2)
@@ -169,6 +170,7 @@ export default class RegisterDriver extends Component {
         data["gender"]=gender;
         data["address"]=address;
         data["pass"]=pass1;
+        data["phone"]=phone;
         return true;
       }
         else{
@@ -351,6 +353,7 @@ return true;
                 "name": data["name"],
                 "email":data["email"],
                 "password":data["pass"],
+                "phone":data["phone"],
                 "id":data["id"],
                 
                 "job_id":"Captain",
@@ -388,7 +391,7 @@ return true;
       "entry_time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
       "brand": data["brand"],
       "color":data["color"],
-      "buyer_emp_id":data["owner_id"],
+      "buyer_emp_id":driverId,
       "reg_year":data["year"],
       "type": data["type"]
       
@@ -658,16 +661,12 @@ return true;
               <input placeholder="National Identity Number" style={{margin:"0px"}} type="text" id="idNumber" className="form-control" />
             </div>
 
-            <div style={{width:'48%',float:'right'}} className="form-group">
-              <text htmlFor="inputName">Location</text>
-              <input onClick={()=>{ navigator.geolocation.getCurrentPosition(function(position) {
-
-                document.getElementById("location").value=position["coords"].longitude+","+position["coords"].latitude ;
-            // console.log(position["coords"].longitude )
-            // console.log(position["coords"].latitude )
-            //
-          });}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location" className="form-control" />
+            <div style={{width:'48%',float:'right',margin:"0px"}} className="form-group">
+              <text htmlFor="inputName">Phone Number</text>
+              <input placeholder="Contact  Number" style={{margin:"0px"}} type="text" id="phNumber" className="form-control" />
             </div>
+
+        
 </div>
 
       <div style={{height:"70px"}}>
@@ -682,11 +681,17 @@ return true;
 </div>     
      
 <div style={{height:"100px"}}>
-<div style={{width:'48%',float:'right'}} className="form-group">
-              <text htmlFor="inputStatus">Address</text>
-              <input placeholder="Enter authentic Address" type="address" id="address" className="form-control" />
+
+            <div style={{width:'48%',float:'right'}} className="form-group">
+              <text htmlFor="inputName">Location</text>
+              <input onClick={()=>{ navigator.geolocation.getCurrentPosition(function(position) {
+
+                document.getElementById("location").value=position["coords"].longitude+","+position["coords"].latitude ;
+            // console.log(position["coords"].longitude )
+            // console.log(position["coords"].latitude )
+            //
+          });}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location" className="form-control" />
             </div>
-          
 
 <div style={{width:'48%',float:'left'}} className="form-group">
               <text htmlFor="inputStatus">Gender</text>
@@ -698,7 +703,10 @@ return true;
               </select>
             </div>
            
-
+            <div style={{width:'100%',float:'right'}} className="form-group">
+              <text htmlFor="inputStatus">Address</text>
+              <input placeholder="Enter authentic Address" type="address" id="address" className="form-control" />
+            </div>
      <div style={{width:'100%',float:'right'}}className="form-group">
               {/* <text htmlFor="inputName">Upload Image</text> */}
             

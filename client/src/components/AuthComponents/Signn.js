@@ -119,6 +119,16 @@ class Signn extends Component {
            
           };
          
+
+
+
+
+
+
+
+
+
+          
           // window.alert("M")
         
     
@@ -159,6 +169,7 @@ class Signn extends Component {
       <br></br>
     <text id="cust" className={this.state.user==="customer" ?"underLinedText"    : "simpleText"} style={{marginRight:"40px"}}
     onClick={()=>{
+   
      this.setState({
        user:"customer"
      })
@@ -184,7 +195,7 @@ class Signn extends Component {
         </div>
         <div className="signin-form">
 
-          <h2 className="form-title">Welcome Back!</h2>
+          <h2  id="test" className="form-title">Welcome Back!</h2>
           <div  className="register-form" id="login-form">
             <div className="form-group">
               <label htmlFor="your_name"><i className="zmdi zmdi-account material-icons-name" /></label>
@@ -201,8 +212,11 @@ class Signn extends Component {
             </div>
             <div className="form-group form-button">
   <button  onClick={()=>
+  {
+
+
   this.state.user==="customer"? this.login(): this.empLogin()
-  } name="signup" id="signin" className="form-submit"  >Log in</button>
+  }} name="signup" id="signin" className="form-submit"  >Log in</button>
 </div>
           </div>
           <div className="social-login">

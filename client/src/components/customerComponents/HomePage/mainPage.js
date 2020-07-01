@@ -17,6 +17,7 @@ var reqFailed=false;
 var reqInProcess=1;
 
 var mounted=true;
+var details;
 
 export default class mainPage extends React.Component {
   
@@ -61,8 +62,8 @@ isAdmin:false
           req_data={
         
                
-               "type":this.props.location.data["sender"],
-               "id":this.props.location.data["userData"]["_id"],
+               "sender":this.props.location.data["sender"],
+               "id":this.props.location.data["userData"]["id"],
                "location":"b",
 
                 
@@ -125,7 +126,7 @@ isAdmin:false
               }else{
       
                
-                window.alert("Operation Failed!")
+                console.log("Operation Failed!")
               }
             // `data` is the parsed version of the JSON returned from the above endpoint.
               // { "userId": 1, "id": 1, "title": "...", "body": "..." }
@@ -133,7 +134,7 @@ isAdmin:false
             
             //   reqInProcess=reqInProcess+1;
             // this.RequestToServer(reqInProcess);
-           window.alert("Unexpected error Try again Retrying...  ");
+           console.log("Unexpected error Try again Retrying...  ");
            if(mounted)
            {
                this.getNotifications()
@@ -193,19 +194,12 @@ isAdmin:false
     
     showHireMenu()
     {
-        if(document.getElementById("subMenu").style.display=="none")
-        {
-            document.getElementById("subMenu").style.display="block"
-        }
-        else{
-            
-            document.getElementById("subMenu").style.display="none"
-        }
+        
 
         if(this.state.component != <HireVahicle></HireVahicle>)
              {
                  this.setState({
-                     component:<HireVahicle userData={this.props.location.data} type="Buses"></HireVahicle>
+                     component:<HireVahicle userData={this.props.location.data} type="Vahicle"></HireVahicle>
                  });
              }
         
@@ -330,11 +324,7 @@ isAdmin:false
 
 
          }
-         if(!pageToBeLoaded.includes("hire"))
-         {
-            
-            document.getElementById("subMenu").style.display="none"
-         }
+         
          
         
         
@@ -346,15 +336,93 @@ isAdmin:false
        
       
       }
+
+checkDriverAvailibility=rData=>{
+
+
+    let req_data;
+    let address;
+    address="getDriverstatus";
+    req_data={
+ 
+       
+       
+        
+  
+ 
+  
+        "company":this.props.location.data["userData"]["company"],
+        "driverId":this.props.location.data["userData"]["id"],
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      }
+ 
+
+    const options={
+        method:"POST",
+        headers:{
+            'Content-type':"application/json"
+            
+        },
+        body:JSON.stringify(req_data)
+    }
+   
+    fetch("/"+address,options).then(response=>{
+        return response.json();
+  }).then(data=>{
+      let status=data.status;
+      
+ 
+      if(status==='Success')
+      {
+       if(data.result["status"]!=="active")
+       {
+           console.log("You have an active ride ! You cant Accept until previous finishes")
+       }
+       else
+       {
+        details=data.result;
+        this.acceptRideInvitation(rData)
+
+
+       }
+      
+        //history.push('/home');
+      
+   
+       // history.push("");
+      }else{
+ 
+       
+        console.log("Operation Failed! Vahicle Details(Driver End)")
+      }
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+  }).catch((error) => {
+   
+    //   reqInProcess=reqInProcess+1;
+    // this.RequestToServer(reqInProcess);
+   console.log("Unexpected error Try again...  ");
+ });
+
+}
+
       acceptRideInvitation=rData=>{
         
 
+        // "type":this.props.location.data["sender"],
+        // "id":this.props.location.data["userData"]["id"],
 
 
 //we will get this when driver logs in
-let empId="lkj"
+let empId=this.props.location.data["userData"]["id"]
 let vahicleId="ICT-1234"
-let company="decideLater"
+let company=this.props.location.data["userData"]["company"]
 
 let ride_id=rData.rideId
 
@@ -378,8 +446,8 @@ if(reqInProcess<= 3)
             "ride_id":ride_id,
      "driverId":empId,
      
-     "vahicleId":vahicleId,
-     "cords":["123,213"],
+     "vahicleId":details["vahicleId"],
+     "cords":details["position"],
      
      
      
@@ -422,6 +490,7 @@ if(reqInProcess<= 3)
      
       
             "company":company,
+
             "rideId":ride_id,
      "status":"No",
      
@@ -450,7 +519,7 @@ if(reqInProcess<= 3)
  
       if(status==='Success')
       {
-        window.alert("Success"+reqInProcess)
+        console.log("Success"+reqInProcess)
         reqInProcess++;
        this.acceptRideInvitation(rData);
         //history.push('/home');
@@ -460,7 +529,7 @@ if(reqInProcess<= 3)
       }else{
  
        
-        window.alert("Operation Failed!"+reqInProcess)
+        console.log("Operation Failed!"+reqInProcess)
       }
     // `data` is the parsed version of the JSON returned from the above endpoint.
     console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
@@ -468,7 +537,7 @@ if(reqInProcess<= 3)
    
     //   reqInProcess=reqInProcess+1;
     // this.RequestToServer(reqInProcess);
-   window.alert("Unexpected error Try again...  ");
+   console.log("Unexpected error Try again...  ");
  });
  
  
@@ -490,10 +559,14 @@ else
          "date":body[2],
          "time":body[3],
          "driverId":empId,
+         "company":company,
          "rideId":rData.rideId,
-         "vahicleId":vahicleId,
+         "customerID":rData.from,
+         "details":details,
          "fare":body[4],
-         "data":body[4]/25,
+         "name":this.props.location.data["userData"].name, 
+         "phone":this.props.location.data["userData"].phone ,
+         "dis":body[4]/25,
         };
 
     
@@ -526,7 +599,7 @@ else
       return(
 
         <div style={{height:"100%",width:"100%"}}>
-<NotificationModal acceptRideInvitation={this.acceptRideInvitation} getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
+<NotificationModal acceptRideInvitation={this.checkDriverAvailibility} getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
 <div className="topbar" >
     <svg className="translate" style={{marginLeft:"15px"}} onClick={this.toggleSlideMenu} xmlns="http://www.w3.org/2000/svg"  height="24" viewBox="0 0 24 24" width="24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
 
@@ -570,7 +643,7 @@ onClick={()=>{
                     </span>
                 </li>
 
-                <li className="home-nav-item" onClick={this.showHireMenu}>
+                <li className="home-nav-item" onClick={() => this.getMenuSelection("hire")}>
                 <img src="/assets/images/booking_icon.png">
                 </img>   
                 <span>
@@ -580,23 +653,9 @@ onClick={()=>{
 
 
                </li>
-               <ul id="subMenu" style={{display:"none"}}>
+           
 
-<li className="home-nav-item" onClick={() => this.getMenuSelection("hireBus")}>
-<i className="fa fa-home"></i>
-  <span>Hire a bus</span>  
-</li>
-<li className="home-nav-item" onClick={() => this.getMenuSelection("hireCar")}>
-<i className="fa fa-home"></i>
-<span>Hire a Car</span>
-    
-</li>
-<li className="home-nav-item" onClick={() => this.getMenuSelection("hireTruck")}>
-<i className="fa fa-home"></i>
-<span>Hire a Truck</span>
-    
-</li>
-</ul>
+
                <li className="home-nav-item" onClick={() => this.getMenuSelection("history")}>
 
 

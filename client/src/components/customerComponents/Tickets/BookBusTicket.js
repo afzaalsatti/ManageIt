@@ -12,8 +12,8 @@ export default class BooBusTicket extends Component {
   
   constructor(props){
     super(props);
-    userID=this.props.data.userData["_id"]
-    userType=this.props.data["sender"]
+    userID=this.props.location.data.userData["_id"]
+    userType=this.props.location.data["sender"]
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
@@ -90,6 +90,7 @@ export default class BooBusTicket extends Component {
         window.alert("Contecting")
         var d = new Date();
         
+      
         const req_data={
         
          
@@ -106,6 +107,7 @@ export default class BooBusTicket extends Component {
           "from":this.props.details["from"],
           "date":this.props.details["date"],
           "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
+          "amount":"test",
           "tickets":booked.length
     //       "company":this.props.details["company"],
     // "title":this.props.details["tittle"],

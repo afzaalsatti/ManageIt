@@ -7,6 +7,7 @@ import CareerPage from '../career/CareerPage'
 import Settings from '../Settings/UserSettings'
 import BookBusTicket from '../Tickets/BookBusTicket'
 import NotificationModal from '../../Utils/NotificationModal'
+import Wallet from '../../EmployeeComponents/DriverWallet'
 
 
 import history from "../../../history";
@@ -18,6 +19,10 @@ var reqInProcess=1;
 
 var mounted=true;
 var details;
+
+var sender;
+var userData;
+
 
 export default class mainPage extends React.Component {
   
@@ -33,7 +38,8 @@ mounted=true;
 this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></Home>,
 showNotif:false,
 noti_icon:"/assets/svg/notify.svg",
-isAdmin:false
+isAdmin:false,
+isEmp:false
 };
 
 
@@ -156,7 +162,7 @@ isAdmin:false
     componentDidMount(){
 
 
-        if(this.props.location.data === undefined)
+        if(this.props.location.data === undefined )
         {
             
            
@@ -169,6 +175,13 @@ isAdmin:false
             {
                 this.setState({
                     isAdmin:true
+                })
+            }
+
+            if(this.props.location.data["sender"] !=="customer")
+            {
+                this.setState({
+                    isEmp:true
                 })
             }
             this.getNotifications();
@@ -272,33 +285,8 @@ isAdmin:false
 
 
          }
-         else 
-         if(pageToBeLoaded==="hireCar")
-         {
-             
-            if(this.state.component != <HireVahicle type="Cars"></HireVahicle>)
-             {
-
-                 this.setState({
-                     component:<HireVahicle userData={this.props.location.data} type="Cars"></HireVahicle>
-                 });
-             }
-
-
-         }else
-         if(pageToBeLoaded==="hireTruck")
-         {
-             
-            if(this.state.component != <HireVahicle type="Trucks"></HireVahicle>)
-             {
-
-                 this.setState({
-                     component:<HireVahicle userData={this.props.location.data} type="Trucks"></HireVahicle>
-                 });
-             }
-
-
-         }else if(pageToBeLoaded==="career")
+        
+     else if(pageToBeLoaded==="career")
          {
              
             if(this.state.component != <CareerPage ></CareerPage>)
@@ -324,7 +312,18 @@ isAdmin:false
 
 
          }
-         
+         else if(pageToBeLoaded==="wallet")
+         {
+             
+           
+
+                 this.setState({
+                     component:<Wallet ></Wallet>
+                 });
+             
+
+
+         }
          
         
         
@@ -700,6 +699,20 @@ onClick={()=>{
                 </img>         <span>
                         Settings
                     </span>
+                </li>
+                <li className={this.state.isEmp? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("home")}>
+                
+                  <span >
+                        switch to customer
+                    </span>
+                    <input
+              type="checkbox"
+              
+              id="customSwitch1"
+              
+              placeholder="Dark"
+            />
+                   
                 </li>
             </ul>
         </div>

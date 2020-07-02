@@ -1023,6 +1023,7 @@ dis*25,
     if(reqInProcess==1)
   {
     
+    let date=new Date();
 
       document.getElementById("fare").innerHTML="RS "+dis*25;
       requestLoadingMessage= <text> Finding Your Captain... </text>
@@ -1032,6 +1033,8 @@ dis*25,
 
        "sender":"customer",
         "company":"decideLater",
+        "date":date.getMonth()+1+"/"+date.getDay()+"/"+date.getFullYear(),
+        "time":date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(),
         "ride_id":"1",
         "cust_id":this.props.location.data["email"],
         "to":dest.toString(),

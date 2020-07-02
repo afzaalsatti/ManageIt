@@ -30,6 +30,9 @@ import MapLocationPicker from './components/Utils/MapLocationPicker'
 import VahicleTracking from './components/Utils/VahicleTrackingPage'
 
 
+import wallet from './components/EmployeeComponents/DriverWallet'
+
+
 function App() {
   
     document.title = "ManageIt"
@@ -62,6 +65,7 @@ function App() {
 
 
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
+      <Route  path="/wallet" exact component={wallet}></Route>
      
       
       </Switch>

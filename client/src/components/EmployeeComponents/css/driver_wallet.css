@@ -1,0 +1,178 @@
+.db-stats-standard {
+    background-color: #fff;
+    padding: 25px 10px;
+    margin-bottom: 30px;
+    display: table;
+    width: 100%;
+    border: 1px #e5e5e5 solid;
+    overflow: visible;
+    box-sizing: border-box;
+    font-family: poppins;
+    background: aliceblue;
+    border-radius: 10px;
+}
+.cf {
+    zoom: 1;
+}
+.db-new-header {
+    padding-bottom: 20px;
+}
+.db-new-content {
+   
+    margin-top: 30px;
+    position: relative;
+    box-sizing: border-box;
+}
+.mp-box .box-row {
+    width: 988px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.mp-box {
+    background: #f7f7f7;
+    margin: 0 auto;
+    position: relative;
+}
+.revenues-actions a{
+    cursor: pointer;
+}
+.revenues-actions li :hover{
+    background-color: rgb(212, 212, 212);
+
+}
+.revenues-actions li {
+   display: grid !important;
+    
+}
+
+.yellowText{
+    color: yellowgreen;
+}
+.redText{
+    color: red
+}
+.greenText{
+    color: green ;
+}
+.db-stats-standard a, .db-stats-standard>span {
+    display: table-cell;
+    font-size: 27px;
+    font-family: poppins;
+    line-height: 27px;
+    font-weight: 400;
+    color: #303030;
+    text-decoration: none;
+    padding: 0 5px;
+    text-align: center;
+    vertical-align: top;
+    border-left: 1px solid #ddd;
+}
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+.db-stats-standard a small, .db-stats-standard>span small {
+    display: block;
+    font-weight: 600;
+    font-family: poppins;
+    font-size: 14px;
+    line-height: 18px;
+    color: #999;
+    text-align: center;
+    padding: 0 0 15px;
+    min-width: 125px;
+}
+.db-new-header h1 {
+    font-weight: 300;
+    font-family: poppins;
+}
+#Earnings-component{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+h1.alt, .text-display-1.alt {
+    font-weight: 400;
+    font-family: poppins;
+}
+.db-new-header h1 .money-expected {
+    float: right;
+    font-size: 12px;
+    font-family: poppins;
+    line-height: 14px;
+    color: #555;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.revenues-actions {
+    padding: 0 0 20px 90px;
+}
+.revenues-actions text {
+    line-height: 31px;
+    margin-left: -90px;
+    float: left;
+}
+.revenues-actions .dd-wrap {
+    display: inline-block;
+    margin-right: 5px;
+}
+.revenues-actions .csv-export {
+    float: right;
+    line-height: 31px;
+    color: #4a73e8;
+}
+
+
+.fake-dropdown .dropdown-toggle.max-width {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fake-dropdown .dropdown-toggle {
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+    font-family: poppins;
+    color: #777;
+    text-decoration: none;
+    text-align: left;
+    border: 1px #b2b2b2 solid;
+    padding: 7px 30px 7px 10px;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.earnings-package .withdraw-buttons-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.earnings-package .withdraw-buttons-list .withdraw-button.disabled {
+    border-color: #c5c6c9;
+    color: #b5b6ba;
+}
+.earnings-package .withdraw-buttons-list .withdraw-button {
+    background: #fff;
+    border: 1px solid #b5b6ba;
+    border-radius: 3px;
+    font-family: poppins;
+    text-transform: none;
+    color: #62646a;
+    padding: 9px 10px 9px 30px;
+    margin-right: 5px;
+    position: relative;
+}
+.btn-standard.disabled, .btn-standard:disabled {
+    color: #999!important;
+    border-color: #ddd!important;
+    background-color: #ddd!important;
+    cursor: default!important;
+    box-shadow: none!important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

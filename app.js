@@ -39,7 +39,194 @@ const Vahicle=mongoose.model("Vahicle");
  const Booking=mongoose.model("Booking")
  const EmployeeNotification=mongoose.model("EmployeeNotification")
  
- 
+ const Earning=mongoose.model("Earning")
+
+ app.post('/getEarnings',(req,res)=>
+ { 
+     
+    
+    Earning.find({ id : req.body.id }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        earnings:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
+ app.post('/getTicketPurchaseHistory',(req,res)=>
+ { 
+     
+    
+    Ticket.find({ cust_id : req.body.id }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        ticketHistory:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
+ app.post('/getTicketPurchaseHistory',(req,res)=>
+ { 
+     
+    
+    Ticket.find({ cust_id : req.body.id }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        ticketHistory:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
+
+ app.post('/getBookingHistory',(req,res)=>
+ { 
+     
+    
+    Booking.find({ cust_id : req.body.id }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        BookingHistory:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
+
  app.post('/getBookingStatus',(req,res)=>
  { 
     
@@ -457,6 +644,7 @@ const Vahicle=mongoose.model("Vahicle");
  app.post('/addBooking',(req,res)=>
  { const booking=new Booking();
 
+
 if(req.body.sender==="customer")
 {
    
@@ -464,6 +652,8 @@ if(req.body.sender==="customer")
     booking.ride_id=booking._id.toString(),
     booking.cust_id=req.body.cust_id,
     booking.to=req.body.to,
+    booking.date=req.body.date,
+    booking.time=req.body.time,
     booking.from=req.body.from,
     booking.distance=req.body.distance,
     booking.fare=req.body.fare,

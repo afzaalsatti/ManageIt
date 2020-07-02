@@ -64,7 +64,7 @@ comp.style.cursor="pointer";
 </text>
 
 <text onClick={this.toggleComponent} style={{color:'white'}} onMouseEnter={this.changeHeadingToggleHover} onMouseLeave={this.changeHeadingToggleHover} className="trans_hist_nav_heading"  id ="ride">
-    Rides
+   Ticket Purchases
 </text>
 
 </div>

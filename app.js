@@ -2,11 +2,13 @@ const express=require('express');
 const path=require('path')
 const connection=require('./Schemas');
 const mongoose=require('mongoose');
+const multer = require("multer");
+var cors = require('cors');
 //init App
 const app=express();
 
 app.use(express.json());
-
+app.use(cors())
 //connecting to DB 
 
 // app.path('views',path.join(__dirname,'views'));
@@ -19,7 +21,15 @@ app.use(express.json());
 
 
 
-
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' +file.originalname )
+  }
+})
+var upload = multer({ storage: storage }).single('file')
 
 
 
@@ -38,9 +48,29 @@ const Vahicle=mongoose.model("Vahicle");
  const HirePool=mongoose.model("HirePool")
  const Booking=mongoose.model("Booking")
  const EmployeeNotification=mongoose.model("EmployeeNotification")
- 
+ const Company=mongoose.model("Company")
  const Earning=mongoose.model("Earning")
 
+
+
+
+
+ app.post('/uploadImage',function(req, res) {
+     
+    upload(req, res, function (err) {
+           if (err instanceof multer.MulterError) {
+               return res.status(500).json(err)
+           } else if (err) {
+               return res.status(500).json(err)
+           }
+console.log(req.test)
+      return res.status(200).json({"link":req.file.path}).send();
+
+    })
+
+});
+
+ 
  app.post('/getEarnings',(req,res)=>
  { 
      
@@ -1210,7 +1240,8 @@ app.post('/addDriverToHirePool',(req,res)=>
 });
 app.post('/addEmployee',(req,res)=>
 {
-console.log(req.body)
+    let d=new Date();
+
     const employee=new Employee();
     employee.company=req.body.company;
     employee.name=req.body.name;
@@ -1225,7 +1256,7 @@ console.log(req.body)
     employee.address=req.body.address;
     employee.education=req.body.education;
     employee.experience=req.body.experience;
-    employee.joining_date=req.body.joining_date;
+    employee.joining_date=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();;
 
     
    
@@ -1233,6 +1264,61 @@ console.log(req.body)
         res.json({
             status:'Success',
             id:employee._id.toString()
+           
+    
+        });
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+
+
+
+
+
+   ;
+    res.json({
+        status:'Success',
+        id:employee._id.toString()
+       
+
+    });
+
+});
+
+//Adding company
+app.post('/registerCompany',(req,res)=>
+{
+    let d=new Date();
+    const company=new Company();
+    company.ownerName=req.body.ownerName;
+    company.ownerEmail=req.body.ownerEmail;
+    company.ownerPass=req.body.ownerPass;
+    company.ownerId=req.body.ownerId;
+    company.ownerPhone=req.body.ownerPhone;
+    company.CompanyInfo=req.body.CompanyInfo;
+    company.CompanyMotto=req.body.CompanyMotto;
+    company.parent=req.body.parent;
+    company.CompanyLogo=req.body.CompanyLogo;
+    company.CompanyName=req.body.CompanyName;
+    company.CompanyEmail=req.body.CompanyEmail;
+    company.CompanyEmployee=req.body.CompanyEmployee;
+    company.experience=req.body.experience;
+    company.CompanyPhone=req.body.CompanyPhone;
+    company.CompanyHeadOffice=req.body.CompanyHeadOffice;
+    company.registerDate=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();
+
+    
+   
+    company.save().then(resultCode => {
+        res.json({
+            status:'Success'
+           
            
     
         });

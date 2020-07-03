@@ -1,38 +1,14 @@
 const mongoose=require('mongoose');
 
 const Company=mongoose.Schema({
-    ownerName:{
+    parent:{
         type:String,
         require:'required'
-    },
-    ownerEmail: {
-        type: String,
-        lowercase: true,
-        required: true,
-        require:'required'
-        
-     
     }
     ,ownerId: {
         type: String,
         
-        required: true,
-        require:'required'
-        
      
-    },
-    ownerPhone: {
-        type: String,
-        
-        required: true,
-        require:'required'
-        
-     
-    },
-    ownerPass: {
-        type: String,
-      
-        required: true,
         require:'required'
         
      
@@ -54,9 +30,28 @@ const Company=mongoose.Schema({
         require:'required'
     },
     CompanyEmployee:{
-        type:Number,
+        type:String,
         require:'required'
     },
+    CompanyInfo:{
+        type:String,
+        require:'required'
+    },
+    CompanyMotto:{
+        type:String,
+        require:'required'
+    },
+    registerDate:{
+        type:String,
+        require:'required'
+    },
+    CompanyLogo:{
+        type:String,
+        require:'required'
+    },
+    
+
+
 });
 
 mongoose.model("Company",Company);

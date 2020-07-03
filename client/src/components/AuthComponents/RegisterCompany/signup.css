@@ -3,7 +3,7 @@
 }
 
 .formgroupDivs{
-    width: 250px !important;
+    width: auto;
     float: left;
     margin-right: 30px;
 }
@@ -30,6 +30,15 @@
     overflow-x: hidden;
 }
 
+.formgroupDivs textarea{
+
+    width: 100%;
+    height: 100px;
+
+}
+#imagePicker-company{
+    width:100% !important
+}
 #style-2::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);

@@ -10,10 +10,12 @@
   "author": "Afzaal Shoukat",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "deck.gl": "^8.1.6",
     "express": "^4.17.1",
     "mapbox-gl-geocoder": "^2.0.1",
     "mongoose": "^5.8.12",
+    "multer": "^1.4.2",
     "react-datepicker": "^2.13.0",
     "react-map-gl-geocoder": "^2.0.11"
   },

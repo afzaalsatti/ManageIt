@@ -1,0 +1,59 @@
+.partnerFirstDiv{
+    text-align: center;
+
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    font-family: poppins;
+}
+#partner-logo-div{
+    text-align: center;
+    margin: auto;
+}
+#partner-logo{
+width: 100px;
+height: 70px;
+}
+.partner-card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    cursor: pointer;
+  }
+.partner-card{
+float: left;
+    width: 300px;
+    margin-bottom: 5px;
+    margin: 0px;
+    margin-top: 30px;
+    margin-left: 30px;
+    font-family: poppins;
+  
+}
+.partner-card text{
+    float: left;
+}
+.partner-benefit-sub{
+    text-align: initial;
+ 
+    width: 70%;
+   
+    margin:auto
+}
+.partner-benefit{
+    width: 33%;
+    float: left;
+    text-align: center;
+}
+.partnerFirstDiv button{
+   background: #1a73e8;
+   color: white;
+   margin-top: 30px;
+    height: 50px;
+    width: 140px;
+    outline: none;
+    border-radius: 10px;
+    border-style: none;
+}
+.partnerFirstDiv button:hover{
+    background: #174EA6;
+    
+ }

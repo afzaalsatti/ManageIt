@@ -1,0 +1,70 @@
+#settings_left{
+    width:15%;
+    background:rgb(63,63,63);
+    color:white;
+    float:left;
+    height: 600px;
+    text-align:center
+}
+#settings_right_title{
+   
+    height: 50px;
+    background: rgb(249,249,249);
+    padding-left: 50px;
+  font-weight: 550;
+    
+}
+#settings_left_title{
+    font-weight: 600;
+    font-size: large;
+}
+#settings_right text{
+    width: 100%;
+
+}
+.settings-footer{
+    width: 50%;
+    margin: auto;
+    float: right;
+    margin-top: 20px;
+}
+.settings-innerpage
+{
+    margin-left: 40px;
+}
+#settings_right{
+    width:85%;
+    float: left;
+   
+}
+
+  .settings_left_list li:hover{
+    border-left: 6px solid rgb(95,113,135);
+    background:rgb(51,54,59);
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+
+  }
+  .settings_left_list li text{
+    margin-left: 10px;
+     height: 40px;
+    vertical-align: sub;
+    font-weight: 600;
+  }
+ 
+.settings_left_list li{
+    list-style: none;
+    text-align: left;
+    
+    color: rgb(121,121,121);
+  
+    margin-top: 10px;
+    text-size-adjust: medium;
+    height: 40px;
+}
+.settings_left_list {
+   padding: 0px;
+   margin-top: 40px;
+    
+}

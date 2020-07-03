@@ -61,6 +61,12 @@ export default class NotificationModal extends Component {
         return (
             <div >
                        <Modal style={{backdropFilter: "blur(5px)"}} show={this.props.showModal} >
+                           <Modal.Header>
+                               <text style={{textAlign: "center",width: "100%",margin: "0px"}}>
+                               Notifications
+                               </text>
+                              
+                           </Modal.Header>
         
         <Modal.Body >
        <div>

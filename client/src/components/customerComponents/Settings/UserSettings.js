@@ -67,6 +67,7 @@ export default class  UserSettings extends React.Component {
     hidePrefs() {
       this.prefs.className = "md-modal";
       this.overlay.style.visibility = "";
+      window.alert("Closing")
     }
   
     showPrefs() {
@@ -123,12 +124,12 @@ export default class  UserSettings extends React.Component {
       // Return your Settings Pane
       return (
         <div>
-          <div className="page-header">
+          {/* <div className="page-header">
             <h1>
               react-settings-pane <small>Example</small>
             </h1>
-          </div>
-          <div style={{ margin: "30px 0 90px 0" }}>
+          </div> */}
+          {/* <div style={{ margin: "30px 0 90px 0" }}>
             <button
               onClick={this.showPrefs.bind(this)}
               className="btn btn-default"
@@ -136,10 +137,10 @@ export default class  UserSettings extends React.Component {
               Show Preferences
             </button>
           </div>
-          <p>
-            <h4>Result</h4>
+          <p> */}
+            {/* <h4>Result</h4>
             <pre className="well">{JSON.stringify(settings, null, 4)}</pre>
-          </p>
+          </p> */}
           <div ref={ref => (this.overlay = ref)} className="overlay" />
   
           <div ref={ref => (this.prefs = ref)} className="md-modal">

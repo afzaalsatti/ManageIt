@@ -30,7 +30,9 @@ import MapLocationPicker from './components/Utils/MapLocationPicker'
 import VahicleTracking from './components/Utils/VahicleTrackingPage'
 
 
-import partners from './components/Utils/Partners'
+
+
+
 
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
       <Route path="/register-company" exact component={RegisterCompany}></Route>
        <Route path="/home" exact component={mainPage}></Route> 
       <Route path="/app" exact component={ManageItApp}></Route>
-  
+      
       <Route  path="/signup" exact component={signup}></Route>
       <Route  path="/signin" exact component={Signn}></Route>
       <Route  path="/inventry" exact component={MainInventryPage}></Route>
@@ -65,7 +67,7 @@ function App() {
 
 
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
-      <Route  path="/partners" exact component={partners}></Route>
+      
      
       
       </Switch>

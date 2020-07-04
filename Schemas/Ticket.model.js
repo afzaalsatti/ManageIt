@@ -21,6 +21,10 @@ const Ticket=mongoose.Schema({
         type:String,
         require:'required'
     },
+    price:{
+        type:String,
+        require:'required'
+    },
     to: {
         type: String,
         

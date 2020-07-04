@@ -4,13 +4,15 @@ import Home from './home'
 import HireVahicle from '../Hire/HireVahicle'
 import TransHistory from '../TransportationHistory/TransHistory'
 import CareerPage from '../career/CareerPage'
-import Settings from '../Settings/UserSettings'
+import Settings from '../Settings/SettingsPage'
 import BookBusTicket from '../Tickets/BookBusTicket'
 import NotificationModal from '../../Utils/NotificationModal'
 import Wallet from '../../EmployeeComponents/DriverWallet'
-
-
+import Footer from '../../Utils/Footer'
+import Partners from '../../Utils/Partners'
+import Spinner from '../../Utils/Spinner'
 import history from "../../../history";
+import ContactUs from '../../customerComponents/contactus/ContactUs'
 var notifications=[];
 
 var requestLoadingMessage="";
@@ -39,7 +41,9 @@ this.state={component:<Home replaceMainComponent={this.replaceMainComponent}></H
 showNotif:false,
 noti_icon:"/assets/svg/notify.svg",
 isAdmin:false,
-isEmp:false
+isEmp:false,
+isLoading:false,
+showModal:false,
 };
 
 
@@ -279,7 +283,7 @@ isEmp:false
              {
 
                  this.setState({
-                     component:<TransHistory ></TransHistory>
+                     component:<TransHistory userData={this.props.location.data["userData"]} ></TransHistory>
                  });
              }
 
@@ -324,6 +328,30 @@ isEmp:false
 
 
          }
+         else if(pageToBeLoaded==="partner")
+         {
+             
+           
+
+                 this.setState({
+                     component:<Partners ></Partners>
+                 });
+             
+
+
+         }
+         else if(pageToBeLoaded==="contact")
+         {
+             
+           
+
+                 this.setState({
+                    showModal:true
+                 });
+             
+
+
+         }
          
         
         
@@ -338,6 +366,9 @@ isEmp:false
 
 checkDriverAvailibility=rData=>{
 
+    this.setState({
+        isLoading:true
+    })
 
     let req_data;
     let address;
@@ -379,6 +410,7 @@ checkDriverAvailibility=rData=>{
  
       if(status==='Success')
       {
+        
        if(data.result["status"]!=="active")
        {
            console.log("You have an active ride ! You cant Accept until previous finishes")
@@ -399,11 +431,17 @@ checkDriverAvailibility=rData=>{
  
        
         console.log("Operation Failed! Vahicle Details(Driver End)")
+        this.setState({
+            isLoading:false
+        })
       }
     // `data` is the parsed version of the JSON returned from the above endpoint.
     console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
   }).catch((error) => {
    
+    this.setState({
+        isLoading:false
+    })
     //   reqInProcess=reqInProcess+1;
     // this.RequestToServer(reqInProcess);
    console.log("Unexpected error Try again...  ");
@@ -413,7 +451,7 @@ checkDriverAvailibility=rData=>{
 
       acceptRideInvitation=rData=>{
         
-
+        
         // "type":this.props.location.data["sender"],
         // "id":this.props.location.data["userData"]["id"],
 
@@ -527,13 +565,17 @@ if(reqInProcess<= 3)
        // history.push("");
       }else{
  
-       
+        this.setState({
+            isLoading:false
+        })
         console.log("Operation Failed!"+reqInProcess)
       }
     // `data` is the parsed version of the JSON returned from the above endpoint.
     console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
   }).catch((error) => {
-   
+    this.setState({
+        isLoading:false
+    })
     //   reqInProcess=reqInProcess+1;
     // this.RequestToServer(reqInProcess);
    console.log("Unexpected error Try again...  ");
@@ -545,7 +587,7 @@ if(reqInProcess<= 3)
 }
 else
 {
-    
+   
 
     let body=rData.body.split("-");
     
@@ -567,7 +609,9 @@ else
          "phone":this.props.location.data["userData"].phone ,
          "dis":body[4]/25,
         };
-
+        this.setState({
+            isLoading:false
+        })
     
      //  console.log( temp["src"])
     history.push({
@@ -593,11 +637,22 @@ else
 
 
       }
+      getModalBtnClick=(type)=>{
+          if(type===1)
+          {
+             window.alert("Your email has been sent successfully")
+          }
+this.setState({
+    showModal:false
+})
+      }
    render(){
      
       return(
 
         <div style={{height:"100%",width:"100%"}}>
+              <ContactUs userData={this.props.location.data} getModalBtnClick={this.getModalBtnClick}  showModal={this.state.showModal}></ContactUs>
+    
 <NotificationModal acceptRideInvitation={this.checkDriverAvailibility} getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
 <div className="topbar" >
     <svg className="translate" style={{marginLeft:"15px"}} onClick={this.toggleSlideMenu} xmlns="http://www.w3.org/2000/svg"  height="24" viewBox="0 0 24 24" width="24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
@@ -717,17 +772,28 @@ onClick={()=>{
             />
                    
                 </li>
+                <li className="home-nav-item" onClick={() => this.getMenuSelection("contact")}>
+                <img src="/assets/images/settings_icon.png">
+                </img>         <span>
+                        Contact US
+                    </span>
+                </li>
+            
             </ul>
         </div>
         </div>
         <div className="left">
-      
-        
+           <div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
+        <Spinner ></Spinner>
+        </div>
 {this.state.component}
 
 {/* <HireVahicle></HireVahicle> */}
         
         </div>
+        <Footer>
+          
+          </Footer>
     </div>
       )
     }

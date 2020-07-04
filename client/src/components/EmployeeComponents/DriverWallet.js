@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import './css/driver_wallet.css'
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Spinner from '../Utils/Spinner'
 var total=0,pending=0,cleared=0,withdrawn=0,canceled=0;
 var earnings;
 var filteredearnings=[];
@@ -21,7 +22,8 @@ export default class DriverWallet extends Component {
         {
             super(props);
             this.state={
-                dataFetched:false
+                dataFetched:false,
+                isLoading:false
             }
             if(earnings === undefined)
             {
@@ -31,8 +33,37 @@ export default class DriverWallet extends Component {
             
         }
 
+        notifySuccess=(message)=>  {
+      
+      
+
+          toast.success(message,  {containerId: 'A'});
+        
+          
+        };
+        
+         notifyWarning=(message)=>  {
+              
+              
+        
+          toast.warning(message,  {containerId: 'A'});
+        
+          
+        };
+         notifyError=(message)=>  {
+              
+             
+        
+          toast.error(message,  {containerId: 'A'});
+        
+          
+        };
+
         filterEarningTable=(type)=>{
 
+          this.setState({
+            isLoaing:true
+          })
             filteredearnings=[];
             if(type==="everything")
             {
@@ -52,10 +83,13 @@ if(type.includes(earning.type) || type.includes(earning.status))
 });
             }
 
-
-this.setState({
-    dataFetched:true
+setTimeout(() => {
+  this.setState({
+    dataFetched:true,
+    isLoading:false
 })
+}, 1000);
+
 
 
 
@@ -127,6 +161,7 @@ this.setState({
             })
         }
 getDriverEarnings=()=>{
+ 
 total=0;
     let address="getEarnings";
     let req_data={
@@ -143,6 +178,7 @@ total=0;
         },
         body:JSON.stringify(req_data)
     }
+
     
 
     fetch("/"+address,options).then(response=>{
@@ -195,10 +231,12 @@ document.getElementById("withdrawn").innerHTML="RS"+withdrawn;
 document.getElementById("expected").innerHTML="RS"+(cleared+pending);
 document.getElementById("canceled").innerHTML="RS"+(canceled);
 
-this.setState({
-    dataFetched:true
+
+  this.setState({
+    dataFetched:true,
+    isLoading:false
 })
-       // history.push("");
+     // history.push("");
       }else{
 
        
@@ -227,8 +265,12 @@ this.setState({
         <div style={{margin:"50px"}}>
                 
 
-
+                <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
+         
 <div className="box-row p-b-100">
+<div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
+        <Spinner ></Spinner>
+        </div>
   <article className="db-new-content js-db-cont">
     <header className="db-new-header">
       <h1 className="alt">

@@ -126,17 +126,27 @@ class Signn extends Component {
 
 
 
-
+if(temp.sender.toLowerCase()==="owner" ||temp.sender.toLowerCase()==="admin" )
+{
+  history.push({
+    pathname: '/AdminDashboard',
+    data: temp,
+  }
+    )
+}else
+{
+  history.push({
+    pathname: '/home',
+    data: temp,
+  }
+    )
+}
 
           
           // window.alert("M")
         
     
-           history.push({
-            pathname: '/home',
-            data: temp,
-          }
-            )
+     
          
           // history.push("");
          }else{
@@ -164,6 +174,7 @@ class Signn extends Component {
   <section className="sign-in">
   
     <div className="container">
+ 
     <div style={{textAlign:"center"}}>
     <text>SignIn as</text>  
       <br></br>

@@ -7,13 +7,15 @@ import StripePayment from '../payment/stripe_payment'
 var count=0;
 var data={};
 var booked,total_booked,total_free;
-var userID,userType;
+var userID,userType,userEmail;
 export default class BooBusTicket extends Component {
   
   constructor(props){
     super(props);
-    userID=this.props.location.data.userData["_id"]
-    userType=this.props.location.data["sender"]
+   
+    userID=this.props.userData.userData["id"]
+    userType=this.props.userData["sender"]
+    userEmail=this.props.userData.userData["email"]
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
@@ -102,12 +104,12 @@ export default class BooBusTicket extends Component {
 
 
           "cust_cnic":document.getElementById("cnic").value,
-          "cust_contact":"contact number/email",
+          "cust_contact":userEmail,
           "to":this.props.details["to"],
           "from":this.props.details["from"],
-          "date":this.props.details["date"],
+          "date":d.getMonth()+1+"/"+ d.getDate()+":"+d.getFullYear(),
           "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
-          "amount":"test",
+          "price":booked.length*this.props.details["fare"],
           "tickets":booked.length
     //       "company":this.props.details["company"],
     // "title":this.props.details["tittle"],

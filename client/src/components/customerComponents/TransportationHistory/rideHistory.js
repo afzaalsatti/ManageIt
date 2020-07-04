@@ -108,11 +108,15 @@ var menu = [
 
 var ticketHistory;
 var pickupCords,dropoffCords;
+var userId,userEmail;
 export default class rideHistory extends Component {
 
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
+
+        userId=this.props.userData["id"]
+        userEmail=this.props.userData["email"]
 this.getListItemCards=this.getListItemCards.bind(this);
 this.showRideDetails=this.showRideDetails.bind(this);
 this.BtnPressed=this.BtnPressed.bind(this);
@@ -130,7 +134,7 @@ this.getTicketPurchaseHistory()
      
             
            
-            "id":"37405-6878852-1",
+            "id":userId,
            
      
              
@@ -194,7 +198,7 @@ this.getTicketPurchaseHistory()
       pickupCords = pickupCords.split(','); // split string on comma space
 
       this.setState({
-          component: <TransHistDetails dropoffCords={dropoffCords} pickupCords={pickupCords} details={menu[list_item]} ></TransHistDetails>
+          component: <TransHistDetails dropoffCords={dropoffCords} pickupCords={pickupCords} details={ticketHistory[list_item]} ></TransHistDetails>
       });
     
      

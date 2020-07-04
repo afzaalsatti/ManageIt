@@ -3,8 +3,9 @@ import mapboxgl  from 'mapbox-gl';
 import { Card } from 'react-bootstrap'
 import './css/tracking.css'
 import LoadiningModal  from '../Utils/LodingModal'
-import { id } from 'date-fns/locale';
 import history from '../../history'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 var mounted=true;
 var myLocation;
 var gotVahicleDetails=false;
@@ -65,7 +66,31 @@ navigator.geolocation.getCurrentPosition(function(position) {
 });
 
       }
+      notifySuccess=(message)=>  {
       
+      
+
+        toast.success(message,  {containerId: 'A'});
+      
+        
+      };
+      
+       notifyWarning=(message)=>  {
+            
+            
+      
+        toast.warning(message,  {containerId: 'A'});
+      
+        
+      };
+       notifyError=(message)=>  {
+            
+           
+      
+        toast.error(message,  {containerId: 'A'});
+      
+        
+      };
       getCustomerDetails=(id)=>
       {
       
@@ -125,14 +150,14 @@ navigator.geolocation.getCurrentPosition(function(position) {
          
              // history.push("");
             }else{
-       
+      
              
               console.log("Operation Failed! Customer Details")
             }
           // `data` is the parsed version of the JSON returned from the above endpoint.
           console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
         }).catch((error) => {
-         
+          this.getCustomerDetails(id);
           //   reqInProcess=reqInProcess+1;
           // this.RequestToServer(reqInProcess);
          console.log("Unexpected error Try again...  ");
@@ -205,7 +230,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
           // `data` is the parsed version of the JSON returned from the above endpoint.
           console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
         }).catch((error) => {
-         
+         this.getDriverDetails(id,company)
           //   reqInProcess=reqInProcess+1;
           // this.RequestToServer(reqInProcess);
          console.log("Unexpected error Try again...  ");
@@ -803,7 +828,7 @@ updateHirePool=()=>{
       {
       
         mounted=false;
-        window.alert("Booking finished ")
+        this.notifySuccess("Booking finished ")
         console.log("Finishing Booking HirePool Updated")
         let sender="customer"
         let userData={};
@@ -863,7 +888,7 @@ checkBookingStatus=()=>{
 
   
      mounted=false;
-    window.alert("Booking finished <checkBookingStatus>")
+  this.notifySuccess("Booking finished <status changed>")
     let sender="customer"
     let userData={};
     userData["name"]=this.props.location.data["name"]
@@ -976,7 +1001,7 @@ RequestToServer=()=>{
   {
        if(this.props.location.data["dest"]===testCords[testCords.length-1])  
        {
-         window.alert("Ride Completed");
+        this.notifySuccess("Ride Completed");
        }
        else{
         console.log("current location"+testCords[testCords.length-1]);
@@ -1137,6 +1162,7 @@ getModalBtnClick=type=>{
     render() {
         return (
             <div>
+               <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
               <LoadiningModal getModalBtnClick={this.getModalBtnClick} reqFailed={reqFailed} displayText={requestLoadingMessage} showModal={this.state.showModal}></LoadiningModal>
     
             <div id="TransHistmapDiv" style={{    width: "90%",height: "300px", marginLeft: "2%",marginTop:"50px"}} ref={el => this.mapContainer = el} className="absolute top right left bottom" />

@@ -13,6 +13,7 @@ export default class TransHistDetails extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.details)
     this.state = {
         pickupCords:this.props.pickupCords,
         dropoffCords:this.props.dropoffCords,
@@ -20,8 +21,55 @@ export default class TransHistDetails extends Component {
       lat: this.props.pickupCords[1],
       zoom: 8
     };
+
+    this.getRouteDetails();
   }
 
+  getRouteDetails=()=>{
+    let req_data={
+      "routeId":this.props.details.routeId
+    }
+    const options={
+      method:"POST",
+      headers:{
+          'Content-type':"application/json"
+          
+      },
+      body:JSON.stringify(req_data)
+  }
+  
+  
+  fetch("/getRouteDetails",options).then(response=>{
+      return response.json();
+  }).then(data=>{
+    let status=data.status;
+  
+  
+    if(status==='Success')
+    {
+     
+     
+ 
+    
+     console.log(data.details)
+      
+     // history.push("");
+    }else{
+  
+     
+      console.log("Operation Failed!")
+    }
+  // `data` is the parsed version of the JSON returned from the above endpoint.
+    // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+  }).catch((error) => {
+  
+  //   reqInProcess=reqInProcess+1;
+  // this.RequestToServer(reqInProcess);
+  console.log("Unexpected error Try again Retrying... History Booking  " +error);
+  
+  
+  });
+  }
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
 
@@ -252,7 +300,9 @@ map.on('load', function() {
   render() {
     const { lng, lat, zoom } = this.state;
     if(rating==="")
-    { for(var i=0;i<this.props.details.rating;i++)
+    { 
+     
+      for(var i=0;i<4;i++)
       {
        rating=rating+"★";
        
@@ -270,10 +320,13 @@ map.on('load', function() {
         <Card style={{ marginLeft: "15px"}} id="rideHistoryCard" >
                   <div>
           <div className="historytopdiv">
-          
+         
+         
+        
+     
               <text className="date" >Ride Fare</text>
          
-              <text className="moveToRight ">{this.props.details.charges}</text>
+              <text className="moveToRight ">RS {this.props.details.price}</text>
               <hr></hr>
           
               <img
@@ -284,7 +337,7 @@ map.on('load', function() {
                                     />
               <text className="date rideDetailCard" >Credit Pay </text>
          
-              <text className="moveToRight rideDetailCard">{this.props.details.credit}</text>
+              <text className="moveToRight rideDetailCard">RS 0</text>
               <br></br>
               <img
                                       className="rideHistoryAddIcon"
@@ -294,7 +347,7 @@ map.on('load', function() {
                                     />
               <text className="date rideDetailCard" >Cash Pay</text>
          
-              <text className="moveToRight rideDetailCard">{this.props.details.cash}</text>
+              <text className="moveToRight rideDetailCard">RS{this.props.details.price}</text>
           
            </div>
            <hr></hr>

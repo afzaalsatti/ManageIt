@@ -50,7 +50,7 @@ const Vahicle=mongoose.model("Vahicle");
  const EmployeeNotification=mongoose.model("EmployeeNotification")
  const Company=mongoose.model("Company")
  const Earning=mongoose.model("Earning")
-
+ const Email=mongoose.model("Email")
 
 
 
@@ -256,7 +256,52 @@ console.log(req.test)
    
    
   });
-
+  
+  app.post('/getRouteDetails',(req,res)=>
+ { 
+    
+    Route.findOne({ _id : req.body.routeId }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        details:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
  app.post('/getBookingStatus',(req,res)=>
  { 
     
@@ -755,10 +800,7 @@ if(req.body.sender==="customer")
 
  app.post('/sendRideInvitation',(req,res)=>
 { const notification=new EmployeeNotification();
-    console.log(req.body)
-    console.log("=============>")
-    console.log(req.body.to)
-    console.log(req.body.from)
+    
     notification.company=req.body.company;
     notification.body=req.body.body;
    
@@ -905,6 +947,7 @@ app.post('/updateRouteSeats',(req,res)=>
                         });
                      return;  
                      }  
+                    
                      ticket.cust_id=req.body.cust_id;
                      ticket.cust_contact=req.body.cust_contact;
                      ticket.cust_cnic=req.body.cust_cnic;
@@ -914,6 +957,7 @@ app.post('/updateRouteSeats',(req,res)=>
                      ticket.date=req.body.date;
                      ticket.time=req.body.time;
                     ticket.routeId=req.body.id
+                    ticket.price=req.body.price
                     ticket.routeId=req.body.id
                     ticket.quantity=req.body.tickets;
                     ticket.save().then(resultCode => {
@@ -1072,7 +1116,7 @@ app.post('/addAttendence',(req,res)=>
      attendence=record.attendance;
     
      attendence.push(req.body.attendance)
-     console.log(attendence)
+   
      Attendance.findOneAndUpdate({company:req.body.company, date:req.body.date} , { attendance:  attendence },   
          function(err,record) {  
           if (record==null) {  
@@ -1238,6 +1282,47 @@ app.post('/addDriverToHirePool',(req,res)=>
     });
 
 });
+
+app.post('/sendEmail',(req,res)=>
+{
+    let d=new Date();
+
+    const email=new Email();
+    email.company=req.body.company;
+    email.subject=req.body.subject;
+    email.body=req.body.body;
+    email.to=req.body.to;
+    email.from=req.body.from;
+    email.date=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();;
+    email.time=d.getHours() +":"+d.getMinutes()+":"+d.getSeconds();;
+
+    
+   
+    email.save().then(resultCode => {
+        res.json({
+            status:'Success'
+            
+           
+    
+        });
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+
+
+
+
+
+   ;
+    
+
+});
 app.post('/addEmployee',(req,res)=>
 {
     let d=new Date();
@@ -1311,7 +1396,7 @@ app.post('/registerCompany',(req,res)=>
     company.experience=req.body.experience;
     company.CompanyPhone=req.body.CompanyPhone;
     company.CompanyHeadOffice=req.body.CompanyHeadOffice;
-    company.registerDate=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();
+    company.registerDate=d.getMonth()+1 +"/"+d.getDate()+"/"+d.getFullYear();
 
     
    
@@ -1336,13 +1421,8 @@ app.post('/registerCompany',(req,res)=>
 
 
 
-   ;
-    res.json({
-        status:'Success',
-        id:employee._id.toString()
-       
-
-    });
+   
+    
 
 });
 
@@ -1373,7 +1453,7 @@ app.post('/signup',(req,res)=>
         users.find((err,doc)=>{
             if(!err)
             {
-                console.log(doc);
+                
                 res.setHeader('Content-Type', 'text/json');
                 res.json({
                     status:'Success'
@@ -1418,7 +1498,7 @@ app.post('/signin',(req,res)=>
        
             if(!err)
             {
-                 console.log(record);
+              
                  if(record != null)
                  {
                      if(req.body.password=== record.password)

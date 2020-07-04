@@ -9,7 +9,9 @@ import MapLocationPicker from '../../Utils/MapLocationPicker'
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import LoadiningModal  from '../../Utils/LodingModal'
+
+
+
 var reqInProcess=1;
 var requestLoadingMessage="";
 var reqFailed=false;
@@ -34,7 +36,31 @@ export default class HireVahicle extends Component {
 // _id
     // console.log("----------------->"+this.props.userData["userData"]["_id"])
   }
+  notifySuccess=(message)=>  {
+      
+      
 
+    toast.success(message,  {containerId: 'A'});
+  
+    
+  };
+  
+   notifyWarning=(message)=>  {
+        
+        
+  
+    toast.warning(message,  {containerId: 'A'});
+  
+    
+  };
+   notifyError=(message)=>  {
+        
+       
+  
+    toast.error(message,  {containerId: 'A'});
+  
+    
+  };
   setCords(a){
     if(click==="from")
     {
@@ -49,18 +75,11 @@ export default class HireVahicle extends Component {
     
     
       }
-       notifyWarning=() => {
       
-      
-
-        toast.warning("All Fields Are Mendatory ",  {containerId: 'A'});
-      
-        
-      };
 
       continueRideBooking=(exist)=>{
         if(!exist){
-          window.alert("Cancel");
+         this.notifyWarning("Can`t start ride right now");
         }
         else{
 
@@ -111,7 +130,7 @@ export default class HireVahicle extends Component {
         }
         else
         {
-          this.notifyWarning();
+          this.notifyWarning("All Fields Are Mendatory");
         }
 
 //         
@@ -176,7 +195,7 @@ console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": ".
 
 //   reqInProcess=reqInProcess+1;
 // this.RequestToServer(reqInProcess);
-window.alert("Unexpected error Try again...  "+reqInProcess);
+this.notifyError("Unexpected error Try again...  ");
 });
 
 }
@@ -184,7 +203,8 @@ window.alert("Unexpected error Try again...  "+reqInProcess);
     render() {
         return (
           <div>
-<ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
+ <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
+        
 <Modal id="modal1" style={{backdropFilter: "blur(5px)"}} show={this.state.showRideWarning} >
         
         <Modal.Body style={{background:"#3d3d3e",color:"white",textAlign:"center"}}>

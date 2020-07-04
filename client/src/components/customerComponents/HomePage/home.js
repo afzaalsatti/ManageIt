@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import './css/home.css'
 import "../career/jobs.css"
 import { Card } from 'react-bootstrap'
-import Footer from '../../Utils/Footer'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import MapLocationPicker from '../../Utils/MapLocationPicker'
 
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Spinner from '../../Utils/Spinner'
 
 var pageLoaded=1;
 var from_cord="Select from map",to_cord="Select from map";
@@ -30,7 +32,8 @@ export default class home extends Component {
       ],
       selectedImage: "/assets/imageSlider/test.jpg",
       showModal:false,
-      tickets:[]
+      tickets:[],
+      isLoading:false
     };
 
     this.setCords = this.setCords.bind(this);
@@ -39,6 +42,31 @@ export default class home extends Component {
 
     
   }
+  notifySuccess=(message)=>  {
+      
+      
+
+    toast.success(message,  {containerId: 'A'});
+  
+    
+  };
+  
+   notifyWarning=(message)=>  {
+        
+        
+  
+    toast.warning(message,  {containerId: 'A'});
+  
+    
+  };
+   notifyError=(message)=>  {
+        
+       
+  
+    toast.error(message,  {containerId: 'A'});
+  
+    
+  };
   bookTicket = index => e =>
     {
       let data=[]
@@ -62,10 +90,13 @@ this.props.replaceMainComponent(data,"BookBusTicket")
     }
   searchTickets()
   {
+    this.setState({
+      isLoading:true
+  })
     let to=document.getElementById("dest").value;
     let from=document.getElementById("src").value;
     let dept_date=document.getElementById("onward_cal").value;
-    window.alert("Contecting")
+   
         
     const req_data={
     
@@ -93,12 +124,13 @@ this.props.replaceMainComponent(data,"BookBusTicket")
           return response.json();
     }).then(data=>{
         let status=data.status;
-        console.log(data.result)
+        
    
         if(status==='Success')
         {
         
-          window.alert("Operation Sucessful")
+          
+          this.notifySuccess("Tickets are fetched Succesfully")
           fetchTickets=data.result;
           
 let temp=  data.result.map((key,index)=>{
@@ -192,20 +224,32 @@ Fare
       </li>
 });
 
-          this.setState({
-            tickets:temp  
-        
-          })
+
+setTimeout(() => {
+  this.setState({
+    tickets:temp,
+     isLoading:false
+
+  })
+}, 1200);
+
+          
        
         }else{
          
-          window.alert("Operation Failed!")
+          this.setState({
+             isLoading:false })
+          this.notifyWarning("Check your request and try again")
         }
       // `data` is the parsed version of the JSON returned from the above endpoint.
-      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+       // { "userId": 1, "id": 1, "title": "...", "body": "..." }
     }).catch((error) => {
-     
-     window.alert("Unexpected error Try again...  "+error);
+      this.setState({
+        isLoading:false
+   
+     })
+
+    this.notifyError("Error in connecting to server. try again")
    });
 
 
@@ -215,11 +259,11 @@ Fare
 if(click==="from")
 {
   from_cord=a.lng+","+a.lat;
-  window.alert("from   "+from_cord)
+  
 }
 else{
   to_cord=a.lng+","+a.lat;
-  window.alert("to   "+to_cord)
+
 }
    
 
@@ -256,6 +300,10 @@ else{
  </div> */}
 
           <div id="homeComponent">
+          <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
+          <div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
+        <Spinner ></Spinner>
+        </div>
             <Modal  style={{backdropFilter: "blur(5px)"}} show={this.state.showModal} >
         
         <Modal.Body style={{background:"#3d3d3e"}}>
@@ -757,9 +805,7 @@ onClick={()=>{
         
             </div>
       
-        <Footer>
-          
-        </Footer>
+       
         
           </div>
         

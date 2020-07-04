@@ -107,15 +107,18 @@ var menu = [
       "dropoffCords": "73.071442,33.626057"
     }
   ];
+  var userId,userEmail;
 // function (list_item) {
     
   
 // }
 export default class BookingHistory extends Component {
     
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
+        userId=this.props.userData["id"]
+        userEmail=this.props.userData["email"]
 this.getListItemCards=this.getListItemCards.bind(this);
 this.showRideDetails=this.showRideDetails.bind(this);
 this.BtnPressed=this.BtnPressed.bind(this);
@@ -334,7 +337,7 @@ getBookingHistory=()=>{
 
        
       
-       "id":"1",
+       "id":userEmail,
       
 
         

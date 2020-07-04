@@ -135,10 +135,9 @@ export default class signup2 extends Component {
   
         if(status==='Success')
         {
-  window.alert("Sucess")
-        //  this.saveOwnerDetails();
+ 
         
-         // history.push("");
+         history.push("/signin");
         }else{
           window.alert("OOH No")
         }

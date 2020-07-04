@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './css/partners.css'
-import Footer from './Footer'
+
 import { Card } from 'react-bootstrap'
+import history from '../../history'
+import Spinner from './Spinner'
 
 var partners=[
     {
@@ -46,13 +48,19 @@ export default class Partners extends Component {
 
 constructor(props){
     super(props);
+    this.state={
+        isLoading:true}
 }
 
-getPartnerDetals=()=>{
+getPartnerDetails=()=>{
 
  return partners.map((key, index)=>{
         
-        
+        setTimeout(() => {
+            this.setState({
+                isLoading:false
+            })
+        }, 800);
     return <Card className="partner-card">
     <Card.Header style={{paddingLeft:"10px"}}>
         <div id="partner-logo-div">
@@ -93,7 +101,16 @@ getPartnerDetals=()=>{
     </text>
 <br></br>
 
-    <button >Register Now</button>
+    <button 
+    onClick={()=>{
+        history.push({
+            pathname: '/register-company'
+            
+          }
+            )
+    }}
+    
+    >Register Now</button>
 </div>
 
 <hr></hr>
@@ -177,9 +194,11 @@ getPartnerDetals=()=>{
 </div>
 </div>
 
+<div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
+        <Spinner ></Spinner>
+        </div>
 
-
-{this.getPartnerDetals()}
+{this.getPartnerDetails()}
 
 
 

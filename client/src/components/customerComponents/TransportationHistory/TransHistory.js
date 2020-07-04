@@ -5,13 +5,14 @@ import BookinHistory from './BookingHistory'
 const RideHistory=rideHistory;
 
 export default class TransHistory extends Component {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
+        console.log()
         this.changeHeadingToggleHover=this.changeHeadingToggleHover.bind(this);
         this.toggleComponent=this.toggleComponent.bind(this);
       
-        this.state={component:<BookinHistory></BookinHistory>}
+        this.state={component:<BookinHistory userData={this.props.userData}></BookinHistory>}
     }
 
 
@@ -22,7 +23,7 @@ const element=document.getElementById(id);
         {
             element.style.textDecoration="underline";
 this.setState({
-    component:<RideHistory></RideHistory>
+    component:<RideHistory userData={this.props.userData}></RideHistory>
 });
 
         }else if(id=="booking" )
@@ -30,7 +31,7 @@ this.setState({
             element.style.textDecoration="underline";
 this.setState({
 
-    component:<BookinHistory></BookinHistory>
+    component:<BookinHistory userData={this.props.userData}></BookinHistory>
 });
         }
        

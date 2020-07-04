@@ -114,7 +114,7 @@ else if(type==="about"){
                 <div id="settings_left" >
 <text id="settings_left_title">General Settings</text>
 
-<ul className="settings_left_list" 
+<ul style={{    display: "grid"}}className="settings_left_list" 
 onClick={(event)=>{
     event= event || window.event;
                  

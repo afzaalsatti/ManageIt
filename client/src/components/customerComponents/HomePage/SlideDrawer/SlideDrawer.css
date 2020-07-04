@@ -72,6 +72,18 @@ position: absolute;
 
 }
 
+.loadingGifDiv{
+   z-index: 9;
+    position: absolute;
+    background: azure;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    backdrop-filter: blur(5px);
+    opacity: 0.6;
+}
 
 
 

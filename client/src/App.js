@@ -29,6 +29,8 @@ import RegisterCompany from './components/AuthComponents/RegisterCompany/Signup'
 import MapLocationPicker from './components/Utils/MapLocationPicker'
 import VahicleTracking from './components/Utils/VahicleTrackingPage'
 
+import AdminHome from './AdminDashboard/Home/HomeDetails'
+
 
 
 
@@ -65,8 +67,9 @@ function App() {
       <Route path="/contactus" exact component={ContactPage}></Route>
       <Route path="/payment" exact component={StripePayment}></Route>
 
-
+      
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
+      <Route  path="/adHome" exact component={AdminHome}></Route>
       
      
       

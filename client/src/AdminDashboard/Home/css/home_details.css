@@ -1,0 +1,39 @@
+.home_detail_card{
+    width: 250px;
+    height: 200px;
+    background: #8861E0;
+    color: white;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.home_detail_card img{
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    float: right;
+   
+}
+
+.graph-image{
+    width: 100% !important;
+    height: auto !important;
+    margin-right: 0px !important;
+}
+
+
+
+.revenues-actions{
+    float: right;
+}
+.revenues-actions span{
+    cursor: pointer;
+}
+.revenues-actions li :hover{
+    background-color: rgb(212, 212, 212);
+
+}
+.revenues-actions li {
+   display: grid !important;
+    
+}

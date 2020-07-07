@@ -29,7 +29,7 @@ import RegisterCompany from './components/AuthComponents/RegisterCompany/Signup'
 import MapLocationPicker from './components/Utils/MapLocationPicker'
 import VahicleTracking from './components/Utils/VahicleTrackingPage'
 
-import AdminHome from './AdminDashboard/Home/HomeDetails'
+import AdminHome from './AdminDashboard/Home/HomePage'
 
 
 

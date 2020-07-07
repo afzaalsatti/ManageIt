@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import Menu from './Menu'
-import Charts from './Chart'
+// import Charts from './Chart'
+import Charts from './Home/HomePage'
 import './css/adminlte.css'
 
 

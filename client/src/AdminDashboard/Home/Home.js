@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import './css/home.css'
 import { Card } from 'react-bootstrap'
 import Chart from 'react-apexcharts'
+var getDetails;
 export default class Home extends Component {
     constructor(props) {
         super(props);
-     
+        
+        getDetails=this.props.getDetails;
         this.state = {
           options: {
             chart: {
               id: 'apexchart-example'
             },
             xaxis: {
-                name: 'Date',
+                
               categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,26, 27, 28, 29, 30]
             }
           },
@@ -201,7 +203,9 @@ export default class Home extends Component {
          
         <a style={{color:"blue",float:"right"}}
         onClick={()=>{
-            this.props.getDetails("a","b");
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("sales",data);
         }}
         >Explore more &#8594;</a>
    </Card.Body>
@@ -248,7 +252,14 @@ export default class Home extends Component {
         <Chart options={this.state.options} series={this.state.series} type="area" />
  
          
-        <a style={{color:"blue",float:"right"}}>Explore more &#8594;</a>
+        <a style={{color:"blue",float:"right"}}
+         onClick={()=>{
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("new_customer",data);
+        }}
+        
+        >Explore more &#8594;</a>
    </Card.Body>
 
   
@@ -289,12 +300,18 @@ export default class Home extends Component {
 
    <Card.Body style={{margin:"0px",padding:"0px"}}>
        
-        <text>No of New Customers in last 30 Days 0</text>
+        <text>Ride Bookings last 30 Days 0</text>
         <br></br>
         <Chart options={this.state.options} series={this.state.series} type="area" />
  
          
-        <a style={{color:"blue",float:"right"}}>Explore more &#8594;</a>
+        <a style={{color:"blue",float:"right"}}
+         onClick={()=>{
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("rides",data);
+        }}
+        >Explore more &#8594;</a>
    </Card.Body>
 
   
@@ -334,12 +351,18 @@ export default class Home extends Component {
 
    <Card.Body style={{margin:"0px",padding:"0px"}}>
        
-        <text>No of New Customers in last 30 Days 0</text>
+        <text>No Ride Cancelation in last 30 Days 0</text>
         <br></br>
         <Chart options={this.state.options} series={this.state.series} type="area" />
  
          
-        <a style={{color:"blue",float:"right"}}>Explore more &#8594;</a>
+        <a style={{color:"blue",float:"right"}}
+         onClick={()=>{
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("ride_cancel",data);
+        }}
+        >Explore more &#8594;</a>
    </Card.Body>
 
   
@@ -378,12 +401,18 @@ export default class Home extends Component {
 
    <Card.Body style={{margin:"0px",padding:"0px"}}>
        
-        <text>No of New Customers in last 30 Days 0</text>
+        <text>No of Tickets Canceled in last 30 Days 0</text>
         <br></br>
         <Chart options={this.state.options} series={this.state.series} type="area" />
  
          
-        <a style={{color:"blue",float:"right"}}>Explore more &#8594;</a>
+        <a style={{color:"blue",float:"right"}}
+         onClick={()=>{
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("ticket_cancel",data);
+        }}
+        >Explore more &#8594;</a>
    </Card.Body>
 
   

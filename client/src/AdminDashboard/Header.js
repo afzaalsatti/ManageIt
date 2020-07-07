@@ -9,24 +9,38 @@ export default class Header extends Component {
   render() {
     return (
       <div >
-        <nav  className="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav id="admin-dash-nav" style={{marginLeft:"0px",background:"rgb(52, 58, 64)"}}  className="main-header navbar navbar-expand navbar-white navbar-light">
           {/* Left navbar links */}
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" data-widget="pushmenu" href="#">
+              <a  style={{color:"white"}}className="nav-link"
+              //  data-widget="pushmenu" href="#"
+              data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+              onClick={()=>{
+               if( document.getElementById("admin-dash-nav").style.marginLeft==="0px"){
+                document.getElementById("admin-dash-nav").style.marginLeft="250px"
+
+               }
+               else
+               {
+                document.getElementById("admin-dash-nav").style.marginLeft="0px"
+               }
+
+              }}
+              >
                 <i className="fas fa-bars" />
               </a>
             </li>
             <li className="nav-item d-none d-sm-inline-block">
             < ReactLink to="/">
-              <a  className="nav-link">
+              <a  style={{color:"white"}} className="nav-link">
                 Home
               </a>
               </ReactLink>
             </li>
             <li className="nav-item d-none d-sm-inline-block">
             < ReactLink to="/contact">
-              <a href="#" className="nav-link">
+              <a   style={{color:"white"}}href="#" className="nav-link">
                 Contact
               </a>
               </ReactLink>
@@ -52,7 +66,7 @@ export default class Header extends Component {
           <ul className="navbar-nav ml-auto">
             {/* Messages Dropdown Menu */}
             <li className="nav-item dropdown">
-              <a className="nav-link" data-toggle="dropdown" href="#">
+              <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
                 <i className="far fa-comments" />
                 <span className="badge badge-danger navbar-badge">3</span>
               </a>
@@ -67,7 +81,7 @@ export default class Header extends Component {
                     />
                     <div className="media-body">
                       <h3 className="dropdown-item-title">
-                        Brad Diesel
+                       Afzaal Shoukat
                         <span className="float-right text-sm text-danger">
                           <i className="fas fa-star" />
                         </span>
@@ -91,7 +105,7 @@ export default class Header extends Component {
                     />
                     <div className="media-body">
                       <h3 className="dropdown-item-title">
-                        John Pierce
+                      Bilal Shoukat
                         <span className="float-right text-sm text-muted">
                           <i className="fas fa-star" />
                         </span>
@@ -115,7 +129,7 @@ export default class Header extends Component {
                     />
                     <div className="media-body">
                       <h3 className="dropdown-item-title">
-                        Nora Silvester
+                       Waqar
                         <span className="float-right text-sm text-warning">
                           <i className="fas fa-star" />
                         </span>
@@ -136,7 +150,7 @@ export default class Header extends Component {
             </li>
             {/* Notifications Dropdown Menu */}
             <li className="nav-item dropdown">
-              <a className="nav-link" data-toggle="dropdown" href="#">
+              <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
                 <i className="far fa-bell" />
                 <span className="badge badge-warning navbar-badge">15</span>
               </a>
@@ -169,6 +183,7 @@ export default class Header extends Component {
             </li>
             <li className="nav-item">
               <a
+               style={{color:"white"}}
                 className="nav-link"
                 data-widget="control-sidebar"
                 data-slide="true"

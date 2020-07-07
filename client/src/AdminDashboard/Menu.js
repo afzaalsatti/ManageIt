@@ -43,7 +43,7 @@ constructor()
     render() {
       var handleToUpdate  =   this.props.handleToUpdate;
         return (
-          <div >
+          <div class="collapse" id="collapseExample" >
                  <aside className="main-sidebar sidebar-dark-primary elevation-4">
   {/* Brand Logo */}
   < ReactLink to="/">

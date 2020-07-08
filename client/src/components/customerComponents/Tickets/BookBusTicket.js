@@ -8,14 +8,17 @@ var count=0;
 var data={};
 var booked,total_booked,total_free;
 var userID,userType,userEmail;
+var userInfo;
 export default class BooBusTicket extends Component {
   
   constructor(props){
     super(props);
    
-    userID=this.props.userData.userData["id"]
-    userType=this.props.userData["sender"]
-    userEmail=this.props.userData.userData["email"]
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
+    console.log(userInfo)
+    userID=userInfo.userData["id"]
+    userType=userInfo["sender"]
+    userEmail=userInfo.userData["email"]
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);

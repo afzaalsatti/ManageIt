@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 var cust_email;
+var userInfo;
 export default class ContactUs extends Component {
     constructor(props)
     {
 super(props);
-
+userInfo=JSON.parse(localStorage.getItem("userInfo"));
 if(this.props.showModal)
 {
-    cust_email=this.props.userData.userData["email"];
+    cust_email=userInfo.userData["email"];
 }
 
     }
@@ -47,7 +48,7 @@ if(this.props.showModal)
        }}
        
        onClick={()=>{
-        this.props.getModalBtnClick(2)
+        this.props.getContactModalBtnClick(2)
         
       }}>Cancel</button>
      
@@ -76,7 +77,7 @@ if(this.props.showModal)
       
             "company":"decideLater",
        "to":"decideLater",
-       "from":this.props.userData.userData["email"],
+       "from":userInfo.userData["email"],
        "subject":document.getElementById("subject").value,
        "body":document.getElementById("body").value,
       
@@ -107,7 +108,7 @@ if(this.props.showModal)
         {
           
           
-            this.props.getModalBtnClick(1)
+            this.props.getContactModalBtnClick(1)
        
        
          

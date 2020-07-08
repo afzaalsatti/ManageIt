@@ -30014,3 +30014,38 @@ a.text-muted:hover {
   color: #ffffff;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+
+.nav-sidebar li:hover{
+  border-left: 6px solid rgb(95,113,135);
+    background:rgb(51,54,59);
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+.nav-sidebar li ul li:hover{
+  border-left: 6px solid white;
+  background: #007BFF;
+ 
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-sidebar{
+  padding: 0px;
+  margin-top: 40px;
+}
+.nav-sidebar li {
+  list-style: none;
+    text-align: left;
+    
+    color: rgb(121,121,121);
+  
+    margin-top: 10px;
+    text-size-adjust: medium;
+    
+}
+.mt-2 ul  li:hover > ul{
+  visibility: visible;
+}

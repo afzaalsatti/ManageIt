@@ -270,3 +270,109 @@ background-color: rgb(62, 218, 24);
     margin-right: 35px;
 }
 
+
+
+
+
+.mini-card-grid {
+    scrollbar-color: #201c29;
+    scrollbar-width: 10px;
+    scrollbar-gutter: always;
+    padding: 3rem;
+    display: flex;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.mini-card {
+    min-width: 300px;
+    min-height: 350px;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: #17141d;
+    box-shadow: -1rem 0 3rem #000;
+    display: flex;
+    flex-direction: column;
+    transition: .2s;
+    margin: 0;
+}
+.mini-article-card-header {
+    margin-bottom: auto;
+}
+.mini-article-subhead {
+    font-size: 14px;
+    margin: 0 0 1rem;
+}
+
+.mini-article-byline {
+    margin: 3rem 0 0;
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    align-items: center;
+}
+.mini-article-byline .author-avatar, .mini-article-byline .author-name-area {
+    grid-area: auto;
+}
+.mini-article-meta .author-name {
+    display: block;
+    position: relative;
+}
+.mini-article-meta .author-avatar img {
+    width: 40px;
+    height: 40px!important;
+}
+.author-avatar img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px!important;
+    display: block;
+    overflow: hidden;
+    margin: 16px 10px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.mini-article-meta .author-avatar .half-circle {
+    width: 60px;
+    height: 48px;
+}
+.mini-article-byline .author-name-area {
+    grid-area: auto;
+}
+.author-name-prefix, .comments-prefix, .date-prefix, .shared-by-prefix, .type-of-guide {
+    font-family: Ringside Regular A,Ringside Regular B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+    font-style: normal;
+    font-weight: 700;
+    color: #7a7a8c;
+}
+.tags a {
+    font-family: Ringside Regular A,Ringside Regular B,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: .5rem;
+}
+.tags a {
+    color: #7a7a8c;
+    text-transform: uppercase;
+    font-size: .66rem;
+    white-space: nowrap;
+    border: 3px solid #28242f;
+    border-radius: 2rem;
+    padding: .2rem .85rem .25rem;
+}
+
+
+
+
+.parallax {
+    /* The image used */
+    background-image: url("/assets/images/home_bg2.jpg");
+  
+    /* Set a specific height */
+    height: 500px;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

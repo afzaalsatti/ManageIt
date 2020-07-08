@@ -15,7 +15,7 @@ export default class Header extends Component {
             <li className="nav-item">
               <a  style={{color:"white"}}className="nav-link"
               //  data-widget="pushmenu" href="#"
-              data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+              data-toggle="collapse" href="" aria-expanded="false" aria-controls="collapseExample"
               onClick={()=>{
                if( document.getElementById("admin-dash-nav").style.marginLeft==="0px"){
                 document.getElementById("admin-dash-nav").style.marginLeft="250px"
@@ -123,7 +123,7 @@ export default class Header extends Component {
                   {/* Message Start */}
                   <div className="media">
                     <img
-                      src="dist/img/user3-128x128.jpg"
+                      src="dist/img/usr3-128x128.jpg"
                       alt="User Avatar"
                       className="img-size-50 img-circle mr-3"
                     />

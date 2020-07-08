@@ -17,13 +17,13 @@ var requestLoadingMessage="";
 var reqFailed=false;
 var from_cord="Select from map",to_cord="Select from map";
 var click;
-
+var userInfo;
 export default class HireVahicle extends Component {
   
   constructor(props)
   {
     super(props);
-  
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
     this.state={  showModal:false,
       showRideWarning:false}
     this.setCords = this.setCords.bind(this);
@@ -34,7 +34,7 @@ export default class HireVahicle extends Component {
 // password: "1"
 // subscription
 // _id
-    // console.log("----------------->"+this.props.userData["userData"]["_id"])
+    // console.log("----------------->"+userInfo["userData"]["_id"])
   }
   notifySuccess=(message)=>  {
       
@@ -113,11 +113,11 @@ export default class HireVahicle extends Component {
           
             let temp={
               "sender":"customer",
-              "id":this.props.userData["userData"]["_id"],
-              "name":this.props.userData["userData"]["name"],
-              "email":this.props.userData["userData"]["email"],
-              "status":this.props.userData["userData"]["status"],
-              "phone":this.props.userData["userData"]["phone"],
+              "id":userInfo["userData"]["_id"],
+              "name":userInfo["userData"]["name"],
+              "email":userInfo["userData"]["email"],
+              "status":userInfo["userData"]["status"],
+              "phone":userInfo["userData"]["phone"],
              
               "src":src,
                "dest":dest,
@@ -149,7 +149,7 @@ checkForActiveRide=()=>{
 
 
       "company":"decideLater",
- "cust_id":this.props.userData["userData"]["_id"],
+ "cust_id":userInfo["userData"]["_id"],
 
 // "vahicleId":data["vh_num"],
 // "status":"active",
@@ -444,7 +444,7 @@ this.notifyError("Unexpected error Try again...  ");
 
 // //   let temp={
 // //     "sender":"customer",
-// //     "cust_id":this.props.userData["userData"]["_id"],
+// //     "cust_id":userInfo["userData"]["_id"],
 // //     "src":src,
 // //      "dest":dest,
 // //      "data":lineDistance};

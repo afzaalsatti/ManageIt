@@ -51,15 +51,21 @@ class Signn extends Component {
           "userData":data.record
            
           };
-          console.log(data.record)
-          // window.alert("M")
-        
-    
+          
+         
+  
+          setTimeout(function() {
+           localStorage.setItem("userInfo",JSON.stringify(temp))
+
            history.push({
             pathname: '/home',
             data: temp,
-          }
-            )
+          })
+           
+        }, 50);
+    
+        
+            
          
           // history.push("");
          }else{
@@ -120,26 +126,36 @@ class Signn extends Component {
           };
          
 
-
-
+        
+         
+          
 
 
 
 
 if(temp.sender.toLowerCase()==="owner" ||temp.sender.toLowerCase()==="admin" )
 {
-  history.push({
-    pathname: '/AdminDashboard',
-    data: temp,
-  }
-    )
+  setTimeout(function() {
+    localStorage.setItem("userInfo",JSON.stringify(temp))
+
+    history.push({
+     pathname: '/home',
+     data: temp,
+   })
+    
+ }, 50);
 }else
 {
-  history.push({
-    pathname: '/home',
-    data: temp,
-  }
-    )
+ 
+  setTimeout(function() {
+    localStorage.setItem("userInfo",JSON.stringify(temp))
+
+    history.push({
+     pathname: '/home',
+     data: temp,
+   })
+    
+ }, 50);
 }
 
           

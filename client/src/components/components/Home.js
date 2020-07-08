@@ -141,30 +141,30 @@ class HomeComponent extends React.Component {
         <Zoom>
           <div
             id="aboutus"
-            className="introText divs"
-            style={{ height: "auto",width:"auto",marginTop:"30px",backgroundColor: "rgba(246,245,245,0)" }}
+            className="introText divs parallax "
+            style={{ height: "auto",width:"auto",marginTop:"51px",backgroundColor: "rgba(246,245,245,0)" }}
           >
            
               <Reveal effect="fadeInUp">
                
               </Reveal>
 
-<Card className="homeCards" style={{paddinTop:"20px",marginTop:"0px"}}>
+
+
+
+
+
+<Card  style={{paddinTop:"20px",marginTop:"0px",backgroundColor:"transparent"}}>
  
- <div>
-  <img
-                        src="//s1.rdbuz.com/web/images/home/promise.png"
-                        height={100}
-                        width={100}
-                        
-                      />
+ <div  >
+  
   
 
 <p
 //  style={{width: "fit-content"}}
    className="heading">Why Us</p>
 </div>
-<p>
+<p style={{color:"black"}}>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
               viverra justo, nec tristique nisi. Curabitur id orci in sapien
               vehicula pretium id non mauris. Nam ac dolor gravida, rhoncus arcu
@@ -222,7 +222,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
             style={{ height: "auto",width:"100%" }}
           >
 
-<Card className="homeCards" >
+<Card className=" homeCards" style={{background:"#E6E1DD"}} >
             <p>
               <Reveal effect="fadeInUp">
                 <p className="heading">Our Provided Solutions</p>

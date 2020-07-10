@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import './AddNewVahicle.css'
-import {Dropdown,ButtonGroup,Button} from 'react-bootstrap'
-import {
-    Card,  Button as CardButton
-  } from 'react-bootstrap'
+
+
 export default class AddNewVahicle extends Component {
   constructor(){
     super();
@@ -94,16 +92,18 @@ else{
 
 <div className="row" style={{justifyContent:'center'}}>
       <div id="step1"className="col-md-8" >
+          
         <div className="card card-primary">
-          <div  style={{padding:"0px"}} className="card-header">
-            <h3 style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title">New Vahicle Details</h3>
+          <div  style={{padding:"0px",background:"white",color:"black"}} className="card-header">
+            <h2 style={{width:"100%",textAlign:"center",fontFamily:"poppins",paddingTop:"20px",fontSize:"x-large"}}  className="form-title">New Vahicle Details</h2>
             <div className="card-tools">
               <button type="button" className="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i style={{color:"white",marginRight:"10px"}} className="fas fa-minus" /></button>
             </div>
           </div>
          
-          <div className="card-body">
+          <div className="card-body NVDataEntry2">
+            <h5>Vahicle Details</h5>
             <div  style={{width:'48%',float:"left"}} className="form-group">
               <text htmlFor="inputName">Vahicle Price</text>
               <input  style={{margin:"0px"}} placeholder="Enter Vahicle Total Price" type="text" id="price" className="form-control" />
@@ -169,7 +169,7 @@ else{
 
 
             
-
+            <h5>Employee(Buyer) Details</h5>
 
 
             <div style={{width:'48%',float:"left"}} className="form-group">

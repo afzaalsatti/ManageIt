@@ -20,7 +20,109 @@ export default class AddOldVahicleExpense extends Component {
         document.getElementById('timePicker').valueAsDate = new Date();
         
     }
-    
+    sendDataToServer=()=>{
+      let req_data;
+      let type=document.getElementById("expense").value;
+     
+
+        req_data={
+      
+             
+             
+              
+        
+       
+        "comapny":"decideLater",
+        "type":type,
+          "details":document.getElementById("details").value,
+      "amount":document.getElementById("amount").value,
+       
+        "emp_id": document.getElementById("emp_id").value,
+        "date": document.getElementById("datePicker").value,
+        "time":document.getElementById("timePicker").value,
+        "status":document.getElementById("status").value,
+
+        
+         
+  
+      }
+      if(type==="maintinance")
+      {
+        req_data["vh_num"]=document.getElementById("vh_num").value;
+        req_data["expense_info"]="Workshp Name;"+document.getElementById("ws_name").value+"-"+"Workshop Address;"+document.getElementById("ws_add").value
+       
+        
+      
+        
+         
+      }
+      else if(type==="fuel")
+      {
+       
+        req_data["expense_info"]="Fuel Quantity;"+document.getElementById("fuel_quan").value
+      }
+      else if(type==="parts")
+      {
+        
+
+        req_data["expense_info"]="Vendor Name;"+document.getElementById("ven_add").value+"-"+"Vendor Address;"+document.getElementById("ven_add").value;
+        
+        
+      }
+
+
+
+
+      
+         let address="addExpense";
+      
+       
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+
+
+          console.log(req_data)
+         
+          fetch("/"+address,options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+            console.log(status)
+       
+            if(status==='Success')
+            {
+            
+              console.log("Adding Expense Operation Sucessful")
+              //history.push('/home');
+              
+             // history.push("");
+            }else{
+
+             
+              window.alert("Operation Failed!")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+          //   reqInProcess=reqInProcess+1;
+          // this.RequestToServer(reqInProcess);
+         window.alert(" Adding Expense Unexpected error Try again...  ");
+       });
+
+
+
+
+
+
+
+    }
     clickListener (e){
         
   
@@ -31,7 +133,7 @@ export default class AddOldVahicleExpense extends Component {
           if(val==='fuel')
           {
             this.setState({
-                expense: <Fuel></Fuel>
+                expense: <Fuel ></Fuel>
               });
           }else if(val==='parts')
           {
@@ -62,7 +164,7 @@ export default class AddOldVahicleExpense extends Component {
        
         <div className="signin-form" style={{width:'100%',textAlign:"center"}}>
            
-          <h2  className="form-title">Add Expense on Old Vahicle</h2>
+          <h2  className="form-title">Expense on Old Vahicle</h2>
       
 
 
@@ -70,9 +172,9 @@ export default class AddOldVahicleExpense extends Component {
   
  
   <Card.Body >
-    <Card.Title>Expense Details</Card.Title>
+    
     <br></br>
-    <div className="NVDataEntry1">
+    {/* <div className="NVDataEntry1">
     <text id="VType" >Type</text>
     <Dropdown as={ButtonGroup} >
   <Button  id="ddButton" >Select Type</Button>
@@ -86,50 +188,64 @@ export default class AddOldVahicleExpense extends Component {
   <Dropdown.Item  onClick={ () => this.clickListener('Truck')}>Truck</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
-    </div>
+    </div> */}
   
            <div className="NVDataEntry2">
-               <h5>Info About Vahicle</h5>
-               <text >Vahicle Number</text>
-               <input></input>
+          
+            
+       
                
                <h5>Employee Information</h5>
               
-               <text >Employee ID</text>
-               <input></input>
+               <div  style={{width:'48%',margin:"auto"}} className="form-group">
+              <text htmlFor="inputName">Employee ID</text>
+              <input  style={{margin:"0px"}} placeholder="Enter Employee ID " type="text" id="emp_id" className="form-control" />
+            </div>
                <h5>Expense Information</h5>
-               <text for="expense">Choose Expense Type:</text>
 
-<select id="expense"  onChange={ () => this.handleSelectListener(this)}>
+               <div  style={{width:'40%',margin:"auto"}} className="form-group">
+              <text htmlFor="inputName">Choose Expense Type:</text>
+              <select className="form-control"  id="expense"  onChange={ () => this.handleSelectListener(this)}>
   <option value="maintinance">Maintinance</option>
   <option value="fuel">Fuel</option>
   <option value="parts">Parts</option>
   <option value="other">Other</option>
 </select>
-<br></br>
-<text>Time</text>
-               <input type="time" id="timePicker"></input>
-               <text>Date</text>
-               <input type="date" id="datePicker"></input>
+     </div>
+               
+<div style={{display: "flex",
+    width: "65%",
+    margin: "auto",marginTop:"10px"}}>
+
+     <div  style={{width:'48%',marginRight:"10px"}} className="form-group">
+     <text htmlFor="inputName" >Time</text>
+     <input  style={{margin:"0px"}}  type="time" id="timePicker" className="form-control" />
+        
+     </div>
+     <div  style={{width:'48%'}} className="form-group">
+     <text htmlFor="inputName" >Date</text>
+     <input  style={{margin:"0px"}}  type="date" id="datePicker" className="form-control" />
+     </div>
+     </div>
+              
 {this.state.expense}
 
-               <h5>Other Info</h5>
-               <text>Date</text>
-               <input type="date" id="datePicker"></input>
-               
-               <text>Time</text>
-               <input type="time" id="timePicker"></input>
+              
                <h5>Additional  Info</h5>
-               <textarea>
+               <textarea id="details" style={{width:"60%"}}>
 
                </textarea>
            </div>
 
     <Card.Text>
-    New Vahicle refers to buying new vahicle.
+   
     
     </Card.Text>
-    <CardButton variant="primary">Add Expense</CardButton>
+    <CardButton variant="primary" 
+    onClick={()=>{
+      this.sendDataToServer();
+    }}
+    >Add Expense</CardButton>
   </Card.Body>
 </Card>
          

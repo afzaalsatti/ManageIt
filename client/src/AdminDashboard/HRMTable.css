@@ -1,15 +1,18 @@
 * {box-sizing: border-box}
 
 /* Add padding to containers */
-.container {
-  padding: 16px;
 
-}
 table{
   border-radius: 25px;
 }
 #example1{
   font-family: Poppins;
+}
+.showModal{
+  display: block;
+}
+.hideModal{
+  display: none;
 }
 .modal-content
 {
@@ -66,5 +69,46 @@ a {
   margin-bottom: 25px;
 }
 thead{
-  background-color: #0067D5;
+  background-color: #212529;
+  color: white;
+}
+
+#example1_filter{
+  margin-top: 30px !important;
+  height: 50px;
+  font-family: poppins;
+ 
+  text-align: initial;
+}
+#example1_length{
+  margin-top: 30px !important;
+  height: 50px;
+  font-family: poppins;
+
+  text-align: initial;
+}
+#example1_filter label{
+ 
+  height: 50px;
+  width: 50%;
+  font-family: poppins;
+ 
+  text-align: initial;
+}
+#example1_length label{
+ 
+  height: 50px;
+  font-family: poppins;
+  width: 50%;
+  text-align: initial;
+}
+#example1_length label select{
+ 
+  height: 40px;
+ 
+}
+#example1_filter label input{
+ 
+  height: 40px;
+ 
 }

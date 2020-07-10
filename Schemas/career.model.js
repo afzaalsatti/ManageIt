@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
 
 const Career=mongoose.Schema({
+    id:{
+        type:String,
+        require:'required'
+    },
     title:{
         type:String,
         require:'required'

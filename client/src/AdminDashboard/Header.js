@@ -1,11 +1,22 @@
 import React, { Component } from "react";
 import history from '../history'
 import {Link as ReactLink} from 'react-router-dom'
+import { Card } from 'react-bootstrap'
 function navigateToOtherPage(params) {
    // alert(params)
     
 }
+
+var userInfo;
 export default class Header extends Component {
+
+ 
+constructor(props)
+{
+  super(props)
+  userInfo=JSON.parse(localStorage.getItem("userInfo"));
+}
+
   render() {
     return (
       <div >
@@ -15,6 +26,7 @@ export default class Header extends Component {
             <li className="nav-item">
               <a  style={{color:"white"}}className="nav-link"
               //  data-widget="pushmenu" href="#"
+              data-target="#collapseExample"
               data-toggle="collapse" href="" aria-expanded="false" aria-controls="collapseExample"
               onClick={()=>{
                if( document.getElementById("admin-dash-nav").style.marginLeft==="0px"){
@@ -182,14 +194,79 @@ export default class Header extends Component {
               </div>
             </li>
             <li className="nav-item">
-              <a
-               style={{color:"white"}}
-                className="nav-link"
-                data-widget="control-sidebar"
-                data-slide="true"
-                href="#"
-              >
-                <i className="fas fa-th-large" />
+            <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
+                <i className="far fa-user" />
+                
+             
+              <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+               <Card style={{textAlign:"center",fontFamily:"poppins"}}>
+                   <Card.Body  >
+                   
+                       <div>
+                       <img
+                       style={{height:"75px"}}
+                      src="dist/img/user1-128x128.jpg"
+                      alt="User Avatar"
+                      className=" img-circle"
+                    />
+
+                       </div>
+
+                       <div>
+                       <h3 style={{    fontSize: "larger",marginTop:"10px"}} className="dropdown-item-title">
+                       {userInfo["userData"].name}
+                       </h3>
+                       <p style={{ marginTop:"4px"}} className="text-sm"> {userInfo["userData"].email}</p>
+                       <p style={{ marginTop:"4px"}} className="text-sm text-muted">
+                        <i className="far fa-clock mr-1" /> {userInfo["sender"]}
+                      </p>
+                      <div 
+                      className="profile-card-mananage-account-text"
+                      onClick={()=>{
+                        this.getMenuSelection("setting")
+                    }}
+                      
+                      >
+                          <text>
+                              Manage your ManageIt Account
+                          </text>
+                      </div>
+                       </div>
+                       <hr></hr>
+                   </Card.Body>
+                   <Card.Footer>
+                       <div style={{    marginTop: "20px",
+    borderStyle: "groove",
+    height: "40px",cursor:"pointer"}}
+    onClick={()=>{
+        localStorage.clear()
+        history.push("/signin")
+    }}
+    
+    >
+                           <h6 style={{marginTop:"6px"}}
+                           
+                           
+                           >
+                           Sign out of Account
+                           </h6>
+                       </div>
+                       <hr></hr>
+                       <div className="profile-card-home-p" style={{display:"flex"}}>
+                           <p style={{    fontSize: "smaller"}}>
+                               Privacy Policy
+                           </p>
+                           <p style={{marginLeft:"32px", fontSize: "smaller"}}>
+                               Terms of Service
+                           </p>
+                       </div>
+                   </Card.Footer>
+               </Card>
+         
+              </div>
+           
+   
+                
               </a>
             </li>
           </ul>

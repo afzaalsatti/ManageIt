@@ -10,12 +10,12 @@
 }
 .NVDataEntry1{
     width:100%;
-   
+    font-family: poppins;
     text-align: center;
 }
 .NVDataEntry2{
     
-    margin-top: 20px;
+    font-family: poppins;
    
 }
 text{
@@ -35,8 +35,18 @@ input{
     
     
 }
-h5{
-    font-weight: bold;
+.NVDataEntry2 h5{
+    
+    background: #007bff;
+    width: 40%;
+    margin: auto;
+    border-radius: 30px;
+    height: 40px;
+    color: white !important;
+    font-family: poppins;
+    padding-top: 6px;
+    margin-bottom: 30px !important;
+    margin-top: 10px;
 }
 textarea
 {

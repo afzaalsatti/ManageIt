@@ -43,7 +43,7 @@ constructor()
     render() {
       var handleToUpdate  =   this.props.handleToUpdate;
         return (
-          <div class="collapse" id="collapseExample" >
+          <div className="collapse" id="collapseExample" >
                  <aside className="main-sidebar sidebar-dark-primary elevation-4">
   {/* Brand Logo */}
   < ReactLink to="/">
@@ -78,7 +78,7 @@ constructor()
           </a>
          
         </li>
-         <li className="nav-item has-treeview" >
+         <li data-toggle="collapse" data-target="#hrm-menu" className="nav-item has-treeview" >
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-chart-pie" />
             <p>
@@ -86,7 +86,7 @@ constructor()
               <i className="right fas fa-angle-left" />
             </p>
           </a>
-          <ul className="nav nav-treeview">
+          <ul id="hrm-menu" className="collapse">
 
           <li className="nav-item has-treeview" onClick={() => handleToUpdate( <AddPerson></AddPerson>)}>
               <a href="" className="nav-link">
@@ -223,14 +223,28 @@ constructor()
           </a>
 
           <ul className="nav nav-treeview">
-            <li className="nav-item has-treeview" onClick={() => handleToUpdate( <Inventry></Inventry>)}>
+            <li className="nav-item has-treeview" >
               <a href="" className="nav-link">
                 <i className=" fa fa-bus nav-icon" />
                 <p >Transport</p>
               </a>
-              <ul className="nav nav-treeview">
+              <ul style={{background:"#343A40",color:"white"}} className="nav nav-treeview">
+<li style={{background:"#343A40",color:"white"}} className="nav-item has-treeview"  onClick={() => handleToUpdate( <Inventry comp="1"></Inventry>)}>
+  <a className="nav-link">
+<i className=" fa fa-bus nav-icon" />
+                <p >  Expense on New Vahicle</p>
+                </a>
+
+</li>
 
 
+<li style={{background:"#343A40",color:"white"}} onClick={() => handleToUpdate( <Inventry comp="2" ></Inventry>)} className="nav-item has-treeview">
+<a className="nav-link">
+<i className=" fa fa-bus nav-icon" />
+                <p >  Other</p>
+                </a>
+  
+</li>
            
 
                  

@@ -7,16 +7,36 @@ import OtherExpense from './OtherExpense'
 
 
 
-
+var comp;
 export default class MainInventryPage extends Component {
   
-    constructor()
+    constructor(props)
     {
-      super();
+      super(props);
       this.handleToUpdate = this.handleToUpdate.bind(this);
+    comp=this.props.comp;
       this.state={
-          Component:''
-      }
+            Component:comp
+        }
+
+       
+     
+    }
+
+    componentDidMount(){
+        
+    }
+    componentDidUpdate()
+    {
+        if(comp!==this.props.comp)
+        {
+            comp=this.props.comp;
+            this.setState({
+                    Component:comp
+                   })
+        }
+       
+        // 
     }
     handleToUpdate(someArg){ 
         this.setState({Component:someArg });

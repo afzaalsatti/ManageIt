@@ -51,6 +51,7 @@ const Vahicle=mongoose.model("Vahicle");
  const Company=mongoose.model("Company")
  const Earning=mongoose.model("Earning")
  const Email=mongoose.model("Email")
+ const Expense=mongoose.model("Expense")
 
 
 
@@ -716,38 +717,121 @@ console.log(req.test)
             }); });
           
 
- app.post('/addBooking',(req,res)=>
- { const booking=new Booking();
+            app.post('/addBooking',(req,res)=>
+            { const booking=new Booking();
+           
+           
+           if(req.body.sender==="customer")
+           {
+              
+               booking.company=req.body.company
+               booking.ride_id=booking._id.toString(),
+               booking.cust_id=req.body.cust_id,
+               booking.to=req.body.to,
+               booking.date=req.body.date,
+               booking.time=req.body.time,
+               booking.from=req.body.from,
+               booking.distance=req.body.distance,
+               booking.fare=req.body.fare,
+               booking.driverId=req.body.driverId,
+               booking.vahicleId=req.body.vahicleId,
+               booking.cords=req.body.cords,
+               booking.rating=req.body.rating,
+               booking.status=req.body.status
+               
+               
+                
+           
+              
+              
+               booking.save().then(resultCode => {
+                    res.json({
+           
+                        status:'Success',
+                        id:booking._id.toString()
+                       
+                
+                    });
+                }).catch(function(error) {
+                  console.log(error)
+                    res.setHeader('Content-Type', 'text/json');
+                    res.json({
+                        status:'Failure'
+                       
+                
+                    });
+                    });
+                   }
+                   else{
+           
+                      
+                                    Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,vahicleId:  req.body.vahicleId,cords:  req.body.cords, status:"booked"  },   
+                                       function(err,record) {  
+                                        if (record==null) {  
+                                           res.json({
+                                               status:'Failure'
+                                              
+                                       
+                                           });
+                                        return;  
+                                        }  
+                                       
+                                   
+                                         
+                                        res.json({
+                                          status:'Success'
+                                         
+                                  
+                                      });
+                                        });  
+                              
+                                  
+                               
+                      
+                          
+                             
+           
+           
+           
+           
+                   }
+                
+                
+                });
+           
+ app.post('/addExpense',(req,res)=>
+ { 
+     const expense=new Expense();
 
-
-if(req.body.sender==="customer")
+    expense.company=req.body.company
+    expense.id=expense._id.toString(),
+    expense.type=req.body.type,
+    expense.date=req.body.date,
+   
+    expense.time=req.body.time,
+    expense.amount=req.body.amount,
+    expense.status=req.body.status,
+    expense.emp_id=req.body.emp_id,
+    expense.details=req.body.details
+    expense.vh_id="nil";
+    expense.expense_info=req.body.expense_info;
+if(req.body.type==="maintinance")
 {
    
-    booking.company=req.body.company
-    booking.ride_id=booking._id.toString(),
-    booking.cust_id=req.body.cust_id,
-    booking.to=req.body.to,
-    booking.date=req.body.date,
-    booking.time=req.body.time,
-    booking.from=req.body.from,
-    booking.distance=req.body.distance,
-    booking.fare=req.body.fare,
-    booking.driverId=req.body.driverId,
-    booking.vahicleId=req.body.vahicleId,
-    booking.cords=req.body.cords,
-    booking.rating=req.body.rating,
-    booking.status=req.body.status
-    
-    
-     
-
    
    
-    booking.save().then(resultCode => {
+    
+    
+    expense.vh_id=req.body.vh_id;
+   
+}
+   
+   
+    expense.save().then(resultCode => {
          res.json({
 
-             status:'Success',
-             id:booking._id.toString()
+             status:'Success'
+           
             
      
          });
@@ -759,45 +843,13 @@ if(req.body.sender==="customer")
             
      
          });
-         });
-        }
-        else{
-
-           
-                         Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,vahicleId:  req.body.vahicleId,cords:  req.body.cords, status:"booked"  },   
-                            function(err,record) {  
-                             if (record==null) {  
-                                res.json({
-                                    status:'Failure'
-                                   
-                            
-                                });
-                             return;  
-                             }  
-                            
-                        
-                              
-                             res.json({
-                               status:'Success'
-                              
-                       
-                           });
-                             });  
-                   
-                       
-                    
-           
-               
-                  
-
-
-
-
-        }
+         
+      
      
      
      });
 
+    });
  app.post('/sendRideInvitation',(req,res)=>
 { const notification=new EmployeeNotification();
     
@@ -1213,6 +1265,7 @@ const vahicle=new Vahicle();
 app.post('/postJob',(req,res)=>
 {
     const career=new Career();
+    career.id=career._id.toString();
     career.contactEmail=req.body.data.contactEmail;
     career.company_name=req.body.data.company_name;
     career.type=req.body.data.type;
@@ -1321,6 +1374,58 @@ app.post('/sendEmail',(req,res)=>
 
    ;
     
+
+});
+app.post('/getAllEmployee',(req,res)=>
+{
+    
+
+    
+   
+  
+        
+
+
+
+    Employee.find({ company : req.body.company }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        employee:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
 
 });
 app.post('/addEmployee',(req,res)=>

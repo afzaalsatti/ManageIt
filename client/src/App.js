@@ -32,7 +32,7 @@ import VahicleTracking from './components/Utils/VahicleTrackingPage'
 import AdminHome from './AdminDashboard/Home/HomePage'
 
 
-import HRMTable from './AdminDashboard/HRMTable'
+import TableDashboard from './AdminDashboard/Tables/TableDashboard'
 
 
 
@@ -74,7 +74,7 @@ function App() {
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
       <Route  path="/adHome" exact component={AdminHome}></Route>
 
-      <Route  path="/abc" exact component={HRMTable}></Route>
+      <Route  path="/abc" exact component={TableDashboard}></Route>
       
      
       

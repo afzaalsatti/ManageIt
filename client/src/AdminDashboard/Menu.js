@@ -8,19 +8,16 @@ import './css/adminlte.css'
 import AddPerson from '../components/HRM/AddPerson'
 import SearchPerson from '../components/HRM/AddAttendance'
 import EarningTable from '../components/Inventry/Transport/Earnings'
-import AttandanceTable from '../components/HRM/AttendanceTable'
+
 import PostAJob from '../components/HRM/JobAds'
 import AddBusRoute from '../components/Inventry/RouteManagement/AddBusRoute'
 import BookBusTicket from '../components/customerComponents/Tickets/BookBusTicket'
 import Compose from '../components/mailbox/compose'
 import Mailbox from '../components/mailbox/mailbox'
+import BookingTable from './Tables/Bookings'
 import readMail from '../components/mailbox/readMail'
 import {Link as ReactLink} from 'react-router-dom'
-const data=[{'Name': 'Abc', 'role': 15, 'email': 'Bangalore','password': 'Bangalore', 'passwrd': 'icon'},
-{'Name': 'Abc', 'role': 15, 'email': 'Bangalore','password': 'Bangalore', 'passwrd': 'icon'},
-{'Name': 'Abc', 'role': 15, 'email': 'Bangalore','password': 'Bangalore', 'passwrd': 'icon'},
-{'Name': 'Abc', 'role': 15, 'email': 'Bangalore','password': 'Bangalore', 'passwrd': 'icon'}];
-
+import TableDashboard from './Tables/TableDashboard'
 const HRMmenuOptions=['Users','Staff','Customers','Contractors'];
 const stores= [{lat: 31.570822, lng: 74.314384},
     
@@ -284,7 +281,7 @@ constructor()
        
        
        
-        <li className="nav-item has-treeview">
+        <li className="nav-item has-treeview"  onClick={() =>handleToUpdate(<TableDashboard ></TableDashboard>)}>
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-table" />
             <p>
@@ -292,49 +289,6 @@ constructor()
               <i className="fas fa-angle-left right" />
             </p>
           </a>
-          <ul className="nav nav-treeview">
-          <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<HRMTable  menu={HRMmenuOptions}data={data}></HRMTable>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >HRM </p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-
-            <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<AttandanceTable  ></AttandanceTable>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >Attendance</p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-            <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<EarningTable  ></EarningTable>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >Earning</p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-            
-          </ul>
         </li>
        
        

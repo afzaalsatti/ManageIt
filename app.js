@@ -71,7 +71,236 @@ console.log(req.test)
 
 });
 
- 
+app.post('/getAllRoutes',(req,res)=>
+{ 
+    
+   
+   Route.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
+app.post('/getAllVahicles',(req,res)=>
+{ 
+    
+   
+   Vahicle.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
+app.post('/getAllExpenses',(req,res)=>
+{ 
+    
+   
+   Expense.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
+app.post('/getAllBookings',(req,res)=>
+{ 
+    
+   
+   Booking.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
+app.post('/getAllEarnings',(req,res)=>
+{ 
+    
+   
+   Earning.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       earnings:record,
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
  app.post('/getEarnings',(req,res)=>
  { 
      
@@ -602,7 +831,65 @@ console.log(req.test)
 
     
     });
-     
+    
+    app.post('/updateEmployeeInfo',(req,res)=>
+    { 
+        
+      
+      
+      Employee.findOneAndUpdate({_id:req.body._id } , {
+           name:  req.body.name,
+           password:  req.body.password,
+           email:  req.body.email,
+           status:  req.body.status,
+           job_id:  req.body.job_id,
+        },   
+       function(err, result) {
+            if (err) {
+                
+              res.json({
+                
+                  status:'Failure'
+                 
+              });
+            } else {
+               
+                res.json({
+                    status:'Success'
+                    
+                   
+                });
+             
+            }
+          }); });
+
+          
+
+          app.post('/updateEarning',(req,res)=>
+          { 
+              
+            
+            
+            Earning.findOneAndUpdate({_id:req.body._id } , {
+                 status:  req.body.status},   
+             function(err, result) {
+                  if (err) {
+                      
+                    res.json({
+                      
+                        status:'Failure'
+                       
+                    });
+                  } else {
+                     
+                      res.json({
+                          status:'Success'
+                         
+                         
+                      });
+                   
+                  }
+                }); });
       app.post('/setDriverlocation',(req,res)=>
       { 
           
@@ -1374,6 +1661,59 @@ app.post('/sendEmail',(req,res)=>
 
    ;
     
+
+});
+
+app.post('/getAllCustomers',(req,res)=>
+{
+    
+
+    
+   
+  
+        
+
+
+
+    users.find({ status : "active" }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        users:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
 
 });
 app.post('/getAllEmployee',(req,res)=>

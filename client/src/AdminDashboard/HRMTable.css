@@ -69,8 +69,8 @@ a {
   margin-bottom: 25px;
 }
 thead{
-  background-color: #212529;
-  color: white;
+  background-color: #f1ecec;
+  color: black;
 }
 
 #example1_filter{
@@ -111,4 +111,24 @@ thead{
  
   height: 40px;
  
+}
+
+.table-dash-topbar text{
+
+  margin-right: 50px;
+  padding-left: 20px
+  
+}
+
+.table-dash-topbar div{
+  padding-top: 6px;
+}
+
+.table-dash-topbar div:hover{
+
+  background-color: lightgray;
+  color:black;
+  font-weight: 600;
+
+  
 }

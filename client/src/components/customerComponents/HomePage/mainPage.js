@@ -655,8 +655,19 @@ else
             return <text>No Notifications yet</text>
         }
        
+    let notif=[]
+    if(notifications.length<=3)
+    {
+        notif.push(notifications[0])
+    notif.push(notifications[1])
+   
+    }
+    else
+    {
+        notif=notifications
+    }
     
-        return notifications.map((key, index)=>{
+        return notif.map((key, index)=>{
         
        if(key.type==="Ride Invitation")
        {
@@ -665,6 +676,9 @@ else
    let to=body[0].split(",");
    let from=body[1].split(",")
            return <li style={{borderRadius:"8px"}}>
+               <div style={{display:"table",paddingTop:"20px",borderBottomColor: "black",
+    borderBottomWidth: "thin",
+    borderBottomStyle: "groove"}}>
  <img
         style={{height:"30px",float:"left"}}
        src="/assets/images/book-car.png"
@@ -714,13 +728,15 @@ else
 
 
 <button>Accept</button>
-<hr></hr>
+</div>
            </li>
        }
 else if(key.type==="Ride cancel Notification") 
 {
     return <li>
- 
+ <div style={{display:"table",paddingTop:"20px",borderBottomColor: "black",
+    borderBottomWidth: "thin",
+    borderBottomStyle: "groove"}}>
     < img
          style={{height:"30px",float:"left"}}
         src="/assets/images/cancel-ride.png"
@@ -736,11 +752,13 @@ else if(key.type==="Ride cancel Notification")
      marginTop: "6px",textAlign:"initial",marginLeft:"6px",color:"black"}}>{key.body}</p>
  
  
- <hr></hr>
+ </div>
  </li>
  
 }else return <li>
- 
+ <div style={{display:"table",paddingTop:"20px",borderBottomColor: "black",
+    borderBottomWidth: "thin",
+    borderBottomStyle: "groove"}}>
 < img
      style={{height:"30px",float:"left"}}
     src="/assets/images/cancel-ride.png"
@@ -756,7 +774,7 @@ else if(key.type==="Ride cancel Notification")
  marginTop: "6px",textAlign:"initial",marginLeft:"6px",color:"black"}}>{key.body}</p>
 
 
-<hr></hr>
+</div>
 </li>
 
 
@@ -856,6 +874,14 @@ onClick={()=>{
                        {this.getListItemCards()}
                        
                    </Card.Body>
+                   <Card.Footer>
+                       <text
+                       onClick={()=>{
+                           this.setState({showNotif:true})
+                       }}
+                       data-toggle="collapse" href="" aria-expanded="false" data-target="#notifications-div"
+                        style={{color:"blue",cursor:"pointer"}}>See all Notifications</text>
+                   </Card.Footer>
                </Card>
          
               </div>

@@ -15,3 +15,12 @@
     border-style: none;
 
 }
+
+.all-notification-modal li{
+    width: 100%;
+    list-style: none;
+}
+.all-notification-modal li div{
+    width: 100%;
+   
+}

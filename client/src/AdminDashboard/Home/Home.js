@@ -249,7 +249,7 @@ export default class Home extends Component {
        
         <text>No of New Customers in last 30 Days 0</text>
         <br></br>
-        <Chart options={this.state.options} series={this.state.series} type="area" />
+        <Chart options={this.state.options} series={this.state.series} type="scatter" />
  
          
         <a style={{color:"blue",float:"right"}}
@@ -286,6 +286,57 @@ export default class Home extends Component {
            </h4>
            <text>
            Showing latest data of Ride Bookings
+           This graph represents Ride Bookings in given time span(you can change time duaration to see variabtions)
+           Scroll down for other analytical data that mogt be useful for you
+           </text>
+         
+       </div>
+   </Card.Body>
+</Card>
+
+<Card className="AnalyticsCard2">
+ 
+ 
+
+   <Card.Body style={{margin:"0px",padding:"0px"}}>
+       
+        <text>Ride Bookings last 30 Days 0</text>
+        <br></br>
+        <Chart options={this.state.options} series={this.state.series} type="bar" />
+ 
+         
+        <a style={{color:"blue",float:"right"}}
+         onClick={()=>{
+          
+          let data=[this.state.options,this.state.series];
+          getDetails("rides",data);
+        }}
+        >Explore more &#8594;</a>
+   </Card.Body>
+
+  
+</Card>
+</div>
+</div>
+
+<div style={{float:"left",width:"100%",margin:"5px"}}>
+<hr></hr>
+<div style={{width: "80%",margin:"auto"}}>
+<Card className="AnalyticsCard1">
+   <Card.Header>
+       <text style={{fontWeight: 600}} >Expedetures</text>
+   </Card.Header>
+   <Card.Body style={{margin:"0px",padding:"0px"}}>
+       <div className="AnalyticsCardImage">
+           <img src="/signinimage.jpg">
+           </img>
+       </div>
+       <div className="AnalyticsCardText">
+           <h4>
+           Expedeture Analytics 
+           </h4>
+           <text>
+           Showing latest data of Expedetures
            This graph represents Ride Bookings in given time span(you can change time duaration to see variabtions)
            Scroll down for other analytical data that mogt be useful for you
            </text>
@@ -353,7 +404,7 @@ export default class Home extends Component {
        
         <text>No Ride Cancelation in last 30 Days 0</text>
         <br></br>
-        <Chart options={this.state.options} series={this.state.series} type="area" />
+        <Chart options={this.state.options} series={this.state.series} type="line" />
  
          
         <a style={{color:"blue",float:"right"}}
@@ -403,7 +454,7 @@ export default class Home extends Component {
        
         <text>No of Tickets Canceled in last 30 Days 0</text>
         <br></br>
-        <Chart options={this.state.options} series={this.state.series} type="area" />
+        <Chart options={this.state.options} series={this.state.series} type="radar" />
  
          
         <a style={{color:"blue",float:"right"}}

@@ -19,16 +19,22 @@ if(this.props.showModal)
             <div>
                        <Modal style={{backdropFilter: "blur(5px)",fontFamily:"poppins"}} show={this.props.showModal} >
         
-        <Modal.Header style={{fontWeight:"500"}}>
+        <Modal.Header style={{fontWeight:"500",padding:"0px"}}>
             <text>New Email</text>
             </Modal.Header>
         <Modal.Body >
        <div style={{display:"grid"}}>
-        <input style={{height:"40px",background:"lightgray",color:"black"}} id="from" placeholder="from">{cust_email}</input>
+       <input style={{height:"40px",background:"lightgray",color:"black",borderRadius: "10px",
+    marginBottom: "5px"}} id="name" placeholder="Your Name"></input>
 
-       <input style={{height:"40px",background:"lightgray",color:"black"}} id="to" placeholder="Subject"></input>
+        <input style={{height:"40px",background:"lightgray",color:"black",borderRadius: "10px",
+    marginBottom: "5px"}} id="from" placeholder="Your Email">{cust_email}</input>
 
-<input style={{height:"40px",background:"lightgray",color:"black"}} id="subject" placeholder="Subject"></input>
+       <input style={{height:"40px",background:"lightgray",color:"black",borderRadius: "10px",
+    marginBottom: "5px"}} id="to" placeholder="To"></input>
+
+<input style={{height:"40px",background:"lightgray",color:"black",borderRadius: "10px",
+    marginBottom: "5px"}} id="subject" placeholder="Subject"></input>
 <textarea style={{width:"100%",background:"lightgray",color:"black"}} id="body" placeholder="Compose Email"></textarea>
        </div>
       
@@ -39,7 +45,7 @@ if(this.props.showModal)
        <button
       id="cancelRequest"
        style={{
-        background: "#196EDE",
+        background: "gray",
         color: "white",
         width: "30%",
         margin: "auto",
@@ -78,6 +84,7 @@ if(this.props.showModal)
             "company":"decideLater",
        "to":"decideLater",
        "from":userInfo.userData["email"],
+       "name":document.getElementById("name").value,
        "subject":document.getElementById("subject").value,
        "body":document.getElementById("body").value,
       

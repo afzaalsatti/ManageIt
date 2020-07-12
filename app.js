@@ -70,7 +70,52 @@ console.log(req.test)
     })
 
 });
-
+app.post('/getAllEmails',(req,res)=>
+{ 
+    
+   
+   Email.find({ comapny : req.body.comapny }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
 app.post('/getAllRoutes',(req,res)=>
 { 
     
@@ -1632,6 +1677,7 @@ app.post('/sendEmail',(req,res)=>
     email.subject=req.body.subject;
     email.body=req.body.body;
     email.to=req.body.to;
+    email.name=req.body.name;
     email.from=req.body.from;
     email.date=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();;
     email.time=d.getHours() +":"+d.getMinutes()+":"+d.getSeconds();;

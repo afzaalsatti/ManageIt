@@ -103,6 +103,7 @@ const data=[""];
   
  
     getKeys = function(){
+      
       let arr=Object.keys(this.state.data[0]);
       arr=arr.slice(1)
 console.log("------------------")
@@ -114,6 +115,7 @@ console.log(arr)
       
     arr.push("edit")
         return  arr;
+      
     }
     
     getHeader = function(){
@@ -156,7 +158,7 @@ console.log(arr)
     {
       
 let booking=data.result;
-    
+    console.log(booking)
       this.setState({
         data:booking,
        

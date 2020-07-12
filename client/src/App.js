@@ -32,7 +32,7 @@ import VahicleTracking from './components/Utils/VahicleTrackingPage'
 import AdminHome from './AdminDashboard/Home/HomePage'
 
 
-import TableDashboard from './AdminDashboard/Tables/TableDashboard'
+import Mailbox from './components/mailbox/MailMainPage'
 
 
 
@@ -74,7 +74,7 @@ function App() {
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
       <Route  path="/adHome" exact component={AdminHome}></Route>
 
-      <Route  path="/abc" exact component={TableDashboard}></Route>
+      <Route  path="/abc" exact component={Mailbox}></Route>
       
      
       

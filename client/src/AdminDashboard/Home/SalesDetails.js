@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import './css/home_details.css'
 import HighlightCards from './HighlightCard'
 import Chart from 'react-apexcharts'
+import Bookings from '../Tables/Bookings'
 var type="Sales";
 var data=[]
 var chart="radar"
@@ -237,7 +238,14 @@ return top_product.map((element, index)=>{
 
 
 </Card>
+
+
 </div>
+
+<div style={{float:"left",width:"100%"}}>
+<Bookings address="getAllBookings"></Bookings>
+</div>
+
 
            </div>
         )

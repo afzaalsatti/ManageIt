@@ -18,6 +18,9 @@ import BookingTable from './Tables/Bookings'
 import readMail from '../components/mailbox/readMail'
 import {Link as ReactLink} from 'react-router-dom'
 import TableDashboard from './Tables/TableDashboard'
+import HomePage from './Home/HomePage'
+
+import MailMainPage from '../components/mailbox/MailMainPage'
 const HRMmenuOptions=['Users','Staff','Customers','Contractors'];
 const stores= [{lat: 31.570822, lng: 74.314384},
     
@@ -65,7 +68,7 @@ constructor()
       <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
-        <li onClick={() => handleToUpdate(<Charts></Charts>)} className="nav-item has-treeview menu-open">
+        <li onClick={() => handleToUpdate(<HomePage></HomePage>)} className="nav-item has-treeview menu-open">
           <a href="#" className="nav-link active">
             <i className="nav-icon fas fa-tachometer-alt" />
             <p>
@@ -293,7 +296,7 @@ constructor()
        
        
        
-        <li className="nav-item has-treeview">
+        <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<MailMainPage  ></MailMainPage>)}>
           <a href="#" className="nav-link">
             <i className="nav-icon far fa-envelope" />
             <p>
@@ -301,48 +304,7 @@ constructor()
               <i className="fas fa-angle-left right" />
             </p>
           </a>
-          <ul className="nav nav-treeview">
-          <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<Mailbox  ></Mailbox>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >Mailbox</p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-            <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<Compose  ></Compose>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >Compose</p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-            <li className="nav-item has-treeview" onClick={() =>handleToUpdate(<readMail  ></readMail>)}>
-              <a href="" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p >Read</p>
-              </a>
-              <ul className="nav nav-treeview">
-
-              
-           
-
-                 
-               </ul>
-            </li>
-          </ul>
-        </li>
+         </li>
         
          
             

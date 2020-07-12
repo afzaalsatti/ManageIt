@@ -9,6 +9,14 @@ const Email=mongoose.Schema({
         
      
     },
+    name:{
+        type:String,
+        require:'required'
+    },
+    sender:{
+        type:String,
+        require:'required'
+    },
     subject:{
         type:String,
         require:'required'

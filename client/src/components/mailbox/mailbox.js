@@ -1,10 +1,333 @@
 import React, { Component } from 'react'
+import './mailbox.css'
 
 export default class mailbox extends Component {
+constructor(props)
+{
+  super(props);
+  // this.getMailsFromServer();
+  this.state={mails:this.props.mails,
+    emailDetail:null,
+    folder:"inbox"
+  }
+
+ this.openEmail=this.openEmail.bind(this);
+}
+// getMailsFromServer=()=>{
+//   let address="getAllEmails";
+//           let req_data={
+        
+              
+              
+               
+          
+        
+         
+//                "company":"decideLater"
+        
+        
+        
+        
+        
+        
+        
+//              }
+//    const options={
+//      method:"POST",
+//      headers:{
+//          'Content-type':"application/json"
+         
+//      },
+//      body:JSON.stringify(req_data)
+//  }
+ 
+//  fetch("/"+address,options).then(response=>{
+//      return response.json();
+//  }).then(data=>{
+//    let status=data.status;
+ 
+ 
+//    if(status==='Success')
+//    {
+     
+// this.setState({
+//   mails:data.result
+// })
+      
+
+     
+     
+   
+    
+//    }else{
+ 
+    
+//      console.log("Operation Failed! Customer Details")
+//    }
+//  // `data` is the parsed version of the JSON returned from the above endpoint.
+//  console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+//  }).catch((error) => {
+ 
+//  console.log("Unexpected error Try again...  ");
+//  });
+//  }
+
+
+componentDidUpdate(){
+
+if(this.state.mails !== this.props.mails)
+{
+  this.setState({
+    mails:this.props.mails
+  })
+}
+
+}
+
+openEmail(index)
+{
+  let mail=this.state.mails[index];
+  this.setState({
+    emailDetail:<div style={{background:"white"}} >
+    
+    
+    <div className="mail-details">
+    
+    <h4>{mail.subject}</h4>
+    <img
+            style={{height:"50px",marginRight:"20px"}}
+           src="/assets/images/book-car.png"
+           alt="User Avatar"
+           className=" img-circle"
+         />
+    
+    <text>From : {mail.from}</text>
+    <br/>
+    <text style={{ marginLeft: "70px"}}>To : {mail.to}</text>
+    <hr></hr>
+    <div id="emailDetailBody" dangerouslySetInnerHTML={{ __html:mail.body}} >
+      
+  
+    </div>
+    </div>
+    
+    
+    
+    
+    
+      </div>
+      
+  })
+ 
+}
+  
+prepareDataToDisplay=()=>{
+
+if(this.state.folder=="important" || this.state.folder=="bin" || this.state.folder=="drafts")
+{
+  return <text style={{color:"white",margin:"auto"}}>  {this.state.folder} Folder is Empty</text>
+}
+
+return this.state.mails.map((element, index)=>{
+  if(this.state.folder=="inbox")
+  {
+
+    if(element.to==="decideLater")
+    {
+      return  <li onClick={()=>{this.openEmail(index)}}style={{display:"flex"}}>
+  
+      <input  type="checkbox"></input>
+      <div>
+      <h5 >{element.name}</h5>
+      </div>
+      <div style={{width:"45%"}}>
+      <text  >{element.subject}</text>
+      
+      </div>
+      
+      <span >
+      <text style={{marginRight:"15px"}} >{element.time}</text>
+      <text >{element.date}</text>
+      </span>
+      
+      
+       
+      
+      </li>
+      
+    }
+
+
+    
+  }
+ else
+ {
+  if(element.to !=="decideLater" && this.state.folder=="sent")
+  {
+
+    return  <li onClick={()=>{this.openEmail(index)}}style={{display:"flex"}}>
+  
+    <input  type="checkbox"></input>
+    <div>
+    <h5 >{element.name}</h5>
+    </div>
+    <div style={{width:"45%"}}>
+    <text  >{element.subject}</text>
+    
+    </div>
+    
+    <span >
+    <text style={{marginRight:"15px"}} >{element.time}</text>
+    <text >{element.date}</text>
+    </span>
+    
+    
+     
+    
+    </li>
+   
+
+ }
+ 
+  
+    
+
+
+    
+  }
+ 
+
+
+  
+})
+
+}
+
+
+
     render() {
         return (
-            <div>
-  <div>
+            <div style={{display:"flex"}}>
+
+<div id="mailbox-menu" className="col-md-2">
+  <div style={{paddingTop:"20px",cursor:"pointer"}}
+  onClick={()=>{this.props.getClickFromMailbox("compose")}}
+  
+  >
+
+    <div id="composeEmailIcon">
+    Compose<img style={{height:"20px"}} src="/assets/svg/edit.svg"></img>
+    </div>
+  </div>
+<ul >
+  <li
+  onClick={()=>{
+    this.setState({
+      folder:"inbox"
+    })
+  }}
+  >
+    <img style={{height:"20px",    marginRight: "12px"}} src="/assets/images/inbox-icon-light.png"></img>
+    Inbox
+  </li>
+  <li
+   onClick={()=>{
+    this.setState({
+      folder:"sent"
+    })
+  }}
+  >
+  <img style={{height:"20px",    marginRight: "12px"}} src="/assets/images/sent-icon.png"></img>
+    Sent
+  </li>
+  <li
+  onClick={()=>{
+    this.setState({
+      folder:"drafts"
+    })
+  }}>
+  <img style={{height:"20px",    marginRight: "12px"}} src="/assets/images/draft-icon.png"></img>
+    Drafts
+  </li>
+  <li
+  onClick={()=>{
+    this.setState({
+      folder:"important"
+    })
+  }}>
+  <img style={{height:"20px",    marginRight: "12px"}} src="/assets/images/important-icon.png"></img>
+    Important
+  </li>
+  <li
+  onClick={()=>{
+    this.setState({
+      folder:"bin"
+    })
+  }}>
+  <img style={{height:"20px",    marginRight: "12px"}} src="/assets/images/bin.png"></img>
+   
+    Bin
+  </li>
+</ul>
+</div>
+
+
+
+<div id="mailbox-component" className="col-md-10">
+
+
+<div style={{marginTop:"10px",background:"transparent",marginLeft:"30px"}} className="mailbox-top-nav">
+
+
+  {this.state.emailDetail===null? <img data-toggle="tooltip" data-placement="top" title="Refresh "  style={{height:"23px",marginRight:"30px",cursor:"pointer"}}
+ src="/assets/svg/reload.svg"
+ onClick={()=>{
+   this.props.refreshMailList()
+ 
+}}
+ >
+ </img>
+ : <img  data-toggle="tooltip" data-placement="top" title="Back to Inbox" style={{height:"35px",marginRight:"30px"}}
+ src="/assets/svg/backbtn.svg"
+ 
+ onClick={()=>{
+   this.setState({
+     emailDetail:null
+   })
+ }}
+  >
+ 
+ 
+  </img>
+ 
+}
+
+
+ 
+
+ 
+
+</div>
+  {this.state.emailDetail===null ?
+ <div >
+
+
+<ul className="mailbox-mails">
+{this.prepareDataToDisplay()}
+ </ul>
+</div>
+:
+this.state.emailDetail
+    }
+</div>
+
+
+
+
+
+
+
+  {/* <div>
     <section classname="content">
       <div classname="row">
         <div classname="col-md-3">
@@ -375,7 +698,12 @@ export default class mailbox extends Component {
             
                 </i></i></i></i></i></i></section><i classname="far fa-trash-alt"><i classname="fas fa-reply"><i classname="fas fa-share"><i classname="fas fa-sync-alt"><i classname="fas fa-chevron-left"><i classname="fas fa-chevron-right">
               </i></i></i></i></i></i></div><i classname="far fa-trash-alt"><i classname="fas fa-reply"><i classname="fas fa-share"><i classname="fas fa-sync-alt"><i classname="fas fa-chevron-left"><i classname="fas fa-chevron-right">
-            </i></i></i></i></i></i></div>
+            </i></i></i></i></i></i> */}
+
+
+
+
+            </div>
 
         )
     }

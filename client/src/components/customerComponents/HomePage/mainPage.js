@@ -1011,6 +1011,13 @@ onClick={()=>{
                         Settings
                     </span>
                 </li>
+                <li className="home-nav-item" onClick={() => this.getMenuSelection("contact")}>
+                <img src="/assets/images/settings_icon.png">
+                </img>         <span>
+                        Contact US
+                    </span>
+                </li>
+         
                 <li className={this.state.isEmp? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("home")}>
                 
                   <span >
@@ -1024,12 +1031,6 @@ onClick={()=>{
               placeholder="Dark"
             />
                    
-                </li>
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("contact")}>
-                <img src="/assets/images/settings_icon.png">
-                </img>         <span>
-                        Contact US
-                    </span>
                 </li>
             
             </ul>

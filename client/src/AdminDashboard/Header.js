@@ -19,7 +19,7 @@ constructor(props)
 
   render() {
     return (
-      <div >
+      <div style={{fontFamily:"poppins"}} >
         <nav id="admin-dash-nav" style={{marginLeft:"0px",background:"rgb(52, 58, 64)"}}  className="main-header navbar navbar-expand navbar-white navbar-light">
           {/* Left navbar links */}
           <ul className="navbar-nav">

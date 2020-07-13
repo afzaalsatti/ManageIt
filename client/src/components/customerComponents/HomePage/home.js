@@ -760,48 +760,7 @@ onClick={()=>{
               </section>
             </div>
             <div class="border-separator"></div>
-            <div className="seo-section clearfix ">
-              <div className="main-body ">
-                <div className="operator-footer-list clearfix">
-                  {" "}
-                  <ul className="container clearfix">
-                    {" "}
-                    <h6 className="seo-header">Top Operators</h6>{" "}
-                    <li>
-                      <a href="https://www.redbus.in/travels/srs-travels-srs.aspx">
-                        SRS Travels
-                      </a>
-                    </li>{" "}
-                    <li>
-                      <a href="https://www.redbus.in/travels/evacay-bus.aspx ">
-                        Evacay Bus
-                      </a>
-                    </li>{" "}
-                    
-                    <li>
-                      <a href="https://www.redbus.in/travels/yamani-travels.aspx">
-                        Yamani Travels
-                      </a>
-                    </li>{" "}
-                    <li>
-                      <a href="https://www.redbus.in/travels/arthi-travels.aspx">
-                        Arthi Travels
-                      </a>
-                    </li>{" "}
-                  </ul>
-                  <div className="more-link">
-                    <a
-                      href="/travels/operators-directory.aspx"
-                      className="more-link site-links"
-                      target="_blank"
-                    >
-                      All Operators &gt;
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="border-separator"></div>
+             <div class="border-separator"></div>
         
             </div>
       

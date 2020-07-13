@@ -52,9 +52,36 @@ const Vahicle=mongoose.model("Vahicle");
  const Earning=mongoose.model("Earning")
  const Email=mongoose.model("Email")
  const Expense=mongoose.model("Expense")
+ app.post("/fetchImage", (req, res) => {
+
+    
+   
+
+    var image1 = path.join(__dirname, "./"+req.body.address);
+
+  var base64Img = require('base64-img');
+  var imageData1 = base64Img.base64Sync(image1);
+//   var base64Data = imageData1.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+//   var img = Buffer.from(base64Data, 'base64');
+
+  res.writeHead(200, {
+    'Content-Type': 'image/png',
+    // 'Content-Length': img.length
+  });
+  res.end(imageData1);
 
 
 
+
+
+
+  });
+ app.post("/fetch", (req, res) => {
+     
+// console.log(req.body.location)
+return res.status(200).sendFile(path.join(__dirname, "./public/uploads/1593859872850-444444.jpeg"));
+   
+  });
 
  app.post('/uploadImage',function(req, res) {
      
@@ -532,6 +559,51 @@ app.post('/getAllEarnings',(req,res)=>
    
   });
   
+  app.post('/getCompanyInfo',(req,res)=>
+ { 
+    
+    Company.findOne({ CompanyName : req.body.company }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+               
+                 
+                
+                    res.json({
+                        status:'Success',
+                        result:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+   
+   
+  });
   app.post('/getRouteDetails',(req,res)=>
  { 
     
@@ -886,6 +958,7 @@ app.post('/getAllEarnings',(req,res)=>
            name:  req.body.name,
            password:  req.body.password,
            email:  req.body.email,
+           auth:  req.body.auth,
            status:  req.body.status,
            job_id:  req.body.job_id,
         },   
@@ -1817,6 +1890,11 @@ app.post('/getAllEmployee',(req,res)=>
 app.post('/addEmployee',(req,res)=>
 {
     let d=new Date();
+let auth="";
+if(req.body.job_id === "owner")
+{
+    auth="owner"
+}
 
     const employee=new Employee();
     employee.company=req.body.company;
@@ -1827,6 +1905,7 @@ app.post('/addEmployee',(req,res)=>
     employee.id=employee._id.toString();
     employee.job_id=req.body.job_id;
     employee.phone=req.body.phone;
+    employee.auth=auth;
     employee.cnic=req.body.id;
     employee.gender=req.body.gender;
     employee.address=req.body.address;

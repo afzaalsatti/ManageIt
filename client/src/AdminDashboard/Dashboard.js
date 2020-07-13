@@ -14,6 +14,7 @@ export default class Dashboard extends Component {
     constructor(props)
     {
       super(props);
+      
     //  window.alert(this.props.location.data["name"])
       this.handleToUpdate = this.handleToUpdate.bind(this);
       this.state={
@@ -23,6 +24,10 @@ export default class Dashboard extends Component {
       height=(window.screen.height)-130 +"px";
     }
  
+
+
+
+
     componentDidMount()
     {
 

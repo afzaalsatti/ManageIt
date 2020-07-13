@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import history from '../history'
 import {Link as ReactLink} from 'react-router-dom'
 import { Card } from 'react-bootstrap'
+
+
 function navigateToOtherPage(params) {
    // alert(params)
     
 }
 
 var userInfo;
+
 export default class Header extends Component {
 
  
@@ -15,7 +18,22 @@ constructor(props)
 {
   super(props)
   userInfo=JSON.parse(localStorage.getItem("userInfo"));
+ 
+
+        
+ 
+
+ 
+
 }
+
+ getDataUrl=()=> {
+  
+}
+
+
+
+
 
   render() {
     return (
@@ -44,6 +62,7 @@ constructor(props)
               </a>
             </li>
             <li className="nav-item d-none d-sm-inline-block">
+            <img  id="test" />
             < ReactLink to="/">
               <a  style={{color:"white"}} className="nav-link">
                 Home
@@ -51,11 +70,6 @@ constructor(props)
               </ReactLink>
             </li>
             <li className="nav-item d-none d-sm-inline-block">
-            < ReactLink to="/contact">
-              <a   style={{color:"white"}}href="#" className="nav-link">
-                Contact
-              </a>
-              </ReactLink>
             </li>
           </ul>
           {/* SEARCH FORM */}
@@ -238,13 +252,17 @@ constructor(props)
                        <div style={{    marginTop: "20px",
     borderStyle: "groove",
     height: "40px",cursor:"pointer"}}
-    onClick={()=>{
-        localStorage.clear()
-        history.push("/signin")
-    }}
+  
     
     >
-                           <h6 style={{marginTop:"6px"}}
+                           <h6 
+                             onClick={()=>{
+                              window.alert("ssdk")
+                                localStorage.clear()
+                                history.push("/signin")
+                            }}
+                           
+                           style={{marginTop:"6px"}}
                            
                            
                            >

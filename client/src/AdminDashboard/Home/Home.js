@@ -220,7 +220,7 @@ export default class Home extends Component {
 <div style={{width: "80%",margin:"auto"}}>
 <Card className="AnalyticsCard1">
    <Card.Header>
-       <text style={{fontWeight: 600}} >New Customer Acquistion</text>
+       <text style={{fontWeight: 600}} >New User Acquistion</text>
    </Card.Header>
    <Card.Body style={{margin:"0px",padding:"0px"}}>
        <div className="AnalyticsCardImage">
@@ -229,10 +229,10 @@ export default class Home extends Component {
        </div>
        <div className="AnalyticsCardText">
            <h4>
-            New Customer Acquistion Analytics 
+            New User Acquistion Analytics 
            </h4>
            <text>
-           Showing latest data of new Customer Acquistion
+           Showing latest data of new User Acquistion
            This graph represents your new Customer Acquistion in given time span(you can change time duaration to see variabtions)
            Scroll down for other analytical data that mogt be useful for you
            </text>
@@ -247,7 +247,7 @@ export default class Home extends Component {
 
    <Card.Body style={{margin:"0px",padding:"0px"}}>
        
-        <text>No of New Customers in last 30 Days 0</text>
+        <text>No of New Users in last 30 Days 0</text>
         <br></br>
         <Chart options={this.state.options} series={this.state.series} type="scatter" />
  
@@ -256,7 +256,7 @@ export default class Home extends Component {
          onClick={()=>{
           
           let data=[this.state.options,this.state.series];
-          getDetails("new_customer",data);
+          getDetails("new_users",data);
         }}
         
         >Explore more &#8594;</a>
@@ -360,7 +360,7 @@ export default class Home extends Component {
          onClick={()=>{
           
           let data=[this.state.options,this.state.series];
-          getDetails("rides",data);
+          getDetails("expense",data);
         }}
         >Explore more &#8594;</a>
    </Card.Body>

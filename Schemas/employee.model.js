@@ -66,6 +66,11 @@ const Employee=mongoose.Schema({
         require:'required'
 
     }
+    ,
+    auth:{
+        type:String
+
+    }
 });
 
 mongoose.model("Employee",Employee);

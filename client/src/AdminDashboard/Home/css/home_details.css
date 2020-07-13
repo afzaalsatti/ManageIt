@@ -37,3 +37,8 @@
    display: grid !important;
     
 }
+
+
+#user-dash-table table{
+    display: block;
+}

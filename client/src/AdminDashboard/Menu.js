@@ -19,7 +19,7 @@ import readMail from '../components/mailbox/readMail'
 import {Link as ReactLink} from 'react-router-dom'
 import TableDashboard from './Tables/TableDashboard'
 import HomePage from './Home/HomePage'
-
+import axios from 'axios'
 import MailMainPage from '../components/mailbox/MailMainPage'
 const HRMmenuOptions=['Users','Staff','Customers','Contractors'];
 const stores= [{lat: 31.570822, lng: 74.314384},
@@ -30,12 +30,66 @@ const stores= [{lat: 31.570822, lng: 74.314384},
   {latitude: 33.6518, longitude: 73.1566}];
 
   var height="100px";
-
+  var companyInfo;
 export default class Menu extends Component {
 constructor()
 {
   super();
  height=(window.screen.height)-310 +"px";
+ companyInfo=JSON.parse(localStorage.getItem("companyInfo"));
+ this.getCompanyLogo()
+
+}
+
+getCompanyLogo=()=>{
+  try{
+    
+  
+    
+
+
+    // var data = new FormData() 
+    // data.set('address', address)
+    let address=companyInfo["CompanyLogo"];
+   address= address.replace(/\\/g, "/");
+   
+  
+
+   
+   const url = "http://localhost:5000/fetchImage";
+    let data = {
+      address: address,
+     
+    };
+    
+     
+      axios
+      .post(
+          "http://localhost:5000/fetchImage", 
+          data
+      ).then(res => { // then print response status
+        if(res.statusText==="OK")
+        {
+          
+       document.getElementById("comapnylogo").src=res.data;
+        }
+        else
+        {
+          window.alert("unable to upload icon")
+        }
+        
+      })
+          
+  
+  
+  
+  
+    
+  
+  }catch(error)
+  {
+  console.log("Error occured in fetching  company info"+error)
+  }
 
 }
 
@@ -48,8 +102,8 @@ constructor()
   {/* Brand Logo */}
   < ReactLink to="/">
   <a href="" className="brand-link">
-    <img src="dist/img/AdminLTELogo.png" alt="Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} />
-    <span className="brand-text font-weight-light">Manage It</span>
+    <img id="comapnylogo" src="dist/img/AdminLTELogo.png" alt="Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} />
+    <span className="brand-text font-weight-light">{companyInfo["CompanyName"]}</span>
   </a>
   </ReactLink>
   {/* Sidebar */}
@@ -86,7 +140,7 @@ constructor()
               <i className="right fas fa-angle-left" />
             </p>
           </a>
-          <ul id="hrm-menu" className="collapse">
+          <ul style={{padding:"5px"}} id="hrm-menu" className="collapse">
 
           <li className="nav-item has-treeview" onClick={() => handleToUpdate( <AddPerson></AddPerson>)}>
               <a href="" className="nav-link">
@@ -288,7 +342,7 @@ constructor()
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-table" />
             <p>
-              Tables
+              Tabular Representation
               <i className="fas fa-angle-left right" />
             </p>
           </a>

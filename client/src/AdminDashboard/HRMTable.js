@@ -441,6 +441,7 @@ else
        "job_id":r,
        "password":p,
        "status":s,
+       "auth":document.getElementById('auth').value,
        "phone":phone,
        "_id":editData._id
      }
@@ -560,7 +561,10 @@ else
               <input id="phone" type="text" placeholder={editData.phone} name="name" required />
               {dataFor!=="customers"?<div>
               <text htmlFor="role"><b>Role</b></text>
-              <input id="Erole" type="text" placeholder={editData.job_id} name="role" required /></div>
+              <input id="Erole" type="text" placeholder={editData.job_id} name="role" required />
+              <text htmlFor="role"><b>Authority</b></text>
+              <input id="auth" type="text" placeholder={editData.auth} name="role" required />
+              </div>
               :
               ""
               

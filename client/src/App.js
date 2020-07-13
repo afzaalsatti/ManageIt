@@ -63,6 +63,7 @@ function App() {
       <Route path="/registerCaptain" exact component={AddCaptain}></Route>
       <Route path="/attendance" exact component={Attendance}></Route>
       <Route path="/addjob" exact component={AddJobs}></Route>
+      
       <Route path="/route" exact component={AddBusRoute}></Route>
       <Route path="/profile" exact component={UserProfile}></Route>
       <Route path="/bookticket" exact component={PersonalDetails}></Route>

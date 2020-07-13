@@ -4,7 +4,7 @@ import './css/material-design-iconic-font.min.css'
 import {Link as ReactLink} from 'react-router-dom'
 import history from "../../history";
 import UserSession from '../../UserSession'
-
+var company="";
 class Signn extends Component {
     constructor(props)
     {
@@ -13,6 +13,80 @@ class Signn extends Component {
         user:"customer"
       }
     }
+
+    getCompanyInfo=()=>{
+      try{
+      
+        const data={
+          "company":company
+          
+        }
+         console.log(company)
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(data)
+          }
+          fetch("/getCompanyInfo",options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+            
+       
+            if(status==='Success')
+            {
+              
+
+              
+          
+             
+            
+     
+             setTimeout(()=> {
+              localStorage.setItem("companyInfo",JSON.stringify(data.result))
+
+              
+              history.push({
+                pathname: '/AdminDashboard'
+                
+              })
+           }, 50);
+       
+           
+           
+            
+            
+         
+               
+            
+             // history.push("");
+            }else{
+             
+              window.alert("Unable to fetch Comapany Info")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+         window.alert("Unexpected error Try again...");
+       });
+              
+      
+      
+      
+      
+        
+      
+      }catch(error)
+      {
+      console.log("Error occured in fetching  company info")
+      }
+      
+      
+      }
      login=()=> {
   
      
@@ -138,12 +212,12 @@ if(temp.sender.toLowerCase()==="owner" ||temp.sender.toLowerCase()==="admin" )
   setTimeout(function() {
     localStorage.setItem("userInfo",JSON.stringify(temp))
 
-    history.push({
-     pathname: '/home',
-     data: temp,
-   })
+   
     
  }, 50);
+
+company=data.record["company"]
+ this.getCompanyInfo();
 }else
 {
  

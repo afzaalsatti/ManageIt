@@ -419,6 +419,29 @@ console.log("Unexpected error Try again Retrying... History Booking  " +error);
         }
 
     }
+
+    reverseGeocode=(cords)=>{
+      const openGeocoder = require('node-open-geocoder');
+      cords=cords.split(",")
+      openGeocoder()
+    .reverse(cords[0], cords[1])
+    .end((err, res) => {
+if(err)
+{
+  console.log(err)
+}
+else
+{
+  
+  console.log(res)
+
+}
+
+
+    })
+
+    
+    }
     
     getListItemCards=function(){
         

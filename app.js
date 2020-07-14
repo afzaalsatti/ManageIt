@@ -6,6 +6,7 @@ const multer = require("multer");
 var cors = require('cors');
 //init App
 const app=express();
+const stripe = require('stripe')('sk_test_QEldKe5DUQ57tb2UffkBtBmO00zOoCPvnq');
 
 app.use(express.json());
 app.use(cors())
@@ -52,6 +53,13 @@ const Vahicle=mongoose.model("Vahicle");
  const Earning=mongoose.model("Earning")
  const Email=mongoose.model("Email")
  const Expense=mongoose.model("Expense")
+
+
+
+
+
+
+
  app.post("/fetchImage", (req, res) => {
 
     

@@ -13,6 +13,7 @@ import Spinner from '../../Utils/Spinner'
 
 var pageLoaded=1;
 var from_cord="Select from map",to_cord="Select from map";
+var from_location="Select from map",to_location="Select from map";
 var click;
 var fetchTickets;
 
@@ -256,13 +257,50 @@ setTimeout(() => {
   }
 
   setCords(a){
+    const openGeocoder = require('node-open-geocoder');
 if(click==="from")
 {
   from_cord=a.lng+","+a.lat;
+
+ 
+ 
+  openGeocoder()
+    .reverse(a.lng, a.lat)
+    .end((err, res) => {
+if(err)
+{
+  console.log(err)
+}
+else
+{
+  from_location=res.display_name;
+  console.log(res)
+
+}
+
+
+    })
   
 }
 else{
   to_cord=a.lng+","+a.lat;
+
+  openGeocoder()
+    .reverse(a.lng, a.lat)
+    .end((err, res) => {
+if(err)
+{
+  console.log(err)
+}
+else
+{
+  to_location=res.display_name;
+  console.log(res)
+
+}
+
+
+    })
 
 }
    
@@ -323,8 +361,8 @@ else{
        }}
        
        onClick={()=>{
-         document.getElementById("src").value=from_cord;
-         document.getElementById("dest").value=to_cord;
+        document.getElementById("src").value=from_location;
+         document.getElementById("dest").value=to_location;
          this.setState({
           showModal:false
       });

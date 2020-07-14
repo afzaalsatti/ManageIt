@@ -32,7 +32,7 @@ export default class NotificationModal extends Component {
         
         let to=body[0].split(",");
         let from=body[1].split(",")
-           return <li style={{borderRadius:"8px"}}>
+           return <li style={{borderRadius:"8px",fontFamily:"poppins"}}>
                <div style={{display:"table",paddingTop:"20px",borderBottomColor: "black",
         borderBottomWidth: "thin",
         borderBottomStyle: "groove"}}>
@@ -44,7 +44,7 @@ export default class NotificationModal extends Component {
         />
         <p style={{float: "left",
         marginTop: "6px",
-        marginLeft: "10px",color:"green"}}>Ride Invitation</p>
+        marginLeft: "10px",color:"green",fontSize:"large"}}>Ride Invitation</p>
         <p id={"show_noti_details"+index}  data-toggle="collapse" data-target={"#notification"+index} style={{cursor:"pointer",fontSize:"smaller",  marginTop: "6px",color:"blue",float:"right"}} 
         onClick={()=>{
         // if(document.getElementById("show_noti_details"+index).innerHTML==="Show Details")
@@ -161,7 +161,7 @@ export default class NotificationModal extends Component {
             <div >
                        <Modal style={{backdropFilter: "blur(5px)"}} show={this.props.showModal} >
                            <Modal.Header>
-                               <text style={{textAlign: "center",width: "100%",margin: "0px"}}>
+                               <text style={{textAlign: "center",width: "100%",margin: "0px",fontSize:"larger",fontFamily:"poppins"}}>
                                Notifications
                                </text>
                               

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Details from './personalDetails'
 import BookSeat from './BookSeat'
-
+import history from '../../../history'
 import StripePayment from '../payment/stripe_payment'
 
 var count=0;
 var data={};
-var booked,total_booked,total_free;
+var booked=[],total_booked,total_free;
 var userID,userType,userEmail;
 var userInfo;
 export default class BooBusTicket extends Component {
@@ -23,6 +23,7 @@ export default class BooBusTicket extends Component {
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
     this.BookSeatListener= this.BookSeatListener.bind(this);
+    this.getPaymentConfirmation=this.getPaymentConfirmation.bind(this)
    
   
   
@@ -38,8 +39,97 @@ export default class BooBusTicket extends Component {
       total_booked=tbooked;
       total_free=tfree;
      
+     
       
   }
+
+
+updateSeats=()=>
+{
+  window.alert("Connecting To Server")
+        var d = new Date();
+        
+      
+        const req_data={
+        
+         
+          
+         
+          "booked_seats":total_booked.toString(),
+          "id":this.props.details["id"],
+"cust_id":userID,
+
+
+          "cust_cnic":document.getElementById("cnic").value,
+          "cust_contact":userEmail,
+          "to":this.props.details["to"],
+          "from":this.props.details["from"],
+          "date":d.getMonth()+1+"/"+ d.getDate()+":"+d.getFullYear(),
+          "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
+          "price":booked.length*this.props.details["fare"],
+          "tickets":booked.length
+    //       "company":this.props.details["company"],
+    // "title":this.props.details["tittle"],
+    // "vh_id":this.props.details["vahicle_Id"],
+    // "driver_id": this.props.details["driver_Id"]
+    
+
+
+
+
+        }
+         
+        
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+          fetch("/updateRouteSeats",options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+            
+       
+            if(status==='Success')
+            {
+            
+              window.alert("Operation Sucessful")
+              
+              history.push('/home')
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }else{
+             
+              window.alert("Operation Failed!")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+         // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+         window.alert("Unexpected error Try again...  "+error);
+       });
+}
+
+getPaymentConfirmation(){
+
+  this.updateSeats();
+
+}
     getDataFromFields (count){
 
 
@@ -92,83 +182,7 @@ export default class BooBusTicket extends Component {
           
           
      
-        window.alert("Contecting")
-        var d = new Date();
         
-      
-        const req_data={
-        
-         
-          
-         
-          "booked_seats":total_booked.toString(),
-          "id":this.props.details["id"],
-"cust_id":userID,
-
-
-          "cust_cnic":document.getElementById("cnic").value,
-          "cust_contact":userEmail,
-          "to":this.props.details["to"],
-          "from":this.props.details["from"],
-          "date":d.getMonth()+1+"/"+ d.getDate()+":"+d.getFullYear(),
-          "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
-          "price":booked.length*this.props.details["fare"],
-          "tickets":booked.length
-    //       "company":this.props.details["company"],
-    // "title":this.props.details["tittle"],
-    // "vh_id":this.props.details["vahicle_Id"],
-    // "driver_id": this.props.details["driver_Id"]
-    
-
-
-
-
-        }
-         
-        console.log("Request Data", req_data)
-          const options={
-              method:"POST",
-              headers:{
-                  'Content-type':"application/json"
-                  
-              },
-              body:JSON.stringify(req_data)
-          }
-          fetch("/updateRouteSeats",options).then(response=>{
-              return response.json();
-        }).then(data=>{
-            let status=data.status;
-            
-       
-            if(status==='Success')
-            {
-            
-              window.alert("Operation Sucessful")
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }else{
-             
-              window.alert("Operation Failed!")
-            }
-          // `data` is the parsed version of the JSON returned from the above endpoint.
-         // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-        }).catch((error) => {
-         
-         window.alert("Unexpected error Try again...  "+error);
-       });
 
         return true;
         
@@ -270,7 +284,7 @@ export default class BooBusTicket extends Component {
   {/* Main content */}
   <section className="content">
     <div className="row" style={{justifyContent:'center'}}>
-    <div id="step1"className="col-md-8" >
+    <div  id="step1"className="col-md-8" >
         <div className="card card-primary">
           <div className="card-header">
             <h3 className="card-title">Bus Tickets</h3>
@@ -300,6 +314,15 @@ export default class BooBusTicket extends Component {
 
              </div>
           {/* /.card-body */}
+          <div style={{justifyContent:'center'}} className="row">
+      <div id="nextprev" className="col-6">
+      <button   onClick={this.goBack} style={{width:'120px'}} href="" className="btn btn-secondary">Previous</button>
+        <button id="next" onClick={this.goForward} style={{width:'120px'}}className="btn btn-success float-right"> Next</button>
+       
+      </div>
+    </div>
+
+       
         </div>
         {/* /.card */}
       </div>
@@ -322,20 +345,7 @@ export default class BooBusTicket extends Component {
             
             
           </div>
-          {/* /.card-body */}
-        </div>
-        {/* /.card */}
-      </div>
-     
-      <div id="step3" className="col-md-8" style={{display:'none'}}>
-   <StripePayment></StripePayment>
-      </div>
-     
-       </div>
-       <div>
-
-       </div>
-       <div style={{justifyContent:'center'}} className="row">
+          <div style={{justifyContent:'center'}} className="row">
       <div id="nextprev" className="col-6">
       <button   onClick={this.goBack} style={{width:'120px'}} href="" className="btn btn-secondary">Previous</button>
         <button id="next" onClick={this.goForward} style={{width:'120px'}}className="btn btn-success float-right"> Next</button>
@@ -343,13 +353,26 @@ export default class BooBusTicket extends Component {
       </div>
     </div>
 
-    <div style={{justifyContent:'center'}} className="row" style={{display:'none'}}>
+        </div>
+        {/* /.card */}
+      </div>
+     
+      <div id="step3" className="col-md-8" style={{display:'none'}}>
+   <StripePayment getPaymentConfirmation={this.getPaymentConfirmation} fare={this.props.details["fare"]}></StripePayment>
+      </div>
+      <div style={{justifyContent:'center'}} className="row" style={{display:'none'}}>
       <div id="btns" className="col-8">
         <a href="#" className="btn btn-secondary">Cancel</a>
         <input  defaultValue="Create new Porject" className="btn btn-success float-right" />
       </div>
     </div>
-  </section>
+ 
+       </div>
+       <div>
+
+       </div>
+     
+    </section>
   {/* /.content */}
 </div>
 

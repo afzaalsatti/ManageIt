@@ -3,6 +3,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import {CardElement, Elements, ElementsConsumer} from './src';
 import './card_detailed.css';
 
+
 const CARD_OPTIONS = {
   iconStyle: 'solid',
   style: {
@@ -24,6 +25,7 @@ const CARD_OPTIONS = {
       iconColor: '#FFC7EE',
       color: '#FFC7EE',
     },
+    
   },
 };
 
@@ -110,9 +112,11 @@ const DEFAULT_STATE = {
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
+    
+   
+
     this.state = DEFAULT_STATE;
   }
-
   handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -140,7 +144,7 @@ class CheckoutForm extends React.Component {
       billing_details: {
         email,
         phone,
-        name,
+        name
       },
     });
 
@@ -149,7 +153,8 @@ class CheckoutForm extends React.Component {
     if (payload.error) {
       this.setState({error: payload.error});
     } else {
-      this.setState({paymentMethod: payload.paymentMethod});
+      getPaymentConfirmation()
+     // this.setState({paymentMethod: payload.paymentMethod });
     }
   };
 
@@ -158,6 +163,7 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
+   
     const {error, processing, paymentMethod, name, email, phone} = this.state;
     const {stripe} = this.props;
     return paymentMethod ? (
@@ -182,7 +188,9 @@ class CheckoutForm extends React.Component {
             required
             autoComplete="name"
             value={name}
+           
             onChange={(event) => {
+              
               this.setState({name: event.target.value});
             }}
           />
@@ -223,7 +231,7 @@ class CheckoutForm extends React.Component {
         </fieldset>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
         <SubmitButton processing={processing} error={error} disabled={!stripe}>
-          Pay $25
+          Pay RS {payment}
         </SubmitButton>
       </form>
     );
@@ -249,8 +257,12 @@ const ELEMENTS_OPTIONS = {
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_09m6GUVFMmvNAJfBoZp2OpLY004Dsajeor');
-
-const StripePayment = () => {
+var payment = 0;
+var getPaymentConfirmation;
+const StripePayment = (props) => {
+  payment=props.fare;
+  getPaymentConfirmation=props.getPaymentConfirmation;
+  
   return (
       <div className="mainPaymentDiv">
     <div className="AppWrapper">

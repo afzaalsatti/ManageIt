@@ -16,10 +16,12 @@
     display: inline-block;
   }
   .grid{
-    width: 100px;
+    width: 120px;
     border: 2px solid orange;
     display: inline-block ;
     margin-right: 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
   
   
 
@@ -34,12 +36,35 @@
   .grid.Left{
     float: left;
     width: 30px ;
+
   }
 
   .grid.Right{
     float: right;
     width: 30px;
   }
+
+  #step1{
+    height: 550px;
+    overflow: scroll;
+  }
+  #step2{
+    height: 550px;
+    overflow: scroll;
+  }
+  #step3{
+    height: 550px;
+    overflow: scroll;
+  }
+ .left h4{
+
+    background: #196EDE;
+    border-radius: 20px;
+    color: white;
+    font-size: large;
+    padding: 5px;
+  }
+
  .grid img{
    width: 30px;
    height: 30px;

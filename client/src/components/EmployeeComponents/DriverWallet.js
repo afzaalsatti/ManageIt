@@ -287,6 +287,9 @@ document.getElementById("canceled").innerHTML="RS"+(canceled);
       <a   href=""><small>Pending Clearance</small><span  id="pending">RS0</span></a>
       <span ><small>Available for Withdrawal</small><span id="cleared">RS0</span></span>
     </div>
+    <div style={{    width: "100%",
+    height: "150px",
+    display: "grid"}}>
     <div className="revenues-actions js-revenues-actions p-b-10 cf">
       <text>WITHDRAW</text>
       <div id="Earnings-component"><div className="earnings-package" data-reactroot><section className="withdraw-buttons-list"><button data-hint="No Earnings to Withdraw" className="withdraw-button paypal hint--top disabled btn-standard" disabled><i />Paypal Account</button><form method="post" className="js-verify-btn" action acceptCharset="UTF-8"><input type="hidden" name="authenticity_token" defaultValue="X/gzmZ6U4K0Ob84MBYuhHKOKmT/4q06Y+pi1dajKUf8=" /><button type="submit" data-hint="New! Bank Transfer withdrawals. Click the button to learn more." className="withdraw-button local_bank_transfer hint--top btn-standard"><i />Bank Transfer</button></form><form method="post" className="js-verify-btn" action acceptCharset="UTF-8"><input type="hidden" name="authenticity_token" defaultValue="X/gzmZ6U4K0Ob84MBYuhHKOKmT/4q06Y+pi1dajKUf8=" />
@@ -438,12 +441,14 @@ document.getElementById("canceled").innerHTML="RS"+(canceled);
       }} >Export to CSV</a>
       <div className="csv-export-notif hidden" />
     </div>
+  
+    </div>
    </article>
 </div>
 
 <hr></hr>
 
-<Card>
+<Card style={{display:"content"}}>
 <table style={{height: 'auto', overflow:'scroll' }}  id="example1" className="table table-bordered table-striped">
               <thead>
                 <tr>

@@ -166,9 +166,7 @@ this.getTicketPurchaseHistory()
         
         
         ticketHistory=data.ticketHistory;
-        this.setState({
-          component:this.getListItemCards()
-         });
+        this.reverseGeocode()
          
         // history.push("");
        }else{
@@ -213,8 +211,69 @@ this.getTicketPurchaseHistory()
       }
 
   }
+ 
+  reverseGeocode=()=>{
+    
+    const openGeocoder = require('node-open-geocoder');
+
+    ticketHistory.forEach(element => {
+      
+  var test=element.from.split(",")
   
+  openGeocoder()
+.reverse(parseFloat(test[0]), parseFloat(test[1]))
+.end((err, res) => {
+if(err)
+{
+element.display_name_src=element.from
+}
+else
+{
+
+element.display_name_src=res.display_name 
+
+
+}
+
+
+})
+
+var test1=element.from.split(",")
+openGeocoder()
+.reverse(parseFloat(test1[0]), parseFloat(test1[1]))
+.end((err, res) => {
+if(err)
+{
+element.display_name_dest=element.from
+}
+else
+{
+
+element.display_name_dest=res.display_name 
+
+
+}
+
+
+})
+
+});
+
+setTimeout(() => {
+  this.setState({
+    component:this.getListItemCards()
+   });
+   console.log("OK going")
+}, 1000);
+
+  
+  }
     getListItemCards=function(){
+   
+
+
+
+
    
         return ticketHistory.map((key, index)=>{
             
@@ -238,7 +297,8 @@ this.getTicketPurchaseHistory()
                                       src="/assets/svg/tickets.svg"
                                       alt
                                     />
-               <text className="rideHistoryAddress">{key.from}</text>
+               <text className="rideHistoryAddress">{key.display_name_src}</text>
+               
           
           
                <br></br>
@@ -250,7 +310,7 @@ this.getTicketPurchaseHistory()
                                       src="/assets/svg/boarding-dropping.svg"
                                       alt
                                     />
-               <text className="rideHistoryAddress">{key.to}</text>
+               <text className="rideHistoryAddress">{key.display_name_dest}</text>
           
            </div>
                  </div>

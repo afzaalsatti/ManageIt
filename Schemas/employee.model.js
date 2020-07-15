@@ -70,6 +70,11 @@ const Employee=mongoose.Schema({
     auth:{
         type:String
 
+    },
+    
+    hash:{
+        type:String
+
     }
 });
 

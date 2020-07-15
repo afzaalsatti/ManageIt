@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import './mailbox.css'
 
 export default class mailbox extends Component {

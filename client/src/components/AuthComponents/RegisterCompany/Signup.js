@@ -5,22 +5,31 @@ import {Link as ReactLink} from 'react-router-dom'
 import './signup.css'
 import ImageUploader from 'react-images-upload';
 import axios from 'axios';
+import Modal from "react-bootstrap/Modal";
 
 var logo_link="";
 
- 
+ var ownerID="";
+ var parentCompany="";
 export default class signup2 extends Component {
   constructor(props)
   {
     super(props);
     this.state ={
-      file: null
+      file: null,
+      showAuthModal:false
   };
   
   
   this.onChange = this.onChange.bind(this);
   }
   saveOwnerDetails=()=>{
+    let new_company=document.getElementById("new-company-check").checked;
+    if(!new_company)
+    {
+this.registerChildCompany();
+    }
+    else{
     let name=  document.getElementById("name").value ;
     
     let email=document.getElementById("email").value ;
@@ -34,7 +43,7 @@ export default class signup2 extends Component {
       "name":name,
       "email":email,
       "password":pass,
-      "dcnic":cnic,
+      "id":cnic,
       "phone":phone,
       "gender":gender,
       "address":address,
@@ -71,7 +80,91 @@ export default class signup2 extends Component {
   // `data` is the parsed version of the JSON returned from the above endpoint.
   console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
 });
+    }
+  }
 
+
+
+  componentDidMount()
+  {
+    document.getElementById("new-company-check").checked=true;
+  }
+  registerChildCompany=()=>
+  {
+      
+    
+    
+    
+  let intro=document.getElementById("company_intro").value ;
+  let motto=document.getElementById("company_motto").value ;
+  let cnic=ownerID ;
+  
+          
+       
+            
+     
+     
+            
+            
+  
+     let company_name=  document.getElementById("company_name").value ;
+    
+     let company_regno=document.getElementById("company_regno").value ;
+     let company_email=document.getElementById("company_email").value ;
+  
+  
+     let company_phone=  document.getElementById("company_phone").value ;
+    
+     let company_employee=document.getElementById("company_employee").value ;
+     let company_head=document.getElementById("company_head").value ;
+  
+  
+       const data={
+     
+      "ownerId":cnic,
+     
+      "CompanyInfo":intro,
+      "CompanyMotto":motto,
+      "parent":parentCompany,
+      "CompanyLogo":logo_link,
+      "CompanyName":company_name,
+      "company_regno":company_regno,
+      "CompanyEmail":company_email,
+      "CompanyEmployee":company_employee,
+      "CompanyPhone":company_phone,
+      "CompanyHeadOffice":company_head
+    }
+     
+      const options={
+          method:"POST",
+          headers:{
+              'Content-type':"application/json"
+  
+          },
+          body:JSON.stringify(data)
+      }
+      fetch("/registerCompany",options).then(response=>{
+          return response.json();
+    }).then(data=>{
+        let status=data.status;
+        console.log(status)
+  
+        if(status==='Success')
+        {
+ 
+        
+         history.push("/signin");
+        }else{
+          window.alert("OOH No")
+        }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    });
+          
+      
+  
+      
+     
   }
   registerCompany=()=>
   {
@@ -184,15 +277,192 @@ onChange(e) {
   console.log(this.state.file)
 }
    
+
+autherizeRegistration=()=>{
+
+  parentCompany=document.getElementById("auth_company").value;
+  document.getElementById("autherizeRequest").innerHTML="Processing..."
+  const data={
+    "company":document.getElementById("auth_company").value,
+    "hash":document.getElementById("auth_hash").value,
+
+    
+
+    
+  }
+
+  const options={
+    method:"POST",
+    headers:{
+        'Content-type':"application/json"
+
+    },
+    body:JSON.stringify(data)
+}
+fetch("/autherizeCompanyRegistration",options).then(response=>{
+    return response.json();
+}).then(data=>{
+  let status=data.status;
+  console.log(status)
+
+  if(status==='Success')
+  {
+
+ window.alert("Autherized !")
+ document.getElementById("autherizeRequest").innerHTML="Autherize"
+ ownerID=data.ownerID;
+ this.setState({
+   showAuthModal:false
+ })
+ this.saveCompanyLogo();
+   // history.push("");
+  }else{
+    window.alert("Try again")
+    document.getElementById("autherizeRequest").innerHTML="Autherize"
+  }
+// `data` is the parsed version of the JSON returned from the above endpoint.
+console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+});
+}
+validateCompanyDetails=(type)=>{
+  let value="";
+  if(type==="CompanyName")
+  {
+value=document.getElementById("company_name").value
+  }
+
+  const data={
+    type:type,
+    value:value,
+
+    
+
+    
+  }
+
+  const options={
+    method:"POST",
+    headers:{
+        'Content-type':"application/json"
+
+    },
+    body:JSON.stringify(data)
+}
+fetch("/validateCompanyInfo",options).then(response=>{
+    return response.json();
+}).then(data=>{
+  let status=data.status;
+  console.log(status)
+
+  if(status==='Success')
+  {
+
+    document.getElementById("company_name").value="This Name is Already taken"
+  
+   // history.push("");
+  }else{
+   
+    console.log("Legal Input"); 
+  }
+// `data` is the parsed version of the JSON returned from the above endpoint.
+ // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+});
+}
     render() {
         return (
-          <div className="main">
+        
   <section className="signup">
     <div className="container">
+    <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showAuthModal} >
+                           <Modal.Header>
+                               <text style={{textAlign: "center",width: "100%",margin: "0px",fontSize:"larger",fontFamily:"poppins"}}>
+                               Please Autherize 
+                               </text>
+                              
+                           </Modal.Header>
+        
+        <Modal.Body style={{maxHeight:"470px"}} >
+       <div style={{display:"grid"}}className="all-notification-modal">
+<text  style={{margin:"0px"}}>Parent Company Name</text>
+<input id="auth_company" className="auth-input" placeholder="Parent Company Name"></input>
+<text style={{margin:"0px"}}>Owner Secret Hash</text>
+<input  id="auth_hash" className="auth-input" placeholder="Secret Hash to verify"></input>
+
+
+
+     </div>
+      
+    </Modal.Body  >
+
+
+       <Modal.Footer  >
+
+       <button
+      id="autherizeRequest"
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "30%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+       this.autherizeRegistration()
+        
+      }}>Autherize</button>
+      
+      <button
+      id="cancelRequest"
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "30%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+       this.setState({
+         showAuthModal:false
+       })
+        
+      }}>Cancel</button>
+     
+       </Modal.Footer>
+      </Modal>
+       
       <div className="signup-content">
         <div id="style-2" className="signup-form company-signup-form" style={{width:'90%',display:"grid"}}>
-          <h2 className="form-title">Register your company </h2>
-          <div className="register-form" id="register-form">
+          <h2 id="company-reg-title" className="form-title">Register your company </h2>
+          <span style={{fontFamily:"poppins",margin:"10px"}}>
+          New Company Registration
+          <input
+          onClick={()=>{
+            
+            let new_company=document.getElementById("new-company-check").checked;
+           
+            
+            if(new_company){
+              document.getElementById("owner_info").style.display="block"
+              document.getElementById("company-reg-title").innerHTML="Register your company"
+              
+
+              
+            }else{
+              document.getElementById("owner_info").style.display="none"
+              document.getElementById("company-reg-title").innerHTML="Register your child company"
+
+            }
+             
+          }}
+          
+          id="new-company-check" style={{marginLeft:"10px"}} type="checkbox" ></input>
+          </span>
+          
+          <div className="register-form" id="owner_info">
               <h6 className="formHeadings">Owner Personal Information</h6>
           <div className="formgroupDivs form-group">
               <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
@@ -202,7 +472,9 @@ onChange(e) {
            
             <div className="formgroupDivs form-group">
               <label htmlFor="email"><i className="zmdi zmdi-email" /></label>
-              <input className="input"  type="email" name="email" id="email" placeholder="Owner Email" />
+              <input
+              
+              className="input"  type="email" name="email" id="email" placeholder="Owner Email" />
             </div>
             
             
@@ -245,7 +517,13 @@ onChange(e) {
      
           <div className="formgroupDivs form-group">
               <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
-              <input className="input" type="name" name="name" id="company_name" placeholder="Company Name" />
+              <input 
+              onBlur={()=>{
+                this.validateCompanyDetails("CompanyName")
+              }}
+              
+              
+              className="input" type="name" name="name" id="company_name" placeholder="Company Name" />
             </div>
            
             <div className="formgroupDivs form-group">
@@ -315,8 +593,17 @@ onChange(e) {
 
   onClick={()=>
   {
-
-    this.saveCompanyLogo();
+    let new_company=document.getElementById("new-company-check").checked;
+    if(!new_company)
+    {
+this.setState({
+  showAuthModal:true
+})
+    }else
+    {
+      this.saveCompanyLogo();
+    }
+   
 
     
   }}
@@ -325,7 +612,7 @@ onChange(e) {
 
           </div>
      
-       
+          
        </div>
         <div className="signup-image sideImage ">
           <figure><img src="/signupimage.jpg" alt="sing up image" /></figure>
@@ -333,10 +620,12 @@ onChange(e) {
           <a href="#" className="signup-image-link">I am already member</a>
           </ ReactLink>
         </div>
+       
       </div>
     </div>
   </section>
-</div>
+
+
 
      
         )

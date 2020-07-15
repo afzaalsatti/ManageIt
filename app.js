@@ -987,7 +987,9 @@ app.post('/getAllEarnings',(req,res)=>
                 });
              
             }
-          }); });
+          }); 
+        
+        });
 
           
 
@@ -1895,19 +1897,61 @@ app.post('/getAllEmployee',(req,res)=>
             });
 
 });
+
+app.post('/updateHash',(req,res)=>
+{
+    let sha256 = require("sha256")
+    let d=new Date();
+    let hash=sha256(req.body.id+d.getMinutes()+d.getSeconds()+Math.floor(Math.random() * 97570)); 
+
+    Employee.findOneAndUpdate({id:req.body.id,company:req.body.company } , {
+        hash:  hash,
+       
+     },   
+    function(err, result) {
+         if (err) {
+             
+           res.json({
+             
+               status:'Failure'
+              
+           });
+         } else {
+            
+             res.json({
+                 status:'Success',
+                 hash:hash
+                 
+                
+             });
+          
+         }
+       }); 
+
+
+
+
+
+
+
+});
 app.post('/addEmployee',(req,res)=>
 {
     let d=new Date();
 let auth="";
+let hash=""
 if(req.body.job_id === "owner")
 {
     auth="owner"
+    var sha256 = require("sha256")
+hash=sha256(req.body.name+req.body.password+Math.floor(Math.random() * 97570)); 
 }
 
     const employee=new Employee();
     employee.company=req.body.company;
     employee.name=req.body.name;
     employee.email=req.body.email;
+    employee.hash=hash;
     employee.password=req.body.password;
     employee.status=req.body.status;
     employee.id=employee._id.toString();
@@ -1953,6 +1997,7 @@ if(req.body.job_id === "owner")
     });
 
 });
+
 
 //Adding company
 app.post('/registerCompany',(req,res)=>
@@ -2057,6 +2102,101 @@ app.post('/signup',(req,res)=>
 
 });
 
+app.post('/validateCompanyInfo',(req,res)=>
+{
+    
+    console.log(req.body)
+if(req.body.type=="CompanyName")
+{
+    Company.findOne({ CompanyName: req.body.value }, function (err, record) {
+   
+
+       
+        if(!err)
+        {
+          
+             if(record != null)
+             {
+                res.json({
+                    status:'Success'
+                   
+                });
+               
+             }
+             else{
+                res.json({
+                    status:'Sorry we could not find any account on this hash!'
+
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Something went wrong'
+               
+        
+            });
+        }
+            });
+
+}
+    
+ 
+    
+   
+   
+   
+   
+    
+
+});
+app.post('/autherizeCompanyRegistration',(req,res)=>
+{
+
+    console.log(req.body)
+  Employee.findOne({ hash: req.body.hash, company:req.body.company,job_id:"owner" }, function (err, record) {
+   
+
+       
+            if(!err)
+            {
+              
+                 if(record != null)
+                 {
+                     console.log(record)
+                    res.json({
+                        status:'Success',
+                        ownerID:record.id
+                       
+                    });
+                   
+                 }
+                 else{
+                    res.json({
+                        status:'Sorry we could not find any account on this hash!'
+
+                    });
+                 }
+       
+            }else{
+                console.log("Something went wrong");
+                res.json({
+                    status:'Something went wrong'
+                   
+            
+                });
+            }
+                });
+    
+   
+   
+   
+   
+    
+
+});
+
 app.post('/signin',(req,res)=>
 {
 
@@ -2095,6 +2235,7 @@ if(req.body.sender!=="customer")
   
     temp["job_id"]=record["job_id"];
     temp["company"]=record["company"];
+    temp["hash"]=record["hash"];
 }
                          
 

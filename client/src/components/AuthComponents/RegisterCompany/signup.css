@@ -59,3 +59,13 @@
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #1976D2;
 }
+
+
+.auth-input{
+    height: 35px;
+    background: lightgray;
+    font-family: poppins;
+    border-radius: 5px;
+
+    border-style: none;
+}

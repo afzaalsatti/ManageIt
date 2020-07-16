@@ -3,11 +3,13 @@ import ImageUploader from 'react-images-upload';
 import {Link as ReactLink} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 var count=0;
 var data={};
 var education=[];
 var experience=[];
-
+var dp_link="";
+var userInfo;
 function notifySuccess()  {
       
       
@@ -35,19 +37,49 @@ function notifyPasswordMismatch()  {
 };
 export default class AddPerson extends Component {
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
     this.goForward = this.goForward.bind(this);
     this.goBack= this.goBack.bind(this);
     this.getDataFromFields= this.getDataFromFields.bind(this);
     this.AddMoreEdu=this.AddMoreEdu.bind(this);
     this.AddMoreExp=this.AddMoreExp.bind(this);
+    this.onDPChange = this.onDPChange.bind(this);
     // this.notifySuccess=this.notifySuccess.bind(this);
-    this.state={eduaction:[],experience:[]}
+    this.state={eduaction:[],experience:[],
+    dp:null}
   
   }
     onDrop(picture) {
         alert(picture)
+    }
+    saveEmpDP=()=>{
+      const data = new FormData() 
+      data.append('file', this.state.dp)
+     
+      axios.post("http://localhost:5000/uploadImage", data, { // receive two parameter endpoint url ,form data 
+        })
+        .then(res => { // then print response status
+          if(res.statusText==="OK")
+          {
+           
+            dp_link=res.data.link;
+            this.sendDataToServer()
+            
+        
+          }
+          else
+          {
+            window.alert("unable to upload Dp")
+          }
+          
+        })
+    }
+    onDPChange(e) {
+      this.setState({dp:e.target.files[0]});
+    
+      
     }
     AddMoreExp()
     {
@@ -128,6 +160,68 @@ export default class AddPerson extends Component {
               eduaction:edu_list
             })
     }
+
+    sendDataToServer=()=>{
+
+      window.alert("Contecting")
+        
+        const req_data={
+        
+         
+          
+         
+          
+          "company":userInfo["userData"].company,
+          "name": data["name"],
+          "email":data["email"],
+
+        "dp":dp_link,
+        "status":"active",
+        "auth":data["auth"],
+          "password":data["pass"],
+          "id":data["id"],
+          "job_id":data["job_id"],
+          "address":data["address"],
+          "gender":data["gender"],
+          "education":education,
+          "experience":experience
+
+
+
+        }
+         
+          const options={
+              method:"POST",
+              headers:{
+                  'Content-type':"application/json"
+                  
+              },
+              body:JSON.stringify(req_data)
+          }
+          fetch("/addEmployee",options).then(response=>{
+              return response.json();
+        }).then(data=>{
+            let status=data.status;
+            console.log(status)
+       
+            if(status==='Success')
+            {
+            
+              window.alert("Operation Sucessful")
+              //history.push('/home');
+            
+             // history.push("");
+            }else{
+             
+              window.alert("Operation Failed!")
+            }
+          // `data` is the parsed version of the JSON returned from the above endpoint.
+          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        }).catch((error) => {
+         
+         window.alert("Unexpected error Try again...  "+error);
+       });
+    }
     getDataFromFields (count){
 
 
@@ -138,10 +232,12 @@ export default class AddPerson extends Component {
         let id=document.getElementById("idNumber").value;
         let job_id=document.getElementById("job_id").value;
         let gender=document.getElementById("status").value;
+        let auth=document.getElementById("auth").value;
+        
         let pass1=document.getElementById("pass1").value;
         let pass2=document.getElementById("pass2").value;
         let address=document.getElementById("address").value;
-        if(name && email && id && job_id && gender!="Gender" && address && pass1 && pass2)
+        if(name && email && id && job_id && gender!="Gender" && address && pass1 && pass2 && auth)
         {
           
           if(pass1===pass2)
@@ -153,6 +249,7 @@ export default class AddPerson extends Component {
         data["gender"]=gender;
         data["address"]=address;
         data["pass"]=pass1;
+        data["auth"]=auth;
         return true;
       }
         else{
@@ -291,60 +388,11 @@ return true;
         document.getElementById("next").innerHTML ="Submit";
       }
     }else{
-      window.alert("Contecting")
-        
-        const req_data={
-        
-         
-          
-         
-          
-          "company":"decideLater",
-          "name": data["name"],
-          "email":data["email"],
-          "password":data["pass"],
-          "id":data["id"],
-          "job_id":data["job_id"],
-          "address":data["address"],
-          "gender":data["gender"],
-          "education":education,
-          "experience":experience
 
 
+this.saveEmpDP();
 
-        }
-         
-          const options={
-              method:"POST",
-              headers:{
-                  'Content-type':"application/json"
-                  
-              },
-              body:JSON.stringify(req_data)
-          }
-          fetch("/addEmployee",options).then(response=>{
-              return response.json();
-        }).then(data=>{
-            let status=data.status;
-            console.log(status)
-       
-            if(status==='Success')
-            {
-            
-              window.alert("Operation Sucessful")
-              //history.push('/home');
-            
-             // history.push("");
-            }else{
-             
-              window.alert("Operation Failed!")
-            }
-          // `data` is the parsed version of the JSON returned from the above endpoint.
-          console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-        }).catch((error) => {
-         
-         window.alert("Unexpected error Try again...  "+error);
-       });
+
     }
     }
     }
@@ -447,6 +495,33 @@ return true;
               </select>
             </div>
            
+            <div style={{width:'48%',float:'right'}} className="form-group">
+              <text htmlFor="inputStatus">Authority</text>
+              <select id="auth" className="form-control custom-select">
+                <option selected disabled>Select Autherization</option>
+                <option>manager</option>
+                <option>moderator</option>
+                <option>data-entry</option>
+                <option>none</option>
+              
+                
+              </select>
+            </div>
+            <div style={{width:'48%',float:'left'}} className="form-group">
+              <text htmlFor="inputStatus">Upload Employee Display Picture</text>
+              <input style={{marginTop:"10px",float:"inherit"}}
+              type="file"
+              name="file"
+              accept=".png, .jpg,.jpeg"
+              onChange= {this.onDPChange}
+             
+            />
+               </div>
+            
+     
+
+
+
 
      <div style={{width:'100%',float:'right'}}className="form-group">
               {/* <text htmlFor="inputName">Upload Image</text> */}

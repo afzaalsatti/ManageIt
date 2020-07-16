@@ -34,6 +34,10 @@ const Employee=mongoose.Schema({
         type:String,
         require:'required'
     },
+    dp:{
+        type:String,
+        require:'required'
+    },
     gender:{
         type:String,
         require:'required'

@@ -719,7 +719,7 @@ onClick={()=>{
                     </div>
                     <div className="fl rest1 appear-second animate">
                       <a
-                        href="https://thebrandtrustreport.wordpress.com/tag/redbus-in/"
+                        href="#"
                         target="_blank"
                       >
                         <div style={{ marginTop: 35 }}>
@@ -770,7 +770,7 @@ onClick={()=>{
                         <div className="sp rest1 animate">CUSTOMERS</div>
                         <div className="sv rest1 animate">17 M</div>
                         <div className="common-desc second-level-heading rest1 animate">
-                          redBus is trusted by over 17 million happy customers
+                          MageIt is trusted by over 17 million happy customers
                           globally
                         </div>
                       </div>
@@ -789,7 +789,7 @@ onClick={()=>{
                         <div className="sp rest1 animate">BUS TICKETS</div>
                         <div className="sv rest1 animate">180+ M</div>
                         <div className="common-desc second-level-heading rest1 animate">
-                          Over 180 million trips booked using redBus
+                          Over 180 million trips booked using ManageIt
                         </div>
                       </div>
                     </div>

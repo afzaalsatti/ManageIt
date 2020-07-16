@@ -30,7 +30,9 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + '-' +file.originalname )
   }
 })
+
 var upload = multer({ storage: storage }).single('file')
+
 
 
 
@@ -53,13 +55,70 @@ const Vahicle=mongoose.model("Vahicle");
  const Earning=mongoose.model("Earning")
  const Email=mongoose.model("Email")
  const Expense=mongoose.model("Expense")
+ const JobApplication=mongoose.model("JobApplication")
+
+
+
+
+ app.post('/uploadCv',function(req, res) {
+    try{
+        upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                return res.status(500).json(err)
+            } else if (err) {
+                return res.status(500).json(err)
+            }
+ 
+       return res.status(200).json({"link":req.file.path}).send();
+ 
+     })
+    }
+    catch(err)
+    {
+        return res.status(500).send();
+    }
+     
+    
+
+});
+
+app.post("/fetchFile", (req, res) => {
+
+    
+   
+
+    var address = path.join(__dirname, "./"+req.body.address);
+
+    const pdf2base64 = require('pdf-to-base64');
+    pdf2base64(address)
+        .then(
+            (response) => {
+                res.json({
+                    status:'Success',
+                    result:response,
+                    
+                    
+                });
+              
+            }
+        )
+        .catch(
+            (error) => {
+                res.json({
+                    status:'Failure',
+                    
+                    
+                    
+                }); //Exepection error....
+            }
+        )
 
 
 
 
 
 
-
+  });
  app.post("/fetchImage", (req, res) => {
 
     
@@ -84,10 +143,10 @@ const Vahicle=mongoose.model("Vahicle");
 
 
   });
- app.post("/fetch", (req, res) => {
+ app.get("/fetch", (req, res) => {
      
 // console.log(req.body.location)
-return res.status(200).sendFile(path.join(__dirname, "./public/uploads/1593859872850-444444.jpeg"));
+return res.status(200).sendFile(path.join(__dirname, "./public/uploads/1594916582030-Midterm-Answer sheet for PCS.pdf"));
    
   });
 
@@ -105,11 +164,59 @@ console.log(req.test)
     })
 
 });
+app.post('/getAllJobApplications',(req,res)=>
+{ 
+    let company=req.body.company
+     company="Elite Bus Service Islamabad"
+   
+   JobApplication.find({ company : company }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
 app.post('/getAllEmails',(req,res)=>
 { 
     
    
-   Email.find({ comapny : req.body.comapny }, function (err, record) {
+   Email.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -155,7 +262,7 @@ app.post('/getAllRoutes',(req,res)=>
 { 
     
    
-   Route.find({ comapny : req.body.comapny }, function (err, record) {
+   Route.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -201,7 +308,7 @@ app.post('/getAllVahicles',(req,res)=>
 { 
     
    
-   Vahicle.find({ comapny : req.body.comapny }, function (err, record) {
+   Vahicle.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -247,7 +354,7 @@ app.post('/getAllExpenses',(req,res)=>
 { 
     
    
-   Expense.find({ comapny : req.body.comapny }, function (err, record) {
+   Expense.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -293,7 +400,7 @@ app.post('/getAllBookings',(req,res)=>
 { 
     
    
-   Booking.find({ comapny : req.body.comapny }, function (err, record) {
+   Booking.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -339,7 +446,7 @@ app.post('/getAllEarnings',(req,res)=>
 { 
     
    
-   Earning.find({ comapny : req.body.comapny }, function (err, record) {
+   Earning.find({ company : req.body.company }, function (err, record) {
   
      
       
@@ -1950,6 +2057,7 @@ hash=sha256(req.body.name+req.body.password+Math.floor(Math.random() * 97570));
     const employee=new Employee();
     employee.company=req.body.company;
     employee.name=req.body.name;
+    employee.dp=req.body.dp;
     employee.email=req.body.email;
     employee.hash=hash;
     employee.password=req.body.password;
@@ -2049,6 +2157,53 @@ app.post('/registerCompany',(req,res)=>
 
 });
 
+app.post('/apply',(req,res)=>
+{
+    let d=new Date()
+    console.log(req.body)
+  
+    const application=new JobApplication();
+    application.company=req.body.company;
+    application.cand_name=req.body.cand_name;
+    application.cand_email=req.body.cand_email;
+    application.cand_phone=req.body.cand_phone;
+    application.cand_cv_link=req.body.cand_cv_link;
+    application.job_id=req.body.job_id;
+    application.date=d.getMonth()+1 +"/"+d.getDay()+"/"+d.getFullYear();;
+    application.time=d.getHours() +":"+d.getMinutes()+":"+d.getSeconds();;
+   
+    
+    application.save().then(resultCode => {
+        res.json({
+            status:'Success'
+            
+           
+    
+        });
+    }).catch(function(error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/json');
+        res.json({
+            status:'Failure'
+           
+    
+        });
+        });
+
+
+
+      
+    
+   
+   
+   
+   
+    
+
+});
+
+
+
 //SignUp Route
 app.post('/signup',(req,res)=>
 {
@@ -2061,7 +2216,12 @@ app.post('/signup',(req,res)=>
     person.subscription=[{"first":1},{"frst":1},{"irst":1}];
    
     person.save().then(resultCode => {
-        res.json('Success');
+        res.json({
+            status:'Success'
+            
+           
+    
+        });
     }).catch(function(error) {
         console.log(error);
         res.setHeader('Content-Type', 'text/json');
@@ -2073,26 +2233,7 @@ app.post('/signup',(req,res)=>
         });
 
 
-        users.find((err,doc)=>{
-            if(!err)
-            {
-                
-                res.setHeader('Content-Type', 'text/json');
-                res.json({
-                    status:'Success'
-                   
-            
-                });
-            
-            }else{
-                console.log("Something went wrong");
-                res.json({
-                    status:'Failure'
-                   
-            
-                });
-            }
-                });
+    
     
    
    

@@ -103,17 +103,23 @@ const data=[""];
   
  
     getKeys = function(){
-      let arr=Object.keys(this.state.data[0]);
-      arr=arr.slice(1)
-console.log("------------------")
-console.log(arr)
+      if(this.state.data.length>0)
+      {
+        let arr=Object.keys(this.state.data[0]);
+        arr=arr.slice(1)
+  console.log("------------------")
+  console.log(arr)
+       
+        
      
+  
+        
+      arr.push("edit")
+          return  arr;
+      }else{
+        return []
+      }
       
-   
-
-      
-    arr.push("edit")
-        return  arr;
     }
     
     getHeader = function(){
@@ -326,13 +332,18 @@ let booking=data.result;
               
                 
                 
+               {this.state.data.length>0 ? this.getRowsData() : 
+               
+               <div style={{width:"100%",textAlign:"center",margin:"60px"}}>
+                 <text>No Data to show</text>
+               </div>
                
                
-                
-                
-                {this.getRowsData()}
-                
+               }
                
+                
+             
+              
           
                 
                 

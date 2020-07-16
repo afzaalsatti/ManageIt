@@ -330,7 +330,14 @@ let booking=data.result;
                
                 
                 
-                {this.getRowsData()}
+              {this.state.data.length>0 ? this.getRowsData() : 
+               
+               <div style={{width:"100%",textAlign:"center",margin:"60px"}}>
+                 <text>No Data to show</text>
+               </div>
+               
+               
+               }
                 
                
           

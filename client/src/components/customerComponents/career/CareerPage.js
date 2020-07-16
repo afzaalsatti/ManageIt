@@ -6,6 +6,7 @@ constructor()
 {
     super();
       this.showJobDetails=this.showJobDetails.bind(this);
+      
       this.showJobs=this.showJobs.bind(this);
       this.state={component:<JobAds showJobDetails={this.showJobDetails}></JobAds>}
 }
@@ -21,9 +22,10 @@ showJobDetails = data => e =>
 
     
     this.setState({
-        component:<JobDetails data={data} showJobs={this.showJobs}></JobDetails>
+        component:<JobDetails  data={data} showJobs={this.showJobs}></JobDetails>
     })
 }
+
 
     render() {
         return (

@@ -75,6 +75,7 @@ getPartnerDetails=()=>{
     
     <Card.Footer>
       <a style={{color:"blue"}}>Learn more &#8594;</a>
+      <a style={{color:"green",float:"right"}}>Subscribe</a>
     </Card.Footer>
     
     </Card>
@@ -131,7 +132,12 @@ getPartnerDetails=()=>{
 
     <img src="./assets/images/cash.png"></img>
    
-    <h4>
+    <h4 style={{    fontSize: "large",
+    width: "80%",
+
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px"}}>
     More choices, endless possibilities
 
     </h4>
@@ -147,7 +153,12 @@ getPartnerDetails=()=>{
 
     <img src="./assets/images/cash.png"></img>
    
-    <h4>
+    <h4 style={{    fontSize: "large",
+    width: "80%",
+
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px"}}>
     Proven technical mastery
 
     </h4>
@@ -162,7 +173,12 @@ getPartnerDetails=()=>{
 
     <img src="./assets/images/cash.png"></img>
    
-    <h4>
+    <h4 style={{    fontSize: "large",
+    width: "80%",
+
+    margin: "auto",
+    marginTop: "10px",
+    marginBottom: "10px"}}>
     There from the start
 
     </h4>

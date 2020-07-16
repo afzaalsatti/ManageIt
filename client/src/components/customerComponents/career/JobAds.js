@@ -4,10 +4,11 @@ import './jobs.css'
 var data=[
     {
         //add Education and salary fields to job ad form
-      "job_id": "Job ID",
+      
       "title": "Sales Manager",
       "issue_date": "11/2/2020",
       "last_date": "20/2/2020",
+      "job_id":"12u12898912891y129y2",
       "hr_email": "afzaalsatti74@gmail.com",
       "company_name": "Elite Bus Service Islamabad",
       "type": "Full Time",
@@ -18,10 +19,11 @@ var data=[
 
     },
     {
-        "job_id": "Job ID",
+        
         "title": "Senior Web Developer Required",
         "issue_date": "11/2/2020",
         "last_date": "20/2/2020",
+        "job_id":"sdljdskljd238293901291",
         "hr_email": "afzaalsatti74@gmail.com",
         "company_name": "Elite Bus Service Islamabad",
         "type": "Part Time",
@@ -31,10 +33,11 @@ var data=[
         ,"res": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
      },
     {
-        "job_id": "Job ID",
+        
         "title": "Bus Driver",
         "issue_date": "11/2/2020",
         "last_date": "20/2/2020",
+        "job_id":"kakjdaklsj8q3921021-",
         "hr_email": "afzaalsatti74@gmail.com",
         "company_name": "Elite Bus Service Islamabad",
         "type": "Full Time",
@@ -44,9 +47,10 @@ var data=[
         ,"res": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
     {
-        "job_id": "Job ID",
+        
         "title": "Senior Web Developer Required",
         "issue_date": "11/2/2020",
+        "job_id":"2834823409u9jdw0",
         "last_date": "20/2/2020",
         "hr_email": "afzaalsatti74@gmail.com",
         "company_name": "Elite Bus Service Islamabad",
@@ -57,10 +61,11 @@ var data=[
         ,"res": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
      },
     {
-        "job_id": "Job ID",
+        
         "title": "Senior Web Developer Required",
         "issue_date": "11/2/2020",
         "last_date": "20/2/2020",
+        "job_id":"ow3u3409dke094903",
         "hr_email": "afzaalsatti74@gmail.com",
         "company_name": "Elite Bus Service Islamabad",
         "type": "Part Time",

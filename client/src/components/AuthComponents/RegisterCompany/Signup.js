@@ -8,6 +8,7 @@ import axios from 'axios';
 import Modal from "react-bootstrap/Modal";
 
 var logo_link="";
+var dp_link="";
 
  var ownerID="";
  var parentCompany="";
@@ -17,11 +18,13 @@ export default class signup2 extends Component {
     super(props);
     this.state ={
       file: null,
+      dp:null,
       showAuthModal:false
   };
   
   
   this.onChange = this.onChange.bind(this);
+  this.onDPChange = this.onDPChange.bind(this);
   }
   saveOwnerDetails=()=>{
     let new_company=document.getElementById("new-company-check").checked;
@@ -44,6 +47,7 @@ this.registerChildCompany();
       "email":email,
       "password":pass,
       "id":cnic,
+      "dp":dp_link,
       "phone":phone,
       "gender":gender,
       "address":address,
@@ -166,6 +170,27 @@ this.registerChildCompany();
       
      
   }
+  saveOwnerDP=()=>{
+    const data = new FormData() 
+    data.append('file', this.state.dp)
+   
+    axios.post("http://localhost:5000/uploadImage", data, { // receive two parameter endpoint url ,form data 
+      })
+      .then(res => { // then print response status
+        if(res.statusText==="OK")
+        {
+         
+          dp_link=res.data.link;
+          this.saveCompanyLogo()
+      
+        }
+        else
+        {
+          window.alert("unable to upload Dp")
+        }
+        
+      })
+  }
   registerCompany=()=>
   {
       
@@ -271,10 +296,15 @@ this.registerChildCompany();
 
 //     document.body.appendChild(script);
 // }
+onDPChange(e) {
+  this.setState({dp:e.target.files[0]});
+
+  
+}
 onChange(e) {
   this.setState({file:e.target.files[0]});
 
-  console.log(this.state.file)
+ 
 }
    
 
@@ -314,7 +344,7 @@ fetch("/autherizeCompanyRegistration",options).then(response=>{
  this.setState({
    showAuthModal:false
  })
- this.saveCompanyLogo();
+ this.saveOwnerDP()
    // history.push("");
   }else{
     window.alert("Try again")
@@ -459,7 +489,7 @@ fetch("/validateCompanyInfo",options).then(response=>{
              
           }}
           
-          id="new-company-check" style={{marginLeft:"10px"}} type="checkbox" ></input>
+          id="new-company-check" style={{marginLeft:"10px"}} type="checkbox" data-toggle="toggle" ></input>
           </span>
           
           <div className="register-form" id="owner_info">
@@ -479,22 +509,22 @@ fetch("/validateCompanyInfo",options).then(response=>{
             
             
             <div className="formgroupDivs form-group">
-              <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
+              <label htmlFor="name"><i className="zmdi zmdi-card" /></label>
               <input className="input" type="cnic" name="name" id="cnic" placeholder="Owner CNIC" />
             </div>
       
             <div className="formgroupDivs form-group">
-              <label htmlFor="email"><i className="zmdi zmdi-email" /></label>
+              <label htmlFor="email"><i className="zmdi zmdi-phone" /></label>
               <input className="input"  type="phone" name="email" id="phone" placeholder="Owner Phone Number" />
             </div>
 
 
             <div className="formgroupDivs form-group">
-              <label htmlFor="pass"><i className="zmdi zmdi-gender" /></label>
+              <label htmlFor="pass"><i className="zmdi zmdi-male-female" /></label>
               <input className="input"  type="text" name="pass" id="gender" placeholder="gender" />
             </div>
             <div className="formgroupDivs form-group">
-              <label htmlFor="re-pass"><i className="zmdi zmdi-address" /></label>
+              <label htmlFor="re-pass"><i className="zmdi zmdi-map" /></label>
               <input className="input"  type="text" name="re_pass" id="address" placeholder="Address" />
             </div>
           
@@ -507,16 +537,25 @@ fetch("/validateCompanyInfo",options).then(response=>{
               <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline" /></label>
               <input className="input"  type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
             </div>
-          
-
+            <div style={{display:"block"}} className="formgroupDivs form-group">
+           <text>Owner Display Picture</text> 
+             
+            <input style={{marginLeft:"20px"}}
+              type="file"
+              name="file"
+              accept=".png, .jpg,.jpeg"
+              onChange= {this.onDPChange}
+             
+            />
+            </div>
           </div>
           
        <br></br>
           <div className="register-form" id="register-form">
           <h6 className="formHeadings">Company Info</h6>
-     
+          
           <div className="formgroupDivs form-group">
-              <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
+              <label htmlFor="name"><i className="zmdi zmdi-case" /></label>
               <input 
               onBlur={()=>{
                 this.validateCompanyDetails("CompanyName")
@@ -527,16 +566,16 @@ fetch("/validateCompanyInfo",options).then(response=>{
             </div>
            
             <div className="formgroupDivs form-group">
-              <label htmlFor="re-pass"><i className="zmdi zmdi-lock-outline" /></label>
-              <input className="input"  type="password" name="re_pass" id="company_regno" placeholder="Company Reg No" />
+              <label htmlFor="re-pass"><i className="zmdi zmdi-pin-account" /></label>
+              <input className="input"  type="text" name="re_pass" id="company_regno" placeholder="Company Reg No" />
             </div>
             <div className="formgroupDivs form-group">
-              <label htmlFor="email"><i className="zmdi zmdi-email" /></label>
+              <label htmlFor="email"><i className="zmdi zmdi-account-box-mail" /></label>
               <input className="input"  type="email" name="email" id="company_email" placeholder="Company Email" />
             </div>
 
             <div className="formgroupDivs form-group">
-              <label htmlFor="email"><i className="zmdi zmdi-email" /></label>
+              <label htmlFor="email"><i className="zmdi zmdi-account-box-phone" /></label>
               <input className="input"  type="phone" name="email" id="company_phone" placeholder="Company Phone No" />
             </div>
             <div className="formgroupDivs form-group">
@@ -575,7 +614,7 @@ fetch("/validateCompanyInfo",options).then(response=>{
             </div>
             
             <div className="formgroupDivs form-group">
-              <text htmlFor="pass"><i className="zmdi zmdi-info" />Company Intro</text>
+              <text htmlFor="pass"><i className="zmdi  zmdi-comment-more" />Company Intro</text>
               <textarea className="textarea"  type="text" name="" id="company_intro" placeholder="Small Intro which Describes your business" />
             </div>
    
@@ -601,7 +640,7 @@ this.setState({
 })
     }else
     {
-      this.saveCompanyLogo();
+      this.saveOwnerDP()
     }
    
 

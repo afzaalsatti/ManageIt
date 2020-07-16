@@ -1,7 +1,124 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
-
+import axios from 'axios';
+var userInfo;
+var cv_link="";
+var callback;
 export default class JobDetails extends Component {
+
+    constructor(props)
+    {
+      super(props);
+      userInfo=JSON.parse(localStorage.getItem("userInfo"));
+      callback=this.props.showJobs;
+      
+      
+      this.state ={
+        file: null,
+        
+    };
+    
+    
+    this.onChange = this.onChange.bind(this);
+   
+    }
+    applyForJob=()=>{
+        try{
+      
+            const data={
+              "company":this.props.data.company_name,
+              "cand_name":userInfo["userData"].name,
+              "cand_email":userInfo["userData"].email,
+              "cand_phone":userInfo["userData"].phone,
+             
+              "cand_cv_link":cv_link,
+              "job_id":this.props.data.job_id
+              
+            }
+             console.log(data)
+              const options={
+                  method:"POST",
+                  headers:{
+                      'Content-type':"application/json"
+                      
+                  },
+                  body:JSON.stringify(data)
+              }
+              fetch("/apply",options).then(response=>{
+                  return response.json();
+            }).then(data=>{
+                let status=data.status;
+                
+           
+                if(status==='Success')
+                {
+                  
+    
+                  
+              
+                 
+                
+         window.alert("Application submitted succesfully !")
+                 
+        
+         callback()
+               
+                
+                
+             
+                   
+                
+                 // history.push("");
+                }else{
+                 
+                  window.alert("Error in Applying")
+                }
+              // `data` is the parsed version of the JSON returned from the above endpoint.
+              console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+            }).catch((error) => {
+             
+             window.alert("Unexpected error Try again...");
+           });
+                  
+          
+          
+          
+          
+            
+          
+          }catch(error)
+          {
+          console.log("Error occured in fetching  company info"+error)
+          }
+    }
+    uploadCV=()=>{
+        const data = new FormData() 
+        data.append('file', this.state.file)
+       
+        axios.post("http://localhost:5000/uploadCv", data, { // receive two parameter endpoint url ,form data 
+          })
+          .then(res => { // then print response status
+            if(res.statusText==="OK")
+            {
+             
+             cv_link=res.data.link;
+              this.applyForJob();
+          
+            }
+            else
+            {
+              window.alert("unable to upload CV")
+            }
+            
+          })
+      }
+    onChange(e) {
+        this.setState({file:e.target.files[0]});
+        console.log(this.state.file)
+      
+       
+      }
+
     render() {
         return (
             <div>
@@ -108,9 +225,19 @@ Expected Salary
 
 
 </Card>
+<input type="file" id="docpicker"
+  accept=".doc,.docx,.pdf"
+  onChange= {this.onChange}
+  
+  ></input>
 
+<button
+onClick={()=>{
+    this.uploadCV();
+}}
 
-<button id="JobsAddListButton" className="moveToRight"  
+id="JobsAddListButton" className="moveToRight" 
+
 >
                         Apply Now
                     </button>

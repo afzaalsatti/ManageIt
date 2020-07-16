@@ -704,7 +704,11 @@ this.checkForActiveRide()
                   </div>
                 </div>
                 <div className="subHeading2">
-                  <h4 className="main-title">
+                  <h4 style={{    height: "40px",
+    width: "50%",
+    margin: "auto",
+    marginTop: "15px",
+    paddingTop: "10px"}} className="main-title">
                     Have Travel Plans, Just Hire a Vahicle
                   </h4>
                   <div className="subHeadingBody">

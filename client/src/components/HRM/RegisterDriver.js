@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadiningModal  from '../Utils/LodingModal'
 import './css/register_driver.css'
 import history from "../../history";
+import axios from 'axios';
 var count=0;
 var driverId;
 var data={};
@@ -41,6 +42,8 @@ function notifyPasswordMismatch()  {
 
   
 };
+
+var dp_link="";
 export default class RegisterDriver extends Component {
   
   constructor(){
@@ -53,7 +56,10 @@ export default class RegisterDriver extends Component {
     // this.notifySuccess=this.notifySuccess.bind(this);
     this.state={eduaction:[],experience:[]
     ,
-    showModal:false,}
+    showModal:false,
+    file: null}
+
+    this.onChange = this.onChange.bind(this);
 
     // navigator.geolocation.getCurrentPosition(function(position) {
     //   console.log(position["coords"].longitude )
@@ -61,6 +67,34 @@ export default class RegisterDriver extends Component {
     //   //
     // });
   
+  }
+
+  onChange(e) {
+    this.setState({file:e.target.files[0]});
+  
+    
+  }
+
+  saveCaptainDP=()=>{
+    const data = new FormData() 
+    data.append('file', this.state.file)
+   
+    axios.post("http://localhost:5000/uploadImage", data, { // receive two parameter endpoint url ,form data 
+      })
+      .then(res => { // then print response status
+        if(res.statusText==="OK")
+        {
+         
+          dp_link=res.data.link;
+          this.RequestToServer();
+      
+        }
+        else
+        {
+          window.alert("unable to upload Dp")
+        }
+        
+      })
   }
     onDrop(picture) {
         alert(picture)
@@ -323,7 +357,7 @@ return true;
         {
 
            reqFailed=false;
-            this.RequestToServer();
+           this.RequestToServer();
         }
        
 
@@ -355,7 +389,7 @@ return true;
                 "password":data["pass"],
                 "phone":data["phone"],
                 "id":data["id"],
-                
+                "dp":dp_link,
                 "job_id":"Captain",
                 "address":data["address"],
                 "gender":data["gender"],
@@ -495,36 +529,36 @@ return true;
 
         if(count==0)
       {
-        document.getElementById("step1").style.display="block";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="block";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="none";
       }
       else if(count==1)
       {
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="block";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="block";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="none";
 
       }else if(count==2){
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="block";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="block";
+        document.getElementById("driver-reg-step4").style.display="none";
       }
       else  if(count==3){
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="block";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="block";
         document.getElementById("next").innerHTML ="Submit";
       }
      
     }else{
 
         
-        this.RequestToServer()
+        this.saveCaptainDP()
 
       
         
@@ -590,35 +624,35 @@ return true;
       }
       if(count==0)
       {
-        document.getElementById("step1").style.display="block";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="block";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="none";
       }
       else if(count==1)
       {
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="block";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="block";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="none";
 
       }else if(count==2){
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="block";
-        document.getElementById("step4").style.display="none";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="block";
+        document.getElementById("driver-reg-step4").style.display="none";
       }
       else{
-        document.getElementById("step1").style.display="none";
-        document.getElementById("step2").style.display="none";
-        document.getElementById("step3").style.display="none";
-        document.getElementById("step4").style.display="block";
+        document.getElementById("driver-reg-step1").style.display="none";
+        document.getElementById("driver-reg-step2").style.display="none";
+        document.getElementById("driver-reg-step3").style.display="none";
+        document.getElementById("driver-reg-step4").style.display="block";
       }
     }
     render() {
         return (
             <div  style={{
-              background: "url('/signupbg.jpg')" }}  >
+              background: "url('/signupbg.jpg')" ,height:"600px"}}  >
 
 <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
   {/* Content Header (Page header) */}
@@ -628,7 +662,7 @@ return true;
 
     <div className="row" style={{justifyContent:'center'}}>
     <LoadiningModal getModalBtnClick={this.getModalBtnClick} reqFailed={reqFailed} displayText={requestLoadingMessage} showModal={this.state.showModal}></LoadiningModal>
-      <div id="step1"className="col-md-8" >
+      <div id="driver-reg-step1"className="col-md-8" >
         <div className="card registerDriverCard card-primary">
           <div  style={{padding:"0px"}}className="card-header">
             <h3 className="card-title" style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}}> Welcome! 
@@ -703,13 +737,29 @@ return true;
               </select>
             </div>
            
-            <div style={{width:'100%',float:'right'}} className="form-group">
+            <div style={{width:'48%',float:'left'}} className="form-group">
               <text htmlFor="inputStatus">Address</text>
               <input placeholder="Enter authentic Address" type="address" id="address" className="form-control" />
             </div>
-     <div style={{width:'100%',float:'right'}}className="form-group">
-              {/* <text htmlFor="inputName">Upload Image</text> */}
+
+
+            <div style={{width:'48%',float:'right'}} id="imagePicker-captain"className="formgroupDivs form-group">
+            <text htmlFor="inputStatus">Select your Display Picture</text>
             
+          <input
+              type="file"
+              name="file"
+              accept=".png, .jpg,.jpeg"
+              onChange= {this.onChange}
+             
+            />
+                
+            
+       </div>
+   
+     {/* <div style={{width:'100%',float:'right'}}className="form-group">
+               <text htmlFor="inputName">Upload Image</text> 
+             
               <ImageUploader
                 withIcon={true}
                 buttonText='Choose images'
@@ -718,7 +768,8 @@ return true;
                 maxFileSize={5242880}
                 style={{marginTop:"-105px"}}
             />
-            </div>         
+            </div>           */}
+
 </div>     
     
      
@@ -738,7 +789,7 @@ return true;
           
 
 
-      <div id="step2"className="col-md-8" style={{display:'none'}} >
+      <div id="driver-reg-step2"className="col-md-8" style={{display:'none'}} >
         <div className="card registerDriverCard card-primary">
           <div  style={{padding:"0px"}} className="card-header">
             <h3 style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title"> Vahicle Details</h3>
@@ -821,7 +872,7 @@ return true;
 
       
        
-      <div id="step3" className="col-md-8" style={{display:'none'}}>
+      <div id="driver-reg-step3" className="col-md-8" style={{display:'none'}}>
         <div className="card registerDriverCard card-primary">
           <div style={{padding:"0px"}} className="card-header">
             <h3  style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title">Educational Details</h3>
@@ -849,7 +900,7 @@ return true;
         {/* /.card */}
       </div>
      
-      <div id="step4" className="col-md-8" style={{display:'none'}}>
+      <div id="driver-reg-step4" className="col-md-8" style={{display:'none'}}>
         <div className="card registerDriverCard card-primary">
           <div className="card-header" style={{padding:"0px"}}>
             <h3 style={{width:"100%",textAlign:"center",fontFamily:"poppins",marginTop:"7px",fontSize:"x-large"}} className="card-title">Experience</h3>

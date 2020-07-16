@@ -10,6 +10,7 @@ import SearchPerson from '../components/HRM/AddAttendance'
 import EarningTable from '../components/Inventry/Transport/Earnings'
 
 import PostAJob from '../components/HRM/JobAds'
+import JobApplications from '../components/HRM/JobApplications'
 import AddBusRoute from '../components/Inventry/RouteManagement/AddBusRoute'
 import BookBusTicket from '../components/customerComponents/Tickets/BookBusTicket'
 import Compose from '../components/mailbox/compose'
@@ -142,6 +143,20 @@ getCompanyLogo=()=>{
           </a>
           <ul style={{padding:"5px"}} id="hrm-menu" className="collapse">
 
+          <li className="nav-item has-treeview" onClick={() => handleToUpdate( <JobApplications></JobApplications>)}>
+              <a href="" className="nav-link">
+                <i className="fa  fa-user-plus nav-icon" />
+                <p >Job Applications</p>
+              </a>
+              <ul className="nav nav-treeview">
+
+
+           
+
+                 
+               </ul>
+            </li>
+          
           <li className="nav-item has-treeview" onClick={() => handleToUpdate( <AddPerson></AddPerson>)}>
               <a href="" className="nav-link">
                 <i className="fa  fa-user-plus nav-icon" />

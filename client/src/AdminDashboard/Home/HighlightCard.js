@@ -10,7 +10,7 @@ export default class HighlightCard extends Component {
     render() {
         return (
             
-            <div style={{display:"flex",width:"80%",margin:"auto",marginBottom:"40px"}}>
+            <div style={{display:"flex",width:"80%",margin:"auto",marginBottom:"10px"}}>
             <Card className="home_detail_card">
                 <Card.Body  style={{margin:"0px",padding:"0px"}}>
                     <div style={{marginTop:"15px"}}>

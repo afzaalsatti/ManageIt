@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../HRMTable.css'
 import Table from './Bookings'
 import Expenses from './Expenses'
-import Earnings from './Earnings'
+import Earnings from './TicketEarnings'
 import HRMTable from '../HRMTable'
 import Vahicles from './Vahicles'
 import BusRoutes from './BusRoutes'
@@ -152,7 +152,7 @@ getTable=()=>{
         if(this.state.tableNo !== 7)
         {
             this.setState({
-                tableNo:3
+                tableNo:7
             });
         }}}>
     <text>

@@ -16,6 +16,7 @@ export default class signup2 extends Component {
   constructor(props)
   {
     super(props);
+    
     this.state ={
       file: null,
       dp:null,
@@ -155,9 +156,17 @@ this.registerChildCompany();
   
         if(status==='Success')
         {
- 
+
+      if(this.props.navigateToAD!=null)
+ {
+  window.alert("Comapny Added Successfully")
+ }
+ else
+ {
+  history.push("/signin");
+ }
         
-         history.push("/signin");
+        
         }else{
           window.alert("OOH No")
         }

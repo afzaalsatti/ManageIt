@@ -7,16 +7,13 @@ import Inventry from '../components/Inventry/Transport/MainInventryPage'
 import './css/adminlte.css'
 import AddPerson from '../components/HRM/AddPerson'
 import SearchPerson from '../components/HRM/AddAttendance'
-import EarningTable from '../components/Inventry/Transport/Earnings'
 
+import RegisterCompany from '../components/AuthComponents/RegisterCompany/Signup'
 import PostAJob from '../components/HRM/JobAds'
 import JobApplications from '../components/HRM/JobApplications'
 import AddBusRoute from '../components/Inventry/RouteManagement/AddBusRoute'
 import BookBusTicket from '../components/customerComponents/Tickets/BookBusTicket'
-import Compose from '../components/mailbox/compose'
-import Mailbox from '../components/mailbox/mailbox'
-import BookingTable from './Tables/Bookings'
-import readMail from '../components/mailbox/readMail'
+import UpdateBranch from './UpdateBranch'
 import {Link as ReactLink} from 'react-router-dom'
 import TableDashboard from './Tables/TableDashboard'
 import HomePage from './Home/HomePage'
@@ -38,10 +35,15 @@ constructor()
   super();
  height=(window.screen.height)-310 +"px";
  companyInfo=JSON.parse(localStorage.getItem("companyInfo"));
- this.getCompanyLogo()
+ 
 
 }
 
+componentDidMount()
+{
+  
+  this.getCompanyLogo();
+}
 getCompanyLogo=()=>{
   try{
     
@@ -72,7 +74,8 @@ getCompanyLogo=()=>{
         if(res.statusText==="OK")
         {
           
-       document.getElementById("comapnylogo").src=res.data;
+      
+      document.getElementById("companylogo").src=res.data;
         }
         else
         {
@@ -103,7 +106,7 @@ getCompanyLogo=()=>{
   {/* Brand Logo */}
   < ReactLink to="/">
   <a href="" className="brand-link">
-    <img id="comapnylogo" src="dist/img/AdminLTELogo.png" alt="Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} />
+    <img id="companylogo" src="dist/img/AdminLTELogo.png" alt="Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} />
     <span className="brand-text font-weight-light">{companyInfo["CompanyName"]}</span>
   </a>
   </ReactLink>
@@ -137,7 +140,7 @@ getCompanyLogo=()=>{
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-chart-pie" />
             <p>
-            Human Resource Management
+            HR Management
               <i className="right fas fa-angle-left" />
             </p>
           </a>
@@ -202,6 +205,77 @@ getCompanyLogo=()=>{
             
           </ul>
         </li>
+        <li data-toggle="collapse" data-target="#branch-menu" className="nav-item has-treeview" >
+          <a href="#" className="nav-link">
+            <i className="nav-icon fas fa-chart-pie" />
+            <p>
+            Branch Management
+              <i className="right fas fa-angle-left" />
+            </p>
+          </a>
+          <ul style={{padding:"5px"}} id="branch-menu" className="collapse">
+
+          <li className="nav-item has-treeview" onClick={() => handleToUpdate( <RegisterCompany navigateToAD="true"></RegisterCompany>)}>
+              <a href="" className="nav-link">
+                <i className="fa  fa-user-plus nav-icon" />
+                <p >Add Branch</p>
+              </a>
+              <ul className="nav nav-treeview">
+
+
+           
+
+                 
+               </ul>
+            </li>
+            <li className="nav-item has-treeview"  onClick={() => handleToUpdate( <UpdateBranch></UpdateBranch>)}>
+              <a href="" className="nav-link">
+                <i className="fas  fa-search nav-icon" />
+                <p >Update Branch</p>
+              </a>
+              <ul className="nav nav-treeview">
+
+
+           
+
+                 
+               </ul>
+            </li>
+          <li className="nav-item has-treeview" onClick={() => handleToUpdate( <GoogleApiWrapper stores={stores}></GoogleApiWrapper>)}>
+              <a href="" className="nav-link">
+                <i className="fa  fa-user-plus nav-icon" />
+                <p >Locate Branches</p>
+              </a>
+              <ul className="nav nav-treeview">
+
+
+           
+
+                 
+               </ul>
+            </li>
+            
+
+           
+            
+            <li className="nav-item has-treeview" onClick={() => handleToUpdate( <PostAJob></PostAJob>)}>
+              <a href="" className="nav-link">
+                <i className="fa  fa-user-plus nav-icon" />
+                <p >Remove</p>
+              </a>
+              <ul className="nav nav-treeview">
+
+
+           
+
+                 
+               </ul>
+            </li>
+            
+          </ul>
+        </li>
+    
+
         <li className="nav-item has-treeview" >
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-building" />

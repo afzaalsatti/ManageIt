@@ -4,11 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MapLocationPicker from '../../Utils/MapLocationPicker'
 var from_cord="Select from map",to_cord="Select from map";
 var click;
+var userInfo;
 export default class AddBusRoute extends Component {
 
     constructor()
     {
         super();
+        userInfo=JSON.parse(localStorage.getItem("userInfo"));
         this.state = {
          
        
@@ -55,7 +57,7 @@ export default class AddBusRoute extends Component {
         if(title &&fare && email && time  && date && seats && vh_id && driver_id && from && to && dtime && ddate )
         {
             let  data={};
-            data["company"]="decideLater";
+            data["company"]=userInfo["userData"].company;
             data["fare"]=fare;
           data["title"]=title;
         data["email"]=email;
@@ -64,6 +66,7 @@ export default class AddBusRoute extends Component {
        
         data["seats"]=seats;
        
+        
         data["from"]=from;
         data["to"]=to;
         data["dtime"]=dtime;

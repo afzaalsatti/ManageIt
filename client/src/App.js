@@ -32,7 +32,7 @@ import VahicleTracking from './components/Utils/VahicleTrackingPage'
 import AdminHome from './AdminDashboard/Home/HomePage'
 
 
-import Mailbox from './components/mailbox/MailMainPage'
+import Mailbox from './AdminDashboard/UpdateBranch'
 
 
 

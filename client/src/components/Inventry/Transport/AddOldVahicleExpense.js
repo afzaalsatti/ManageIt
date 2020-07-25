@@ -7,10 +7,14 @@ import {Dropdown,ButtonGroup,Button} from 'react-bootstrap'
 import {
     Card,  Button as CardButton
   } from 'react-bootstrap'
+
+
+  var userInfo;
 export default class AddOldVahicleExpense extends Component {
     constructor()
     {
         super();
+        userInfo=JSON.parse(localStorage.getItem("userInfo"));
         this.state={
             expense:<Maintinace></Maintinace> }
     }
@@ -32,7 +36,7 @@ export default class AddOldVahicleExpense extends Component {
               
         
        
-        "comapny":"decideLater",
+        "company":userInfo["userData"].company,
         "type":type,
           "details":document.getElementById("details").value,
       "amount":document.getElementById("amount").value,

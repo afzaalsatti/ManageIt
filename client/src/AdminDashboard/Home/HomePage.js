@@ -4,8 +4,10 @@ import SalesDetails from './SalesDetails'
 import UserAquisition from './UserAquisition'
 import RideDetails from './RideDetails'
 import Expense from './ExpenseDetails'
+
 var userInfo;
 var companyInfo;
+
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -14,28 +16,30 @@ export default class HomePage extends Component {
         companyInfo=JSON.parse(localStorage.getItem("companyInfo"));
         
         
-if(userInfo !== null)
-{
-        if( userInfo.sender==="customer" || userInfo.sender.toLowerCase()==="employee" || userInfo.sender.toLowerCase()==="captain")
-        {
-          window.alert("You are not allowed here Redirecting...")
-        }
-      }else{
-        window.alert("Signin First Redirecting... ")
-      }
+
      // this.getCompanyInfo();
         this.getDetails = this.getDetails.bind(this);
         this.backBtnPressed = this.backBtnPressed.bind(this);
+        
         this.state = {
-          component:<Home getDetails={this.getDetails}></Home>
+          
+          component:<Home parentCompany={companyInfo["parent"]} getDetails={this.getDetails}></Home>
         }
+
+        
        
       }
+
+
+
+
+
+
 
       backBtnPressed(){
        
         this.setState ({
-            component:<Home getDetails={this.getDetails}></Home>
+            component:<Home arentCompany={companyInfo["parent"]} getDetails={this.getDetails}></Home>
           })
       }
       

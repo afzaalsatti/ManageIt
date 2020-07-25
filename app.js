@@ -164,10 +164,57 @@ console.log(req.test)
     })
 
 });
+app.post('/getAllBranches',(req,res)=>
+{ 
+    
+   
+   Company.find({ parent : req.body.parent }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              record=record.map(function (value) {return {company_name: value.CompanyName} })
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
 app.post('/getAllJobApplications',(req,res)=>
 { 
     let company=req.body.company
-     company="Elite Bus Service Islamabad"
+    //  company="Elite Bus Service Islamabad"
    
    JobApplication.find({ company : company }, function (err, record) {
   
@@ -673,7 +720,51 @@ app.post('/getAllEarnings',(req,res)=>
    
    
   });
-  
+  app.post('/getChildCompanyInfo',(req,res)=>
+  { 
+     
+     Company.findOne({ CompanyName : req.body.company,parent:req.body.parent }, function (err, record) {
+    
+       
+        
+         if(!err)
+         {
+              
+              if(record != null)
+              {
+                
+                  
+                 
+                     res.json({
+                         status:'Success',
+                         result:record,
+                         
+                         
+                     });
+                  
+                 
+                
+              }
+              else{
+               
+               
+                 res.json({
+                     status:'Failure'
+                 });
+              }
+    
+         }else{
+             console.log("Something went wrong");
+             res.json({
+                 status:'Failure'
+                
+         
+             });
+         }
+             });
+    
+    
+   });
   app.post('/getCompanyInfo',(req,res)=>
  { 
     
@@ -1063,6 +1154,52 @@ app.post('/getAllEarnings',(req,res)=>
 
     
     });
+
+
+    app.post('/updateCompanyInfo',(req,res)=>
+    { 
+        
+      console.log(req.body.CompanyName)
+      
+      Company.findOneAndUpdate({CompanyName:req.body.pervName } , {
+        CompanyName:  req.body.CompanyName,
+           CompanyEmail:  req.body.CompanyEmail,
+           CompanyPhone:  req.body.CompanyPhone,
+           CompanyMotto:  req.body.CompanyMotto,
+           CompanyInfo:  req.body.CompanyInfo,
+           
+        },   
+       function(err, result) {
+            if (err) {
+                
+              res.json({
+                
+                  status:'Failure'
+                 
+              });
+            } else {
+               
+                if(result)
+                {
+                    res.json({
+                        status:'Success'
+                        
+                       
+                    });
+                }
+                else{
+                    res.json({
+                
+                        status:'Failure'
+                       
+                    });
+                }
+                
+             
+            }
+          }); 
+        
+        });
     
     app.post('/updateEmployeeInfo',(req,res)=>
     { 
@@ -1493,7 +1630,44 @@ app.post('/getTickets',(req,res)=>
 });
  
 
+app.post('/getTicketEarnings',(req,res)=>
+{
+    
+    Ticket.find({ company : req.body.company }, function (err, record) {
+   
 
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                
+                    res.json({
+                        status:'Success',
+                        result:record
+                    });
+                 
+                
+               
+             }
+             else{
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+
+});
 app.post('/updateRouteSeats',(req,res)=>
 {
 
@@ -1521,7 +1695,7 @@ app.post('/updateRouteSeats',(req,res)=>
                         });
                      return;  
                      }  
-                    
+                     ticket.company=req.body.company;
                      ticket.cust_id=req.body.cust_id;
                      ticket.cust_contact=req.body.cust_contact;
                      ticket.cust_cnic=req.body.cust_cnic;

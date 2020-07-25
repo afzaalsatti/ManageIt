@@ -9,7 +9,7 @@ import Bookings from '../Tables/Bookings'
 var type="Ride Dashboard";
 var data=[]
 var chart="radar"
-var chart_type
+var chart_type="area"
 var latest_users=[];var top_routes=[]
 
 export default class RideDetails extends Component {

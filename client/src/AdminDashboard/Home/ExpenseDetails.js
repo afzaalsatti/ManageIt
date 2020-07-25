@@ -9,7 +9,7 @@ import Bookings from '../Tables/Bookings'
 var type="Expense Dashboard";
 var data=[]
 var chart="radar"
-var chart_type
+var chart_type="area"
 var latest_users=[];var latest_expenditures=[]
 
 export default class ExpenseDetails extends Component {

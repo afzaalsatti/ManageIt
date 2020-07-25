@@ -8,7 +8,7 @@ import HRMTable from '../HRMTable'
 var type="User Aquisition";
 var data=[]
 var chart="radar"
-var chart_type
+var chart_type="area"
 var latest_users=[];
 const HRMmenuOptions=['Customers','Staff','owners','Contractors'];
 export default class UserAquisition extends Component {

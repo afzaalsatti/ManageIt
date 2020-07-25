@@ -15,7 +15,7 @@ export default class BooBusTicket extends Component {
     super(props);
    
     userInfo=JSON.parse(localStorage.getItem("userInfo"));
-    console.log(userInfo)
+    
     userID=userInfo.userData["id"]
     userType=userInfo["sender"]
     userEmail=userInfo.userData["email"]
@@ -59,12 +59,12 @@ updateSeats=()=>
           "id":this.props.details["id"],
 "cust_id":userID,
 
-
+"company":this.props.details["company"],
           "cust_cnic":document.getElementById("cnic").value,
           "cust_contact":userEmail,
           "to":this.props.details["to"],
           "from":this.props.details["from"],
-          "date":d.getMonth()+1+"/"+ d.getDate()+":"+d.getFullYear(),
+          "date":d.getMonth()+1+"/"+ d.getDate()+"/"+d.getFullYear(),
           "time":d.getHours()+":"+ d.getMinutes()+":"+d.getSeconds(),
           "price":booked.length*this.props.details["fare"],
           "tickets":booked.length

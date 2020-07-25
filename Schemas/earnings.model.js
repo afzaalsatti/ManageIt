@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
 const Earning=mongoose.Schema({
-
+   
 
 id:{
         type:String,

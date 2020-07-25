@@ -3,12 +3,14 @@ import './css/home.css'
 import { Card } from 'react-bootstrap'
 import Chart from 'react-apexcharts'
 var getDetails;
+var userInfo;
 export default class Home extends Component {
     constructor(props) {
         super(props);
-        
+        userInfo=JSON.parse(localStorage.getItem("userInfo"));
         getDetails=this.props.getDetails;
         this.state = {
+          branches:[],
           options: {
             chart: {
               id: 'apexchart-example'
@@ -23,17 +25,86 @@ export default class Home extends Component {
             data: [31, 42, 13, 74, 5, 26, 27, 38, 49, 120, 111, 128, 13, 134, 15, 16, 17, 118, 192, 120, 221, 322, 23, 249, 25,26, 127, 158, 209, 30]
           }]
         }
+
+        this.getCompanyBranches()
       }
+
+      componentDidUpdate()
+      {
+
+if(this.state.branches.length>0)
+{
+  
+  let i=0;
+  this.state.branches.forEach(element => {
+    var opt = document.createElement('option');
+    opt.text = element["company_name"];
+    opt.value = element["company_name"];
+    document.getElementById("branch_list").add(opt)
+    i=i+1
+  });
+}
+
+        
+      }
+      getCompanyBranches=()=>{
+        let address="getAllBranches";
+             
+        let req_data={
+          "parent":this.props.parentCompany
+        }
+       const options={
+         method:"POST",
+         headers:{
+             'Content-type':"application/json"
+             
+         },
+         body:JSON.stringify(req_data)
+      }
+      
+      console.log(address)
+      fetch("/"+address,options).then(response=>{
+         return response.json();
+      }).then(data=>{
+       let status=data.status;
+      
+      
+       if(status==='Success')
+       {
+console.log(data.result)
+         this.setState({
+          branches:data.result
+         })
+       
+      
+      
+        
+      
+      //this.prepareDataToDisplay();
+        
+      
+        
+       }
+      // `data` is the parsed version of the JSON returned from the above endpoint.
+      console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+      }).catch((error) => {
+      
+      
+      //   reqInProcess=reqInProcess+1;
+      // this.RequestToServer(reqInProcess);
+      //this.notifyError("Unexpected error Try again...  ");
+      });
+      }
+      
+     
     render() {
         return (
             <div>
 <div id="ADHomeTiopDiv">
 <div  style={{margin:"20px"}} id="ADHomeIstDiv">
 
-<select>
-    <option>
-        ABC Travels
-    </option>
+<select className={(userInfo.sender==="owner" ||userInfo.sender==="admin" ) ?"showComp":"hideComp"} id="branch_list">
+    
 </select>
 
 <div className="ADHomerightDiv" >

@@ -77,7 +77,7 @@ function showEditModal(key) {
    
 
 
-export default class BookingTable extends Component {
+export default class TicketEarnings extends Component {
 
     
  constructor(props){
@@ -117,11 +117,9 @@ const data=[""];
       arr.push("edit")
           return  arr;
       }
-      else
-      {
-return []
-      }
-     
+      else return []
+    
+      
     }
     
     getHeader = function(){
@@ -134,19 +132,12 @@ return []
    }
     
   
-componentDidUpdate()
-{
-  if(address!=this.props.address)
-  {
-    this.getDataFromServer();
-  }
-  
-}
+
 
 
    getDataFromServer=()=>{
 
-     address=this.props.address;
+     address="getTicketEarnings";
     
      let req_data={
        "company":"decideLater"
@@ -170,10 +161,11 @@ componentDidUpdate()
     if(status==='Success')
     {
       
-let booking=data.result;
-    
+let earning=data.result;
+  
+
       this.setState({
-        data:booking,
+        data:earning,
        
    
       })
@@ -269,7 +261,7 @@ let booking=data.result;
       
         return (
           
-           <div style={{margin:"0px"}} className="content-wrapper">
+           <div style={{margin:"0px",padding:"50px"}} className="content-wrapper">
              <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
            
   {/* Content Header (Page header) */}

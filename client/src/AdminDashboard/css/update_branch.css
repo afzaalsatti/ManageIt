@@ -1,0 +1,9 @@
+.ub-primary-btn{
+    height: 36px;
+    margin-left: 20px;
+    border-radius: 6px;
+    width: 80px;
+    background: #343A40;
+    color: white;
+    font-family: poppins;
+}

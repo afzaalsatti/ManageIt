@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './AddNewVahicle.css'
 
-
+var userInfo;
 export default class AddNewVahicle extends Component {
   constructor(){
     super();
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
     this.saveVahicle = this.saveVahicle.bind(this);
     
   
@@ -32,7 +33,7 @@ export default class AddNewVahicle extends Component {
     window.alert("Contecting")
         
     const req_data={
-     "company":"decideLater",
+     "company":userInfo["userData"].company,
       "owner":"Company",
       "price": price,
       "payment_status":status,

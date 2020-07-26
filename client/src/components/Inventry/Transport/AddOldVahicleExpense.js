@@ -102,7 +102,7 @@ export default class AddOldVahicleExpense extends Component {
             if(status==='Success')
             {
             
-              console.log("Adding Expense Operation Sucessful")
+              window.alert("Adding Expense Operation Sucessful")
               //history.push('/home');
               
              // history.push("");

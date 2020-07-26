@@ -13,13 +13,13 @@ var top_product=[];
 var mytestchart;
 var mytestchartOptions;
 
-
+var userInfo;
 export default class SalesDetails extends Component {
   
 
     constructor(props) {
         super(props);
-     
+        userInfo=JSON.parse(localStorage.getItem("userInfo"));
         this.state = {
           options: this.props.data[0]
           ,
@@ -267,9 +267,9 @@ this.updateChart(keys,actual_data)
       }
       else{
         let address="getTicketEarnings";
-       
+       console.log(userInfo["userData"].company)
         let req_data={
-          "company":"decideLater"
+          "company":userInfo["userData"].company
         }
        const options={
          method:"POST",

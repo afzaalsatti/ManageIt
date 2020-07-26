@@ -158,12 +158,59 @@ return res.status(200).sendFile(path.join(__dirname, "./public/uploads/159491658
            } else if (err) {
                return res.status(500).json(err)
            }
-console.log(req.test)
+
       return res.status(200).json({"link":req.file.path}).send();
 
     })
 
 });
+app.post('/getAllBranchesLocation',(req,res)=>
+{ 
+    
+   
+   Company.find({ parent : req.body.parent }, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              record=record.map(function (value) {return {location: value.CompanyHeadOffice, name:value.CompanyName,email:value.CompanyEmail} })
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
 app.post('/getAllBranches',(req,res)=>
 { 
     
@@ -2074,6 +2121,50 @@ app.post('/sendEmail',(req,res)=>
 
 });
 
+app.post('/getAllCompanies',(req,res)=>
+{
+    
+    Company.find({ }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                record=record.map(function (value) {return {company_name: value.CompanyName} })
+                 
+                
+                    res.json({
+                        status:'Success',
+                        result:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+
+});
 app.post('/getAllCustomers',(req,res)=>
 {
     
@@ -2284,6 +2375,7 @@ hash=sha256(req.body.name+req.body.password+Math.floor(Math.random() * 97570));
 //Adding company
 app.post('/registerCompany',(req,res)=>
 {
+    
     let d=new Date();
     const company=new Company();
     company.ownerName=req.body.ownerName;
@@ -2302,7 +2394,6 @@ app.post('/registerCompany',(req,res)=>
     company.CompanyPhone=req.body.CompanyPhone;
     company.CompanyHeadOffice=req.body.CompanyHeadOffice;
     company.registerDate=d.getMonth()+1 +"/"+d.getDate()+"/"+d.getFullYear();
-
     
    
     company.save().then(resultCode => {
@@ -2469,7 +2560,7 @@ if(req.body.type=="CompanyName")
 app.post('/autherizeCompanyRegistration',(req,res)=>
 {
 
-    console.log(req.body)
+    
   Employee.findOne({ hash: req.body.hash, company:req.body.company,job_id:"owner" }, function (err, record) {
    
 
@@ -2479,7 +2570,7 @@ app.post('/autherizeCompanyRegistration',(req,res)=>
               
                  if(record != null)
                  {
-                     console.log(record)
+                     
                     res.json({
                         status:'Success',
                         ownerID:record.id

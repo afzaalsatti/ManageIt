@@ -7,6 +7,8 @@ import LoadiningModal  from '../Utils/LodingModal'
 import './css/register_driver.css'
 import history from "../../history";
 import axios from 'axios';
+import Modal from "react-bootstrap/Modal";
+import { Card } from 'react-bootstrap'
 var count=0;
 var driverId;
 var data={};
@@ -15,8 +17,8 @@ var experience=[];
 var requestLoadingMessage="";
 var reqFailed=false;
 var reqInProcess=1;
-
-
+var companies=[]
+var selected_company="decideLater"
 function notifySuccess()  {
       
       
@@ -56,10 +58,13 @@ export default class RegisterDriver extends Component {
     // this.notifySuccess=this.notifySuccess.bind(this);
     this.state={eduaction:[],experience:[]
     ,
+    showCompanyModal:false,
+    
     showModal:false,
     file: null}
 
     this.onChange = this.onChange.bind(this);
+    this.getAllCompanies()
 
     // navigator.geolocation.getCurrentPosition(function(position) {
     //   console.log(position["coords"].longitude )
@@ -68,6 +73,70 @@ export default class RegisterDriver extends Component {
     // });
   
   }
+
+
+getAllCompanies=()=>{
+ let address="getAllCompanies";
+ let req_data={
+
+     
+    
+
+
+    }
+     
+
+  
+
+  const options={
+      method:"POST",
+      headers:{
+          'Content-type':"application/json"
+          
+      },
+      body:JSON.stringify(req_data)
+  }
+
+  fetch("/"+address,options).then(response=>{
+      return response.json();
+}).then(data=>{
+    let status=data.status;
+    console.log(status)
+
+    if(status==='Success')
+    {
+    
+      
+      //history.push('/home');
+      companies=data.result;
+      this.setState({
+        showCompanyModal:true
+      })
+      
+     // history.push("");
+    }else{
+
+     
+      window.alert("Company Fetch Operation Failed!")
+    }
+  // `data` is the parsed version of the JSON returned from the above endpoint.
+  console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+}).catch((error) => {
+  
+  
+  //   reqInProcess=reqInProcess+1;
+  // this.RequestToServer(reqInProcess);
+ window.alert("Unexpected error Try again...  "+reqInProcess);
+});
+
+
+
+
+
+}
+
+
+
 
   onChange(e) {
     this.setState({file:e.target.files[0]});
@@ -362,6 +431,31 @@ return true;
        
 
     }
+
+    getModalBody=()=>{
+
+      return companies.map((key,index)=>{
+        return  <li style={{listStyle:"none",height:"30px"}}>
+
+<Card className="JobAdsCard">
+            <div className="historymiddlediv">
+           
+                <text
+                 onClick={()=>{
+                  this.clickListener(index)
+              }}
+                id ="company_name" className="rideHistoryAddress">{companies[index].company_name}</text>
+         
+             
+                 </div>
+            </Card>
+          
+
+            </li>
+    });
+
+
+    }
      RequestToServer=()=>{
         
          
@@ -383,7 +477,7 @@ return true;
           
          
           
-                "company":"decideLater",
+                "company":selected_company,
                 "name": data["name"],
                 "email":data["email"],
                 "password":data["pass"],
@@ -415,7 +509,7 @@ return true;
           
          
           
-                "company":"decideLater",
+                "company":selected_company,
       "owner":driverId,
       "price": data["price"],
       "payment_status":data["status"],
@@ -447,7 +541,7 @@ return true;
           
          
           
-                "company":"decideLater",
+                "company":selected_company,
       "driverId":driverId,
      
       "vahicleId":data["vh_num"],
@@ -568,7 +662,7 @@ return true;
           
          
           
-    //       "company":"decideLater",
+    //       "company":selected_company,
     //       "name": data["name"],
     //       "email":data["email"],
     //       "password":data["pass"],
@@ -649,11 +743,58 @@ return true;
         document.getElementById("driver-reg-step4").style.display="block";
       }
     }
+
+    clickListener=(index)=>{
+      selected_company=companies[index].company_name
+    this.setState({
+      showCompanyModal:false
+    })
+  }
     render() {
         return (
             <div  style={{
               background: "url('/signupbg.jpg')" ,height:"600px"}}  >
+  <Modal style={{backdropFilter: "blur(5px)"}} show={this.state.showCompanyModal} >
+                           <Modal.Header>
+                               <text style={{textAlign: "center",width: "100%",margin: "0px",fontSize:"larger",fontFamily:"poppins"}}>
+                               Select Company to apply as Captain
+                               </text>
+                              
+                           </Modal.Header>
+        
+        <Modal.Body style={{maxHeight:"600px",overflow:"scroll"}} >
+       <div style={{display:"block"}}className="all-notification-modal">
+{this.getModalBody()}
 
+
+     </div>
+      
+    </Modal.Body  >
+
+
+       <Modal.Footer  >
+
+    <button
+      id="cancelRequest"
+       style={{
+        background: "#196EDE",
+        color: "white",
+        width: "30%",
+        margin: "auto",
+        height: "35px",
+    borderRadius: "8px"
+       }}
+       
+       onClick={()=>{
+       this.setState({
+         showCompanyModal:false
+       })
+        
+      }}>Cancel</button>
+     
+       </Modal.Footer>
+      </Modal>
+     
 <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.BOTTOM_RIGHT} />
   {/* Content Header (Page header) */}
   
@@ -717,14 +858,26 @@ return true;
 <div style={{height:"100px"}}>
 
             <div style={{width:'48%',float:'right'}} className="form-group">
-              <text htmlFor="inputName">Location</text>
-              <input onClick={()=>{ navigator.geolocation.getCurrentPosition(function(position) {
-
+              <text htmlFor="inputName">Location  <i  id="loadinggif" className="fa fa-spinner fa-spin" style={{fontSize: 16,display:"none"}} />
+         </text>
+              <input onClick={()=>{
+                document.getElementById("loadinggif").style.display="block";
+                navigator.geolocation.getCurrentPosition(function(position) {
+                  document.getElementById("loadinggif").style.display="none";
                 document.getElementById("location").value=position["coords"].longitude+","+position["coords"].latitude ;
             // console.log(position["coords"].longitude )
             // console.log(position["coords"].latitude )
             //
-          });}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location" className="form-control" />
+          },
+          function(error) {
+            document.getElementById("loadinggif").style.display="none";
+                document.getElementById("location").value="Error occured please click again"
+          }
+          );}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location"  >
+
+
+
+          </input>
             </div>
 
 <div style={{width:'48%',float:'left'}} className="form-group">

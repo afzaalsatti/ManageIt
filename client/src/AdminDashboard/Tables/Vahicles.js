@@ -76,13 +76,13 @@ function showEditModal(key) {
 
    
 
-
+var userInfo;
 export default class Vahicles extends Component {
 
     
  constructor(props){
     super(props);
-
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
     this.getHeader = this.getHeader.bind(this);
     this.getRowsData = this.getRowsData.bind(this);
     this.getKeys = this.getKeys.bind(this);
@@ -103,17 +103,24 @@ const data=[""];
   
  
     getKeys = function(){
-      let arr=Object.keys(this.state.data[0]);
-      arr=arr.slice(1)
-console.log("------------------")
-console.log(arr)
-     
-      
-   
 
+      if(this.state.data.length>0)
+      {
+        let arr=Object.keys(this.state.data[0]);
+        arr=arr.slice(1)
+  
+       
+        
+     
+  
+        
+      arr.push("edit")
+          return  arr;
+      }else
+      {
+        return []
+      }
       
-    arr.push("edit")
-        return  arr;
     }
     
     getHeader = function(){
@@ -134,7 +141,7 @@ console.log(arr)
      address="getAllVahicles";
     
      let req_data={
-       "company":"decideLater"
+       "company":userInfo["userData"].company
      }
     const options={
       method:"POST",

@@ -4,10 +4,12 @@ import { Card } from 'react-bootstrap'
 import Chart from 'react-apexcharts'
 var getDetails;
 var userInfo;
+var company="";
 export default class Home extends Component {
     constructor(props) {
         super(props);
         userInfo=JSON.parse(localStorage.getItem("userInfo"));
+        company=userInfo["userData"].company
         getDetails=this.props.getDetails;
         this.state = {
           branches:[],
@@ -29,12 +31,40 @@ export default class Home extends Component {
         this.getCompanyBranches()
       }
 
+
+highlightCompany=()=>{
+  
+
+let length=document.getElementById("branch_list").options.length;
+for(let i=0;i<length;i++)
+{
+
+  if(document.getElementById("branch_list").options[i].innerHTML==company)
+  {
+
+    document.getElementById("branch_list").options[i].style.background="red"
+    document.getElementById("branch_list").options[i].style.color="white"
+
+  }
+  else{
+    document.getElementById("branch_list").options[i].style.background="white"
+    document.getElementById("branch_list").options[i].style.color="black"
+  }
+}
+
+  // document.getElementById("branch_list").options.forEach(element => {
+  //   console.log(element.innerHTML)
+  // });
+}
+
       componentDidUpdate()
       {
 
+       
+       
 if(this.state.branches.length>0)
 {
-  
+  //company=this.state.branches[0]["company_name"];
   let i=0;
   this.state.branches.forEach(element => {
     var opt = document.createElement('option');
@@ -43,6 +73,8 @@ if(this.state.branches.length>0)
     document.getElementById("branch_list").add(opt)
     i=i+1
   });
+  document.getElementById("branch_list").value=userInfo["userData"].company;
+  this.highlightCompany()
 }
 
         
@@ -103,7 +135,34 @@ console.log(data.result)
 <div id="ADHomeTiopDiv">
 <div  style={{margin:"20px"}} id="ADHomeIstDiv">
 
-<select className={(userInfo.sender==="owner" ||userInfo.sender==="admin" ) ?"showComp":"hideComp"} id="branch_list">
+<select 
+
+onClick={()=>{
+
+  let comp=document.getElementById("branch_list").value;
+  if(company!=comp)
+  {
+    company=comp;
+    this.highlightCompany()
+    let temp=userInfo;
+    temp["userData"].company=company;
+
+    setTimeout(function() {
+      localStorage.setItem("userInfo",JSON.stringify(temp))
+
+     
+      
+   }, 50);
+console.log(userInfo)
+
+  }
+ 
+}}
+
+
+
+
+className={(userInfo.sender==="owner" ||userInfo.sender==="admin" ) ?"showComp":"hideComp"} id="branch_list">
     
 </select>
 

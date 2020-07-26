@@ -140,6 +140,8 @@ this.registerChildCompany();
       "CompanyHeadOffice":company_head
     }
      
+    console.log("Request data")
+    console.log(data)
       const options={
           method:"POST",
           headers:{
@@ -353,7 +355,7 @@ fetch("/autherizeCompanyRegistration",options).then(response=>{
  this.setState({
    showAuthModal:false
  })
- this.saveOwnerDP()
+ this.saveCompanyLogo()
    // history.push("");
   }else{
     window.alert("Try again")
@@ -588,8 +590,28 @@ fetch("/validateCompanyInfo",options).then(response=>{
               <input className="input"  type="phone" name="email" id="company_phone" placeholder="Company Phone No" />
             </div>
             <div className="formgroupDivs form-group">
-              <label htmlFor="name"><i className="zmdi zmdi-account" /></label>
-              <input className="input" type="cnic" name="name" id="company_head" placeholder="Company Head Office" />
+              <label htmlFor="name"><i className="zmdi zmdi-account" /><i  id="loadinggif" className="fa fa-spinner fa-spin" style={{fontSize: 16,display:"none"}} />
+     </label>
+              <input
+              
+              onClick={()=>{
+               document.getElementById("loadinggif").style.display="block";
+                navigator.geolocation.getCurrentPosition(function(position) {
+                 document.getElementById("loadinggif").style.display="none";
+                document.getElementById("company_head").value=position["coords"].longitude+","+position["coords"].latitude ;
+            // console.log(position["coords"].longitude )
+            // console.log(position["coords"].latitude )
+            //
+          },
+          function(error) {
+            document.getElementById("loadinggif").style.display="none";
+            document.getElementById("company_head").value="Error occured please click again"
+           
+          }
+          );}}
+              
+              
+              className="input" type="cnic" name="name" id="company_head" placeholder="Company Head Office" />
             </div>
       
            

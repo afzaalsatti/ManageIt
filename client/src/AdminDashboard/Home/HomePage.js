@@ -39,7 +39,7 @@ export default class HomePage extends Component {
       backBtnPressed(){
        
         this.setState ({
-            component:<Home arentCompany={companyInfo["parent"]} getDetails={this.getDetails}></Home>
+            component:<Home parentCompany={companyInfo["parent"]} getDetails={this.getDetails}></Home>
           })
       }
       
@@ -49,7 +49,7 @@ export default class HomePage extends Component {
         {
 
             this.setState ({
-                component:<SalesDetails backBtnPressed={this.backBtnPressed} data={data}></SalesDetails>
+                component:<SalesDetails company={userInfo["userData"].company} backBtnPressed={this.backBtnPressed} data={data}></SalesDetails>
               })
         }else
         if(type==="new_users")

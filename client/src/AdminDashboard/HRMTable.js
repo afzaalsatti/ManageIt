@@ -122,12 +122,13 @@ else if(tableFor==="earnings")
    
 
 const m=['Staff','Ownner','Users','Contractors'];
+var userInfo;
 export default class HRMTable extends Component {
 
     
  constructor(props){
     super(props);
-
+    userInfo=JSON.parse(localStorage.getItem("userInfo"));
     this.getHeader = this.getHeader.bind(this);
     this.getRowsData = this.getRowsData.bind(this);
     this.getKeys = this.getKeys.bind(this);
@@ -208,7 +209,7 @@ else
     getEarningsFromServer=()=>{
       
       let req_data={
-        "company":"decideLater"
+        "company":userInfo["userData"].company
       }
      const options={
        method:"POST",
@@ -260,7 +261,7 @@ else
       dataFor="customers"
 
       let req_data={
-        "company":"decideLater"
+        "company":userInfo["userData"].company
       }
      const options={
        method:"POST",
@@ -317,7 +318,8 @@ else
       // });
     }
     getKeys = function(){
-
+if(this.state.data.length>0)
+{
       let arr=Object.keys(this.state.data[0]);
       if(tableFor=="earnings")
       {
@@ -343,6 +345,11 @@ else
       }
     arr.push("edit")
         return  arr;
+    }
+    else
+    {
+      return []
+    }
     }
     
     getHeader = function(){
@@ -370,7 +377,7 @@ else
 
    getDataFromServer=()=>{
      let req_data={
-       "company":"decideLater"
+       "company":userInfo["userData"].company
      }
     const options={
       method:"POST",

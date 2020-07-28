@@ -18,9 +18,10 @@ var marker;
 var reqInProcess=1;
 var requestLoadingMessage="Searching For Captain";
 var reqFailed=false;
-var src,dest,fare,dis;
+var src,dest,fare,dis,to_loc,from_loc;
 var rideID="";
 var driverID="";
+var company="";
 var testCords=[];
 export default class VahicleTrackingPage extends Component {
 
@@ -33,7 +34,10 @@ export default class VahicleTrackingPage extends Component {
           
            src=this.props.location.data["src"];
              dest=this.props.location.data["dest"];
-             dis=this.props.location.data["dis"]
+             dis=this.props.location.data["dis"];
+             to_loc=this.props.location.data["to"]
+             from_loc=this.props.location.data["from"]
+
 
              fare=dis*25;
             
@@ -63,7 +67,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
 // console.log(position["coords"].longitude )
 // console.log(position["coords"].latitude )
 //
-});
+},
+function error(msg) {window.alert('Please enable your GPS position feature.');},
+{enableHighAccuracy: true}
+
+);
 
       }
       notifySuccess=(message)=>  {
@@ -356,6 +364,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
           }
          
           driverID=this.props.location.data["driverId"]
+          company=this.props.location.data["company"]
           testCords.push(myLocation)
          
           
@@ -445,6 +454,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
  {
   testCords=data.cords;
   driverID=data.driverId;
+  company=data.company;
  
  if(!gotVahicleDetails)
           {
@@ -741,7 +751,7 @@ let address,req_data;
     
    
     
-      "company":"decideLater",
+      "company":company,
 "rideId":rideID,
 
 "body":"Ride has been Cancelled by "+this.props.location.data["sender"],
@@ -805,7 +815,7 @@ updateHirePool=()=>{
       
      
       
-        "company":"decideLater",
+        "company":company,
         "driverId":driverID,
         "status":"active",
   
@@ -947,7 +957,7 @@ finishBooking=(status)=>{
   
  "sender":this.props.location.data["sender"],
   
-    "company":"decideLater",
+    "company":company,
     
     "ride_id":rideID,
     "status":status
@@ -997,6 +1007,7 @@ console.log("Unexpected error Try again... RIDE CANCEL ");
 
 }
 RequestToServer=()=>{
+  let date=new Date();
   if(testCords.length>1)
   {
        if(this.props.location.data["dest"]===testCords[testCords.length-1])  
@@ -1027,18 +1038,21 @@ RequestToServer=()=>{
     
    
     
-      "company":"decideLater",
+      "company":company,
 "rideId":rideID,
 "from":this.props.location.data["email"],
 
 "body":src+"-"+dest+"-"+
-"Date"+"-"+"Time"+"-"+
+date.getMonth()+1+"/"+date.getDay()+"/"+date.getFullYear()+"-"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"-"+
 
 dis*25,
 
   "to":"All Drivers",
 "type":"Ride Invitation",
-"isActive":"Yes"
+"isActive":"Yes",
+"from_loc":from_loc,
+"to_loc":to_loc
+
 
 
     }
@@ -1048,7 +1062,7 @@ dis*25,
     if(reqInProcess==1)
   {
     
-    let date=new Date();
+    
 
       document.getElementById("fare").innerHTML="RS "+dis*25;
       requestLoadingMessage= <text> Finding Your Captain... </text>

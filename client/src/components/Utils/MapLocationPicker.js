@@ -55,7 +55,9 @@ export default class MapLocationPicker extends Component {
 
 
 
-
+map.on("load", ()=> {
+ this.getAllVehicleLocation()
+})
 
 
 map.on('click', function(e) {
@@ -77,19 +79,94 @@ test(e.lngLat.wrap());
     
   }
 
+    getAllVehicleLocation=()=>{
+
+      let address="getAllVehicleLocation";
+      let req_data={
     
+         
+         
+          
+    
+    
+    
+        
+    
+    
+    
+    
+    
+        }
+      const options={
+        method:"POST",
+        headers:{
+            'Content-type':"application/json"
+            
+        },
+        body:JSON.stringify(req_data)
+    }
+    this.setState({showModal:true})
+    fetch("/"+address,options).then(response=>{
+        return response.json();
+    }).then(data=>{
+      let status=data.status;
+    
+    
+      if(status==='Success')
+      {
+        
+        let locations=data.result;
+        
+        let i=0;
+      
+        locations.forEach(function(marker) {
+       
+          
+              // create a HTML element for each feature
+              var el = document.createElement('div');
+              el.className = 'tracking_marker';
+              
+          
+            let location=locations[i].location.split(",")
+              // make a marker for each feature and add to the map
+                   new mapboxgl.Marker(el) 
+                .setLngLat(location)
+                .addTo(map);
+  
+                i=i+1;
+            });
+     
+       
+      }else{
+    
+       
+       
+       
+      }
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    }).catch((error) => {
+    
+    
+    //   reqInProcess=reqInProcess+1;
+    // this.RequestToServer(reqInProcess);
+ 
+    });
+    
+
+    }
   render() {
     const { lng, lat, zoom } = this.state;
     
    
     return (
         
-        
+        <div>
           
        
         <div id="TransHistmapDiv" style={{    width: "100%",height: "100%", marginLeft: "2%"}} ref={el => this.mapContainer = el}  />
       
-       
+       </div>
       
     
       

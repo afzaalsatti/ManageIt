@@ -62,23 +62,23 @@ export default class NotificationModal extends Component {
         margin: "10px",fontSize:"smaller",textAlign:"initial"}} id={"notification"+index} className="collapse">
         <hr></hr>
         <div>
-        <text>To</text>
-        <text className="notifi-details">{to[0].slice(0,9)+","+to[1].slice(0,9)}</text>
+    <text style={{fontWeight:"800"}}>Pickup</text>
+    <text className="notifi-details">{key.from_add}</text>
+</div>
+<div>
+    <text style={{fontWeight:"800"}}>Dropoff</text>
+    <text className="notifi-details">{key.to_add}</text>
+</div>
+        <div>
+        <text style={{fontWeight:"800"}}>Fare</text>
+        <text className="notifi-details">RS {body[4]}</text>
         </div>
         <div>
-        <text>From</text>
-        <text className="notifi-details">{from[0].slice(0,9)+","+from[1].slice(0,9)}</text>
-        </div>
-        <div>
-        <text>Fare</text>
-        <text className="notifi-details">{body[4]}</text>
-        </div>
-        <div>
-        <text>date</text>
+        <text style={{fontWeight:"800"}}>dDate</text>
         <text className="notifi-details">{body[2]}</text>
         </div>
         <div>
-        <text>Time</text>
+        <text style={{fontWeight:"800"}}>Time</text>
         <text className="notifi-details">{body[3]}</text>
         </div>
         </div>

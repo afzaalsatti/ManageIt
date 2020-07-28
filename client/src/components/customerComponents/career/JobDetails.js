@@ -143,7 +143,7 @@ export default class JobDetails extends Component {
 Last Date To Apply
                             </span>
                             <span>
-                            {this.props.data.last_date}
+                            {this.props.data.expireDate}
                             </span>
                     </text>
 
@@ -154,7 +154,7 @@ Last Date To Apply
                    <br></br>
                    <text  style={{  fontSize: "12px",   marginLeft: "70px"}}>
                        contact us@ <span style={{marginLeft:"5px"}}></span> 
-                       {this.props.data.hr_email}
+                       {this.props.data.contactEmail}
                    </text>
                    <br></br>
              <text  style={{    marginLeft: "70px"}}>
@@ -162,7 +162,7 @@ Last Date To Apply
 Issue Date
                             </span>
                             <span style={{    fontSize: "12px"}}>
-                            {this.props.data.issue_date}
+                            {this.props.data.postDate}
                             </span>
                     </text>
                    
@@ -201,7 +201,7 @@ Expected Salary
 <h5>Requirements</h5>
 <br></br>
 <text>
-    {this.props.data.req}
+    {this.props.data.requirements}
 </text>
 </Card>
 
@@ -211,7 +211,7 @@ Expected Salary
 <h5>Responsibiliies</h5>
 <br></br>
 <text>
-{this.props.data.res}
+{this.props.data.responsibiities}
 </text>
 </Card>
 
@@ -225,12 +225,16 @@ Expected Salary
 
 
 </Card>
-<input type="file" id="docpicker"
+<div style={{width:"100%",float:"left",marginBottom:"30px"}}>
+<div style={{float:"right"}}>
+<text for="docpicker" class="btn">Upload Your CV</text>
+<input  type="file" id="docpicker"
   accept=".doc,.docx,.pdf"
   onChange= {this.onChange}
   
   ></input>
-
+</div>
+</div>
 <button
 onClick={()=>{
     this.uploadCV();

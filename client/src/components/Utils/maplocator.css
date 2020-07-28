@@ -23,3 +23,17 @@
     color: white;
     border-radius: 12px;
 }
+
+
+.tracking_marker {
+    background-image: url('/assets/svg/car.svg');
+   
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+  
+ 
+ 
+  }

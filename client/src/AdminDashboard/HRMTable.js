@@ -121,7 +121,7 @@ else if(tableFor==="earnings")
 
    
 
-const m=['Staff','Ownner','Users','Contractors'];
+const m=['Staff','Users','Owner','Contractors'];
 var userInfo;
 export default class HRMTable extends Component {
 
@@ -293,8 +293,7 @@ else
     
       
      }
-   // `data` is the parsed version of the JSON returned from the above endpoint.
-   console.log(data.status);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+ 
    }).catch((error) => {
    
    
@@ -650,7 +649,7 @@ if(this.state.data.length>0)
       
           {/* /.card-header */}
           <div className="card-body" >
-            <table style={{height: '300px', overflow:'scroll',marginTop:'0px',width:"99%" }}  id="example1" className="table table-bordered table-striped">
+            <table style={{height: '300px', overflow:'scroll',marginTop:'0px',width:"99%" }}  id="example1" className={dataFor==="Employees"? "table table-bordered table-striped employee-table":"table table-bordered table-striped"}>
               <thead style={{cursor:"default"}}>
                 <tr>
                  {this.getHeader()}

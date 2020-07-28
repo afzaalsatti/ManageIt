@@ -117,12 +117,11 @@ else
         }
         else{
 
-          let src=document.getElementById("src").value;
-          let dest=document.getElementById("dest").value;
+          let src=from_cord;
+          let dest=to_cord;
           let vahicle=document.getElementById("vh_type").value;
           
-          src="72.7707022399893,33.459119468548835";
-          dest="72.7707022399893,33.459119468548835";
+         
           vahicle="car";
 
           if(src && dest && vahicle!=="head")
@@ -152,10 +151,13 @@ else
               "email":userInfo["userData"]["email"],
               "status":userInfo["userData"]["status"],
               "phone":userInfo["userData"]["phone"],
-             
+             "to":to_location,
+             "from":from_location,
               "src":src,
                "dest":dest,
                "dis":lineDistance};
+
+             
                     history.push({
               pathname: '/trackRide',
               data: temp,

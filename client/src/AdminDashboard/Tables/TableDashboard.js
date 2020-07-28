@@ -18,8 +18,38 @@ export default class TableDashboard extends Component {
         this.state={tableNo:1}
     }
 
+
+setSelectedBackground=()=>{
+
+document.getElementById("table1").style.background="rgb(52, 58, 64)"
+document.getElementById("table1").style.color="white"
+document.getElementById("table2").style.background="rgb(52, 58, 64)"
+document.getElementById("table2").style.color="white"
+document.getElementById("table3").style.background="rgb(52, 58, 64)"
+document.getElementById("table3").style.color="white"
+document.getElementById("table4").style.background="rgb(52, 58, 64)"
+document.getElementById("table4").style.color="white"
+document.getElementById("table5").style.background="rgb(52, 58, 64)"
+document.getElementById("table5").style.color="white"
+document.getElementById("table6").style.background="rgb(52, 58, 64)"
+document.getElementById("table6").style.color="white"
+document.getElementById("table7").style.background="rgb(52, 58, 64)"
+document.getElementById("table7").style.color="white"
+
+
+
+
+document.getElementById("table"+this.state.tableNo).style.background="lightgray"
+document.getElementById("table"+this.state.tableNo).style.color="black"
+
+}
+
 getTable=()=>{
-    console.log(this.state.tableNo)
+    
+    if(document.getElementById("table"+this.state.tableNo) !==null)
+    {
+         this.setSelectedBackground()
+    }
     if(this.state.tableNo===1)
     {
         return <Expenses></Expenses>
@@ -57,6 +87,7 @@ getTable=()=>{
         
         
     }
+
     
 }
 
@@ -71,7 +102,7 @@ getTable=()=>{
             <div>
 <div className="table-dash-topbar" style={{width:"fit-content",height:"40px",background:"#343A40",color:"white",textAlign:"center",display:"flex",margin:"auto",marginTop:"20px",cursor:"default"}}>
 
-<div onClick={()=>{
+<div style={{background:"lightgray",color:"black"}}id="table1" onClick={()=>{
     if(this.state.tableNo !== 1)
     {
         this.setState({
@@ -85,7 +116,10 @@ getTable=()=>{
         Expense
     </text>
     </div>
-    <div
+
+
+
+    <div id="table2"
     onClick={()=>{
         if(this.state.tableNo !== 2)
         {
@@ -101,7 +135,8 @@ getTable=()=>{
         Vahicles
     </text>
     </div>
-    <div onClick={()=>{
+    <div id="table3"
+     onClick={()=>{
         if(this.state.tableNo !== 3)
         {
             this.setState({
@@ -114,7 +149,8 @@ getTable=()=>{
         Bookings
     </text>
     </div>
-    <div onClick={()=>{
+    <div id="table4"
+    onClick={()=>{
         if(this.state.tableNo !== 4)
         {
             this.setState({
@@ -126,7 +162,8 @@ getTable=()=>{
     </text>
     </div>
      
-    <div onClick={()=>{
+    <div id="table5"
+    onClick={()=>{
         if(this.state.tableNo !== 5)
         {
             this.setState({
@@ -137,7 +174,8 @@ getTable=()=>{
         Attendance
     </text>
     </div>
-    <div onClick={()=>{
+    <div id="table6"
+    onClick={()=>{
         if(this.state.tableNo !== 6)
         {
             this.setState({
@@ -148,7 +186,8 @@ getTable=()=>{
         Routes
     </text>
     </div>
-    <div onClick={()=>{
+    <div id="table7"
+     onClick={()=>{
         if(this.state.tableNo !== 7)
         {
             this.setState({
@@ -158,7 +197,8 @@ getTable=()=>{
     <text>
         Earnings
     </text>
-    </div>
+  
+   </div>
 
 </div>
 

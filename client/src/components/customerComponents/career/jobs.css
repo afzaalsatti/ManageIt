@@ -36,7 +36,9 @@
     padding-left: 20px;
     margin-bottom: 10px;
 }
-
+.JobAdsCard:hover{
+    transform: scale(1.1);
+}
 
 #JobDetailCard{
     padding-left: 10px;

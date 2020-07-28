@@ -77,6 +77,7 @@ showModal:false,
                "sender":userInfo["sender"],
                "id":userInfo["userData"]["id"],
                "location":"b",
+               "email":userInfo["userData"]["email"]
 
                 
           
@@ -179,6 +180,7 @@ showModal:false,
         }
         else
         {
+            document.getElementById("userName").innerText="Welcome  " + userInfo["userData"].name+" !";
             if(userInfo["sender"]==="Admin")
             {
                 this.setState({
@@ -424,7 +426,7 @@ checkDriverAvailibility=rData=>{
         
        if(data.result["status"]!=="active")
        {
-           console.log("You have an active ride ! You cant Accept until previous finishes")
+           window.alert("You have an active ride ! You cant Accept until previous finishes")
        }
        else
        {
@@ -503,6 +505,8 @@ if(reqInProcess<= 3)
           }
            
     }
+
+
     else if(reqInProcess==2)
     {
         address="updateHirePoolStatus";
@@ -656,7 +660,7 @@ else
         }
        
     let notif=[]
-    if(notifications.length<=3)
+    if(notifications.length>=3)
     {
         notif.push(notifications[0])
     notif.push(notifications[1])
@@ -668,7 +672,7 @@ else
     }
     
         return notif.map((key, index)=>{
-        
+           
        if(key.type==="Ride Invitation")
        {
         let body=key.body.split("-");
@@ -705,23 +709,24 @@ else
     margin: "10px",fontSize:"smaller",textAlign:"initial"}} id={"notification"+index} className="collapse">
 <hr></hr>
 <div>
-    <text>To</text>
-    <text className="notifi-details">{to[0].slice(0,9)+","+to[1].slice(0,9)}</text>
+    <text style={{fontWeight:"800"}}>Pickup</text>
+    <text className="notifi-details">{key.from_add}</text>
 </div>
 <div>
-    <text>From</text>
-    <text className="notifi-details">{from[0].slice(0,9)+","+from[1].slice(0,9)}</text>
+    <text style={{fontWeight:"800"}}>Dropoff</text>
+    <text className="notifi-details">{key.to_add}</text>
+</div>
+
+<div>
+    <text style={{fontWeight:"800"}}>Fare</text>
+    <text className="notifi-details">RS {body[4]}</text>
 </div>
 <div>
-    <text>Fare</text>
-    <text className="notifi-details">{body[4]}</text>
-</div>
-<div>
-    <text>date</text>
+    <text style={{fontWeight:"800"}}>Date</text>
     <text className="notifi-details">{body[2]}</text>
 </div>
 <div>
-    <text>Time</text>
+    <text style={{fontWeight:"800"}}>Time</text>
     <text className="notifi-details">{body[3]}</text>
 </div>
 </div>
@@ -819,20 +824,24 @@ this.setState({
     showModal:false
 })
       }
+
+
+     
    render(){
      
-      return(
+    if(userInfo!=null)
+    {
+        return (
+          <div style={{height:"100%",width:"100%"}}>
+        <ContactUs getContactModalBtnClick={this.getContactModalBtnClick}  showModal={this.state.showModal}></ContactUs>
 
-        <div style={{height:"100%",width:"100%"}}>
-              <ContactUs getContactModalBtnClick={this.getContactModalBtnClick}  showModal={this.state.showModal}></ContactUs>
-    
 <NotificationModal acceptRideInvitation={this.checkDriverAvailibility} getModalBtnClick={this.getModalBtnClick} showModal={this.state.showNotif} notifications={notifications}></NotificationModal>
 <div className="topbar" >
-    <svg className="translate" style={{marginLeft:"15px"}} onClick={this.toggleSlideMenu} xmlns="http://www.w3.org/2000/svg"  height="24" viewBox="0 0 24 24" width="24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+<svg className="translate" style={{marginLeft:"15px"}} onClick={this.toggleSlideMenu} xmlns="http://www.w3.org/2000/svg"  height="24" viewBox="0 0 24 24" width="24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
 
 
-  <div className="translateText"><text>ManageIt</text> </div>
-             
+<div className="translateText"><text>ManageIt</text> </div>
+       
 
 
 
@@ -843,238 +852,244 @@ this.setState({
 <text id="userName"
 
 
->Welcome  {userInfo["userData"].name} !</text>
+>Welcome  !</text>
 
 <svg width="40%" width= "auto" style={{position:"inherit", width:"60px",}} margin-right= "25px" fill="white" height="40%" viewBox="0 0 18 18" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><path d="M9 16A7 7 0 1 0 9 2a7 7 0 0 0 0 14zm2.47-7.587a5.15 5.15 0 0 1-.548.61c-.206.195-.42.387-.64.578-.25.22-.418.37-.503.62-.09.26-.13.78-.14.78H8.08s.02-.48.06-.71a2.09 2.09 0 0 1 .19-.57c.09-.18.207-.34.348-.5A6.1 6.1 0 0 1 9.2 8.7c.156-.14.3-.268.436-.393s.253-.25.356-.382c.103-.13.184-.27.244-.42.06-.147.09-.312.09-.493 0-.4-.106-.702-.32-.913-.21-.21-.524-.32-.936-.32-.165 0-.93-.04-1.2.49-.075.142-.187.49-.187.68H6c.072-.598.178-.91.33-1.21.155-.308.366-.49.633-.7.267-.206.58-.33.94-.43.36-.105.75-.14 1.172-.14.463 0 .874.06 1.236.172.37.11.67.275.92.487.26.21.45.474.58.78.13.305.2.652.2 1.04 0 .28-.042.54-.14.78a2.81 2.81 0 0 1-.383.68zM8.997 14c-.32 0-.565-.094-.738-.284a1.006 1.006 0 0 1-.26-.704c0-.143.02-.276.06-.4a.923.923 0 0 1 .19-.32.868.868 0 0 1 .31-.215A1.11 1.11 0 0 1 8.99 12c.16 0 .3.026.426.077a.83.83 0 0 1 .312.215c.084.09.15.198.196.32.046.124.07.256.07.4 0 .28-.087.516-.26.704-.175.19-.42.284-.74.284z" fill-rule="evenodd"></path></svg>
 <img id="notify_icon"   style={{width:"20px",height:"20px",marginRight:"10px"}} src={this.state.noti_icon}
 onClick={()=>{
-    this.setState({
-        noti_icon:"/assets/svg/new_notify.svg",
-        showNotif:true
-    });
+this.setState({
+  noti_icon:"/assets/svg/new_notify.svg",
+  showNotif:true
+});
 }}
 
 ></img>
 
-<a  style={{color:"white"}} className="nav-link"  data-toggle="collapse" href="" aria-expanded="false" data-target="#notifications-div" href="#">
-                <i className="far fa-bell" />
-                <span className="notification-badge badge-warning notification-navbar-badge">{notifications.length}</span>
-            
-              </a>
+<a  style={{color:"white"}} className="nav-link main-icon"  data-toggle="collapse" href="" aria-expanded="false" data-target="#notifications-div" href="#">
+          <i className="far fa-bell" />
+          <span className="notification-badge badge-warning notification-navbar-badge">{notifications.length}</span>
+      
+        </a>
+          
+        <div style={{
+            position: "absolute",
+willChange: "transform",
+top: "40px",
+left: "0px",
+transform: "translate3d(1041px, 5px, 0px)"}}
+id="notifications-div" className="collapse notifications-div-menu notifications-div-menu-lg notifications-div-menu-right">
+         <Card style={{textAlign:"center",fontFamily:"poppins"}}>
+             <Card.Body  >
+                 {this.getListItemCards()}
+                 
+             </Card.Body>
+             <Card.Footer>
+                 <text
+                 onClick={()=>{
+                     this.setState({showNotif:true})
+                 }}
+                 data-toggle="collapse" href="" aria-expanded="false" data-target="#notifications-div"
+                  style={{color:"blue",cursor:"pointer"}}>See all Notifications</text>
+             </Card.Footer>
+         </Card>
+   
+        </div>
+     
+
+
+<a  style={{color:"white"}} className="nav-link main-icon" data-toggle="dropdown" href="#">
+          <i className="far fa-user" />
+          
+        </a>
+        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+         <Card style={{textAlign:"center",fontFamily:"poppins"}}>
+             <Card.Body  >
+             
+                 <div>
+                 <img
+                 style={{height:"75px"}}
+                src="dist/img/user1-128x128.jpg"
+                alt="User Avatar"
+                className=" img-circle"
+              />
+
+                 </div>
+
+                 <div>
+                 <h3 style={{    fontSize: "larger",marginTop:"10px"}} className="dropdown-item-title">
+                 {userInfo["userData"].name}
+                 </h3>
+                 <p style={{ marginTop:"4px"}} className="text-sm"> {userInfo["userData"].email}</p>
+                 <p style={{ marginTop:"4px"}} className="text-sm text-muted">
+                  <i className="far fa-clock mr-1" /> {userInfo["sender"]}
+                </p>
+                <div 
+                className="profile-card-mananage-account-text"
+                onClick={()=>{
+                  this.getMenuSelection("setting")
+              }}
                 
-              <div style={{
-                  position: "absolute",
-    willChange: "transform",
-    top: "40px",
-    left: "0px",
-    transform: "translate3d(1041px, 5px, 0px)"}}
-     id="notifications-div" className="collapse notifications-div-menu notifications-div-menu-lg notifications-div-menu-right">
-               <Card style={{textAlign:"center",fontFamily:"poppins"}}>
-                   <Card.Body  >
-                       {this.getListItemCards()}
-                       
-                   </Card.Body>
-                   <Card.Footer>
-                       <text
-                       onClick={()=>{
-                           this.setState({showNotif:true})
-                       }}
-                       data-toggle="collapse" href="" aria-expanded="false" data-target="#notifications-div"
-                        style={{color:"blue",cursor:"pointer"}}>See all Notifications</text>
-                   </Card.Footer>
-               </Card>
+                >
+                    <text>
+                        Manage your ManageIt Account
+                    </text>
+                </div>
+                 </div>
+                 <hr></hr>
+             </Card.Body>
+             <Card.Footer>
+                 <div style={{    marginTop: "20px",
+borderStyle: "groove",
+height: "40px",cursor:"pointer"}}
+onClick={()=>{
+  localStorage.clear()
+  history.push("/signin")
+}}
+
+>
+                     <h6 style={{marginTop:"6px"}}
+                     
+                     
+                     >
+                     Sign out of Account
+                     </h6>
+                 </div>
+                 <hr></hr>
+                 <div className="profile-card-home-p" style={{display:"flex"}}>
+                     <p style={{    fontSize: "smaller"}}>
+                         Privacy Policy
+                     </p>
+                     <p style={{marginLeft:"32px", fontSize: "smaller"}}>
+                         Terms of Service
+                     </p>
+                 </div>
+             </Card.Footer>
+         </Card>
+   
+        </div>
+     
+
+{/* <img id="userprofile" src="/assets/images/userprofile.png"></img> */}
+
+
+</div>
+</div>
+  <div  >
+      
+      <div id="right" className="shadow-lg p-3 mb-5 bg-white rounded"  style={{display: 'none'}}>
+      <ul className="home-nav-ul" >
+
+          
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("home")}>
+          <img src="/assets/images/home_icon.png">
+          </img>   
+            <span >
+                  Home
+              </span>
+          </li>
+
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("hire")}>
+          <img src="/assets/images/booking_icon.png">
+          </img>   
+          <span>
+                  Hire a Vahicle
+              </span>
+
+
+
+         </li>
+     
+
+
+         <li className="home-nav-item" onClick={() => this.getMenuSelection("history")}>
+
+
+
+         <img src="/assets/images/history_icon.png">
+          </img>         <span>
+                 History
+              </span>
+          </li>
+
          
-              </div>
-           
-   
-   
-    <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
-                <i className="far fa-user" />
-                
-              </a>
-              <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-               <Card style={{textAlign:"center",fontFamily:"poppins"}}>
-                   <Card.Body  >
-                   
-                       <div>
-                       <img
-                       style={{height:"75px"}}
-                      src="dist/img/user1-128x128.jpg"
-                      alt="User Avatar"
-                      className=" img-circle"
-                    />
 
-                       </div>
 
-                       <div>
-                       <h3 style={{    fontSize: "larger",marginTop:"10px"}} className="dropdown-item-title">
-                       {userInfo["userData"].name}
-                       </h3>
-                       <p style={{ marginTop:"4px"}} className="text-sm"> {userInfo["userData"].email}</p>
-                       <p style={{ marginTop:"4px"}} className="text-sm text-muted">
-                        <i className="far fa-clock mr-1" /> {userInfo["sender"]}
-                      </p>
-                      <div 
-                      className="profile-card-mananage-account-text"
-                      onClick={()=>{
-                        this.getMenuSelection("setting")
-                    }}
-                      
-                      >
-                          <text>
-                              Manage your ManageIt Account
-                          </text>
-                      </div>
-                       </div>
-                       <hr></hr>
-                   </Card.Body>
-                   <Card.Footer>
-                       <div style={{    marginTop: "20px",
-    borderStyle: "groove",
-    height: "40px",cursor:"pointer"}}
-    onClick={()=>{
-        localStorage.clear()
-        history.push("/signin")
-    }}
-    
-    >
-                           <h6 style={{marginTop:"6px"}}
-                           
-                           
-                           >
-                           Sign out of Account
-                           </h6>
-                       </div>
-                       <hr></hr>
-                       <div className="profile-card-home-p" style={{display:"flex"}}>
-                           <p style={{    fontSize: "smaller"}}>
-                               Privacy Policy
-                           </p>
-                           <p style={{marginLeft:"32px", fontSize: "smaller"}}>
-                               Terms of Service
-                           </p>
-                       </div>
-                   </Card.Footer>
-               </Card>
-         
-              </div>
-           
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("wallet")}>
+          <img src="/assets/images/career_icon.png">
+          </img>         <span>
+                  My Wallet
+              </span>
+          </li>
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("career")}>
+          <img src="/assets/images/career_icon.png">
+          </img>         <span>
+                  Career
+              </span>
+          </li>
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("partner")}>
+          <img src="/assets/images/partners_icon.png"/>  
+
+              <span>
+                  Our Partners
+              </span>
+          </li>
+          <li  className={this.state.isAdmin? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("Admin")}>
+          <img src="/assets/images/partners_icon.png"/>  
+
+              <span>
+                  Admin Dashboard
+              </span>
+          </li>
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("setting")}>
+          <img src="/assets/images/settings_icon.png">
+          </img>         <span>
+                  Settings
+              </span>
+          </li>
+          <li className="home-nav-item" onClick={() => this.getMenuSelection("contact")}>
+          <img src="/assets/images/settings_icon.png">
+          </img>         <span>
+                  Contact US
+              </span>
+          </li>
    
-  {/* <img id="userprofile" src="/assets/images/userprofile.png"></img> */}
-
- 
+          <li className={this.state.isEmp? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("home")}>
+          
+            <span >
+                  switch to customer
+              </span>
+              <input
+        type="checkbox"
+        
+        id="customSwitch1"
+        
+        placeholder="Dark"
+      />
+             
+          </li>
+      
+      </ul>
   </div>
   </div>
-        <div  >
-            
-            <div id="right" className="shadow-lg p-3 mb-5 bg-white rounded"  style={{display: 'none'}}>
-            <ul className="home-nav-ul" >
-
-                
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("home")}>
-                <img src="/assets/images/home_icon.png">
-                </img>   
-                  <span >
-                        Home
-                    </span>
-                </li>
-
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("hire")}>
-                <img src="/assets/images/booking_icon.png">
-                </img>   
-                <span>
-                        Hire a Vahicle
-                    </span>
-
-
-
-               </li>
-           
-
-
-               <li className="home-nav-item" onClick={() => this.getMenuSelection("history")}>
-
-
-
-               <img src="/assets/images/history_icon.png">
-                </img>         <span>
-                       History
-                    </span>
-                </li>
-
-               
-
-
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("wallet")}>
-                <img src="/assets/images/career_icon.png">
-                </img>         <span>
-                        My Wallet
-                    </span>
-                </li>
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("career")}>
-                <img src="/assets/images/career_icon.png">
-                </img>         <span>
-                        Career
-                    </span>
-                </li>
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("partner")}>
-                <img src="/assets/images/partners_icon.png"/>  
-
-                    <span>
-                        Our Partners
-                    </span>
-                </li>
-                <li  className={this.state.isAdmin? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("Admin")}>
-                <img src="/assets/images/partners_icon.png"/>  
-
-                    <span>
-                        Admin Dashboard
-                    </span>
-                </li>
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("setting")}>
-                <img src="/assets/images/settings_icon.png">
-                </img>         <span>
-                        Settings
-                    </span>
-                </li>
-                <li className="home-nav-item" onClick={() => this.getMenuSelection("contact")}>
-                <img src="/assets/images/settings_icon.png">
-                </img>         <span>
-                        Contact US
-                    </span>
-                </li>
-         
-                <li className={this.state.isEmp? "showOption home-nav-item":"hideOption home-nav-item" }  onClick={() => this.getMenuSelection("home")}>
-                
-                  <span >
-                        switch to customer
-                    </span>
-                    <input
-              type="checkbox"
-              
-              id="customSwitch1"
-              
-              placeholder="Dark"
-            />
-                   
-                </li>
-            
-            </ul>
-        </div>
-        </div>
-        <div className="left">
-           <div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
-        <Spinner ></Spinner>
-        </div>
+  <div className="left">
+     <div   className={this.state.isLoading?"showOption loadingGifDiv":"hideOption loadingGifDiv"}>
+  <Spinner ></Spinner>
+  </div>
 {this.state.component}
 
 {/* <HireVahicle></HireVahicle> */}
-        
-        </div>
-        <Footer>
-          
-          </Footer>
-    </div>
-      )
+  
+  </div>
+  <Footer>
+    
+    </Footer>
+</div>
+
+        )
+}
+    else
+    {
+        return(<div></div>)
+    }
     }
 }

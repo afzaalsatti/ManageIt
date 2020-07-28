@@ -55,6 +55,7 @@ const mapStyles = {
           container: this.mapContainer,
           style: 'mapbox://styles/mapbox/streets-v9',
           center: [this.state.lng,this.state.lat],
+       
           zoom:5
         });
      

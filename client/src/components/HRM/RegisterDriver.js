@@ -865,14 +865,17 @@ return true;
                 navigator.geolocation.getCurrentPosition(function(position) {
                   document.getElementById("loadinggif").style.display="none";
                 document.getElementById("location").value=position["coords"].longitude+","+position["coords"].latitude ;
-            // console.log(position["coords"].longitude )
+                console.log(position)
+           
+                // console.log(position["coords"].longitude )
             // console.log(position["coords"].latitude )
             //
           },
           function(error) {
             document.getElementById("loadinggif").style.display="none";
                 document.getElementById("location").value="Error occured please click again"
-          }
+          },
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
           );}} placeholder="Click and allow popup" style={{margin:"0px"}} type="text" id="location"  >
 
 

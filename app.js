@@ -164,6 +164,54 @@ return res.status(200).sendFile(path.join(__dirname, "./public/uploads/159491658
     })
 
 });
+
+app.post('/getAllVehicleLocation',(req,res)=>
+{ 
+    
+   
+   HirePool.find({}, function (err, record) {
+  
+     
+      
+       if(!err)
+       {
+            
+            if(record != null)
+            {
+              record=record.map(function (value) {return {location: value.position} })
+                
+               
+                   res.json({
+                       status:'Success',
+                       result:record,
+                       
+                       
+                   });
+
+                
+               
+              
+            }
+            else{
+             
+             
+               res.json({
+                   status:'Failure'
+               });
+            }
+  
+       }else{
+           console.log("Something went wrong");
+           res.json({
+               status:'Failure'
+              
+       
+           });
+       }
+           });
+  
+  
+ });
 app.post('/getAllBranchesLocation',(req,res)=>
 { 
     
@@ -1198,6 +1246,23 @@ app.post('/getAllEarnings',(req,res)=>
         }
       }); 
   }
+  else
+  {
+    EmployeeNotification.find({
+        
+          to:req.body.email
+    }, function(err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+            res.json({
+                status:'Success',
+                result:result
+            });
+         
+        }
+      });
+  }
 
     
     });
@@ -1405,7 +1470,7 @@ app.post('/getAllEarnings',(req,res)=>
           
         
         
-        EmployeeNotification.findOneAndUpdate({rideId:req.body.rideId , company : req.body.company} , { isActive:  req.body.status},   
+        EmployeeNotification.findOneAndUpdate({rideId:req.body.rideId } , {company:req.body.company, isActive:  req.body.status},   
          function(err, result) {
               if (err) {
                 
@@ -1471,7 +1536,7 @@ app.post('/getAllEarnings',(req,res)=>
                    else{
            
                       
-                                    Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,vahicleId:  req.body.vahicleId,cords:  req.body.cords, status:"booked"  },   
+                                    Booking.findOneAndUpdate({ride_id:req.body.ride_id} , { driverId:  req.body.driverId,company:req.body.company,vahicleId:  req.body.vahicleId,cords:  req.body.cords, status:"booked"  },   
                                        function(err,record) {  
                                         if (record==null) {  
                                            res.json({
@@ -1563,8 +1628,8 @@ if(req.body.type==="maintinance")
     notification.body=req.body.body;
    
     
-   
-    
+    notification.to_add=req.body.to_loc;
+    notification.from_add=req.body.from_loc;
     notification.to=req.body.to;
     notification.from=req.body.from;
     
@@ -2005,10 +2070,53 @@ const vahicle=new Vahicle();
 
 });
 
+app.post('/getAllJobs',(req,res)=>
+{
+    Career.find({ }, function (err, record) {
+   
+      
+       
+        if(!err)
+        {
+             
+             if(record != null)
+             {
+                
+                 
+                
+                    res.json({
+                        status:'Success',
+                        result:record,
+                        
+                        
+                    });
+                 
+                
+               
+             }
+             else{
+              
+              
+                res.json({
+                    status:'Failure'
+                });
+             }
+   
+        }else{
+            console.log("Something went wrong");
+            res.json({
+                status:'Failure'
+               
+        
+            });
+        }
+            });
+});
 app.post('/postJob',(req,res)=>
 {
     const career=new Career();
     career.id=career._id.toString();
+    career.title=req.body.data.title;
     career.contactEmail=req.body.data.contactEmail;
     career.company_name=req.body.data.company_name;
     career.type=req.body.data.type;

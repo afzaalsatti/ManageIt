@@ -92,7 +92,8 @@ margin-top: 7px;
     margin-top: 0px;
     background-color: #1976d2;
     font-family: Poppins;
-   
+    border-radius: 5px;
+
     
     color: white;
     margin-bottom: 5px;
@@ -161,6 +162,7 @@ margin-top: 7px;
     flex-direction: column;
     flex: 1 1 auto;
     width: 230px;
+    border-radius: 10px !important;
     font-family: Poppins;
     background-color: white;
  border: groove;
@@ -170,6 +172,10 @@ margin-top: 7px;
   
     
 }
+.erp-button:hover{
+    transform: scale(1.1);
+}
+.pricing-plan:hover { transform: scale(1.1); }
 .margin-class{
     margin-right: 50px;
 }
@@ -178,6 +184,7 @@ margin-top: 7px;
     background-color: #fff;
     height: 50px;
     color: black;
+    border-radius: 10px;
     justify-content: space-around;
     display: flex;
     font-family: Poppins;

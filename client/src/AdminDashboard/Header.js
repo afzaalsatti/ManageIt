@@ -173,7 +173,7 @@ updateHash(){
           <ul className="navbar-nav ml-auto">
             {/* Messages Dropdown Menu */}
             <li className="nav-item dropdown">
-              <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown"  href="#">
+              <a  style={{color:"white"}} className="nav-link main-icon" data-toggle="dropdown"  href="#">
                 <i className="far fa-comments" />
                 <span className="badge badge-danger navbar-badge">3</span>
               </a>
@@ -257,7 +257,7 @@ updateHash(){
             </li>
             {/* Notifications Dropdown Menu */}
             <li className="nav-item dropdown">
-              <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
+              <a  style={{color:"white"}} className="nav-link main-icon" data-toggle="dropdown" href="#">
                 <i className="far fa-bell" />
                 <span className="badge badge-warning navbar-badge">15</span>
               </a>
@@ -297,7 +297,7 @@ updateHash(){
             </li>
          
             <li className="nav-item dropdown">
-              <a  style={{color:"white"}} className="nav-link" data-toggle="dropdown" href="#">
+              <a  style={{color:"white"}} className="nav-link main-icon" data-toggle="dropdown" href="#">
                 <i className="far fa-user" />
                 
               </a>

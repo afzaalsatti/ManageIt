@@ -7,6 +7,7 @@ import Spinner from '../Utils/Spinner'
 var total=0,pending=0,cleared=0,withdrawn=0,canceled=0;
 var earnings;
 var filteredearnings=[];
+var userInfo;
 function RenderRow (props) {
     console.log(props.data)
     return props.keys.map((key, index)=>{
@@ -25,6 +26,9 @@ export default class DriverWallet extends Component {
                 dataFetched:false,
                 isLoading:false
             }
+
+            userInfo=JSON.parse(localStorage.getItem("userInfo"));
+         
             if(earnings === undefined)
             {
                 this.getDriverEarnings()
@@ -122,16 +126,22 @@ setTimeout(() => {
         //This method will get keys Headings
          getKeys = ()=>{
 
+          if(earnings.length>0)
+          {
             let temp=Object.keys(earnings[0]);
-           temp.splice(0,4)
-           temp.splice(2,2)
-           temp.splice(2, 0, 'amount')
-           temp.splice(3, 0, 'type')
-           temp.splice(4, 0, 'status')
-           //  temp.splice(3,1)
-          //  temp.splice(6, 0, 'status')
-
-            return temp;
+            temp.splice(0,4)
+            temp.splice(2,2)
+            temp.splice(2, 0, 'amount')
+            temp.splice(3, 0, 'type')
+            temp.splice(4, 0, 'status')
+            //  temp.splice(3,1)
+           //  temp.splice(6, 0, 'status')
+ 
+             return temp;
+          }
+          else return []
+        
+            
         }
           GetHeader=()=>{
                 
@@ -161,11 +171,11 @@ setTimeout(() => {
             })
         }
 getDriverEarnings=()=>{
- 
+ console.log(userInfo.userData.id)
 total=0;
     let address="getEarnings";
     let req_data={
-        "id":"1"
+        "id":userInfo.userData.id
     }
 
 

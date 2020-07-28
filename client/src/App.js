@@ -32,10 +32,10 @@ import VahicleTracking from './components/Utils/VahicleTrackingPage'
 import AdminHome from './AdminDashboard/Home/HomePage'
 
 
-import Mailbox from './AdminDashboard/UpdateBranch'
 
 
 
+import Tracking from './components/Utils/VehicleTrackingTestPage'
 
 
 
@@ -75,7 +75,7 @@ function App() {
       <Route  path="/trackRide" exact component={VahicleTracking}></Route>
       <Route  path="/adHome" exact component={AdminHome}></Route>
 
-      <Route  path="/abc" exact component={Mailbox}></Route>
+      <Route  path="/abc" exact component={Tracking}></Route>
       
      
       

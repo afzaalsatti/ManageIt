@@ -1,6 +1,14 @@
 const mongoose=require('mongoose');
 
 const EmployeeNotification=mongoose.Schema({
+    to_add:{
+        type:String,
+    
+    },
+    from_add:{
+        type:String,
+    
+    },
     body:{
         type:String,
     

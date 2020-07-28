@@ -1,10 +1,10 @@
 import React from "react";
 import HomeNavBar from "../Utils/HomeNavBar";
-import PricingTable from "../Utils/pricingtable/pricingtable";
+import PricingTable from "../Utils/pricingtable";
 import "./Home.css";
 import "../../bootstrap.min.css";
 import history from "../../history";
-import GoogleApiWrapper from "../../AdminDashboard/BusinessLocations";
+
 // import SimpleImageSlider from "react-simple-image-slider";
 import Zoom from "react-reveal/Zoom";
 import Bounce from "react-reveal/Bounce";
@@ -399,9 +399,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in
 <Footer>
   
 </Footer>
-        <div  style={{ height: "30px"}}>
-              <GoogleApiWrapper stores={[]}></GoogleApiWrapper>
-            </div>
+        
          </div>
     );
   }
